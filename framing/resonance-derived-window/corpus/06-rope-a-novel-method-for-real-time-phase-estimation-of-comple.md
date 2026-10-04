@@ -1,0 +1,8 @@
+# ROPE: A Novel Method for Real-Time Phase Estimation of Complex Biological Rhythms
+
+Antonio Spallone, Marco Coraggio, Francesco De Lellis, Mario di Bernardo; 2025-09-05; http://arxiv.org/abs/2509.04962v2
+Anna document arxiv:e6a794b6d9784c40
+
+Abstract
+
+Accurate phase estimation -- the process of assigning phase values between $0$ and $2π$ to repetitive or periodic signals -- is a cornerstone in the analysis of oscillatory signals across diverse fields, from neuroscience to robotics, where it is fundamental, e.g., to understanding coordination in neural networks, cardiorespiratory coupling, and human-robot interaction. However, existing methods are often limited to offline processing and/or constrained to one-dimensional signals. In this paper, we introduce ROPE, which, to the best of our knowledge, is the first phase-estimation algorithm capable of (i) handling signals of arbitrary dimension and (ii) operating in real-time, with minimal error. ROPE identifies repetitions within the signal to segment it into (pseudo-)periods and assigns phase values by performing efficient, tractable searches over previous signal segments. We extensively validate the algorithm on a variety of signal types, including trajectories from chaotic dynamical systems, human motion-capture data, and electrocardiographic recordings. Our results demonstrate that ROPE is robust against noise and signal drift, and achieves significantly superior performance compared to state-of-the-art phase estimation methods. This advancement enables real-time analysis of complex biological rhythms, opening new pathways, for example, for early diagnosis of pathological rhythm disruptions and developing rhythm-based therapeutic interventions in neurological and cardiovascular disorders.

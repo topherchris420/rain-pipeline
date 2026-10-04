@@ -1,0 +1,182 @@
+{
+  "schema": "rain-pipeline-framing/v1",
+  "experiment_id": "V3D-EXP-0002",
+  "spec": "specs/slow-breathers-6s-window.json",
+  "registered_at": "2026-10-04T17:41:16.253Z",
+  "definition_sha256": "60253e47f1055739d50649b611c02aeb1877e63947042825cd3a2449ca6fe61f",
+  "binding": {
+    "anna_record_sha256": "23d5f15aee83e17733d59d132cda6870da76fcc91392d9da654364cd961bfd28",
+    "panel_corpus_sha256": "c4cc832a38f698825f116fd6e3dc2be3997497ea581c93e05325fb343a0078df",
+    "parent_result_sha256": "8103083e4304201d4ba4f12401445a5459db8b87c1125ee85ea465e6a4e3f39c",
+    "exploration_report_sha256": "c14de3b6d975fee1cf94444aca10dbd7cc007e67bb34fbb17c31296b8ad5784e",
+    "holdout": {
+      "byte_ranges": 20,
+      "bytes": 129741000,
+      "ledger_sha256": "6ab74ac2cca606040e29a3a70384a2f74127b3c947cb843935bf3f5b5c1b6f94"
+    }
+  },
+  "holdout_ranges": [
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f1y01.dat",
+      [
+        660000,
+        6659999
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f1y02.dat",
+      [
+        660000,
+        6659999
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f1y03.dat",
+      [
+        660000,
+        6659999
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f1y04.dat",
+      [
+        660000,
+        6659999
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f1y05.dat",
+      [
+        660000,
+        6659999
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f1y06.dat",
+      [
+        660000,
+        6659999
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f1y07.dat",
+      [
+        660000,
+        6659999
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f1y08.dat",
+      [
+        660000,
+        6659999
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f1y09.dat",
+      [
+        660000,
+        6659999
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f1y10.dat",
+      [
+        660000,
+        6659999
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f2y01.dat",
+      [
+        742500,
+        7492499
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f2y02.dat",
+      [
+        989010,
+        9980009
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f2y03.dat",
+      [
+        742500,
+        7492499
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f2y04.dat",
+      [
+        742500,
+        7492499
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f2y05.dat",
+      [
+        742500,
+        7492499
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f2y06.dat",
+      [
+        742500,
+        7492499
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f2y07.dat",
+      [
+        742500,
+        7492499
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f2y08.dat",
+      [
+        742500,
+        7492499
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f2y09.dat",
+      [
+        742500,
+        7492499
+      ]
+    ],
+    [
+      "https://physionet.org/files/fantasia/1.0.0/f2y10.dat",
+      [
+        742500,
+        7492499
+      ]
+    ]
+  ],
+  "files": [
+    {
+      "name": "anna_record.json",
+      "sha256": "f895776fd9063d46686e13015e32b054c4b5e6d8e10476266c68a2239597eb4d",
+      "bytes": 25914
+    },
+    {
+      "name": "anna_verification.json",
+      "sha256": "13fdc912728764934187e162bbf3c71e2fac9a8790f5ec255565328754d605f2",
+      "bytes": 1630
+    },
+    {
+      "name": "panel_meeting.md",
+      "sha256": "a7d954a311cb5ace0c884877c480c40ac488492e8de6c57ac979da655032cc4f",
+      "bytes": 2416
+    },
+    {
+      "name": "panel_summary.json",
+      "sha256": "719ea527d07d96ce0ec7f104e47794b17c1d934cddfc4904c0bdc7508c802fb7",
+      "bytes": 3390
+    }
+  ]
+}

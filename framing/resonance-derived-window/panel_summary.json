@@ -1,0 +1,80 @@
+{
+  "engine": "R.A.I.N. offline meeting (deterministic, no model)",
+  "question": "Can DRR set its lag window from the breathing rhythm itself, half the respiratory period, instead of a hand-picked number of seconds?",
+  "grounding": "none",
+  "matched_terms": [
+    "set",
+    "rhythm",
+    "respiratory",
+    "period"
+  ],
+  "missing_terms": [
+    "drr",
+    "lag",
+    "window",
+    "breathing",
+    "half",
+    "instead",
+    "hand-picked",
+    "hand",
+    "picked",
+    "number",
+    "seconds"
+  ],
+  "corpus_files": 8,
+  "quotable_passages": 48,
+  "citation_audit": {
+    "checked": 0,
+    "verified": 0,
+    "passed": true,
+    "corpus_sha256": "ddbbc7192ac9199da2f75c610b9f505acbcfa97ca16a54d3cb5e4179e420b9af"
+  },
+  "verdict": {
+    "agreed": "The local library has no evidence on this question, so the room made no claims about it.",
+    "contested": "Nothing yet. A disagreement needs evidence on the table first.",
+    "next_move": "Add two or three papers on this topic to the library and rerun the same command, or connect a local model for an open-ended meeting."
+  },
+  "quotes": [],
+  "sources": {
+    "01-synchronization-dissipation-dynamics-in-the-cardiorespirator.md": {
+      "anna_id": "arxiv:c828102dbd28c9d9",
+      "title": "Synchronization-dissipation dynamics in the cardiorespiratory system",
+      "url": "http://arxiv.org/abs/2603.23259v1"
+    },
+    "02-effect-of-stress-on-cardiorespiratory-synchronization-of-iro.md": {
+      "anna_id": "arxiv:65c6592855287138",
+      "title": "Effect of stress on cardiorespiratory synchronization of Ironmen athletes",
+      "url": "http://arxiv.org/abs/2102.01883v1"
+    },
+    "03-cardiorespiratory-coupling-improves-cardiac-pumping-efficien.md": {
+      "anna_id": "arxiv:e2e5ed79dbae2ef1",
+      "title": "Cardiorespiratory coupling improves cardiac pumping efficiency in heart failure",
+      "url": "http://arxiv.org/abs/2507.00597v1"
+    },
+    "04-inference-of-a-nonlinear-stochastic-model-of-the-cardiorespi.md": {
+      "anna_id": "arxiv:bf02e31b8544bdbd",
+      "title": "Inference of a nonlinear stochastic model of the cardiorespiratory interaction",
+      "url": "http://arxiv.org/abs/physics/0503040v1"
+    },
+    "05-contact-sensors-to-remote-cameras-quantifying-cardiorespirat.md": {
+      "anna_id": "arxiv:f6c0e229eeda150f",
+      "title": "Contact Sensors to Remote Cameras: Quantifying Cardiorespiratory Coupling in High-Altitude Exercise Recovery",
+      "url": "http://arxiv.org/abs/2508.00773v1"
+    },
+    "06-rope-a-novel-method-for-real-time-phase-estimation-of-comple.md": {
+      "anna_id": "arxiv:e6a794b6d9784c40",
+      "title": "ROPE: A Novel Method for Real-Time Phase Estimation of Complex Biological Rhythms",
+      "url": "http://arxiv.org/abs/2509.04962v2"
+    },
+    "07-directional-coupling-detection-through-cross-distance-vector.md": {
+      "anna_id": "arxiv:4b984f57c53881e2",
+      "title": "Directional coupling detection through cross-distance vectors",
+      "url": "http://arxiv.org/abs/2210.09000v2"
+    },
+    "08-inference-of-time-evolving-coupled-dynamical-systems-in-the.md": {
+      "anna_id": "arxiv:89bdea13bcd3d637",
+      "title": "Inference of Time-Evolving Coupled Dynamical Systems in the Presence of Noise",
+      "url": "http://arxiv.org/abs/1206.1961v2"
+    }
+  }
+}

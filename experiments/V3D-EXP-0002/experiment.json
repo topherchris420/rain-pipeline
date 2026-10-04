@@ -1,0 +1,413 @@
+{
+  "created_at": "2026-10-04T17:41:16.253Z",
+  "created_by": "rain-pipeline",
+  "criteria": {
+    "failure": [
+      {
+        "id": "F1",
+        "metric": "slow_gain_long_vs_short",
+        "note": "The wider window does not help slow breathers.",
+        "op": "<=",
+        "value": 0
+      },
+      {
+        "id": "F2",
+        "metric": "normal_change_long_vs_short",
+        "note": "The wider window harms normal breathers.",
+        "op": "<",
+        "value": -0.15
+      },
+      {
+        "id": "F3",
+        "metric": "mismatched_detection_rate_long",
+        "note": "The wider window fires on mismatched people at three times the nominal rate.",
+        "op": ">",
+        "value": 0.15
+      }
+    ],
+    "guards": [
+      {
+        "id": "G1",
+        "metric": "holdout_bytes_read_before_registration",
+        "note": "The data must be unseen at registration, or it confirms nothing.",
+        "op": "<=",
+        "value": 0
+      },
+      {
+        "id": "G2",
+        "metric": "windows_analyzed",
+        "note": "At most 40 of 200 windows may fail QC.",
+        "op": ">=",
+        "value": 160
+      },
+      {
+        "id": "G3",
+        "metric": "slow_subjects",
+        "note": "A claim about slow breathers needs several of them.",
+        "op": ">=",
+        "value": 4
+      },
+      {
+        "id": "G4",
+        "metric": "slow_windows",
+        "op": ">=",
+        "value": 20
+      },
+      {
+        "id": "G5",
+        "metric": "synthetic_long_lag_detection_rate_long",
+        "note": "The 6 s window must see a known coupling at 4.5 s.",
+        "op": ">=",
+        "value": 0.9
+      },
+      {
+        "id": "G6",
+        "metric": "synthetic_null_false_positive_rate_long",
+        "note": "The 6 s test must stay near its nominal 5% on independent synthetic pairs.",
+        "op": "<=",
+        "value": 0.15
+      }
+    ],
+    "success": [
+      {
+        "id": "S1",
+        "metric": "slow_detection_rate_long",
+        "note": "Slow breathers reach the bar V3D-EXP-0001 set for the cohort.",
+        "op": ">=",
+        "value": 0.8
+      },
+      {
+        "id": "S2",
+        "metric": "slow_gain_long_vs_short",
+        "op": ">=",
+        "value": 0.1
+      },
+      {
+        "id": "S3",
+        "metric": "normal_change_long_vs_short",
+        "op": ">=",
+        "value": -0.05
+      },
+      {
+        "id": "S4",
+        "metric": "mismatched_detection_rate_long",
+        "note": "About the 99th percentile for 200 pairs at a true 5% rate.",
+        "op": "<=",
+        "value": 0.1
+      }
+    ]
+  },
+  "data_policy": {
+    "classification": "public",
+    "store_artifacts": false
+  },
+  "dependencies": [
+    "drr-framework",
+    "numpy",
+    "scipy"
+  ],
+  "evidence_class": "measured",
+  "experiment_id": "V3D-EXP-0002",
+  "experiment_version": 1,
+  "hypothesis": "In held-out 10-minute windows from the Fantasia young cohort (seconds 660-6660 of each record), widening the lag window from 3 s to 6 s raises the subject-balanced detection rate of respiration -> heart-rate coupling in slow-breathing windows (dominant breathing frequency from 0.0833 Hz up to, but not including, 0.1667 Hz) by at least 0.10, to at least 0.80, lowers it by no more than 0.05 in normal-breathing windows, and keeps detections between mismatched people at or below 0.10.",
+  "limitations": [
+    "The held-out windows come from the same 20 people as V3D-EXP-0001: new data, not new people. Slow breathing is concentrated in a few of them, so rates weight each person equally and the guards require at least four slow breathers.",
+    "Detection means max-statistic adjusted p <= 0.05 for respiration -> heart rate. Lagged correlation ignores sign and lag 0, so this tests coupling, not direction.",
+    "Strata come from the dominant Welch peak of respiration (64 s segments, 0.0156 Hz resolution). Windows slower than 0.0833 Hz fall in neither stratum.",
+    "Mismatched pairs share the time into the recording, and every subject watched the same film. A film-locked common response would raise mismatched detections and count against the hypothesis.",
+    "Windows from one person are not independent, so mismatched and window-level shares are less certain than their counts suggest.",
+    "R peaks come from a simple band-pass detector; windows below the QC threshold are excluded, not repaired.",
+    "The holdout guarantee rests on this tool's data ledger: it shows no byte of these ranges was read through the pipeline before registration, and cannot rule out reads made outside it.",
+    "A sibling experiment (specs/resonance-derived-window.json) was registered alongside this one and is judged on the same held-out windows. Each is evaluated on its own criteria; there is no correction across the two.",
+    "Literature retrieval uses Anna's deterministic hashing embeddings (lexical, not semantic) over arXiv metadata and abstracts only."
+  ],
+  "metrics": [
+    {
+      "description": "Bytes of the pre-registered data that the ledger shows were read before this registration existed.",
+      "deterministic": true,
+      "name": "holdout_bytes_read_before_registration",
+      "unit": "bytes"
+    },
+    {
+      "description": "Windows that passed R-peak QC and were analysed.",
+      "deterministic": true,
+      "name": "windows_analyzed",
+      "unit": "count"
+    },
+    {
+      "description": "Analysed windows in the slow stratum.",
+      "deterministic": true,
+      "name": "slow_windows",
+      "unit": "count"
+    },
+    {
+      "description": "People with at least one slow window.",
+      "deterministic": true,
+      "name": "slow_subjects",
+      "unit": "count"
+    },
+    {
+      "description": "Analysed windows in the normal stratum.",
+      "deterministic": true,
+      "name": "normal_windows",
+      "unit": "count"
+    },
+    {
+      "description": "People with at least one normal window.",
+      "deterministic": true,
+      "name": "normal_subjects",
+      "unit": "count"
+    },
+    {
+      "description": "Subject-balanced detection rate in slow windows, 3 s window.",
+      "deterministic": true,
+      "name": "slow_detection_rate_short",
+      "unit": "ratio"
+    },
+    {
+      "description": "Subject-balanced detection rate in slow windows, 6 s window.",
+      "deterministic": true,
+      "name": "slow_detection_rate_long",
+      "unit": "ratio"
+    },
+    {
+      "description": "slow_detection_rate_long minus slow_detection_rate_short.",
+      "deterministic": true,
+      "name": "slow_gain_long_vs_short",
+      "unit": "ratio"
+    },
+    {
+      "description": "Subject-balanced detection rate in normal windows, 3 s window.",
+      "deterministic": true,
+      "name": "normal_detection_rate_short",
+      "unit": "ratio"
+    },
+    {
+      "description": "Subject-balanced detection rate in normal windows, 6 s window.",
+      "deterministic": true,
+      "name": "normal_detection_rate_long",
+      "unit": "ratio"
+    },
+    {
+      "description": "normal_detection_rate_long minus normal_detection_rate_short.",
+      "deterministic": true,
+      "name": "normal_change_long_vs_short",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of mismatched-person pairs detected, 3 s window (descriptive).",
+      "deterministic": true,
+      "name": "mismatched_detection_rate_short",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of mismatched-person pairs detected, 6 s window.",
+      "deterministic": true,
+      "name": "mismatched_detection_rate_long",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of mismatched pairs detected when the respiration window is slow, 3 s window (descriptive).",
+      "deterministic": true,
+      "name": "mismatched_slow_detection_rate_short",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of mismatched pairs detected when the respiration window is slow, 6 s window (descriptive).",
+      "deterministic": true,
+      "name": "mismatched_slow_detection_rate_long",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of all analysed windows detected, 3 s window (descriptive).",
+      "deterministic": true,
+      "name": "window_detection_rate_short",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of all analysed windows detected, 6 s window (descriptive).",
+      "deterministic": true,
+      "name": "window_detection_rate_long",
+      "unit": "ratio"
+    },
+    {
+      "description": "Median lag of detected slow windows, 3 s window (descriptive).",
+      "deterministic": true,
+      "name": "slow_median_lag_s_short",
+      "unit": "s"
+    },
+    {
+      "description": "Median lag of detected slow windows, 6 s window (descriptive).",
+      "deterministic": true,
+      "name": "slow_median_lag_s_long",
+      "unit": "s"
+    },
+    {
+      "description": "Share of synthetic lag-18 couplings detected by the 3 s window; expected near alpha (descriptive).",
+      "deterministic": true,
+      "name": "synthetic_long_lag_detection_rate_short",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of synthetic lag-18 couplings detected by the 6 s window.",
+      "deterministic": true,
+      "name": "synthetic_long_lag_detection_rate_long",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of synthetic lag-4 couplings detected by the 6 s window (descriptive).",
+      "deterministic": true,
+      "name": "synthetic_positive_detection_rate_long",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of independent synthetic pairs falsely detected by the 6 s window.",
+      "deterministic": true,
+      "name": "synthetic_null_false_positive_rate_long",
+      "unit": "ratio"
+    }
+  ],
+  "parameters": {
+    "analysis": {
+      "alpha": 0.05,
+      "arms": {
+        "long": {
+          "max_lag_s": 6.0
+        },
+        "short": {
+          "max_lag_s": 3.0
+        }
+      },
+      "contrasts": {
+        "normal_change_long_vs_short": {
+          "arm": "long",
+          "metric": "normal_detection_rate",
+          "minus": "short"
+        },
+        "slow_gain_long_vs_short": {
+          "arm": "long",
+          "metric": "slow_detection_rate",
+          "minus": "short"
+        }
+      },
+      "controls": {
+        "ar_coefficient": 0.5,
+        "long_lag_samples": 18,
+        "positive_coupling": 0.3,
+        "positive_lag_samples": 4,
+        "synthetic_trials": 20
+      },
+      "correction": "max_statistic",
+      "method": "lagged_correlation",
+      "n_surrogates": 199,
+      "seed": 20261005,
+      "strata": {
+        "normal": {
+          "min_hz": 0.1667
+        },
+        "slow": {
+          "below_hz": 0.1667,
+          "min_hz": 0.0833
+        }
+      },
+      "study": "lag_window",
+      "surrogate_method": "circular_shift"
+    },
+    "data": {
+      "grid_hz": 4,
+      "highpass_hz": 0.05,
+      "holdout": true,
+      "qc": {
+        "min_valid_rr_fraction": 0.95
+      },
+      "records": [
+        "f1y01",
+        "f1y02",
+        "f1y03",
+        "f1y04",
+        "f1y05",
+        "f1y06",
+        "f1y07",
+        "f1y08",
+        "f1y09",
+        "f1y10",
+        "f2y01",
+        "f2y02",
+        "f2y03",
+        "f2y04",
+        "f2y05",
+        "f2y06",
+        "f2y07",
+        "f2y08",
+        "f2y09",
+        "f2y10"
+      ],
+      "segments": {
+        "count": 10,
+        "duration_s": 600,
+        "first_start_s": 660
+      },
+      "source": "physionet-fantasia"
+    },
+    "framing": {
+      "anna_record_sha256": "23d5f15aee83e17733d59d132cda6870da76fcc91392d9da654364cd961bfd28",
+      "exploration_report_sha256": "c14de3b6d975fee1cf94444aca10dbd7cc007e67bb34fbb17c31296b8ad5784e",
+      "holdout": {
+        "byte_ranges": 20,
+        "bytes": 129741000,
+        "ledger_sha256": "6ab74ac2cca606040e29a3a70384a2f74127b3c947cb843935bf3f5b5c1b6f94"
+      },
+      "panel_corpus_sha256": "c4cc832a38f698825f116fd6e3dc2be3997497ea581c93e05325fb343a0078df",
+      "parent_result_sha256": "8103083e4304201d4ba4f12401445a5459db8b87c1125ee85ea465e6a4e3f39c"
+    },
+    "lineage": {
+      "exploration": "explorations/20261004T173027Z-explore-lag-window/report.json",
+      "follows": "V3D-EXP-0001/RUN-0001",
+      "observation": "RUN-0001 missed two of 20 records (f2y09, f2y10), both breathing near 0.11-0.13 Hz, and detected a third slow breather (f1y03) only at the 3 s edge of the lag window."
+    }
+  },
+  "procedure": [
+    "Explore lag windows on the already-seen V3D-EXP-0001 windows only (the tool refuses unseen bytes in exploration) and bind the report's hash into this registration.",
+    "Retrieve and cite literature with Anna; convene the R.A.I.N. offline panel over those sources; bind both by hash.",
+    "Register this definition after the data ledger confirms that no byte of seconds 660-6660 of any listed record has been read. Commit and push the registration before any of that data is fetched.",
+    "Fetch seconds 660-6660 of each record as one byte range, log it in the ledger, and cut it into ten 600 s windows.",
+    "Per window: detect R peaks (5-20 Hz band-pass, 330 ms refractory); exclude the window if fewer than 20 valid RR intervals are found or the valid-RR fraction is below 0.95; resample respiration (1 Hz low-pass) and instantaneous heart rate to 4 Hz; high-pass both at 0.05 Hz; z-score.",
+    "Assign each window a stratum from respiration alone, using the dominant Welch peak f from DRR's resonance detector: slow if 0.0833 <= f < 0.1667 Hz, normal if f >= 0.1667 Hz, otherwise neither.",
+    "Test respiration -> heart rate with DRR RootingAnalyzer (lagged correlation, 199 circular-shift surrogates, max-statistic correction) under each arm, lags 1-12 samples (3 s) and lags 1-24 samples (6 s), with the same seed per window. A window is detected when its adjusted p <= 0.05.",
+    "Run the identical tests on mismatched pairs (a window's respiration with another person's heart rate from the same segment; the partner moves one person further in each segment) and on 20 synthetic AR(1) pairs each of: coupling at lag 4 samples, no coupling, coupling at lag 18 samples.",
+    "A stratum's detection rate is the unweighted mean, over people with at least one window in the stratum, of each person's share of detected windows there. Mismatched and synthetic rates are plain shares.",
+    "Submit measurements as rain-experiment-submission/v1; R.A.I.N. evaluates the criteria."
+  ],
+  "question": "On recordings never analysed before, does widening DRR's lag window from 3 s to 6 s raise detection of respiration -> heart-rate coupling when breathing is slow, without making the test fire on mismatched people?",
+  "rationale": "V3D-EXP-0001 missed two of 20 records, both slow breathers, and found a third only at the 3 s edge of its lag window. The absolute cross-correlation of two signals that share a rhythm peaks once every half period, so a 3 s window is guaranteed to contain a peak only when breathing is faster than 0.1667 Hz; a 6 s window extends that guarantee down to 0.0833 Hz. If truncation explains the misses, the wider window should recover slow breathers. Exploration on the already-seen EXP-0001 windows (not evidence; the report's hash is bound in this registration) did not show that: the 6 s window left slow-window detections unchanged at 3 of 5, although it lowered the p-values of the two edge cases (0.020 to 0.005 and 0.195 to 0.070), and mismatched detections rose from 1 of 20 to 4 of 20. Twenty windows cannot settle either point, so this experiment tests both on 200 held-out windows. A longer window that buys detections by also firing on mismatched people is not a fix, so mismatched calibration is part of the hypothesis: its failure is a failure of the claim, not a reason to abstain.",
+  "runner": {
+    "adapter": "rain-pipeline: Anna -> R.A.I.N. -> DRR (rain-experiment-submission/v1)",
+    "kind": "external",
+    "repository": "topherchris420/dynamic-resonance-rooting"
+  },
+  "schema_version": "rain-experiment/v1",
+  "seed": 20261005,
+  "subsystem": {
+    "component": "RootingAnalyzer",
+    "paths": [],
+    "repository": "topherchris420/dynamic-resonance-rooting"
+  },
+  "title": "Does a 6 s lag window recover respiration-to-heart-rate coupling in slow breathers? (held-out Fantasia windows)",
+  "variables": {
+    "controls": [
+      "synthetic coupling at lag 18 samples: reachable by the 6 s window only",
+      "independent synthetic AR(1) pairs (negative control)",
+      "mismatched-person pairs from the same segment (real-data negative control)",
+      "identical preprocessing, surrogates, correction and per-window seed in both arms"
+    ],
+    "dependent": [
+      "max-statistic adjusted p-value, respiration -> heart rate",
+      "lag of the strongest lagged correlation"
+    ],
+    "independent": [
+      "lag window: 3 s vs 6 s",
+      "breathing stratum: slow vs normal",
+      "pairing: same person vs mismatched people"
+    ]
+  }
+}

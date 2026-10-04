@@ -7,13 +7,15 @@ from recorded measurements against criteria registered *before* the run; no mode
 decides it. Failed and inconclusive results stay on the record.
 How to add one: [EXPERIMENTS.md](EXPERIMENTS.md). Raw records: [`experiments/`](experiments/).
 
-**1 experiments · 1 runs** — 1 passed · 0 failed
+**3 experiments · 1 runs** — 1 passed · 0 failed · 2 planned
 
-Evidence: 1 measured
+Evidence: 1 measured · 2 proposed
 
 | ID | Experiment | Result | Key measurement | Evidence | Runs |
 | --- | --- | --- | --- | --- | --- |
 | [V3D-EXP-0001](#v3d-exp-0001) | Does DRR recover respiration-to-heart-rate coupling (RSA) in resting young adults? | **PASSED** | coupling_detection_rate = 0.9 (needs ≥ 0.8) | measured | 1 |
+| [V3D-EXP-0002](#v3d-exp-0002) | Does a 6 s lag window recover respiration-to-heart-rate coupling in slow breathers? (held-out Fantasia windows) | **PLANNED** | slow_detection_rate_long: — (needs ≥ 0.8) | proposed | 0 |
+| [V3D-EXP-0003](#v3d-exp-0003) | Can DRR derive its lag window from the breathing resonance instead of a hand-picked length? (held-out Fantasia windows) | **PLANNED** | slow_resonant_vs_long: — (needs ≥ -0.05) | proposed | 0 |
 
 ## Negative and inconclusive results
 
@@ -64,3 +66,58 @@ Measurements from V3D-EXP-0001-RUN-0001:
 - Literature retrieval uses Anna's deterministic hashing embeddings (lexical, not semantic) over arXiv metadata and abstracts only.
 
 **Reproduce:** `python rain_lab.py experiment reproduce V3D-EXP-0001`
+
+## V3D-EXP-0002
+
+### Does a 6 s lag window recover respiration-to-heart-rate coupling in slow breathers? (held-out Fantasia windows)
+
+**Result: PLANNED** — no runs yet · evidence: proposed · runs: 0 (none completed)
+
+**Question:** On recordings never analysed before, does widening DRR's lag window from 3 s to 6 s raise detection of respiration -> heart-rate coupling when breathing is slow, without making the test fire on mismatched people?
+
+**Hypothesis:** In held-out 10-minute windows from the Fantasia young cohort (seconds 660-6660 of each record), widening the lag window from 3 s to 6 s raises the subject-balanced detection rate of respiration -> heart-rate coupling in slow-breathing windows (dominant breathing frequency from 0.0833 Hz up to, but not including, 0.1667 Hz) by at least 0.10, to at least 0.80, lowers it by no more than 0.05 in normal-breathing windows, and keeps detections between mismatched people at or below 0.10.
+
+**Pre-registered criteria** (nothing measured yet):
+
+- Guard G1: holdout_bytes_read_before_registration ≤ 0
+- Guard G2: windows_analyzed ≥ 160
+- Guard G3: slow_subjects ≥ 4
+- Guard G4: slow_windows ≥ 20
+- Guard G5: synthetic_long_lag_detection_rate_long ≥ 0.9
+- Guard G6: synthetic_null_false_positive_rate_long ≤ 0.15
+- Success S1: slow_detection_rate_long ≥ 0.8
+- Success S2: slow_gain_long_vs_short ≥ 0.1
+- Success S3: normal_change_long_vs_short ≥ -0.05
+- Success S4: mismatched_detection_rate_long ≤ 0.1
+- Failure F1: slow_gain_long_vs_short ≤ 0
+- Failure F2: normal_change_long_vs_short < -0.15
+- Failure F3: mismatched_detection_rate_long > 0.15
+
+**Next step:** run it — `topherchris420/dynamic-resonance-rooting` via `experiment record`.
+
+## V3D-EXP-0003
+
+### Can DRR derive its lag window from the breathing resonance instead of a hand-picked length? (held-out Fantasia windows)
+
+**Result: PLANNED** — no runs yet · evidence: proposed · runs: 0 (none completed)
+
+**Question:** Does a lag window set per recording to half the breathing period, as measured by DRR's own resonance detector, detect respiration -> heart-rate coupling as often as the better hand-picked window in each breathing range, without firing on mismatched people?
+
+**Hypothesis:** On held-out 10-minute windows from the Fantasia young cohort (seconds 660-6660 of each record), a lag window derived per window from DRR's resonance detector (half the dominant breathing period plus one sample, clamped to 1-8 s) detects respiration -> heart-rate coupling at a subject-balanced rate within 0.05 of the fixed 6 s window in slow-breathing windows and within 0.05 of the fixed 3 s window in normal-breathing windows, while detections between mismatched people stay at or below 0.10.
+
+**Pre-registered criteria** (nothing measured yet):
+
+- Guard G1: holdout_bytes_read_before_registration ≤ 0
+- Guard G2: windows_analyzed ≥ 160
+- Guard G3: slow_subjects ≥ 4
+- Guard G4: slow_windows ≥ 20
+- Guard G5: synthetic_positive_detection_rate_resonant ≥ 0.9
+- Guard G6: synthetic_null_false_positive_rate_resonant ≤ 0.15
+- Success S1: slow_resonant_vs_long ≥ -0.05
+- Success S2: normal_resonant_vs_short ≥ -0.05
+- Success S3: mismatched_detection_rate_resonant ≤ 0.1
+- Failure F1: slow_resonant_vs_long < -0.15
+- Failure F2: normal_resonant_vs_short < -0.15
+- Failure F3: mismatched_detection_rate_resonant > 0.15
+
+**Next step:** run it — `topherchris420/dynamic-resonance-rooting` via `experiment record`.

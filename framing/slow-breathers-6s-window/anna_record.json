@@ -1,0 +1,429 @@
+{
+  "captured_at": "2026-10-04T17:41:15.700Z",
+  "content_sha256": "23d5f15aee83e17733d59d132cda6870da76fcc91392d9da654364cd961bfd28",
+  "record": {
+    "schema": "anna-research-record/v1",
+    "provider": "live",
+    "request": {
+      "q": "slow breathing or paced breathing or respiratory sinus arrhythmia",
+      "mode": "hybrid",
+      "page": 1,
+      "per_page": 8,
+      "filters": {}
+    },
+    "retrieval": {
+      "backend": "postgres",
+      "requested_mode": "hybrid",
+      "executed": [
+        "fts",
+        "knn"
+      ],
+      "unavailable": [],
+      "degraded": false,
+      "embedding": "hashing",
+      "fusion": "rrf",
+      "candidate_count": 28,
+      "total_scope": "retrieved-candidates",
+      "score_ceiling": 0.03278688524590164,
+      "score_meaning": "ranking-score-not-probability"
+    },
+    "result_count": 28,
+    "scope": "current-page",
+    "hits": [
+      {
+        "score": 0.032522,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 1,
+            "knn": 2
+          },
+          "contributions": {
+            "fts": 0.01639344262295082,
+            "knn": 0.016129032258064516
+          }
+        },
+        "document": {
+          "id": "arxiv:d278669380f744b7",
+          "title": "Mathematical and Preclinical Investigation of Respiratory Sinus Arrhythmia Effects on Cardiac Output",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2004.11325v1",
+          "pdf_url": "https://arxiv.org/pdf/2004.11325v1",
+          "authors": [
+            "Sahar Rahbar"
+          ],
+          "published": "2020-04-23T17:19:44Z",
+          "version": "",
+          "abstract": "Respiratory sinus arrhythmia (RSA) is heart rate variability in synchrony with respiration although its functional significance not clear. The loss of sinus arrhythmia may indicate underlying heart failure or disease; therefore, there would be a great advantage of knowing how it works and affects the cardio-respiratory system, especially by providing a mathematical model. To this end, Windkessel model and cardiovascular partial differential equations are used to obtain cardiac output based on the elasticity of left ventricle, which is related to RSA. By solving the corresponding equations, it would be possible to propose a new model to predict the RSA effects on cardiac output."
+        },
+        "highlights": [
+          "<em>Respiratory</em> <em>sinus</em> <em>arrhythmia</em> (RSA) is heart rate variability in synchrony with respiration although its functional significance not clear. The loss of <em>sinus</em> <em>arrhythmia</em> may indicate",
+          "great advantage of knowing how it works and affects the cardio-<em>respiratory</em> system, especially by providing a mathematical model. To this end, Windkessel model"
+        ],
+        "relevance": 0.9919
+      },
+      {
+        "score": 0.032266,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 3,
+            "knn": 1
+          },
+          "contributions": {
+            "fts": 0.015873015873015872,
+            "knn": 0.01639344262295082
+          }
+        },
+        "document": {
+          "id": "arxiv:2cd076769301f26e",
+          "title": "Analysis of Respiratory Sinus Arrhythmia with Neural Networks",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2609.05698v1",
+          "pdf_url": "https://arxiv.org/pdf/2609.05698v1",
+          "authors": [
+            "Julian Szymanski",
+            "Patryk Orkisz",
+            "Higinio Mora"
+          ],
+          "published": "2026-09-04T20:09:30Z",
+          "version": "",
+          "abstract": "The paper introduces a neural network-based approach for analyzing ECG signals to estimate respiratory rate by leveraging the phe- nomenon of Respiratory Sinus Arrhythmia (RSA). Our method employs a deep learning model trained to predict respiratory waveforms directly from ECG input data. To achieve this, we developed and evaluated three different neural network architectures capable of automatically extract- ing relevant features from ECG signals without the need for manual preprocessing. The proposed approach offers a robust and scalable solu- tion for non-invasive respiratory monitoring, with potential applications in healthcare and wearable technology"
+        },
+        "highlights": [
+          "signals to estimate <em>respiratory</em> rate by leveraging the phe- nomenon of <em>Respiratory</em> <em>Sinus</em> <em>Arrhythmia</em> (RSA). Our method employs a deep learning model trained to predict"
+        ],
+        "relevance": 0.9841
+      },
+      {
+        "score": 0.031514,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 2,
+            "knn": 5
+          },
+          "contributions": {
+            "fts": 0.016129032258064516,
+            "knn": 0.015384615384615385
+          }
+        },
+        "document": {
+          "id": "arxiv:beb468b08796420f",
+          "title": "Disentangling Respiratory Sinus Arrhythmia in Heart Rate Variability Records",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/1802.00683v1",
+          "pdf_url": "https://arxiv.org/pdf/1802.00683v1",
+          "authors": [
+            "Çağdaş Topçu",
+            "Matthias Frühwirth",
+            "Maximilian Moser",
+            "Michael Rosenblum",
+            "Arkady Pikovsky"
+          ],
+          "published": "2018-02-02T13:54:50Z",
+          "version": "",
+          "abstract": "Different measures of heart rate variability and particularly of respiratory sinus arrhythmia are widely used in research and clinical applications. Inspired by the ideas from the theory of coupled oscillators, we use simultaneous measurements of respiratory and cardiac activity to perform a nonlinear decomposition of the heart rate variability into the respiratory-related component and the rest. We suggest to exploit the technique as a universal preprocessing tool, both for the analysis of respiratory influence on the heart rate as well as in cases when effects of other factors on the heart rate variability are in focus. The theoretical consideration is illustrated by the analysis of 25 data sets from healthy subjects."
+        },
+        "highlights": [
+          "Different measures of heart rate variability and particularly of <em>respiratory</em> <em>sinus</em> <em>arrhythmia</em> are widely used in research and clinical applications. Inspired by the ideas from",
+          "theory of coupled oscillators, we use simultaneous measurements of <em>respiratory</em> and cardiac activity to perform a nonlinear decomposition of the heart rate variability into"
+        ],
+        "relevance": 0.9612
+      },
+      {
+        "score": 0.030798,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 7,
+            "knn": 3
+          },
+          "contributions": {
+            "fts": 0.014925373134328358,
+            "knn": 0.015873015873015872
+          }
+        },
+        "document": {
+          "id": "arxiv:92768c96aeeaae69",
+          "title": "The Evaluation of Breathing 5:5 effect on resilience, stress and balance center measured by Single-Channel EEG",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2507.10175v1",
+          "pdf_url": "https://arxiv.org/pdf/2507.10175v1",
+          "authors": [
+            "Eliezer Yahalom",
+            "Neta Maimon",
+            "Lior Molcho",
+            "Talya Zeimer",
+            "Ofir Chibotero",
+            "Nathan Intrator"
+          ],
+          "published": "2025-07-14T11:37:29Z",
+          "version": "",
+          "abstract": "Slow-paced breathing is a promising intervention for reducing anxiety and enhancing emotional regulation through its effects on autonomic and central nervous system function. This study examined the neurophysiological and subjective effects of a 5:5 breathing protocol on stress-related EEG biomarkers using a mobile single-channel EEG system. Thirty-eight healthy adults were randomly assigned to either an intervention group (n = 20), which completed two sessions spaced two weeks apart with daily breathing practice, or a control group (n = 18), which completed one session. In each session, participants underwent an auditory EEG assessment with resting, mental load, and startle conditions. The intervention group also completed a guided breathing session during the first visit and practiced the technique between sessions. EEG biomarkers (ST4, Alpha, Delta, Gamma, VC0) and subjective anxiety levels (STAI) were assessed before and after the intervention. A significant reduction in Gamma power was observed in the intervention group immediately following the first breathing session during mental load (p = .002), indicating acute stress reduction. Across sessions, long-term breathing practice led to increased Alpha and Delta power and reduced ST4 activity, suggesting cumulative improvements in emotional regulation and cognitive efficiency. Correlational analyses revealed that changes in VC0 and Alpha were significantly associated with subjective reports of tension, focus difficulty, and calmness. Guided slow-paced breathing at a 5:5 rhythm produces both immediate and sustained effects on neural markers of stress and cognition, with corresponding improvements in subjective anxiety. These findings support EEG-based monitoring as a scalable method for evaluating breath-based interventions and promoting real-time emotional self-regulation."
+        },
+        "highlights": [
+          "<em>Slow</em>-<em>paced</em> <em>breathing</em> is a promising intervention for reducing anxiety and enhancing emotional regulation through its effects on autonomic and central nervous system function",
+          "with subjective reports of tension, focus difficulty, and calmness. Guided <em>slow</em>-<em>paced</em> <em>breathing</em> at a 5:5 rhythm produces both immediate and sustained effects"
+        ],
+        "relevance": 0.9393
+      },
+      {
+        "score": 0.030331,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 8,
+            "knn": 4
+          },
+          "contributions": {
+            "fts": 0.014705882352941176,
+            "knn": 0.015625
+          }
+        },
+        "document": {
+          "id": "arxiv:14025cf79803abfc",
+          "title": "NEFFY 2.0: A Breathing Companion Robot: User-Centered Design and Findings from a Study with Ukrainian Refugees",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2604.15325v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.15325v1",
+          "authors": [
+            "Ilona Buchem",
+            "Jessica Kazubski",
+            "Charly Goerke"
+          ],
+          "published": "2026-03-05T18:08:13Z",
+          "version": "",
+          "abstract": "This paper presents the design of NEFFY 2.0, a social robot designed as a haptic slow-paced breathing companion for stress reduction, and reports findings from a mixed-methods user study with 14 refugees from Ukraine. Developed through a user-centered design process, NEFFY 2.0 builds on NEFFY 1.0 and integrates embodiment and multi-sensory interaction to provide low-threshold, accessible guidance of slow-paced breathing for stress relief, which may be particularly valuable for individuals experiencing prolonged periods of anxiety. To evaluate effectiveness, an experimental comparison of a robot-assisted breathing intervention versus an audio-only condition was conducted. Measures included subjective ratings and physiological indicators, such as heart rate (HR), heart rate variability (HRV) using RMSSD parameter, respiratory rate (RR), and galvanic skin response (GSR), alongside qualitative data from interviews exploring user experience and perceived support. Qualitative findings showed that NEFFY 2.0 was perceived as intuitive, calming and supportive. Survey results showed a substantially larger effect in significant reduction of perceived stress in the NEFFY 2.0 condition compared to audio-only. Physiological data reveled mixed results combined with large inter-personal variability. Three patterns of breathing practice with NEFFY 2.0 were identified using k-means clustering. Despite the small sample size, this study makes a novel contribution by providing empirical evidence of stress reduction in a vulnerable population through a direct comparison of robot-assisted and non-robot conditions. The findings position NEFFY 2.0 as a promising low-threshold tool that supports stress relief and contributes to the vision of HRI empowering society."
+        },
+        "highlights": [
+          "NEFFY 2.0, a social robot designed as a haptic <em>slow</em>-<em>paced</em> <em>breathing</em> companion for stress reduction, and reports findings from a mixed-methods user",
+          "multi-sensory interaction to provide low-threshold, accessible guidance of <em>slow</em>-<em>paced</em> <em>breathing</em> for stress relief, which may be particularly valuable for individuals experiencing"
+        ],
+        "relevance": 0.9251
+      },
+      {
+        "score": 0.029437,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 6,
+            "knn": 10
+          },
+          "contributions": {
+            "fts": 0.015151515151515152,
+            "knn": 0.014285714285714285
+          }
+        },
+        "document": {
+          "id": "arxiv:6ece36e51aa3c13f",
+          "title": "Deriving the respiratory sinus arrhythmia from the heartbeat time series using Empirical Mode Decomposition",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/q-bio/0310002v1",
+          "pdf_url": "https://arxiv.org/pdf/q-bio/0310002v1",
+          "authors": [
+            "R. Balocchi",
+            "D. Menicucci",
+            "E. Santarcangelo",
+            "L. Sebastiani",
+            "A. Gemignani",
+            "B. Ghelarducci",
+            "M. Varanini"
+          ],
+          "published": "2003-10-01T20:14:27Z",
+          "version": "",
+          "abstract": "Heart rate variability (HRV) is a well-known phenomenon whose characteristics are of great clinical relevance in pathophysiologic investigations. In particular, respiration is a powerful modulator of HRV contributing to the oscillations at highest frequency. Like almost all natural phenomena, HRV is the result of many nonlinearly interacting processes; therefore any linear analysis has the potential risk of underestimating, or even missing, a great amount of information content. Recently the technique of Empirical Mode Decomposition (EMD) has been proposed as a new tool for the analysis of nonlinear and nonstationary data. We applied EMD analysis to decompose the heartbeat intervals series, derived from one electrocardiographic (ECG) signal of 13 subjects, into their components in order to identify the modes associated with breathing. After each decomposition the mode showing the highest frequency and the corresponding respiratory signal were Hilbert transformed and the instantaneous phases extracted were then compared. The results obtained indicate a synchronization of order 1:1 between the two series proving the existence of phase and frequency coupling between the component associated with breathing and the respiratory signal itself in all subjects."
+        },
+        "highlights": [],
+        "relevance": 0.8978
+      },
+      {
+        "score": 0.029324,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 4,
+            "knn": 13
+          },
+          "contributions": {
+            "fts": 0.015625,
+            "knn": 0.0136986301369863
+          }
+        },
+        "document": {
+          "id": "arxiv:d8d7da7b460e44ec",
+          "title": "Buffering blood pressure fluctuations by respiratory sinus arrhythmia may in fact enhance them: a theoretical analysis",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/1007.2229v1",
+          "pdf_url": "https://arxiv.org/pdf/1007.2229v1",
+          "authors": [
+            "Teodor Buchner",
+            "Jan Żebrowski",
+            "Grzegorz Gielerak"
+          ],
+          "published": "2010-07-13T23:56:07Z",
+          "version": "",
+          "abstract": "Using a three-compartment model of blood pressure dynamics, we analyze theoretically the short term cardiovascular variability: how the respiratory-related blood pressure fluctuations are buffered by appropriate heart rate changes: i.e. the respiratory sinus arrhythmia. The buffering is shown to be crucially dependent on the time delay between the stimulus (such as e.g. the inspiration onset) and the application of the control (the moment in time when the efferent response is delivered to the heart). This theoretical analysis shows that the buffering mechanism is effective only in the upright position of the body. It explains a paradoxical effect of enhancement of the blood pressure fluctuations by an ineffective control. Such a phenomenon was observed experimentally. Using the basis of the model, we discuss the blood pressure variability and heart rate variability under such clinical conditions as the states of expressed adrenergic drive and the tilt-test during the parasympathetic blockade or fixed rate atrial pacing. From the results of the variability analysis we draw a conclusion that the control of blood pressure in the HF band does not directly obtain the arterial baroreceptor input. We also discuss methodological issues of baroreflex sensitivity and sympathovagal balance assessment."
+        },
+        "highlights": [
+          "pressure fluctuations are buffered by appropriate heart rate changes: i.e. the <em>respiratory</em> <em>sinus</em> <em>arrhythmia</em>. The buffering is shown to be crucially dependent on the time"
+        ],
+        "relevance": 0.8944
+      },
+      {
+        "score": 0.029236,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 11,
+            "knn": 6
+          },
+          "contributions": {
+            "fts": 0.014084507042253521,
+            "knn": 0.015151515151515152
+          }
+        },
+        "document": {
+          "id": "arxiv:8a4b587881aef737",
+          "title": "Hand-breathe: Non-Contact Monitoring of Breathing Abnormalities from Hand Palm",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2212.06089v1",
+          "pdf_url": "https://arxiv.org/pdf/2212.06089v1",
+          "authors": [
+            "Kawish Pervez",
+            "Waqas Aman",
+            "M. Mahboob Ur Rahman",
+            "M. Wasim Nawaz",
+            "Qammer H. Abbasi"
+          ],
+          "published": "2022-12-12T18:02:40Z",
+          "version": "",
+          "abstract": "In post-covid19 world, radio frequency (RF)-based non-contact methods, e.g., software-defined radios (SDR)-based methods have emerged as promising candidates for intelligent remote sensing of human vitals, and could help in containment of contagious viruses like covid19. To this end, this work utilizes the universal software radio peripherals (USRP)-based SDRs along with classical machine learning (ML) methods to design a non-contact method to monitor different breathing abnormalities. Under our proposed method, a subject rests his/her hand on a table in between the transmit and receive antennas, while an orthogonal frequency division multiplexing (OFDM) signal passes through the hand. Subsequently, the receiver extracts the channel frequency response (basically, fine-grained wireless channel state information), and feeds it to various ML algorithms which eventually classify between different breathing abnormalities. Among all classifiers, linear SVM classifier resulted in a maximum accuracy of 88.1\\%. To train the ML classifiers in a supervised manner, data was collected by doing real-time experiments on 4 subjects in a lab environment. For label generation purpose, the breathing of the subjects was classified into three classes: normal, fast, and slow breathing. Furthermore, in addition to our proposed method (where only a hand is exposed to RF signals), we also implemented and tested the state-of-the-art method (where full chest is exposed to RF radiation). The performance comparison of the two methods reveals a trade-off, i.e., the accuracy of our proposed method is slightly inferior but our method results in minimal body exposure to RF radiation, compared to the benchmark method."
+        },
+        "highlights": [
+          "subjects was classified into three classes: normal, fast, and <em>slow</em> <em>breathing</em>. Furthermore, in addition to our proposed method (where only a hand is exposed"
+        ],
+        "relevance": 0.8917
+      }
+    ],
+    "summary": {
+      "query": "slow breathing or paced breathing or respiratory sinus arrhythmia",
+      "answer": "the respiratory sinus arrhythmia. [1] Respiratory sinus arrhythmia (RSA) is heart rate variability in synchrony with respiration although its functional significance not clear. [2] Different measures of heart rate variability and particularly of respiratory sinus arrhythmia are widely used in research and clinical applications. [3] Slow-paced breathing is a promising intervention for reducing anxiety and enhancing emotional regulation through its effects on autonomic and central nervous system function. [4] The paper introduces a neural network-based approach for analyzing ECG signals to estimate respiratory rate by leveraging the phe- nomenon of Respiratory Sinus Arrhythmia (RSA). [5]",
+      "generator": "extractive",
+      "citations": [
+        {
+          "n": 1,
+          "id": "arxiv:d8d7da7b460e44ec",
+          "title": "Buffering blood pressure fluctuations by respiratory sinus arrhythmia may in fact enhance them: a theoretical analysis",
+          "url": "http://arxiv.org/abs/1007.2229v1",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:d8d7da7b460e44ec",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 237,
+              "end": 270,
+              "quote": "the respiratory sinus arrhythmia.",
+              "matched_terms": [
+                "arrhythmia",
+                "respiratory",
+                "sinus"
+              ]
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "id": "arxiv:d278669380f744b7",
+          "title": "Mathematical and Preclinical Investigation of Respiratory Sinus Arrhythmia Effects on Cardiac Output",
+          "url": "http://arxiv.org/abs/2004.11325v1",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:d278669380f744b7",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 0,
+              "end": 138,
+              "quote": "Respiratory sinus arrhythmia (RSA) is heart rate variability in synchrony with respiration although its functional significance not clear.",
+              "matched_terms": [
+                "arrhythmia",
+                "respiratory",
+                "sinus"
+              ]
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "id": "arxiv:beb468b08796420f",
+          "title": "Disentangling Respiratory Sinus Arrhythmia in Heart Rate Variability Records",
+          "url": "http://arxiv.org/abs/1802.00683v1",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:beb468b08796420f",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 0,
+              "end": 148,
+              "quote": "Different measures of heart rate variability and particularly of respiratory sinus arrhythmia are widely used in research and clinical applications.",
+              "matched_terms": [
+                "arrhythmia",
+                "respiratory",
+                "sinus"
+              ]
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "id": "arxiv:92768c96aeeaae69",
+          "title": "The Evaluation of Breathing 5:5 effect on resilience, stress and balance center measured by Single-Channel EEG",
+          "url": "http://arxiv.org/abs/2507.10175v1",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:92768c96aeeaae69",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 0,
+              "end": 174,
+              "quote": "Slow-paced breathing is a promising intervention for reducing anxiety and enhancing emotional regulation through its effects on autonomic and central nervous system function.",
+              "matched_terms": [
+                "breathing",
+                "paced",
+                "slow"
+              ]
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "id": "arxiv:2cd076769301f26e",
+          "title": "Analysis of Respiratory Sinus Arrhythmia with Neural Networks",
+          "url": "http://arxiv.org/abs/2609.05698v1",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:2cd076769301f26e",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 0,
+              "end": 177,
+              "quote": "The paper introduces a neural network-based approach for analyzing ECG signals to estimate respiratory rate by leveraging the phe- nomenon of Respiratory Sinus Arrhythmia (RSA).",
+              "matched_terms": [
+                "arrhythmia",
+                "respiratory",
+                "sinus"
+              ]
+            }
+          ]
+        }
+      ],
+      "grounding": "source-extract",
+      "fallback_reason": null
+    }
+  }
+}

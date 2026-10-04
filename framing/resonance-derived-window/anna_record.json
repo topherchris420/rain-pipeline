@@ -1,0 +1,431 @@
+{
+  "captured_at": "2026-10-04T17:41:35.821Z",
+  "content_sha256": "04b3db7e0e8728fcfaefe3ba37274d9e3c38dc3efa56bd9dba13eec365dc8607",
+  "record": {
+    "schema": "anna-research-record/v1",
+    "provider": "live",
+    "request": {
+      "q": "cardiorespiratory phase or cardiorespiratory synchronization or cardiorespiratory interaction",
+      "mode": "hybrid",
+      "page": 1,
+      "per_page": 8,
+      "filters": {}
+    },
+    "retrieval": {
+      "backend": "postgres",
+      "requested_mode": "hybrid",
+      "executed": [
+        "fts",
+        "knn"
+      ],
+      "unavailable": [],
+      "degraded": false,
+      "embedding": "hashing",
+      "fusion": "rrf",
+      "candidate_count": 23,
+      "total_scope": "retrieved-candidates",
+      "score_ceiling": 0.03278688524590164,
+      "score_meaning": "ranking-score-not-probability"
+    },
+    "result_count": 23,
+    "scope": "current-page",
+    "hits": [
+      {
+        "score": 0.032018,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 4,
+            "knn": 1
+          },
+          "contributions": {
+            "fts": 0.015625,
+            "knn": 0.01639344262295082
+          }
+        },
+        "document": {
+          "id": "arxiv:c828102dbd28c9d9",
+          "title": "Synchronization-dissipation dynamics in the cardiorespiratory system",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2603.23259v1",
+          "pdf_url": "https://arxiv.org/pdf/2603.23259v1",
+          "authors": [
+            "Joshua R. Border",
+            "Alain Nogaret",
+            "Andrew Lefevre",
+            "Vishal Jain"
+          ],
+          "published": "2026-03-24T14:22:41Z",
+          "version": "",
+          "abstract": "Dissipative coupling is known to induce synchronization. Conversely it may be hypothesized that oscillators driven to synchronize may reduce power dissipation in their coupling. The latter scenario is realized in the human cardiorespiratory system where cardiac and respiratory rhythms are controlled by the central nervous system while interacting viscoelastically through the pulmonary vasculature. Here we examine the functional significance of this coupling which is observed in respiratory sinus arrhythmia (RSA). By modelling electrical and viscoelastic interactions within the cardiorespiratory system, we identify the conditions leading to synchronization. We demonstrate that, when present, synchronization reduces cardiac power losses by 10% in humans and up to 55% in other species. The predicted gain in cardiac output is compared to the gain observed in-vivo by pacing the heart with a device restoring RSA. It is therefore surmised that RSA may improve cardiac pumping efficiency by reducing dynamic stress and power dissipation in the pulmonary vasculature."
+        },
+        "highlights": [
+          "human <em>cardiorespiratory</em> system where cardiac and respiratory rhythms are controlled by the central nervous system while <em>interacting</em> viscoelastically through the pulmonary vasculature. Here",
+          "respiratory sinus arrhythmia (RSA). By modelling electrical and viscoelastic <em>interactions</em> within the <em>cardiorespiratory</em> system, we identify the conditions leading to <em>synchronization</em>. We demonstrate"
+        ],
+        "relevance": 0.9765
+      },
+      {
+        "score": 0.031778,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 1,
+            "knn": 5
+          },
+          "contributions": {
+            "fts": 0.01639344262295082,
+            "knn": 0.015384615384615385
+          }
+        },
+        "document": {
+          "id": "arxiv:65c6592855287138",
+          "title": "Effect of stress on cardiorespiratory synchronization of Ironmen athletes",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2102.01883v1",
+          "pdf_url": "https://arxiv.org/pdf/2102.01883v1",
+          "authors": [
+            "Maia Angelova",
+            "Philip M. Holloway",
+            "Sergiy Shelyag",
+            "Sutharshan Rajasegarar",
+            "H. G. Laurie Rauch"
+          ],
+          "published": "2021-02-03T05:33:54Z",
+          "version": "",
+          "abstract": "The aim of this paper is to investigate the cardiorespiratory synchronization in athletes subjected to extreme physical stress combined with a cognitive stress tasks. ECG and respiration were measured in 14 athletes before and after the Ironmen competition. Stroop test was applied between the measurements before and after the Ironmen competition to induce cognitive stress. Synchrogram and empirical mode decomposition analysis were used for the first time to investigate the effects of physical stress, induced by the Ironmen competition, on the phase synchronization of the cardiac and respiratory systems of Ironmen athletes before and after the competition. A cognitive stress task (Stroop test) was performed both pre- and post-Ironman event in order to prevent the athletes from cognitively controlling their breathing rates. Our analysis showed that cardiorespiratory synchronization increased post-Ironman race compared to pre-Ironman. The results suggest that the amount of stress the athletes are recovering from post-competition is greater than the effects of the Stroop test. This indicates that the recovery phase after the competition is more important for restoring and maintaining homeostasis, which could be another reason for stronger synchronization."
+        },
+        "highlights": [
+          "this paper is to investigate the <em>cardiorespiratory</em> <em>synchronization</em> in athletes subjected to extreme physical stress combined with a cognitive stress tasks",
+          "from cognitively controlling their breathing rates. Our analysis showed that <em>cardiorespiratory</em> <em>synchronization</em> increased post-Ironman race compared to pre-Ironman. The results suggest"
+        ],
+        "relevance": 0.9692
+      },
+      {
+        "score": 0.031054,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 7,
+            "knn": 2
+          },
+          "contributions": {
+            "fts": 0.014925373134328358,
+            "knn": 0.016129032258064516
+          }
+        },
+        "document": {
+          "id": "arxiv:e2e5ed79dbae2ef1",
+          "title": "Cardiorespiratory coupling improves cardiac pumping efficiency in heart failure",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2507.00597v1",
+          "pdf_url": "https://arxiv.org/pdf/2507.00597v1",
+          "authors": [
+            "Josh Border",
+            "Andrew Lefevre",
+            "Vishal Jain",
+            "Alain Nogaret"
+          ],
+          "published": "2025-07-01T09:27:11Z",
+          "version": "",
+          "abstract": "Recent trials of a neuronal pacemaker have shown that cardiac pumping efficiency increases when respiratory sinus arrhythmia (RSA) is artificially restored in animal models of heart failure. This novel device sheds new light on the functional role of RSA, which has long been debated, by allowing the strength of cardiorespiratory coupling to be artificially varied. Here we show that RSA minimizes the cardiac power dissipated within the cardiovascular network. The cardiorespiratory system is found to exhibit mode-locked synchronized regions within which viscoelastic dissipation is reduced relative to the scenario where cardiorespiratory coupling is absent. We determine the gain in cardiac output as the magnitude of RSA increases. We find that cardiac pumping efficiency improves up and until the cardiac frequency, within each breadth intake, is approximately 1.5 times greater than the cardiac frequency in the expiratory phase, at which point it reaches a plateau. RSA was found to be most effective at low cardiac frequencies, in good agreement with clinical evidence. Simulation of the cardiac power saved under RSA is in good agreement with the 17-20% increase in cardiac output observed in RSA-paced animal models."
+        },
+        "highlights": [
+          "power dissipated within the cardiovascular network. The <em>cardiorespiratory</em> system is found to exhibit mode-locked <em>synchronized</em> regions within which viscoelastic dissipation is reduced",
+          "relative to the scenario where <em>cardiorespiratory</em> coupling is absent. We determine the gain in cardiac output as the magnitude of RSA increases"
+        ],
+        "relevance": 0.9471
+      },
+      {
+        "score": 0.030835,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 2,
+            "knn": 8
+          },
+          "contributions": {
+            "fts": 0.016129032258064516,
+            "knn": 0.014705882352941176
+          }
+        },
+        "document": {
+          "id": "arxiv:bf02e31b8544bdbd",
+          "title": "Inference of a nonlinear stochastic model of the cardiorespiratory interaction",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/physics/0503040v1",
+          "pdf_url": "https://arxiv.org/pdf/physics/0503040v1",
+          "authors": [
+            "V. N. Smelyanskiy",
+            "D. G. Luchinsky",
+            "A. Stefanovska",
+            "P. V. E. McClintock"
+          ],
+          "published": "2005-03-04T15:09:31Z",
+          "version": "",
+          "abstract": "A new technique is introduced to reconstruct a nonlinear stochastic model of the cardiorespiratory interaction. Its inferential framework uses a set of polynomial basis functions representing the nonlinear force governing the system oscillations. The strength and direction of coupling, and the noise intensity are simultaneously inferred from a univariate blood pressure signal, monitored in a clinical environment. The technique does not require extensive global optimization and it is applicable to a wide range of complex dynamical systems subject to noise."
+        },
+        "highlights": [
+          "introduced to reconstruct a nonlinear stochastic model of the <em>cardiorespiratory</em> <em>interaction</em>. Its inferential framework uses a set of polynomial basis functions representing"
+        ],
+        "relevance": 0.9405
+      },
+      {
+        "score": 0.030366,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 9,
+            "knn": 3
+          },
+          "contributions": {
+            "fts": 0.014492753623188406,
+            "knn": 0.015873015873015872
+          }
+        },
+        "document": {
+          "id": "arxiv:f6c0e229eeda150f",
+          "title": "Contact Sensors to Remote Cameras: Quantifying Cardiorespiratory Coupling in High-Altitude Exercise Recovery",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2508.00773v1",
+          "pdf_url": "https://arxiv.org/pdf/2508.00773v1",
+          "authors": [
+            "Jiankai Tang",
+            "Meng Kang",
+            "Yiru Zhang",
+            "Kegang Wang",
+            "Daniel Mcduff",
+            "Xin Liu",
+            "Yuanchun Shi",
+            "Yuntao Wang"
+          ],
+          "published": "2025-08-01T16:54:47Z",
+          "version": "",
+          "abstract": "Cardiorespiratory coupling (CRC) captures the dynamic interaction between the cardiac and respiratory systems--an interaction strengthened by physical exercise and linked to improved physiological function. We examined CRC at high altitude in two states, rest and post-exercise recovery, and found significant differences (p < 0.05). Quantitative analysis revealed that recovery involved more frequent yet less stable episodes of synchronization between respiration and pulse. Furthermore, we explored the feasibility of non-contact CRC measurement with remote photoplethysmography (rPPG), observing a strong correlation with oximeter-based metrics (Pearson r = 0.96). These findings highlight the potential of CRC as a sensitive marker for autonomic regulation and its future application in contactless monitoring. Source code is available at GitHub: https://github.com/McJackTang/CRC."
+        },
+        "highlights": [
+          "<em>Cardiorespiratory</em> coupling (CRC) captures the dynamic <em>interaction</em> between the cardiac and respiratory systems--an <em>interaction</em> strengthened by physical exercise and linked to improved"
+        ],
+        "relevance": 0.9262
+      },
+      {
+        "score": 0.030331,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 8,
+            "knn": 4
+          },
+          "contributions": {
+            "fts": 0.014705882352941176,
+            "knn": 0.015625
+          }
+        },
+        "document": {
+          "id": "arxiv:e6a794b6d9784c40",
+          "title": "ROPE: A Novel Method for Real-Time Phase Estimation of Complex Biological Rhythms",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2509.04962v2",
+          "pdf_url": "https://arxiv.org/pdf/2509.04962v2",
+          "authors": [
+            "Antonio Spallone",
+            "Marco Coraggio",
+            "Francesco De Lellis",
+            "Mario di Bernardo"
+          ],
+          "published": "2025-09-05T09:39:12Z",
+          "version": "",
+          "abstract": "Accurate phase estimation -- the process of assigning phase values between $0$ and $2π$ to repetitive or periodic signals -- is a cornerstone in the analysis of oscillatory signals across diverse fields, from neuroscience to robotics, where it is fundamental, e.g., to understanding coordination in neural networks, cardiorespiratory coupling, and human-robot interaction. However, existing methods are often limited to offline processing and/or constrained to one-dimensional signals. In this paper, we introduce ROPE, which, to the best of our knowledge, is the first phase-estimation algorithm capable of (i) handling signals of arbitrary dimension and (ii) operating in real-time, with minimal error. ROPE identifies repetitions within the signal to segment it into (pseudo-)periods and assigns phase values by performing efficient, tractable searches over previous signal segments. We extensively validate the algorithm on a variety of signal types, including trajectories from chaotic dynamical systems, human motion-capture data, and electrocardiographic recordings. Our results demonstrate that ROPE is robust against noise and signal drift, and achieves significantly superior performance compared to state-of-the-art phase estimation methods. This advancement enables real-time analysis of complex biological rhythms, opening new pathways, for example, for early diagnosis of pathological rhythm disruptions and developing rhythm-based therapeutic interventions in neurological and cardiovascular disorders."
+        },
+        "highlights": [
+          "Accurate <em>phase</em> estimation -- the process of assigning <em>phase</em> values between $0$ and $2π$ to repetitive or periodic signals -- is a cornerstone in the analysis",
+          "fundamental, e.g., to understanding coordination in neural networks, <em>cardiorespiratory</em> coupling, and human-robot <em>interaction</em>. However, existing methods are often limited to offline processing"
+        ],
+        "relevance": 0.9251
+      },
+      {
+        "score": 0.030303,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 6,
+            "knn": 6
+          },
+          "contributions": {
+            "fts": 0.015151515151515152,
+            "knn": 0.015151515151515152
+          }
+        },
+        "document": {
+          "id": "arxiv:4b984f57c53881e2",
+          "title": "Directional coupling detection through cross-distance vectors",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2210.09000v2",
+          "pdf_url": "https://arxiv.org/pdf/2210.09000v2",
+          "authors": [
+            "Martin Brešar",
+            "Pavle Boškoski"
+          ],
+          "published": "2022-10-12T12:06:16Z",
+          "version": "",
+          "abstract": "Inferring the coupling direction from measured time series of complex systems is challenging. We propose a new state space based causality measure obtained from cross-distance vectors for quantifying interaction strength. It is a model-free noise-robust approach that requires only a few parameters. The approach is applicable to bivariate time series and is resilient to artefacts and missing values. The result is two coupling indices that quantify coupling strength in each direction more accurately than the already established state space measures. We test the proposed method on different dynamical systems and analyse numerical stability. As a result, a procedure for optimal parameter selection is proposed, circumventing the challenge of determining the optimal embedding parameters. We show it is robust to noise and reliable in shorter time series. Moreover, we show that it can detect cardiorespiratory interaction in measured data. A numerically efficient implementation is available at https://repo.ijs.si/mbresar/cd-vec."
+        },
+        "highlights": [
+          "state space based causality measure obtained from cross-distance vectors for quantifying <em>interaction</em> strength. It is a model-free noise-robust approach that requires only",
+          "shorter time series. Moreover, we show that it can detect <em>cardiorespiratory</em> <em>interaction</em> in measured data. A numerically efficient implementation is available"
+        ],
+        "relevance": 0.9242
+      },
+      {
+        "score": 0.029877,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 5,
+            "knn": 9
+          },
+          "contributions": {
+            "fts": 0.015384615384615385,
+            "knn": 0.014492753623188406
+          }
+        },
+        "document": {
+          "id": "arxiv:89bdea13bcd3d637",
+          "title": "Inference of Time-Evolving Coupled Dynamical Systems in the Presence of Noise",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/1206.1961v2",
+          "pdf_url": "https://arxiv.org/pdf/1206.1961v2",
+          "authors": [
+            "Tomislav Stankovski",
+            "Andrea Duggento",
+            "Peter V. E. McClintock",
+            "Aneta Stefanovska"
+          ],
+          "published": "2012-06-09T18:29:11Z",
+          "version": "",
+          "abstract": "A new method is introduced for analysis of interactions between time-dependent coupled oscillators, based on the signals they generate. It distinguishes unsynchronized dynamics from noise-induced phase slips, and enables the evolution of the coupling functions and other parameters to be followed. It is based on phase dynamics, with Bayesian inference of the time-evolving parameters achieved by shaping the prior densities to incorporate knowledge of previous samples. The method is tested numerically and applied to reveal and quantify the time-varying nature of cardiorespiratory interactions."
+        },
+        "highlights": [
+          "coupling functions and other parameters to be followed. It is based on <em>phase</em> dynamics, with Bayesian inference of the time-evolving parameters achieved by shaping",
+          "applied to reveal and quantify the time-varying nature of <em>cardiorespiratory</em> <em>interactions</em>"
+        ],
+        "relevance": 0.9112
+      }
+    ],
+    "summary": {
+      "query": "cardiorespiratory phase or cardiorespiratory synchronization or cardiorespiratory interaction",
+      "answer": "Moreover, we show that it can detect cardiorespiratory interaction in measured data. [1] Our analysis showed that cardiorespiratory synchronization increased post-Ironman race compared to pre-Ironman. [2] A new technique is introduced to reconstruct a nonlinear stochastic model of the cardiorespiratory interaction. [3] By modelling electrical and viscoelastic interactions within the cardiorespiratory system, we identify the conditions leading to synchronization. [4] Accurate phase estimation -- the process of assigning phase values between $0$ and $2π$ to repetitive or periodic signals -- is a cornerstone in the analysis of oscillatory signals across diverse fields, from neuroscience to robotics, where it is fundamental, e.g., to understanding coordination in neural networks, cardiorespiratory coupling, and human-robot interaction. [5]",
+      "generator": "extractive",
+      "citations": [
+        {
+          "n": 1,
+          "id": "arxiv:4b984f57c53881e2",
+          "title": "Directional coupling detection through cross-distance vectors",
+          "url": "http://arxiv.org/abs/2210.09000v2",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:4b984f57c53881e2",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 860,
+              "end": 944,
+              "quote": "Moreover, we show that it can detect cardiorespiratory interaction in measured data.",
+              "matched_terms": [
+                "cardiorespiratory",
+                "interaction"
+              ]
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "id": "arxiv:65c6592855287138",
+          "title": "Effect of stress on cardiorespiratory synchronization of Ironmen athletes",
+          "url": "http://arxiv.org/abs/2102.01883v1",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:65c6592855287138",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 834,
+              "end": 945,
+              "quote": "Our analysis showed that cardiorespiratory synchronization increased post-Ironman race compared to pre-Ironman.",
+              "matched_terms": [
+                "cardiorespiratory",
+                "synchronization"
+              ]
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "id": "arxiv:bf02e31b8544bdbd",
+          "title": "Inference of a nonlinear stochastic model of the cardiorespiratory interaction",
+          "url": "http://arxiv.org/abs/physics/0503040v1",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:bf02e31b8544bdbd",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 0,
+              "end": 111,
+              "quote": "A new technique is introduced to reconstruct a nonlinear stochastic model of the cardiorespiratory interaction.",
+              "matched_terms": [
+                "cardiorespiratory",
+                "interaction"
+              ]
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "id": "arxiv:c828102dbd28c9d9",
+          "title": "Synchronization-dissipation dynamics in the cardiorespiratory system",
+          "url": "http://arxiv.org/abs/2603.23259v1",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:c828102dbd28c9d9",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 519,
+              "end": 664,
+              "quote": "By modelling electrical and viscoelastic interactions within the cardiorespiratory system, we identify the conditions leading to synchronization.",
+              "matched_terms": [
+                "cardiorespiratory",
+                "synchronization"
+              ]
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "id": "arxiv:e6a794b6d9784c40",
+          "title": "ROPE: A Novel Method for Real-Time Phase Estimation of Complex Biological Rhythms",
+          "url": "http://arxiv.org/abs/2509.04962v2",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:e6a794b6d9784c40",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 0,
+              "end": 372,
+              "quote": "Accurate phase estimation -- the process of assigning phase values between $0$ and $2π$ to repetitive or periodic signals -- is a cornerstone in the analysis of oscillatory signals across diverse fields, from neuroscience to robotics, where it is fundamental, e.g., to understanding coordination in neural networks, cardiorespiratory coupling, and human-robot interaction.",
+              "matched_terms": [
+                "cardiorespiratory",
+                "interaction",
+                "phase"
+              ]
+            }
+          ]
+        }
+      ],
+      "grounding": "source-extract",
+      "fallback_reason": null
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "engine": "R.A.I.N. offline meeting (deterministic, no model)",
+  "question": "Do slow breathers escape DRR's coupling test because its 3 s lag window is shorter than half a breath, and does a 6 s window recover them?",
+  "grounding": "none",
+  "matched_terms": [
+    "slow",
+    "coupling",
+    "test",
+    "breath"
+  ],
+  "missing_terms": [
+    "breathers",
+    "escape",
+    "drr",
+    "lag",
+    "window",
+    "shorter",
+    "half",
+    "recover"
+  ],
+  "corpus_files": 8,
+  "quotable_passages": 50,
+  "citation_audit": {
+    "checked": 0,
+    "verified": 0,
+    "passed": true,
+    "corpus_sha256": "c4cc832a38f698825f116fd6e3dc2be3997497ea581c93e05325fb343a0078df"
+  },
+  "verdict": {
+    "agreed": "The local library has no evidence on this question, so the room made no claims about it.",
+    "contested": "Nothing yet. A disagreement needs evidence on the table first.",
+    "next_move": "Add two or three papers on this topic to the library and rerun the same command, or connect a local model for an open-ended meeting."
+  },
+  "quotes": [],
+  "sources": {
+    "01-mathematical-and-preclinical-investigation-of-respiratory-si.md": {
+      "anna_id": "arxiv:d278669380f744b7",
+      "title": "Mathematical and Preclinical Investigation of Respiratory Sinus Arrhythmia Effects on Cardiac Output",
+      "url": "http://arxiv.org/abs/2004.11325v1"
+    },
+    "02-analysis-of-respiratory-sinus-arrhythmia-with-neural-network.md": {
+      "anna_id": "arxiv:2cd076769301f26e",
+      "title": "Analysis of Respiratory Sinus Arrhythmia with Neural Networks",
+      "url": "http://arxiv.org/abs/2609.05698v1"
+    },
+    "03-disentangling-respiratory-sinus-arrhythmia-in-heart-rate-var.md": {
+      "anna_id": "arxiv:beb468b08796420f",
+      "title": "Disentangling Respiratory Sinus Arrhythmia in Heart Rate Variability Records",
+      "url": "http://arxiv.org/abs/1802.00683v1"
+    },
+    "04-the-evaluation-of-breathing-5-5-effect-on-resilience-stress.md": {
+      "anna_id": "arxiv:92768c96aeeaae69",
+      "title": "The Evaluation of Breathing 5:5 effect on resilience, stress and balance center measured by Single-Channel EEG",
+      "url": "http://arxiv.org/abs/2507.10175v1"
+    },
+    "05-neffy-2-0-a-breathing-companion-robot-user-centered-design-a.md": {
+      "anna_id": "arxiv:14025cf79803abfc",
+      "title": "NEFFY 2.0: A Breathing Companion Robot: User-Centered Design and Findings from a Study with Ukrainian Refugees",
+      "url": "http://arxiv.org/abs/2604.15325v1"
+    },
+    "06-deriving-the-respiratory-sinus-arrhythmia-from-the-heartbeat.md": {
+      "anna_id": "arxiv:6ece36e51aa3c13f",
+      "title": "Deriving the respiratory sinus arrhythmia from the heartbeat time series using Empirical Mode Decomposition",
+      "url": "http://arxiv.org/abs/q-bio/0310002v1"
+    },
+    "07-buffering-blood-pressure-fluctuations-by-respiratory-sinus-a.md": {
+      "anna_id": "arxiv:d8d7da7b460e44ec",
+      "title": "Buffering blood pressure fluctuations by respiratory sinus arrhythmia may in fact enhance them: a theoretical analysis",
+      "url": "http://arxiv.org/abs/1007.2229v1"
+    },
+    "08-hand-breathe-non-contact-monitoring-of-breathing-abnormaliti.md": {
+      "anna_id": "arxiv:8a4b587881aef737",
+      "title": "Hand-breathe: Non-Contact Monitoring of Breathing Abnormalities from Hand Palm",
+      "url": "http://arxiv.org/abs/2212.06089v1"
+    }
+  }
+}

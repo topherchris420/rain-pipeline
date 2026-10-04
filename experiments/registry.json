@@ -3,6 +3,14 @@
     {
       "created_at": "2026-10-04T14:59:41.703Z",
       "id": "V3D-EXP-0001"
+    },
+    {
+      "created_at": "2026-10-04T17:41:16.253Z",
+      "id": "V3D-EXP-0002"
+    },
+    {
+      "created_at": "2026-10-04T17:41:36.439Z",
+      "id": "V3D-EXP-0003"
     }
   ],
   "schema_version": "rain-experiment-registry/v1"

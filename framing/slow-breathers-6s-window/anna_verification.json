@@ -1,0 +1,69 @@
+{
+  "schema": "anna-research-record/v1",
+  "schema_known": true,
+  "fingerprint": {
+    "declared": "23d5f15aee83e17733d59d132cda6870da76fcc91392d9da654364cd961bfd28",
+    "computed": "23d5f15aee83e17733d59d132cda6870da76fcc91392d9da654364cd961bfd28",
+    "matches": true
+  },
+  "checked_against": {
+    "backend": "postgres",
+    "index": "rain_pipeline_docs"
+  },
+  "excerpts": [
+    {
+      "citation": 1,
+      "document_id": "arxiv:d8d7da7b460e44ec",
+      "field": "abstract",
+      "start": 237,
+      "end": 270,
+      "offset_unit": "unicode-code-points",
+      "status": "verified"
+    },
+    {
+      "citation": 2,
+      "document_id": "arxiv:d278669380f744b7",
+      "field": "abstract",
+      "start": 0,
+      "end": 138,
+      "offset_unit": "unicode-code-points",
+      "status": "verified"
+    },
+    {
+      "citation": 3,
+      "document_id": "arxiv:beb468b08796420f",
+      "field": "abstract",
+      "start": 0,
+      "end": 148,
+      "offset_unit": "unicode-code-points",
+      "status": "verified"
+    },
+    {
+      "citation": 4,
+      "document_id": "arxiv:92768c96aeeaae69",
+      "field": "abstract",
+      "start": 0,
+      "end": 174,
+      "offset_unit": "unicode-code-points",
+      "status": "verified"
+    },
+    {
+      "citation": 5,
+      "document_id": "arxiv:2cd076769301f26e",
+      "field": "abstract",
+      "start": 0,
+      "end": 177,
+      "offset_unit": "unicode-code-points",
+      "status": "verified"
+    }
+  ],
+  "counts": {
+    "verified": 5,
+    "relocated": 0,
+    "drifted": 0,
+    "missing-document": 0,
+    "missing-field": 0,
+    "invalid-excerpt": 0
+  },
+  "ok": true
+}
