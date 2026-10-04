@@ -1,0 +1,45 @@
+{
+  "question": "On the recordings V3D-EXP-0001 already analysed, does a longer or a breathing-derived lag window change which windows show respiration to heart-rate coupling?",
+  "data": {
+    "source": "physionet-fantasia",
+    "records": [
+      "f1y01", "f1y02", "f1y03", "f1y04", "f1y05", "f1y06", "f1y07", "f1y08", "f1y09", "f1y10",
+      "f2y01", "f2y02", "f2y03", "f2y04", "f2y05", "f2y06", "f2y07", "f2y08", "f2y09", "f2y10"
+    ],
+    "segments": {"first_start_s": 60, "duration_s": 600, "count": 1},
+    "grid_hz": 4,
+    "highpass_hz": 0.05,
+    "qc": {"min_valid_rr_fraction": 0.95}
+  },
+  "analysis": {
+    "study": "lag_window",
+    "method": "lagged_correlation",
+    "surrogate_method": "circular_shift",
+    "correction": "max_statistic",
+    "n_surrogates": 199,
+    "alpha": 0.05,
+    "seed": 20261005,
+    "arms": {
+      "short": {"max_lag_s": 3.0},
+      "long": {"max_lag_s": 6.0},
+      "resonant": {"rule": "half_period", "min_lag_s": 1.0, "max_lag_s": 8.0}
+    },
+    "strata": {
+      "slow": {"min_hz": 0.0833, "below_hz": 0.1667},
+      "normal": {"min_hz": 0.1667}
+    },
+    "contrasts": {
+      "slow_gain_long_vs_short": {"metric": "slow_detection_rate", "arm": "long", "minus": "short"},
+      "normal_change_long_vs_short": {"metric": "normal_detection_rate", "arm": "long", "minus": "short"},
+      "slow_resonant_vs_long": {"metric": "slow_detection_rate", "arm": "resonant", "minus": "long"},
+      "normal_resonant_vs_short": {"metric": "normal_detection_rate", "arm": "resonant", "minus": "short"}
+    },
+    "controls": {
+      "synthetic_trials": 20,
+      "positive_coupling": 0.3,
+      "positive_lag_samples": 4,
+      "long_lag_samples": 18,
+      "ar_coefficient": 0.5
+    }
+  }
+}

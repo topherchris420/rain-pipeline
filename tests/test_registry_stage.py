@@ -45,20 +45,35 @@ GOOD = {
 }
 
 
-def test_preregistration_is_reused_when_identical_and_refused_when_changed(registry, spec):
-    first, created = registry_stage.preregister(registry, spec)
-    assert created and first["runner"]["kind"] == "external"
-    again, created = registry_stage.preregister(registry, spec)
-    assert not created and again["experiment_id"] == first["experiment_id"]
+def test_registration_is_write_once(registry, spec):
+    assert registry_stage.find(registry, spec) is None
+    first = registry_stage.register(registry, spec)
+    assert first["runner"]["kind"] == "external"
+    assert registry_stage.find(registry, spec)["experiment_id"] == first["experiment_id"]
+    with pytest.raises(Exception, match="already registered"):
+        registry_stage.register(registry, spec)
 
     moved_goalposts = copy.deepcopy(spec)
     moved_goalposts["preregistration"]["criteria"]["success"][0]["value"] = 0.5
     with pytest.raises(Exception, match="write-once"):
-        registry_stage.preregister(registry, moved_goalposts)
+        registry_stage.find(registry, moved_goalposts)
+    assert "V3D-EXP-0001" in registry.results_path.read_text(encoding="utf-8")  # planned experiments are published
+
+
+def test_framing_is_bound_into_the_registration_but_not_compared_with_the_spec(registry, spec):
+    spec["lineage"] = {"follows": "V3D-EXP-0001/RUN-0001", "observation": "two slow breathers were missed"}
+    binding = {"anna_record_sha256": "a" * 64, "panel_corpus_sha256": "b" * 64}
+    definition = registry_stage.register(registry, spec, binding)
+    assert definition["parameters"]["framing"] == binding
+    assert definition["parameters"]["lineage"] == spec["lineage"]
+    assert registry_stage.find(registry, spec)["experiment_id"] == definition["experiment_id"]
+    del spec["lineage"]
+    with pytest.raises(Exception, match="write-once"):
+        registry_stage.find(registry, spec)
 
 
 def test_rain_assigns_the_status_from_measurements(registry, spec):
-    definition, _ = registry_stage.preregister(registry, spec)
+    definition = registry_stage.register(registry, spec)
     record = registry_stage.submit(registry, definition, _submission(definition, GOOD))
     assert (record["status"], record["hypothesis_verdict"]) == ("passed", "supported")
     assert registry_stage.definition_sha256(definition) == record["definition_sha256"]
@@ -77,14 +92,23 @@ def test_rain_assigns_the_status_from_measurements(registry, spec):
 
 
 def test_a_crashed_run_is_recorded_as_error_not_as_failure(registry, spec):
-    definition, _ = registry_stage.preregister(registry, spec)
+    definition = registry_stage.register(registry, spec)
     submission = _submission(definition, {name: None for name in GOOD})
     submission["error"] = {"stage": "data", "type": "ConnectionError", "message": "physionet.org unreachable"}
     record = registry_stage.submit(registry, definition, submission)
     assert record["status"] == "error"
 
 
-def test_undeclared_measurements_are_refused(spec, registry):
-    definition, _ = registry_stage.preregister(registry, spec)
-    with pytest.raises(ValueError, match="undeclared"):
-        registry_stage.check_measurements(definition, {**GOOD, "extra_metric": 1.0})
+def test_only_registered_metrics_are_submitted_and_none_may_be_missing(registry, spec):
+    definition = registry_stage.register(registry, spec)
+    selected = registry_stage.select_measurements(definition, {**GOOD, "something_descriptive": 1.0})
+    assert list(selected) == [m["name"] for m in definition["metrics"]]
+    incomplete = {k: v for k, v in GOOD.items() if k != "coupling_detection_rate"}
+    with pytest.raises(ValueError, match="coupling_detection_rate"):
+        registry_stage.select_measurements(definition, incomplete)
+
+
+def test_an_uncommitted_registration_has_no_anchor(registry, spec):
+    definition = registry_stage.register(registry, spec)  # tmp_path is not a git repository
+    with pytest.raises(registry_stage.NotAnchored):
+        registry_stage.anchor(registry, definition["experiment_id"])

@@ -1,0 +1,225 @@
+{
+  "schema": "rain-pipeline-data-ledger/v1",
+  "entries": [
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y01.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "e8312f30c9881f899b46f469532a0721dc3e6cf55d95ab7401d35a88b923c3d3",
+      "first_read_at": "2026-10-04T14:57:34.674Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time. First read by an engineering dry check (R-peak quality only, no coupling statistic) before V3D-EXP-0001 was registered."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y01.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "77a77de3f351b268dd9f94e629c31970e576668207fb4acea318b4b769d78e03",
+      "first_read_at": "2026-10-04T14:57:40.846Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time. First read by an engineering dry check (R-peak quality only, no coupling statistic) before V3D-EXP-0001 was registered."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y02.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "0197fc4de9b68e476b11f240aae78e81e654b7581844467d05cf6080d35d9a99",
+      "first_read_at": "2026-10-04T14:59:48.218Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y03.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "56c5cb9e9ca709c613046ad8d47e421e264bff2deaff191df4650d0c58ed5bb3",
+      "first_read_at": "2026-10-04T14:59:56.202Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y04.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "815f72aa0a1bdd2756af793931cb9380f1705df4cc8000775706b5131e4dc85f",
+      "first_read_at": "2026-10-04T15:00:01.348Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y05.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "2baaf977ba1d9c6a4ff56ce6b8bc86a5d9fc95dfdfd1c7c20533d10490eac907",
+      "first_read_at": "2026-10-04T15:00:08.148Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y06.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "468625ed63c13be96c04c21b059f54d0a25e3c6911a1fa9f59ca3d3d8c69c30b",
+      "first_read_at": "2026-10-04T15:00:13.006Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y07.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "9c66f7b7e24e467b9cf476679aef9385afdf3ecba74509e51d6147e14b1b0d29",
+      "first_read_at": "2026-10-04T15:00:18.541Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y08.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "9cae3f5344ef9693aacb2cde682d5560cf42071b5656dc52cf4ef64123ba1624",
+      "first_read_at": "2026-10-04T15:00:24.887Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y09.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "1c1d38fe1e823117a5eb1d69206131727e1297923a9be7aa9bf0710ba282b429",
+      "first_read_at": "2026-10-04T15:00:31.640Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y10.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "9bc47293ecd45a2c49a99a89e5037f47a575fc66123c2c6d422b9d7c6f2825ff",
+      "first_read_at": "2026-10-04T15:00:37.447Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y02.dat",
+      "byte_range": [
+        89910,
+        989009
+      ],
+      "sha256": "88e895c3fce5fcfbf3a3c658e0f6ae7bd2b7696b20f3c452a34300b91e40d52c",
+      "first_read_at": "2026-10-04T15:00:45.086Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y03.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "95c8f5adb7f3eed892c424faada81828b5bf32fb0c94247eac360ff17fe1e7bd",
+      "first_read_at": "2026-10-04T15:00:51.863Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y04.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "c23919ad2931dbb66c37e69b840ca85891060e9deea60a27e9c11968704353fe",
+      "first_read_at": "2026-10-04T15:00:57.020Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y05.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "158c5fbbbce6827634fcc32f0ecc0f62a0ec73f821c2b82b760f1600a1017899",
+      "first_read_at": "2026-10-04T15:01:02.348Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y06.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "df40f57af0de9be5de4dfe11d4274de905119487f509c8c6d8d156f520bc716a",
+      "first_read_at": "2026-10-04T15:01:08.331Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y07.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "8d7d12a07d926fd4d76aa2b191e140f032bec9c6bd35bc6331cf27832e07cf60",
+      "first_read_at": "2026-10-04T15:01:14.736Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y08.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "0a8b44b844451f362095ad85f8597e023752162b742bd8f70d67f2351adcbae5",
+      "first_read_at": "2026-10-04T15:01:21.117Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y09.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "b75113c2c5235cb4bd7aa145788c21c0be18e0cb473ddebed45d54b9e3776212",
+      "first_read_at": "2026-10-04T15:01:28.172Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y10.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "0297aeaf5ac215952317421fbc802085f25aab09b5e7b029eb03bb158a849ffd",
+      "first_read_at": "2026-10-04T15:01:34.742Z",
+      "first_read_by": "V3D-EXP-0001",
+      "note": "Backfilled: time is the cache file's creation time."
+    }
+  ]
+}

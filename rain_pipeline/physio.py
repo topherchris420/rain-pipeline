@@ -102,8 +102,21 @@ def _get(url: str, **headers: str) -> requests.Response:
     return response
 
 
-def fetch_segment(record: str, start_s: float, duration_s: float, cache_dir: Path) -> tuple[Header, np.ndarray, dict]:
-    """Fetch one segment of a Fantasia record (cached) and return provenance for it."""
+@dataclass(frozen=True)
+class SegmentPlan:
+    """Exactly which bytes a segment needs. Planning reads only the header, never signal data."""
+
+    record: str
+    header: Header
+    header_sha256: str
+    url: str
+    byte_range: tuple[int, int]
+    start_s: float
+    duration_s: float
+    cache_path: Path
+
+
+def plan_segment(record: str, start_s: float, duration_s: float, cache_dir: Path) -> SegmentPlan:
     cache_dir.mkdir(parents=True, exist_ok=True)
     header_path = cache_dir / f"{record}.hea"
     if not header_path.exists():
@@ -118,29 +131,46 @@ def fetch_segment(record: str, start_s: float, duration_s: float, cache_dir: Pat
         raise ValueError(f"{record}: segment ends past the record ({header.n_samples} samples)")
     frame = bytes_per_sample(storage_format(header)) * len(header.signals)
     byte_range = (int(first * frame), int((first + count) * frame) - 1)
-    expected = byte_range[1] - byte_range[0] + 1
+    return SegmentPlan(record, header, hashlib.sha256(header_bytes).hexdigest(), FANTASIA + header.signals[0].file,
+                       byte_range, start_s, duration_s, cache_dir / f"{record}_{first}_{count}.dat")
 
-    segment_path = cache_dir / f"{record}_{first}_{count}.dat"
-    url = FANTASIA + header.signals[0].file
-    if not segment_path.exists():
-        response = _get(url, Range=f"bytes={byte_range[0]}-{byte_range[1]}")
+
+def read_segment(plan: SegmentPlan) -> tuple[np.ndarray, dict[str, Any]]:
+    """Read the planned bytes (downloading once, then from cache) and describe them."""
+    downloaded = not plan.cache_path.exists()
+    if downloaded:
+        expected = plan.byte_range[1] - plan.byte_range[0] + 1
+        response = _get(plan.url, Range=f"bytes={plan.byte_range[0]}-{plan.byte_range[1]}")
         if response.status_code != 206 or len(response.content) != expected:
-            raise RuntimeError(f"{record}: server did not honour the byte range")
-        segment_path.write_bytes(response.content)
-    raw = segment_path.read_bytes()
-
+            raise RuntimeError(f"{plan.record}: server did not honour the byte range")
+        plan.cache_path.write_bytes(response.content)
+    raw = plan.cache_path.read_bytes()
     provenance = {
-        "record": record,
-        "url": url,
-        "byte_range": list(byte_range),
+        "record": plan.record,
+        "url": plan.url,
+        "byte_range": list(plan.byte_range),
         "sha256": hashlib.sha256(raw).hexdigest(),
-        "header_url": FANTASIA + f"{record}.hea",
-        "header_sha256": hashlib.sha256(header_bytes).hexdigest(),
-        "fs_hz": header.fs,
-        "start_s": start_s,
-        "duration_s": duration_s,
+        "header_url": FANTASIA + f"{plan.record}.hea",
+        "header_sha256": plan.header_sha256,
+        "fs_hz": plan.header.fs,
+        "start_s": plan.start_s,
+        "duration_s": plan.duration_s,
+        "downloaded": downloaded,
     }
-    return header, decode(raw, header), provenance
+    return decode(raw, plan.header), provenance
+
+
+def fetch_segment(record: str, start_s: float, duration_s: float, cache_dir: Path) -> tuple[Header, np.ndarray, dict]:
+    """Plan and read one segment of a Fantasia record."""
+    plan = plan_segment(record, start_s, duration_s, cache_dir)
+    data, provenance = read_segment(plan)
+    return plan.header, data, provenance
+
+
+def split_windows(data: np.ndarray, count: int) -> list[np.ndarray]:
+    """Cut a contiguous span into ``count`` equal, non-overlapping windows."""
+    frames = len(data) // count
+    return [data[k * frames:(k + 1) * frames] for k in range(count)]
 
 
 def detect_r_peaks(ecg: np.ndarray, fs: float) -> np.ndarray:
@@ -154,6 +184,10 @@ def detect_r_peaks(ecg: np.ndarray, fs: float) -> np.ndarray:
     return peaks
 
 
+class QualityError(ValueError):
+    """The window cannot yield a usable pair of series; the caller excludes it."""
+
+
 @dataclass(frozen=True)
 class PairedSeries:
     record: str
@@ -161,6 +195,8 @@ class PairedSeries:
     heart_rate: np.ndarray    # standardized
     fs: float
     qc: dict[str, Any]
+    segment: int = 0          # index of the window within the record's span
+    start_s: float | None = None
 
 
 def paired_series(header: Header, data: np.ndarray, *, grid_fs: float, highpass_hz: float) -> PairedSeries:
@@ -176,8 +212,12 @@ def paired_series(header: Header, data: np.ndarray, *, grid_fs: float, highpass_
     beat_t = peaks / fs
     rr = np.diff(beat_t)
     rr_t = beat_t[1:]
+    if len(rr) < 20:
+        raise QualityError(f"only {len(peaks)} beats detected")
     local = median_filter(rr, size=11, mode="nearest")
     valid = (rr >= 0.33) & (rr <= 2.0) & (np.abs(rr - local) <= 0.3 * local)
+    if valid.sum() < 20:
+        raise QualityError(f"only {int(valid.sum())} valid RR intervals")
 
     t0 = max(rr_t[0], 2.0)
     t1 = min(rr_t[-1], len(resp) / fs - 2.0)
@@ -190,6 +230,8 @@ def paired_series(header: Header, data: np.ndarray, *, grid_fs: float, highpass_
     highpass = butter(2, highpass_hz / (grid_fs / 2), btype="high", output="sos")
     respiration = _zscore(sosfiltfilt(highpass, respiration))
     heart_rate_z = _zscore(sosfiltfilt(highpass, heart_rate))
+    if not (np.all(np.isfinite(respiration)) and np.all(np.isfinite(heart_rate_z))):
+        raise QualityError("flat or non-finite signal")
 
     qc = {
         "beats": int(len(peaks)),

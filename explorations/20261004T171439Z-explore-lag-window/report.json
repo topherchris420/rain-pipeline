@@ -1,0 +1,4170 @@
+{
+  "status": "EXPLORATORY. Computed on data the ledger had already seen, to choose what to register. It is not evidence for any claim.",
+  "spec": "specs/explore-lag-window.json",
+  "question": "On the recordings V3D-EXP-0001 already analysed, does a longer or a breathing-derived lag window change which windows show respiration to heart-rate coupling?",
+  "code": {
+    "pipeline": {
+      "version": "0.2.0",
+      "source_sha256": "85d4cd91b52e313420ee5d77f0fbe790ca8119e932c82863161f4ef8a563c1a4"
+    },
+    "vendored": {
+      "anna": {
+        "repository": "topherchris420/anna",
+        "commit": "064af912028be740900cc7dd090c4c5bc13cdf9a",
+        "branch": "main",
+        "dirty": false
+      },
+      "rain": {
+        "repository": "topherchris420/james_library",
+        "commit": "9c8811e343d21b8c143055f9cf549abdefa862f1",
+        "branch": "main",
+        "dirty": false
+      },
+      "drr": {
+        "repository": "topherchris420/dynamic-resonance-rooting",
+        "commit": "862c4f75e6092e3314eb786adcb9fa2a7ee3e779",
+        "branch": "main",
+        "dirty": false
+      }
+    }
+  },
+  "dataset_files": [
+    {
+      "record": "f1y01",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y01.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "e8312f30c9881f899b46f469532a0721dc3e6cf55d95ab7401d35a88b923c3d3",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y01.hea",
+      "header_sha256": "519eff62d1ad082ea1f3ed68e4e90dc474dc35f7c99757b1d00cdaf1738bc9c2",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f1y02",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y02.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "0197fc4de9b68e476b11f240aae78e81e654b7581844467d05cf6080d35d9a99",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y02.hea",
+      "header_sha256": "9f9539b217b186e55eb10bd02c33d8fd716f8bc644d4ae5e5c815c063a8da77e",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f1y03",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y03.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "56c5cb9e9ca709c613046ad8d47e421e264bff2deaff191df4650d0c58ed5bb3",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y03.hea",
+      "header_sha256": "51f76b2873ac92e84fd05a842d7580926c875ff12e895c3f4287679b5057d764",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f1y04",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y04.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "815f72aa0a1bdd2756af793931cb9380f1705df4cc8000775706b5131e4dc85f",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y04.hea",
+      "header_sha256": "2dfebac593c932bc4c73e49c834da796f55195c2758dba80c459af5fe7f368b5",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f1y05",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y05.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "2baaf977ba1d9c6a4ff56ce6b8bc86a5d9fc95dfdfd1c7c20533d10490eac907",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y05.hea",
+      "header_sha256": "e4b2cb36a48626d893fb9a6c74e13b3681c7d7ce8b2396eaafbff6d47ffa4180",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f1y06",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y06.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "468625ed63c13be96c04c21b059f54d0a25e3c6911a1fa9f59ca3d3d8c69c30b",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y06.hea",
+      "header_sha256": "f2b5aeb9954288cd5de0e5eed274705321610a18d9fa6923801263c32b9ddbf1",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f1y07",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y07.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "9c66f7b7e24e467b9cf476679aef9385afdf3ecba74509e51d6147e14b1b0d29",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y07.hea",
+      "header_sha256": "38128068262c493c60cfe37e3730ad4dc24467b0f97eb3d44092c5f8034aa55a",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f1y08",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y08.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "9cae3f5344ef9693aacb2cde682d5560cf42071b5656dc52cf4ef64123ba1624",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y08.hea",
+      "header_sha256": "74cded67d8460176178abd3552f6bfa7de87e5249fe5bd1ad2458de44b10e80e",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f1y09",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y09.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "1c1d38fe1e823117a5eb1d69206131727e1297923a9be7aa9bf0710ba282b429",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y09.hea",
+      "header_sha256": "3d72f47c294b3d54f8a3fc2805b7c6a02b5ffa19c69e814cf783d3884c8639c0",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f1y10",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y10.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "9bc47293ecd45a2c49a99a89e5037f47a575fc66123c2c6d422b9d7c6f2825ff",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y10.hea",
+      "header_sha256": "df4a8a086037415a18cc23c367b5d009c6e0904d512b087d54ac85acfed46d9c",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f2y01",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y01.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "77a77de3f351b268dd9f94e629c31970e576668207fb4acea318b4b769d78e03",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y01.hea",
+      "header_sha256": "4074b8fe12804229305d6e84c92453205dab5cce704856dadfc16e94ad6435a0",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f2y02",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y02.dat",
+      "byte_range": [
+        89910,
+        989009
+      ],
+      "sha256": "88e895c3fce5fcfbf3a3c658e0f6ae7bd2b7696b20f3c452a34300b91e40d52c",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y02.hea",
+      "header_sha256": "9de8b532de4913dcd10e5355518bee34e8ea2b416069ec563c11c110afa9986d",
+      "fs_hz": 333.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f2y03",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y03.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "95c8f5adb7f3eed892c424faada81828b5bf32fb0c94247eac360ff17fe1e7bd",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y03.hea",
+      "header_sha256": "5af18ef02528d0a62d7bc3d237d259c5dabded7c60c70eedc503a33d5e84c565",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f2y04",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y04.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "c23919ad2931dbb66c37e69b840ca85891060e9deea60a27e9c11968704353fe",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y04.hea",
+      "header_sha256": "1b1cae21d75482e3c50c7d31f98e9506f5b0424814d1e5fa36373ba56f19a05d",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f2y05",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y05.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "158c5fbbbce6827634fcc32f0ecc0f62a0ec73f821c2b82b760f1600a1017899",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y05.hea",
+      "header_sha256": "de538fe68c7bc7b6a4ceccad35117a8bfc4a66c1d4a89dde8c0036dcb37d9c99",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f2y06",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y06.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "df40f57af0de9be5de4dfe11d4274de905119487f509c8c6d8d156f520bc716a",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y06.hea",
+      "header_sha256": "6c7eb0d512356688ce7332e52e58cf9b8312ec7cd0e08df9221d626d31fa8463",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f2y07",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y07.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "8d7d12a07d926fd4d76aa2b191e140f032bec9c6bd35bc6331cf27832e07cf60",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y07.hea",
+      "header_sha256": "8eb44ce7d8cb71ed8b424326618ebfa78d68e813a37175a6ae1a1e9ac406ab8c",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f2y08",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y08.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "0a8b44b844451f362095ad85f8597e023752162b742bd8f70d67f2351adcbae5",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y08.hea",
+      "header_sha256": "a3a8aea8b080612cf66b7d97802bff3d845efe94eb292d3263eab85b2441b432",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f2y09",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y09.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "b75113c2c5235cb4bd7aa145788c21c0be18e0cb473ddebed45d54b9e3776212",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y09.hea",
+      "header_sha256": "0d9c147b527ce68ba3bfe5c069a21b85765b210dda22bd3840f3b8289b09746f",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    },
+    {
+      "record": "f2y10",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y10.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "0297aeaf5ac215952317421fbc802085f25aab09b5e7b029eb03bb158a849ffd",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y10.hea",
+      "header_sha256": "6a9a78d677c7f4f5ec47da3cfd5b978c86196e5b2f38fa349e53af0ed417c174",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600,
+      "downloaded": false
+    }
+  ],
+  "engine": "drr_framework.RootingAnalyzer",
+  "study": "lag_window",
+  "settings": {
+    "study": "lag_window",
+    "method": "lagged_correlation",
+    "surrogate_method": "circular_shift",
+    "correction": "max_statistic",
+    "n_surrogates": 199,
+    "alpha": 0.05,
+    "seed": 20261005,
+    "arms": {
+      "short": {
+        "max_lag_s": 3.0
+      },
+      "long": {
+        "max_lag_s": 6.0
+      },
+      "resonant": {
+        "rule": "half_period",
+        "min_lag_s": 1.0,
+        "max_lag_s": 8.0
+      }
+    },
+    "strata": {
+      "slow": {
+        "min_hz": 0.0833,
+        "below_hz": 0.1667
+      },
+      "normal": {
+        "min_hz": 0.1667
+      }
+    },
+    "contrasts": {
+      "slow_gain_long_vs_short": {
+        "metric": "slow_detection_rate",
+        "arm": "long",
+        "minus": "short"
+      },
+      "normal_change_long_vs_short": {
+        "metric": "normal_detection_rate",
+        "arm": "long",
+        "minus": "short"
+      },
+      "slow_resonant_vs_long": {
+        "metric": "slow_detection_rate",
+        "arm": "resonant",
+        "minus": "long"
+      },
+      "normal_resonant_vs_short": {
+        "metric": "normal_detection_rate",
+        "arm": "resonant",
+        "minus": "short"
+      }
+    },
+    "controls": {
+      "synthetic_trials": 20,
+      "positive_coupling": 0.3,
+      "positive_lag_samples": 4,
+      "long_lag_samples": 18,
+      "ar_coefficient": 0.5
+    },
+    "grid_hz": 4,
+    "minimum_attainable_p": 0.005
+  },
+  "windows": [
+    {
+      "record": "f1y01",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.28125,
+      "stratum": "normal",
+      "qc": {
+        "beats": 779,
+        "valid_rr_fraction": 0.9858611825192802,
+        "mean_heart_rate_bpm": 78.73594382617573,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.8126390803498424,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.4956792404368077,
+          "reverse_lag_samples": 6,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261005
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.8126390803498424,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.4956792404368077,
+          "reverse_lag_samples": 6,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261005
+        },
+        "resonant": {
+          "max_lag_samples": 9,
+          "forward_score": 0.8126390803498424,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.4956792404368077,
+          "reverse_lag_samples": 6,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261005
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f1y02",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.0978324537411307,
+            "forward_lag_samples": 1,
+            "forward_p": 0.165,
+            "forward_adjusted_p": 0.285,
+            "reverse_score": 0.09847739485804105,
+            "reverse_lag_samples": 9,
+            "reverse_adjusted_p": 0.28,
+            "seed": 21261005
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.0978324537411307,
+            "forward_lag_samples": 1,
+            "forward_p": 0.27,
+            "forward_adjusted_p": 0.455,
+            "reverse_score": 0.09847739485804105,
+            "reverse_lag_samples": 9,
+            "reverse_adjusted_p": 0.45,
+            "seed": 21261005
+          },
+          "resonant": {
+            "max_lag_samples": 9,
+            "forward_score": 0.0978324537411307,
+            "forward_lag_samples": 1,
+            "forward_p": 0.16,
+            "forward_adjusted_p": 0.25,
+            "reverse_score": 0.09847739485804105,
+            "reverse_lag_samples": 9,
+            "reverse_adjusted_p": 0.245,
+            "seed": 21261005
+          }
+        }
+      }
+    },
+    {
+      "record": "f1y02",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.28125,
+      "stratum": "normal",
+      "qc": {
+        "beats": 605,
+        "valid_rr_fraction": 0.9983443708609272,
+        "mean_heart_rate_bpm": 60.88622165122467,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.6103072025683208,
+          "forward_lag_samples": 3,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.21757238856780098,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.025,
+          "seed": 20261006
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.6103072025683208,
+          "forward_lag_samples": 3,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.01,
+          "reverse_score": 0.21757238856780098,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.025,
+          "seed": 20261006
+        },
+        "resonant": {
+          "max_lag_samples": 9,
+          "forward_score": 0.6103072025683208,
+          "forward_lag_samples": 3,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.21757238856780098,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.025,
+          "seed": 20261006
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f1y03",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.015073478336366266,
+            "forward_lag_samples": 9,
+            "forward_p": 0.995,
+            "forward_adjusted_p": 1.0,
+            "reverse_score": 0.0684944669478766,
+            "reverse_lag_samples": 8,
+            "reverse_adjusted_p": 0.465,
+            "seed": 21261006
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.04009326792291895,
+            "forward_lag_samples": 18,
+            "forward_p": 0.885,
+            "forward_adjusted_p": 0.975,
+            "reverse_score": 0.09696386318625551,
+            "reverse_lag_samples": 21,
+            "reverse_adjusted_p": 0.125,
+            "seed": 21261006
+          },
+          "resonant": {
+            "max_lag_samples": 9,
+            "forward_score": 0.015073478336366266,
+            "forward_lag_samples": 9,
+            "forward_p": 0.975,
+            "forward_adjusted_p": 1.0,
+            "reverse_score": 0.0684944669478766,
+            "reverse_lag_samples": 8,
+            "reverse_adjusted_p": 0.41,
+            "seed": 21261006
+          }
+        }
+      }
+    },
+    {
+      "record": "f1y03",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.109375,
+      "stratum": "slow",
+      "qc": {
+        "beats": 659,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 66.08613810852343,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.6471941563218754,
+          "forward_lag_samples": 12,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.02,
+          "reverse_score": 0.5454228606642733,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.02,
+          "seed": 20261007
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.654055203457671,
+          "forward_lag_samples": 13,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.5454228606642733,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.025,
+          "seed": 20261007
+        },
+        "resonant": {
+          "max_lag_samples": 20,
+          "forward_score": 0.654055203457671,
+          "forward_lag_samples": 13,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.5454228606642733,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.025,
+          "seed": 20261007
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f1y04",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.1251830297744108,
+            "forward_lag_samples": 4,
+            "forward_p": 0.085,
+            "forward_adjusted_p": 0.155,
+            "reverse_score": 0.07480454499743243,
+            "reverse_lag_samples": 10,
+            "reverse_adjusted_p": 0.64,
+            "seed": 21261007
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.1251830297744108,
+            "forward_lag_samples": 4,
+            "forward_p": 0.135,
+            "forward_adjusted_p": 0.255,
+            "reverse_score": 0.07480454499743243,
+            "reverse_lag_samples": 10,
+            "reverse_adjusted_p": 0.89,
+            "seed": 21261007
+          },
+          "resonant": {
+            "max_lag_samples": 20,
+            "forward_score": 0.1251830297744108,
+            "forward_lag_samples": 4,
+            "forward_p": 0.115,
+            "forward_adjusted_p": 0.21,
+            "reverse_score": 0.07480454499743243,
+            "reverse_lag_samples": 10,
+            "reverse_adjusted_p": 0.83,
+            "seed": 21261007
+          }
+        }
+      }
+    },
+    {
+      "record": "f1y04",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.328125,
+      "stratum": "normal",
+      "qc": {
+        "beats": 453,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 45.51705978176279,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.5140461338276469,
+          "forward_lag_samples": 3,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.4000127451120657,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261008
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.5140461338276469,
+          "forward_lag_samples": 3,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.4000127451120657,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261008
+        },
+        "resonant": {
+          "max_lag_samples": 8,
+          "forward_score": 0.5140461338276469,
+          "forward_lag_samples": 3,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.4000127451120657,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261008
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f1y05",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.051538807622084244,
+            "forward_lag_samples": 12,
+            "forward_p": 0.525,
+            "forward_adjusted_p": 0.75,
+            "reverse_score": 0.05810483254248182,
+            "reverse_lag_samples": 11,
+            "reverse_adjusted_p": 0.685,
+            "seed": 21261008
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.1358084208776575,
+            "forward_lag_samples": 20,
+            "forward_p": 0.05,
+            "forward_adjusted_p": 0.085,
+            "reverse_score": 0.05810483254248182,
+            "reverse_lag_samples": 11,
+            "reverse_adjusted_p": 0.8,
+            "seed": 21261008
+          },
+          "resonant": {
+            "max_lag_samples": 8,
+            "forward_score": 0.03543574627337971,
+            "forward_lag_samples": 3,
+            "forward_p": 0.7,
+            "forward_adjusted_p": 0.905,
+            "reverse_score": 0.05227533201872557,
+            "reverse_lag_samples": 4,
+            "reverse_adjusted_p": 0.635,
+            "seed": 21261008
+          }
+        }
+      }
+    },
+    {
+      "record": "f1y05",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.328125,
+      "stratum": "normal",
+      "qc": {
+        "beats": 622,
+        "valid_rr_fraction": 0.9951690821256038,
+        "mean_heart_rate_bpm": 62.32450533391242,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.4439613337048581,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.2326306670706821,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261009
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.4439613337048581,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.2326306670706821,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261009
+        },
+        "resonant": {
+          "max_lag_samples": 8,
+          "forward_score": 0.4439613337048581,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.2326306670706821,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261009
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f1y06",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.05893825853959594,
+            "forward_lag_samples": 6,
+            "forward_p": 0.345,
+            "forward_adjusted_p": 0.525,
+            "reverse_score": 0.04047956699073681,
+            "reverse_lag_samples": 4,
+            "reverse_adjusted_p": 0.865,
+            "seed": 21261009
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.05893825853959594,
+            "forward_lag_samples": 6,
+            "forward_p": 0.55,
+            "forward_adjusted_p": 0.735,
+            "reverse_score": 0.05505536668324379,
+            "reverse_lag_samples": 19,
+            "reverse_adjusted_p": 0.815,
+            "seed": 21261009
+          },
+          "resonant": {
+            "max_lag_samples": 8,
+            "forward_score": 0.05893825853959594,
+            "forward_lag_samples": 6,
+            "forward_p": 0.25,
+            "forward_adjusted_p": 0.43,
+            "reverse_score": 0.04047956699073681,
+            "reverse_lag_samples": 4,
+            "reverse_adjusted_p": 0.795,
+            "seed": 21261009
+          }
+        }
+      }
+    },
+    {
+      "record": "f1y06",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.25,
+      "stratum": "normal",
+      "qc": {
+        "beats": 592,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 59.5971123311565,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.47234391537352005,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.27255029755711546,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261010
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.47234391537352005,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.29360212994343354,
+          "reverse_lag_samples": 22,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261010
+        },
+        "resonant": {
+          "max_lag_samples": 9,
+          "forward_score": 0.47234391537352005,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.27255029755711546,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261010
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f1y07",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.04345129247513811,
+            "forward_lag_samples": 11,
+            "forward_p": 0.785,
+            "forward_adjusted_p": 0.91,
+            "reverse_score": 0.08132877470144768,
+            "reverse_lag_samples": 3,
+            "reverse_adjusted_p": 0.445,
+            "seed": 21261010
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.1432327514487531,
+            "forward_lag_samples": 21,
+            "forward_p": 0.01,
+            "forward_adjusted_p": 0.025,
+            "reverse_score": 0.08132877470144768,
+            "reverse_lag_samples": 3,
+            "reverse_adjusted_p": 0.58,
+            "seed": 21261010
+          },
+          "resonant": {
+            "max_lag_samples": 9,
+            "forward_score": 0.03932689350440667,
+            "forward_lag_samples": 5,
+            "forward_p": 0.765,
+            "forward_adjusted_p": 0.905,
+            "reverse_score": 0.08132877470144768,
+            "reverse_lag_samples": 3,
+            "reverse_adjusted_p": 0.395,
+            "seed": 21261010
+          }
+        }
+      }
+    },
+    {
+      "record": "f1y07",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.21875,
+      "stratum": "normal",
+      "qc": {
+        "beats": 529,
+        "valid_rr_fraction": 0.9981060606060606,
+        "mean_heart_rate_bpm": 53.78022191681513,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.6096312156738695,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.3649411696475697,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261011
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.6096312156738695,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.3649411696475697,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261011
+        },
+        "resonant": {
+          "max_lag_samples": 11,
+          "forward_score": 0.6096312156738695,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.3649411696475697,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261011
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f1y08",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.05422033317001316,
+            "forward_lag_samples": 12,
+            "forward_p": 0.64,
+            "forward_adjusted_p": 0.81,
+            "reverse_score": 0.11319365878127813,
+            "reverse_lag_samples": 4,
+            "reverse_adjusted_p": 0.245,
+            "seed": 21261011
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.06847383556661059,
+            "forward_lag_samples": 15,
+            "forward_p": 0.605,
+            "forward_adjusted_p": 0.795,
+            "reverse_score": 0.11319365878127813,
+            "reverse_lag_samples": 4,
+            "reverse_adjusted_p": 0.38,
+            "seed": 21261011
+          },
+          "resonant": {
+            "max_lag_samples": 11,
+            "forward_score": 0.047887430429231444,
+            "forward_lag_samples": 11,
+            "forward_p": 0.75,
+            "forward_adjusted_p": 0.9,
+            "reverse_score": 0.11319365878127813,
+            "reverse_lag_samples": 4,
+            "reverse_adjusted_p": 0.235,
+            "seed": 21261011
+          }
+        }
+      }
+    },
+    {
+      "record": "f1y08",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.15625,
+      "stratum": "slow",
+      "qc": {
+        "beats": 620,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 62.30165164967464,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.4327797667796283,
+          "forward_lag_samples": 1,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.3057492073530907,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261012
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.4327797667796283,
+          "forward_lag_samples": 1,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.3057492073530907,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261012
+        },
+        "resonant": {
+          "max_lag_samples": 14,
+          "forward_score": 0.4327797667796283,
+          "forward_lag_samples": 1,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.3057492073530907,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261012
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f1y09",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.10980769890698451,
+            "forward_lag_samples": 4,
+            "forward_p": 0.08,
+            "forward_adjusted_p": 0.15,
+            "reverse_score": 0.10735552121427609,
+            "reverse_lag_samples": 5,
+            "reverse_adjusted_p": 0.18,
+            "seed": 21261012
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.10980769890698451,
+            "forward_lag_samples": 4,
+            "forward_p": 0.13,
+            "forward_adjusted_p": 0.26,
+            "reverse_score": 0.10735552121427609,
+            "reverse_lag_samples": 5,
+            "reverse_adjusted_p": 0.3,
+            "seed": 21261012
+          },
+          "resonant": {
+            "max_lag_samples": 14,
+            "forward_score": 0.10980769890698451,
+            "forward_lag_samples": 4,
+            "forward_p": 0.105,
+            "forward_adjusted_p": 0.185,
+            "reverse_score": 0.10735552121427609,
+            "reverse_lag_samples": 5,
+            "reverse_adjusted_p": 0.21,
+            "seed": 21261012
+          }
+        }
+      }
+    },
+    {
+      "record": "f1y09",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.3125,
+      "stratum": "normal",
+      "qc": {
+        "beats": 703,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 70.55552540833672,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.453344560274035,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.18584621481463603,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261013
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.453344560274035,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.19315764456842194,
+          "reverse_lag_samples": 15,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261013
+        },
+        "resonant": {
+          "max_lag_samples": 8,
+          "forward_score": 0.453344560274035,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.18584621481463603,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261013
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f1y10",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.06242517470565588,
+            "forward_lag_samples": 1,
+            "forward_p": 0.5,
+            "forward_adjusted_p": 0.68,
+            "reverse_score": 0.06549725563373089,
+            "reverse_lag_samples": 1,
+            "reverse_adjusted_p": 0.67,
+            "seed": 21261013
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.06388711457846577,
+            "forward_lag_samples": 24,
+            "forward_p": 0.67,
+            "forward_adjusted_p": 0.855,
+            "reverse_score": 0.06549725563373089,
+            "reverse_lag_samples": 1,
+            "reverse_adjusted_p": 0.845,
+            "seed": 21261013
+          },
+          "resonant": {
+            "max_lag_samples": 8,
+            "forward_score": 0.06242517470565588,
+            "forward_lag_samples": 1,
+            "forward_p": 0.405,
+            "forward_adjusted_p": 0.58,
+            "reverse_score": 0.06549725563373089,
+            "reverse_lag_samples": 1,
+            "reverse_adjusted_p": 0.525,
+            "seed": 21261013
+          }
+        }
+      }
+    },
+    {
+      "record": "f1y10",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.125,
+      "stratum": "slow",
+      "qc": {
+        "beats": 754,
+        "valid_rr_fraction": 0.9960159362549801,
+        "mean_heart_rate_bpm": 76.02207036477647,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.4976614606202412,
+          "forward_lag_samples": 1,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.29997994548753915,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.02,
+          "seed": 20261014
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.4976614606202412,
+          "forward_lag_samples": 1,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.29997994548753915,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.02,
+          "seed": 20261014
+        },
+        "resonant": {
+          "max_lag_samples": 17,
+          "forward_score": 0.4976614606202412,
+          "forward_lag_samples": 1,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.29997994548753915,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.02,
+          "seed": 20261014
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f2y01",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.06952731370965276,
+            "forward_lag_samples": 11,
+            "forward_p": 0.475,
+            "forward_adjusted_p": 0.645,
+            "reverse_score": 0.08100053733879181,
+            "reverse_lag_samples": 7,
+            "reverse_adjusted_p": 0.43,
+            "seed": 21261014
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.06952731370965276,
+            "forward_lag_samples": 11,
+            "forward_p": 0.61,
+            "forward_adjusted_p": 0.775,
+            "reverse_score": 0.0912162682716559,
+            "reverse_lag_samples": 24,
+            "reverse_adjusted_p": 0.385,
+            "seed": 21261014
+          },
+          "resonant": {
+            "max_lag_samples": 17,
+            "forward_score": 0.06952731370965276,
+            "forward_lag_samples": 11,
+            "forward_p": 0.55,
+            "forward_adjusted_p": 0.72,
+            "reverse_score": 0.08100053733879181,
+            "reverse_lag_samples": 7,
+            "reverse_adjusted_p": 0.525,
+            "seed": 21261014
+          }
+        }
+      }
+    },
+    {
+      "record": "f2y01",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.359375,
+      "stratum": "normal",
+      "qc": {
+        "beats": 689,
+        "valid_rr_fraction": 0.998546511627907,
+        "mean_heart_rate_bpm": 69.15985565494866,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.5010635256355014,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.4451093451416018,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261015
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.5010635256355014,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.4451093451416018,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261015
+        },
+        "resonant": {
+          "max_lag_samples": 7,
+          "forward_score": 0.5010635256355014,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.4451093451416018,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261015
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f2y02",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.017291466774578053,
+            "forward_lag_samples": 10,
+            "forward_p": 0.89,
+            "forward_adjusted_p": 0.97,
+            "reverse_score": 0.03506046499856277,
+            "reverse_lag_samples": 8,
+            "reverse_adjusted_p": 0.46,
+            "seed": 21261015
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.017291466774578053,
+            "forward_lag_samples": 10,
+            "forward_p": 0.965,
+            "forward_adjusted_p": 1.0,
+            "reverse_score": 0.038364079988003785,
+            "reverse_lag_samples": 20,
+            "reverse_adjusted_p": 0.515,
+            "seed": 21261015
+          },
+          "resonant": {
+            "max_lag_samples": 7,
+            "forward_score": 0.008275449699771932,
+            "forward_lag_samples": 7,
+            "forward_p": 0.96,
+            "forward_adjusted_p": 0.995,
+            "reverse_score": 0.033423012523243256,
+            "reverse_lag_samples": 7,
+            "reverse_adjusted_p": 0.36,
+            "seed": 21261015
+          }
+        }
+      }
+    },
+    {
+      "record": "f2y02",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.265625,
+      "stratum": "normal",
+      "qc": {
+        "beats": 550,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 55.51526333442061,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.6361756254660283,
+          "forward_lag_samples": 3,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.01,
+          "reverse_score": 0.36327053149217753,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.02,
+          "seed": 20261016
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.6361756254660283,
+          "forward_lag_samples": 3,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.01,
+          "reverse_score": 0.36327053149217753,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.02,
+          "seed": 20261016
+        },
+        "resonant": {
+          "max_lag_samples": 9,
+          "forward_score": 0.6361756254660283,
+          "forward_lag_samples": 3,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.01,
+          "reverse_score": 0.36327053149217753,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.02,
+          "seed": 20261016
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f2y03",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.07775704716743406,
+            "forward_lag_samples": 6,
+            "forward_p": 0.18,
+            "forward_adjusted_p": 0.245,
+            "reverse_score": 0.07047177372393823,
+            "reverse_lag_samples": 2,
+            "reverse_adjusted_p": 0.32,
+            "seed": 21261016
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.07775704716743406,
+            "forward_lag_samples": 6,
+            "forward_p": 0.25,
+            "forward_adjusted_p": 0.41,
+            "reverse_score": 0.07047177372393823,
+            "reverse_lag_samples": 2,
+            "reverse_adjusted_p": 0.485,
+            "seed": 21261016
+          },
+          "resonant": {
+            "max_lag_samples": 9,
+            "forward_score": 0.07775704716743406,
+            "forward_lag_samples": 6,
+            "forward_p": 0.115,
+            "forward_adjusted_p": 0.185,
+            "reverse_score": 0.07047177372393823,
+            "reverse_lag_samples": 2,
+            "reverse_adjusted_p": 0.26,
+            "seed": 21261016
+          }
+        }
+      }
+    },
+    {
+      "record": "f2y03",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.3125,
+      "stratum": "normal",
+      "qc": {
+        "beats": 583,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 58.35350450155729,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.8052906962330011,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.42441488641639735,
+          "reverse_lag_samples": 6,
+          "reverse_adjusted_p": 0.015,
+          "seed": 20261017
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.8052906962330011,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.47423509115628304,
+          "reverse_lag_samples": 18,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261017
+        },
+        "resonant": {
+          "max_lag_samples": 8,
+          "forward_score": 0.8052906962330011,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.42441488641639735,
+          "reverse_lag_samples": 6,
+          "reverse_adjusted_p": 0.015,
+          "seed": 20261017
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f2y04",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.07614805228590436,
+            "forward_lag_samples": 12,
+            "forward_p": 0.515,
+            "forward_adjusted_p": 0.63,
+            "reverse_score": 0.09101377321323902,
+            "reverse_lag_samples": 8,
+            "reverse_adjusted_p": 0.425,
+            "seed": 21261017
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.08577368878958228,
+            "forward_lag_samples": 24,
+            "forward_p": 0.5,
+            "forward_adjusted_p": 0.63,
+            "reverse_score": 0.11352526505733695,
+            "reverse_lag_samples": 21,
+            "reverse_adjusted_p": 0.335,
+            "seed": 21261017
+          },
+          "resonant": {
+            "max_lag_samples": 8,
+            "forward_score": 0.04602198210273322,
+            "forward_lag_samples": 6,
+            "forward_p": 0.755,
+            "forward_adjusted_p": 0.875,
+            "reverse_score": 0.09101377321323902,
+            "reverse_lag_samples": 8,
+            "reverse_adjusted_p": 0.37,
+            "seed": 21261017
+          }
+        }
+      }
+    },
+    {
+      "record": "f2y04",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.3125,
+      "stratum": "normal",
+      "qc": {
+        "beats": 761,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 76.40941498635186,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.4913374054129278,
+          "forward_lag_samples": 1,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.3326482282814581,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261018
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.4913374054129278,
+          "forward_lag_samples": 1,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.3326482282814581,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261018
+        },
+        "resonant": {
+          "max_lag_samples": 8,
+          "forward_score": 0.4913374054129278,
+          "forward_lag_samples": 1,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.3326482282814581,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261018
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f2y05",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.13820899134471049,
+            "forward_lag_samples": 10,
+            "forward_p": 0.025,
+            "forward_adjusted_p": 0.03,
+            "reverse_score": 0.10935011126164744,
+            "reverse_lag_samples": 9,
+            "reverse_adjusted_p": 0.075,
+            "seed": 21261018
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.13820899134471049,
+            "forward_lag_samples": 10,
+            "forward_p": 0.02,
+            "forward_adjusted_p": 0.035,
+            "reverse_score": 0.10935011126164744,
+            "reverse_lag_samples": 9,
+            "reverse_adjusted_p": 0.12,
+            "seed": 21261018
+          },
+          "resonant": {
+            "max_lag_samples": 8,
+            "forward_score": 0.10658489994264261,
+            "forward_lag_samples": 8,
+            "forward_p": 0.045,
+            "forward_adjusted_p": 0.07,
+            "reverse_score": 0.10393860174208058,
+            "reverse_lag_samples": 8,
+            "reverse_adjusted_p": 0.085,
+            "seed": 21261018
+          }
+        }
+      }
+    },
+    {
+      "record": "f2y05",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.28125,
+      "stratum": "normal",
+      "qc": {
+        "beats": 787,
+        "valid_rr_fraction": 0.9860050890585241,
+        "mean_heart_rate_bpm": 78.68504292164418,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.4756792232519798,
+          "forward_lag_samples": 1,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.24449454740860246,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261019
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.4756792232519798,
+          "forward_lag_samples": 1,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.24449454740860246,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261019
+        },
+        "resonant": {
+          "max_lag_samples": 9,
+          "forward_score": 0.4756792232519798,
+          "forward_lag_samples": 1,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.24449454740860246,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261019
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f2y06",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.07367371643441091,
+            "forward_lag_samples": 1,
+            "forward_p": 0.16,
+            "forward_adjusted_p": 0.225,
+            "reverse_score": 0.09988062372532713,
+            "reverse_lag_samples": 2,
+            "reverse_adjusted_p": 0.06,
+            "seed": 21261019
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.13403554232969012,
+            "forward_lag_samples": 19,
+            "forward_p": 0.005,
+            "forward_adjusted_p": 0.01,
+            "reverse_score": 0.09988062372532713,
+            "reverse_lag_samples": 2,
+            "reverse_adjusted_p": 0.095,
+            "seed": 21261019
+          },
+          "resonant": {
+            "max_lag_samples": 9,
+            "forward_score": 0.07367371643441091,
+            "forward_lag_samples": 1,
+            "forward_p": 0.125,
+            "forward_adjusted_p": 0.2,
+            "reverse_score": 0.09988062372532713,
+            "reverse_lag_samples": 2,
+            "reverse_adjusted_p": 0.06,
+            "seed": 21261019
+          }
+        }
+      }
+    },
+    {
+      "record": "f2y06",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.375,
+      "stratum": "normal",
+      "qc": {
+        "beats": 606,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 60.67791018636099,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.3703128784602117,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.01,
+          "reverse_score": 0.28713483543943286,
+          "reverse_lag_samples": 3,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261020
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.3703128784602117,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.01,
+          "reverse_score": 0.28713483543943286,
+          "reverse_lag_samples": 3,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261020
+        },
+        "resonant": {
+          "max_lag_samples": 7,
+          "forward_score": 0.3703128784602117,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.01,
+          "reverse_score": 0.28713483543943286,
+          "reverse_lag_samples": 3,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261020
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f2y07",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.057341848863042014,
+            "forward_lag_samples": 1,
+            "forward_p": 0.105,
+            "forward_adjusted_p": 0.18,
+            "reverse_score": 0.055424335797577017,
+            "reverse_lag_samples": 1,
+            "reverse_adjusted_p": 0.255,
+            "seed": 21261020
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.057341848863042014,
+            "forward_lag_samples": 1,
+            "forward_p": 0.175,
+            "forward_adjusted_p": 0.31,
+            "reverse_score": 0.055424335797577017,
+            "reverse_lag_samples": 1,
+            "reverse_adjusted_p": 0.42,
+            "seed": 21261020
+          },
+          "resonant": {
+            "max_lag_samples": 7,
+            "forward_score": 0.057341848863042014,
+            "forward_lag_samples": 1,
+            "forward_p": 0.08,
+            "forward_adjusted_p": 0.125,
+            "reverse_score": 0.055424335797577017,
+            "reverse_lag_samples": 1,
+            "reverse_adjusted_p": 0.18,
+            "seed": 21261020
+          }
+        }
+      }
+    },
+    {
+      "record": "f2y07",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.25,
+      "stratum": "normal",
+      "qc": {
+        "beats": 574,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 57.61439199449046,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.6445100954288404,
+          "forward_lag_samples": 3,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.5269977920444202,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261021
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.6445100954288404,
+          "forward_lag_samples": 3,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.5269977920444202,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261021
+        },
+        "resonant": {
+          "max_lag_samples": 9,
+          "forward_score": 0.6445100954288404,
+          "forward_lag_samples": 3,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.5269977920444202,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.005,
+          "seed": 20261021
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f2y08",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.06746892012030627,
+            "forward_lag_samples": 5,
+            "forward_p": 0.41,
+            "forward_adjusted_p": 0.51,
+            "reverse_score": 0.08970713315097463,
+            "reverse_lag_samples": 5,
+            "reverse_adjusted_p": 0.315,
+            "seed": 21261021
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.06746892012030627,
+            "forward_lag_samples": 5,
+            "forward_p": 0.54,
+            "forward_adjusted_p": 0.745,
+            "reverse_score": 0.09875140938878404,
+            "reverse_lag_samples": 23,
+            "reverse_adjusted_p": 0.3,
+            "seed": 21261021
+          },
+          "resonant": {
+            "max_lag_samples": 9,
+            "forward_score": 0.06746892012030627,
+            "forward_lag_samples": 5,
+            "forward_p": 0.37,
+            "forward_adjusted_p": 0.44,
+            "reverse_score": 0.08970713315097463,
+            "reverse_lag_samples": 5,
+            "reverse_adjusted_p": 0.27,
+            "seed": 21261021
+          }
+        }
+      }
+    },
+    {
+      "record": "f2y08",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.203125,
+      "stratum": "normal",
+      "qc": {
+        "beats": 626,
+        "valid_rr_fraction": 0.992,
+        "mean_heart_rate_bpm": 63.345484786928814,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.5466980346922955,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.25520904289684393,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261022
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.5466980346922955,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.25520904289684393,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.02,
+          "seed": 20261022
+        },
+        "resonant": {
+          "max_lag_samples": 11,
+          "forward_score": 0.5466980346922955,
+          "forward_lag_samples": 2,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.25520904289684393,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.01,
+          "seed": 20261022
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f2y09",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.03226054318199331,
+            "forward_lag_samples": 2,
+            "forward_p": 0.95,
+            "forward_adjusted_p": 0.995,
+            "reverse_score": 0.03869905684344517,
+            "reverse_lag_samples": 12,
+            "reverse_adjusted_p": 0.975,
+            "seed": 21261022
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.04594301454135605,
+            "forward_lag_samples": 22,
+            "forward_p": 0.905,
+            "forward_adjusted_p": 0.97,
+            "reverse_score": 0.074123264867345,
+            "reverse_lag_samples": 20,
+            "reverse_adjusted_p": 0.775,
+            "seed": 21261022
+          },
+          "resonant": {
+            "max_lag_samples": 11,
+            "forward_score": 0.03226054318199331,
+            "forward_lag_samples": 2,
+            "forward_p": 0.93,
+            "forward_adjusted_p": 0.99,
+            "reverse_score": 0.03868425291835068,
+            "reverse_lag_samples": 11,
+            "reverse_adjusted_p": 0.95,
+            "seed": 21261022
+          }
+        }
+      }
+    },
+    {
+      "record": "f2y09",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.125,
+      "stratum": "slow",
+      "qc": {
+        "beats": 770,
+        "valid_rr_fraction": 0.953185955786736,
+        "mean_heart_rate_bpm": 77.66096605030314,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.030361364494341472,
+          "forward_lag_samples": 9,
+          "forward_p": 0.76,
+          "forward_adjusted_p": 0.865,
+          "reverse_score": 0.08960624112333247,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.19,
+          "seed": 20261023
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.045519199506838866,
+          "forward_lag_samples": 24,
+          "forward_p": 0.64,
+          "forward_adjusted_p": 0.73,
+          "reverse_score": 0.08960624112333247,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.25,
+          "seed": 20261023
+        },
+        "resonant": {
+          "max_lag_samples": 17,
+          "forward_score": 0.030361364494341472,
+          "forward_lag_samples": 9,
+          "forward_p": 0.805,
+          "forward_adjusted_p": 0.9,
+          "reverse_score": 0.08960624112333247,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.2,
+          "seed": 20261023
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f2y10",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.10228954354854733,
+            "forward_lag_samples": 1,
+            "forward_p": 0.165,
+            "forward_adjusted_p": 0.215,
+            "reverse_score": 0.12159776050711543,
+            "reverse_lag_samples": 2,
+            "reverse_adjusted_p": 0.115,
+            "seed": 21261023
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.10228954354854733,
+            "forward_lag_samples": 1,
+            "forward_p": 0.22,
+            "forward_adjusted_p": 0.295,
+            "reverse_score": 0.12159776050711543,
+            "reverse_lag_samples": 2,
+            "reverse_adjusted_p": 0.13,
+            "seed": 21261023
+          },
+          "resonant": {
+            "max_lag_samples": 17,
+            "forward_score": 0.10228954354854733,
+            "forward_lag_samples": 1,
+            "forward_p": 0.175,
+            "forward_adjusted_p": 0.255,
+            "reverse_score": 0.12159776050711543,
+            "reverse_lag_samples": 2,
+            "reverse_adjusted_p": 0.125,
+            "seed": 21261023
+          }
+        }
+      }
+    },
+    {
+      "record": "f2y10",
+      "segment": 0,
+      "start_s": 60,
+      "respiratory_frequency_hz": 0.109375,
+      "stratum": "slow",
+      "qc": {
+        "beats": 602,
+        "valid_rr_fraction": 0.9833610648918469,
+        "mean_heart_rate_bpm": 64.20388771361772,
+        "grid_samples": 2384
+      },
+      "arms": {
+        "short": {
+          "max_lag_samples": 12,
+          "forward_score": 0.11539749159569451,
+          "forward_lag_samples": 12,
+          "forward_p": 0.14,
+          "forward_adjusted_p": 0.195,
+          "reverse_score": 0.1347620628689287,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.165,
+          "seed": 20261024
+        },
+        "long": {
+          "max_lag_samples": 24,
+          "forward_score": 0.1836913330967439,
+          "forward_lag_samples": 18,
+          "forward_p": 0.04,
+          "forward_adjusted_p": 0.07,
+          "reverse_score": 0.13653433230846485,
+          "reverse_lag_samples": 14,
+          "reverse_adjusted_p": 0.22,
+          "seed": 20261024
+        },
+        "resonant": {
+          "max_lag_samples": 20,
+          "forward_score": 0.1836913330967439,
+          "forward_lag_samples": 18,
+          "forward_p": 0.035,
+          "forward_adjusted_p": 0.06,
+          "reverse_score": 0.13653433230846485,
+          "reverse_lag_samples": 14,
+          "reverse_adjusted_p": 0.2,
+          "seed": 20261024
+        }
+      },
+      "mismatched": {
+        "heart_rate_of": "f1y01",
+        "arms": {
+          "short": {
+            "max_lag_samples": 12,
+            "forward_score": 0.05208431128307039,
+            "forward_lag_samples": 1,
+            "forward_p": 0.655,
+            "forward_adjusted_p": 0.825,
+            "reverse_score": 0.056547041202444505,
+            "reverse_lag_samples": 1,
+            "reverse_adjusted_p": 0.79,
+            "seed": 21261024
+          },
+          "long": {
+            "max_lag_samples": 24,
+            "forward_score": 0.13349213016165323,
+            "forward_lag_samples": 18,
+            "forward_p": 0.02,
+            "forward_adjusted_p": 0.04,
+            "reverse_score": 0.056547041202444505,
+            "reverse_lag_samples": 1,
+            "reverse_adjusted_p": 0.94,
+            "seed": 21261024
+          },
+          "resonant": {
+            "max_lag_samples": 20,
+            "forward_score": 0.13349213016165323,
+            "forward_lag_samples": 18,
+            "forward_p": 0.015,
+            "forward_adjusted_p": 0.03,
+            "reverse_score": 0.056547041202444505,
+            "reverse_lag_samples": 1,
+            "reverse_adjusted_p": 0.915,
+            "seed": 21261024
+          }
+        }
+      }
+    }
+  ],
+  "excluded_windows": [],
+  "synthetic": {
+    "short": {
+      "positive": [
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.276107737771851,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.0321343063279649,
+          "reverse_lag_samples": 7,
+          "reverse_adjusted_p": 0.97,
+          "seed": 22261005
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.3210583550096493,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.04898298581739301,
+          "reverse_lag_samples": 8,
+          "reverse_adjusted_p": 0.62,
+          "seed": 22261006
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.3355891899403589,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.037391303589726144,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.905,
+          "seed": 22261007
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.31035097667670014,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05623010705104897,
+          "reverse_lag_samples": 8,
+          "reverse_adjusted_p": 0.27,
+          "seed": 22261008
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.3084833398760111,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.02847963480666471,
+          "reverse_lag_samples": 2,
+          "reverse_adjusted_p": 0.98,
+          "seed": 22261009
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.3196963725250761,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.03363675051020531,
+          "reverse_lag_samples": 8,
+          "reverse_adjusted_p": 0.945,
+          "seed": 22261010
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.28295668253379885,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.01,
+          "reverse_score": 0.03343965807726079,
+          "reverse_lag_samples": 6,
+          "reverse_adjusted_p": 0.95,
+          "seed": 22261011
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.2932815931881099,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05069236151079154,
+          "reverse_lag_samples": 2,
+          "reverse_adjusted_p": 0.56,
+          "seed": 22261012
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.31730565868332,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.0359435324610018,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.94,
+          "seed": 22261013
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.3426656591230183,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.032236052921953265,
+          "reverse_lag_samples": 9,
+          "reverse_adjusted_p": 0.97,
+          "seed": 22261014
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.29122899359812426,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.04080433684331325,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.825,
+          "seed": 22261015
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.2705835461130584,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05236701671446397,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.535,
+          "seed": 22261016
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.3008149605751012,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.015,
+          "reverse_score": 0.029848527537202,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.955,
+          "seed": 22261017
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.2911606434730829,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.048760474638383025,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.71,
+          "seed": 22261018
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.3568650355424698,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.04492632006219796,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.745,
+          "seed": 22261019
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.3001066594398228,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05299900496828238,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.465,
+          "seed": 22261020
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.2602026193949312,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.050151021290218034,
+          "reverse_lag_samples": 11,
+          "reverse_adjusted_p": 0.66,
+          "seed": 22261021
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.2742805972676324,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.06399901448518971,
+          "reverse_lag_samples": 11,
+          "reverse_adjusted_p": 0.28,
+          "seed": 22261022
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.29552056669932597,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.01,
+          "reverse_score": 0.0395502513743864,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.895,
+          "seed": 22261023
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.2593899585478519,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.06309426797990647,
+          "reverse_lag_samples": 6,
+          "reverse_adjusted_p": 0.21,
+          "seed": 22261024
+        }
+      ],
+      "null": [
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.03767286958930039,
+          "forward_lag_samples": 12,
+          "forward_p": 0.655,
+          "forward_adjusted_p": 0.965,
+          "reverse_score": 0.06010351126856058,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.315,
+          "seed": 22262005
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.05545760529967841,
+          "forward_lag_samples": 5,
+          "forward_p": 0.32,
+          "forward_adjusted_p": 0.47,
+          "reverse_score": 0.07219342589393915,
+          "reverse_lag_samples": 7,
+          "reverse_adjusted_p": 0.085,
+          "seed": 22262006
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.03858018265197301,
+          "forward_lag_samples": 4,
+          "forward_p": 0.665,
+          "forward_adjusted_p": 0.885,
+          "reverse_score": 0.09175953387971754,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.025,
+          "seed": 22262007
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.038100538967547684,
+          "forward_lag_samples": 1,
+          "forward_p": 0.71,
+          "forward_adjusted_p": 0.905,
+          "reverse_score": 0.03662222836118157,
+          "reverse_lag_samples": 8,
+          "reverse_adjusted_p": 0.92,
+          "seed": 22262008
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.04865094420105445,
+          "forward_lag_samples": 5,
+          "forward_p": 0.465,
+          "forward_adjusted_p": 0.705,
+          "reverse_score": 0.05843382991829893,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.41,
+          "seed": 22262009
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.03236474541142847,
+          "forward_lag_samples": 1,
+          "forward_p": 0.77,
+          "forward_adjusted_p": 0.93,
+          "reverse_score": 0.051560079879847946,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.44,
+          "seed": 22262010
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.0424766772031473,
+          "forward_lag_samples": 1,
+          "forward_p": 0.53,
+          "forward_adjusted_p": 0.78,
+          "reverse_score": 0.08167363636005313,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.045,
+          "seed": 22262011
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.045728527316489485,
+          "forward_lag_samples": 11,
+          "forward_p": 0.4,
+          "forward_adjusted_p": 0.605,
+          "reverse_score": 0.04990590939521417,
+          "reverse_lag_samples": 2,
+          "reverse_adjusted_p": 0.435,
+          "seed": 22262012
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.03582247248439096,
+          "forward_lag_samples": 2,
+          "forward_p": 0.725,
+          "forward_adjusted_p": 0.915,
+          "reverse_score": 0.06959404291883993,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.075,
+          "seed": 22262013
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.047521949856295584,
+          "forward_lag_samples": 1,
+          "forward_p": 0.43,
+          "forward_adjusted_p": 0.665,
+          "reverse_score": 0.04877265019026741,
+          "reverse_lag_samples": 10,
+          "reverse_adjusted_p": 0.63,
+          "seed": 22262014
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.02873497058021336,
+          "forward_lag_samples": 9,
+          "forward_p": 0.855,
+          "forward_adjusted_p": 0.965,
+          "reverse_score": 0.06561331563972068,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.15,
+          "seed": 22262015
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.033439877533872044,
+          "forward_lag_samples": 10,
+          "forward_p": 0.8,
+          "forward_adjusted_p": 0.945,
+          "reverse_score": 0.031524399728164024,
+          "reverse_lag_samples": 10,
+          "reverse_adjusted_p": 0.96,
+          "seed": 22262016
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.06130508824505014,
+          "forward_lag_samples": 3,
+          "forward_p": 0.15,
+          "forward_adjusted_p": 0.285,
+          "reverse_score": 0.034462467247670395,
+          "reverse_lag_samples": 7,
+          "reverse_adjusted_p": 0.955,
+          "seed": 22262017
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.02842609235533059,
+          "forward_lag_samples": 10,
+          "forward_p": 0.9,
+          "forward_adjusted_p": 0.975,
+          "reverse_score": 0.054338025362659824,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.375,
+          "seed": 22262018
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.03018937171260563,
+          "forward_lag_samples": 11,
+          "forward_p": 0.91,
+          "forward_adjusted_p": 0.98,
+          "reverse_score": 0.022483720708214253,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 1.0,
+          "seed": 22262019
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.053371671973038146,
+          "forward_lag_samples": 1,
+          "forward_p": 0.245,
+          "forward_adjusted_p": 0.455,
+          "reverse_score": 0.03117849329873377,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.97,
+          "seed": 22262020
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.05404592730702653,
+          "forward_lag_samples": 10,
+          "forward_p": 0.28,
+          "forward_adjusted_p": 0.45,
+          "reverse_score": 0.07264274941988097,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.12,
+          "seed": 22262021
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.032700409508571886,
+          "forward_lag_samples": 11,
+          "forward_p": 0.85,
+          "forward_adjusted_p": 0.945,
+          "reverse_score": 0.0596472933047716,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.22,
+          "seed": 22262022
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.04934598774187194,
+          "forward_lag_samples": 1,
+          "forward_p": 0.35,
+          "forward_adjusted_p": 0.585,
+          "reverse_score": 0.07443453542876477,
+          "reverse_lag_samples": 9,
+          "reverse_adjusted_p": 0.095,
+          "seed": 22262023
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.04521671517931572,
+          "forward_lag_samples": 5,
+          "forward_p": 0.425,
+          "forward_adjusted_p": 0.67,
+          "reverse_score": 0.03669702423445677,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.915,
+          "seed": 22262024
+        }
+      ],
+      "long_lag": [
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.0670783637295726,
+          "forward_lag_samples": 7,
+          "forward_p": 0.09,
+          "forward_adjusted_p": 0.165,
+          "reverse_score": 0.02911355642812668,
+          "reverse_lag_samples": 2,
+          "reverse_adjusted_p": 0.99,
+          "seed": 22263005
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.04028933555388522,
+          "forward_lag_samples": 8,
+          "forward_p": 0.665,
+          "forward_adjusted_p": 0.88,
+          "reverse_score": 0.04529514825462209,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.775,
+          "seed": 22263006
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.02872197143019153,
+          "forward_lag_samples": 9,
+          "forward_p": 0.85,
+          "forward_adjusted_p": 0.985,
+          "reverse_score": 0.03332006476741484,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.955,
+          "seed": 22263007
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.022438647933316635,
+          "forward_lag_samples": 12,
+          "forward_p": 0.985,
+          "forward_adjusted_p": 0.995,
+          "reverse_score": 0.04981280105320363,
+          "reverse_lag_samples": 3,
+          "reverse_adjusted_p": 0.595,
+          "seed": 22263008
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.04131766177413277,
+          "forward_lag_samples": 2,
+          "forward_p": 0.59,
+          "forward_adjusted_p": 0.865,
+          "reverse_score": 0.03295387339302035,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.985,
+          "seed": 22263009
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.024565118782020178,
+          "forward_lag_samples": 10,
+          "forward_p": 0.925,
+          "forward_adjusted_p": 1.0,
+          "reverse_score": 0.049558003213757876,
+          "reverse_lag_samples": 8,
+          "reverse_adjusted_p": 0.57,
+          "seed": 22263010
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.04728973641887168,
+          "forward_lag_samples": 4,
+          "forward_p": 0.46,
+          "forward_adjusted_p": 0.705,
+          "reverse_score": 0.07487446689487111,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.16,
+          "seed": 22263011
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.04120894502110608,
+          "forward_lag_samples": 2,
+          "forward_p": 0.62,
+          "forward_adjusted_p": 0.855,
+          "reverse_score": 0.03947732303267139,
+          "reverse_lag_samples": 3,
+          "reverse_adjusted_p": 0.89,
+          "seed": 22263012
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.04340009967294297,
+          "forward_lag_samples": 3,
+          "forward_p": 0.555,
+          "forward_adjusted_p": 0.82,
+          "reverse_score": 0.03209752877873764,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.98,
+          "seed": 22263013
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.055263311704867445,
+          "forward_lag_samples": 2,
+          "forward_p": 0.275,
+          "forward_adjusted_p": 0.45,
+          "reverse_score": 0.027277468858675522,
+          "reverse_lag_samples": 9,
+          "reverse_adjusted_p": 0.99,
+          "seed": 22263014
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.038038969054232256,
+          "forward_lag_samples": 5,
+          "forward_p": 0.685,
+          "forward_adjusted_p": 0.9,
+          "reverse_score": 0.039706142545878724,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.88,
+          "seed": 22263015
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.03895042503145161,
+          "forward_lag_samples": 2,
+          "forward_p": 0.695,
+          "forward_adjusted_p": 0.935,
+          "reverse_score": 0.01751146688826608,
+          "reverse_lag_samples": 9,
+          "reverse_adjusted_p": 1.0,
+          "seed": 22263016
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.03789325539471046,
+          "forward_lag_samples": 1,
+          "forward_p": 0.665,
+          "forward_adjusted_p": 0.85,
+          "reverse_score": 0.04342143116963677,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.775,
+          "seed": 22263017
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.07211473155084697,
+          "forward_lag_samples": 9,
+          "forward_p": 0.065,
+          "forward_adjusted_p": 0.125,
+          "reverse_score": 0.025908756124689153,
+          "reverse_lag_samples": 9,
+          "reverse_adjusted_p": 1.0,
+          "seed": 22263018
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.063902765005376,
+          "forward_lag_samples": 10,
+          "forward_p": 0.13,
+          "forward_adjusted_p": 0.2,
+          "reverse_score": 0.03981181878784915,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.845,
+          "seed": 22263019
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.02560161710881758,
+          "forward_lag_samples": 6,
+          "forward_p": 0.96,
+          "forward_adjusted_p": 0.99,
+          "reverse_score": 0.038672538535982834,
+          "reverse_lag_samples": 6,
+          "reverse_adjusted_p": 0.875,
+          "seed": 22263020
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.06155125874310056,
+          "forward_lag_samples": 3,
+          "forward_p": 0.125,
+          "forward_adjusted_p": 0.275,
+          "reverse_score": 0.040420973189278085,
+          "reverse_lag_samples": 10,
+          "reverse_adjusted_p": 0.89,
+          "seed": 22263021
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.04690950873436244,
+          "forward_lag_samples": 12,
+          "forward_p": 0.43,
+          "forward_adjusted_p": 0.695,
+          "reverse_score": 0.050099452690462766,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.585,
+          "seed": 22263022
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.03617385669656713,
+          "forward_lag_samples": 1,
+          "forward_p": 0.68,
+          "forward_adjusted_p": 0.905,
+          "reverse_score": 0.034313956022012995,
+          "reverse_lag_samples": 8,
+          "reverse_adjusted_p": 0.935,
+          "seed": 22263023
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.02456431015176563,
+          "forward_lag_samples": 6,
+          "forward_p": 0.935,
+          "forward_adjusted_p": 1.0,
+          "reverse_score": 0.04854062512722989,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.62,
+          "seed": 22263024
+        }
+      ]
+    },
+    "long": {
+      "positive": [
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.276107737771851,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05199817502810863,
+          "reverse_lag_samples": 16,
+          "reverse_adjusted_p": 0.755,
+          "seed": 22261005
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.3210583550096493,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.04898298581739301,
+          "reverse_lag_samples": 8,
+          "reverse_adjusted_p": 0.9,
+          "seed": 22261006
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.3355891899403589,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.037391303589726144,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.995,
+          "seed": 22261007
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.31035097667670014,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05623010705104897,
+          "reverse_lag_samples": 8,
+          "reverse_adjusted_p": 0.545,
+          "seed": 22261008
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.3084833398760111,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.06750181986205746,
+          "reverse_lag_samples": 22,
+          "reverse_adjusted_p": 0.32,
+          "seed": 22261009
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.3196963725250761,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05035074001747501,
+          "reverse_lag_samples": 14,
+          "reverse_adjusted_p": 0.71,
+          "seed": 22261010
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.28295668253379885,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.045869787584425885,
+          "reverse_lag_samples": 22,
+          "reverse_adjusted_p": 0.89,
+          "seed": 22261011
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.2932815931881099,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05069236151079154,
+          "reverse_lag_samples": 2,
+          "reverse_adjusted_p": 0.84,
+          "seed": 22261012
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.31730565868332,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.06025499984483378,
+          "reverse_lag_samples": 18,
+          "reverse_adjusted_p": 0.62,
+          "seed": 22261013
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.3426656591230183,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.046370346716786165,
+          "reverse_lag_samples": 16,
+          "reverse_adjusted_p": 0.9,
+          "seed": 22261014
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.29122899359812426,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.0662088094975962,
+          "reverse_lag_samples": 24,
+          "reverse_adjusted_p": 0.295,
+          "seed": 22261015
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.2705835461130584,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05746106080490488,
+          "reverse_lag_samples": 16,
+          "reverse_adjusted_p": 0.675,
+          "seed": 22261016
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.3008149605751012,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.015,
+          "reverse_score": 0.029848527537202,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 1.0,
+          "seed": 22261017
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.2911606434730829,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.048760474638383025,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.895,
+          "seed": 22261018
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.3568650355424698,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.07108965765974361,
+          "reverse_lag_samples": 14,
+          "reverse_adjusted_p": 0.26,
+          "seed": 22261019
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.3001066594398228,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05299900496828238,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.72,
+          "seed": 22261020
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.2602026193949312,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.06440265385916483,
+          "reverse_lag_samples": 23,
+          "reverse_adjusted_p": 0.365,
+          "seed": 22261021
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.2742805972676324,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.06399901448518971,
+          "reverse_lag_samples": 11,
+          "reverse_adjusted_p": 0.46,
+          "seed": 22261022
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.29552056669932597,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.0395502513743864,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.995,
+          "seed": 22261023
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.2593899585478519,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.06309426797990647,
+          "reverse_lag_samples": 6,
+          "reverse_adjusted_p": 0.405,
+          "seed": 22261024
+        }
+      ],
+      "null": [
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.07487121966614178,
+          "forward_lag_samples": 18,
+          "forward_p": 0.05,
+          "forward_adjusted_p": 0.135,
+          "reverse_score": 0.06010351126856058,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.475,
+          "seed": 22262005
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.08276467819219385,
+          "forward_lag_samples": 19,
+          "forward_p": 0.045,
+          "forward_adjusted_p": 0.055,
+          "reverse_score": 0.07219342589393915,
+          "reverse_lag_samples": 7,
+          "reverse_adjusted_p": 0.145,
+          "seed": 22262006
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.049676003428620254,
+          "forward_lag_samples": 22,
+          "forward_p": 0.675,
+          "forward_adjusted_p": 0.865,
+          "reverse_score": 0.09175953387971754,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.05,
+          "seed": 22262007
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.060735836754671355,
+          "forward_lag_samples": 18,
+          "forward_p": 0.25,
+          "forward_adjusted_p": 0.44,
+          "reverse_score": 0.04540892000012584,
+          "reverse_lag_samples": 14,
+          "reverse_adjusted_p": 0.965,
+          "seed": 22262008
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.04865094420105445,
+          "forward_lag_samples": 5,
+          "forward_p": 0.7,
+          "forward_adjusted_p": 0.89,
+          "reverse_score": 0.05843382991829893,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.72,
+          "seed": 22262009
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.037112983522063686,
+          "forward_lag_samples": 21,
+          "forward_p": 0.925,
+          "forward_adjusted_p": 1.0,
+          "reverse_score": 0.051560079879847946,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.71,
+          "seed": 22262010
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.045154234911651374,
+          "forward_lag_samples": 20,
+          "forward_p": 0.745,
+          "forward_adjusted_p": 0.885,
+          "reverse_score": 0.08167363636005313,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.08,
+          "seed": 22262011
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.05236825143969603,
+          "forward_lag_samples": 14,
+          "forward_p": 0.405,
+          "forward_adjusted_p": 0.605,
+          "reverse_score": 0.05085950543572526,
+          "reverse_lag_samples": 17,
+          "reverse_adjusted_p": 0.655,
+          "seed": 22262012
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.050658763648663244,
+          "forward_lag_samples": 15,
+          "forward_p": 0.53,
+          "forward_adjusted_p": 0.755,
+          "reverse_score": 0.06959404291883993,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.215,
+          "seed": 22262013
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.047521949856295584,
+          "forward_lag_samples": 1,
+          "forward_p": 0.655,
+          "forward_adjusted_p": 0.895,
+          "reverse_score": 0.04877265019026741,
+          "reverse_lag_samples": 10,
+          "reverse_adjusted_p": 0.845,
+          "seed": 22262014
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.05113580711159043,
+          "forward_lag_samples": 19,
+          "forward_p": 0.53,
+          "forward_adjusted_p": 0.785,
+          "reverse_score": 0.06561331563972068,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.325,
+          "seed": 22262015
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.07120056246913949,
+          "forward_lag_samples": 16,
+          "forward_p": 0.09,
+          "forward_adjusted_p": 0.15,
+          "reverse_score": 0.050311089158402884,
+          "reverse_lag_samples": 16,
+          "reverse_adjusted_p": 0.79,
+          "seed": 22262016
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.06130508824505014,
+          "forward_lag_samples": 3,
+          "forward_p": 0.325,
+          "forward_adjusted_p": 0.53,
+          "reverse_score": 0.04045732763801412,
+          "reverse_lag_samples": 17,
+          "reverse_adjusted_p": 0.985,
+          "seed": 22262017
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.054827488517727375,
+          "forward_lag_samples": 14,
+          "forward_p": 0.37,
+          "forward_adjusted_p": 0.59,
+          "reverse_score": 0.054338025362659824,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.59,
+          "seed": 22262018
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.04084617226481883,
+          "forward_lag_samples": 21,
+          "forward_p": 0.83,
+          "forward_adjusted_p": 0.98,
+          "reverse_score": 0.039798411364013554,
+          "reverse_lag_samples": 16,
+          "reverse_adjusted_p": 0.99,
+          "seed": 22262019
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.053371671973038146,
+          "forward_lag_samples": 1,
+          "forward_p": 0.445,
+          "forward_adjusted_p": 0.69,
+          "reverse_score": 0.04816823153020791,
+          "reverse_lag_samples": 24,
+          "reverse_adjusted_p": 0.835,
+          "seed": 22262020
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.055739933559398915,
+          "forward_lag_samples": 18,
+          "forward_p": 0.415,
+          "forward_adjusted_p": 0.665,
+          "reverse_score": 0.07264274941988097,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.18,
+          "seed": 22262021
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.032700409508571886,
+          "forward_lag_samples": 11,
+          "forward_p": 0.975,
+          "forward_adjusted_p": 1.0,
+          "reverse_score": 0.0697479220735538,
+          "reverse_lag_samples": 13,
+          "reverse_adjusted_p": 0.26,
+          "seed": 22262022
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.050488836772276016,
+          "forward_lag_samples": 22,
+          "forward_p": 0.62,
+          "forward_adjusted_p": 0.815,
+          "reverse_score": 0.07443453542876477,
+          "reverse_lag_samples": 9,
+          "reverse_adjusted_p": 0.18,
+          "seed": 22262023
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.047701591073566994,
+          "forward_lag_samples": 21,
+          "forward_p": 0.6,
+          "forward_adjusted_p": 0.87,
+          "reverse_score": 0.048368784497863526,
+          "reverse_lag_samples": 18,
+          "reverse_adjusted_p": 0.855,
+          "seed": 22262024
+        }
+      ],
+      "long_lag": [
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.2801660774566797,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.02911355642812668,
+          "reverse_lag_samples": 2,
+          "reverse_adjusted_p": 1.0,
+          "seed": 22263005
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.3074207248151761,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.04529514825462209,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.94,
+          "seed": 22263006
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.30080957975461176,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.03332006476741484,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 1.0,
+          "seed": 22263007
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.2717165029834823,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.04981280105320363,
+          "reverse_lag_samples": 3,
+          "reverse_adjusted_p": 0.83,
+          "seed": 22263008
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.2887695106549569,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.03,
+          "reverse_score": 0.039157383855720505,
+          "reverse_lag_samples": 24,
+          "reverse_adjusted_p": 0.98,
+          "seed": 22263009
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.2960069394582391,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.015,
+          "reverse_score": 0.052137198538342235,
+          "reverse_lag_samples": 15,
+          "reverse_adjusted_p": 0.725,
+          "seed": 22263010
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.32345238098443657,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.07487446689487111,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.245,
+          "seed": 22263011
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.2384733770971129,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.04158528207829286,
+          "reverse_lag_samples": 15,
+          "reverse_adjusted_p": 0.995,
+          "seed": 22263012
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.3250017250556711,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.03209752877873764,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 1.0,
+          "seed": 22263013
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.3199397756994983,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.040690900920274116,
+          "reverse_lag_samples": 22,
+          "reverse_adjusted_p": 0.95,
+          "seed": 22263014
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.32950533880350097,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.06513360928524782,
+          "reverse_lag_samples": 13,
+          "reverse_adjusted_p": 0.31,
+          "seed": 22263015
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.3104937971660497,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05442052840140997,
+          "reverse_lag_samples": 23,
+          "reverse_adjusted_p": 0.685,
+          "seed": 22263016
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.30516217209083135,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.04342143116963677,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.915,
+          "seed": 22263017
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.30318071391334733,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.07027616996483926,
+          "reverse_lag_samples": 21,
+          "reverse_adjusted_p": 0.29,
+          "seed": 22263018
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.2647341775989449,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05281984181898348,
+          "reverse_lag_samples": 19,
+          "reverse_adjusted_p": 0.705,
+          "seed": 22263019
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.23588577217115614,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05773544590029295,
+          "reverse_lag_samples": 20,
+          "reverse_adjusted_p": 0.57,
+          "seed": 22263020
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.304267662522714,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.04976980745652512,
+          "reverse_lag_samples": 21,
+          "reverse_adjusted_p": 0.885,
+          "seed": 22263021
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.3561735524711236,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.050099452690462766,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.845,
+          "seed": 22263022
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.28215366905415695,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.0724072591365393,
+          "reverse_lag_samples": 18,
+          "reverse_adjusted_p": 0.115,
+          "seed": 22263023
+        },
+        {
+          "max_lag_samples": 24,
+          "forward_score": 0.30454475610131126,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.058836086356242046,
+          "reverse_lag_samples": 16,
+          "reverse_adjusted_p": 0.565,
+          "seed": 22263024
+        }
+      ]
+    },
+    "resonant": {
+      "positive": [
+        {
+          "max_lag_samples": 11,
+          "forward_score": 0.276107737771851,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.0321343063279649,
+          "reverse_lag_samples": 7,
+          "reverse_adjusted_p": 0.96,
+          "seed": 22261005
+        },
+        {
+          "max_lag_samples": 23,
+          "forward_score": 0.3210583550096493,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.04898298581739301,
+          "reverse_lag_samples": 8,
+          "reverse_adjusted_p": 0.895,
+          "seed": 22261006
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.3355891899403589,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.037391303589726144,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 1.0,
+          "seed": 22261007
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.31035097667670014,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05623010705104897,
+          "reverse_lag_samples": 8,
+          "reverse_adjusted_p": 0.68,
+          "seed": 22261008
+        },
+        {
+          "max_lag_samples": 20,
+          "forward_score": 0.3084833398760111,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.039751660787221,
+          "reverse_lag_samples": 20,
+          "reverse_adjusted_p": 0.955,
+          "seed": 22261009
+        },
+        {
+          "max_lag_samples": 20,
+          "forward_score": 0.3196963725250761,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05035074001747501,
+          "reverse_lag_samples": 14,
+          "reverse_adjusted_p": 0.67,
+          "seed": 22261010
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.28295668253379885,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.045869787584425885,
+          "reverse_lag_samples": 22,
+          "reverse_adjusted_p": 0.925,
+          "seed": 22261011
+        },
+        {
+          "max_lag_samples": 20,
+          "forward_score": 0.2932815931881099,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05069236151079154,
+          "reverse_lag_samples": 2,
+          "reverse_adjusted_p": 0.77,
+          "seed": 22261012
+        },
+        {
+          "max_lag_samples": 11,
+          "forward_score": 0.31730565868332,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.0359435324610018,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.925,
+          "seed": 22261013
+        },
+        {
+          "max_lag_samples": 9,
+          "forward_score": 0.3426656591230183,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.032236052921953265,
+          "reverse_lag_samples": 9,
+          "reverse_adjusted_p": 0.935,
+          "seed": 22261014
+        },
+        {
+          "max_lag_samples": 27,
+          "forward_score": 0.29122899359812426,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.0662088094975962,
+          "reverse_lag_samples": 24,
+          "reverse_adjusted_p": 0.32,
+          "seed": 22261015
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.2705835461130584,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05746106080490488,
+          "reverse_lag_samples": 16,
+          "reverse_adjusted_p": 0.78,
+          "seed": 22261016
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.3008149605751012,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.015,
+          "reverse_score": 0.03857956155824794,
+          "reverse_lag_samples": 27,
+          "reverse_adjusted_p": 0.975,
+          "seed": 22261017
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.2911606434730829,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.048760474638383025,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.96,
+          "seed": 22261018
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.3568650355424698,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.07108965765974361,
+          "reverse_lag_samples": 14,
+          "reverse_adjusted_p": 0.335,
+          "seed": 22261019
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.3001066594398228,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05299900496828238,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.805,
+          "seed": 22261020
+        },
+        {
+          "max_lag_samples": 23,
+          "forward_score": 0.2602026193949312,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.06440265385916483,
+          "reverse_lag_samples": 23,
+          "reverse_adjusted_p": 0.345,
+          "seed": 22261021
+        },
+        {
+          "max_lag_samples": 14,
+          "forward_score": 0.2742805972676324,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.06399901448518971,
+          "reverse_lag_samples": 11,
+          "reverse_adjusted_p": 0.335,
+          "seed": 22261022
+        },
+        {
+          "max_lag_samples": 17,
+          "forward_score": 0.29552056669932597,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.01,
+          "reverse_score": 0.0395502513743864,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.945,
+          "seed": 22261023
+        },
+        {
+          "max_lag_samples": 23,
+          "forward_score": 0.2593899585478519,
+          "forward_lag_samples": 4,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.06309426797990647,
+          "reverse_lag_samples": 6,
+          "reverse_adjusted_p": 0.4,
+          "seed": 22261024
+        }
+      ],
+      "null": [
+        {
+          "max_lag_samples": 14,
+          "forward_score": 0.03767286958930039,
+          "forward_lag_samples": 12,
+          "forward_p": 0.74,
+          "forward_adjusted_p": 0.99,
+          "reverse_score": 0.06010351126856058,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.34,
+          "seed": 22262005
+        },
+        {
+          "max_lag_samples": 23,
+          "forward_score": 0.08276467819219385,
+          "forward_lag_samples": 19,
+          "forward_p": 0.04,
+          "forward_adjusted_p": 0.05,
+          "reverse_score": 0.07219342589393915,
+          "reverse_lag_samples": 7,
+          "reverse_adjusted_p": 0.13,
+          "seed": 22262006
+        },
+        {
+          "max_lag_samples": 17,
+          "forward_score": 0.03858018265197301,
+          "forward_lag_samples": 4,
+          "forward_p": 0.75,
+          "forward_adjusted_p": 0.945,
+          "reverse_score": 0.09175953387971754,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.03,
+          "seed": 22262007
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.038100538967547684,
+          "forward_lag_samples": 1,
+          "forward_p": 0.71,
+          "forward_adjusted_p": 0.905,
+          "reverse_score": 0.03662222836118157,
+          "reverse_lag_samples": 8,
+          "reverse_adjusted_p": 0.92,
+          "seed": 22262008
+        },
+        {
+          "max_lag_samples": 7,
+          "forward_score": 0.04865094420105445,
+          "forward_lag_samples": 5,
+          "forward_p": 0.325,
+          "forward_adjusted_p": 0.53,
+          "reverse_score": 0.05214470626619106,
+          "reverse_lag_samples": 6,
+          "reverse_adjusted_p": 0.485,
+          "seed": 22262009
+        },
+        {
+          "max_lag_samples": 10,
+          "forward_score": 0.03236474541142847,
+          "forward_lag_samples": 1,
+          "forward_p": 0.67,
+          "forward_adjusted_p": 0.875,
+          "reverse_score": 0.051560079879847946,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.395,
+          "seed": 22262010
+        },
+        {
+          "max_lag_samples": 8,
+          "forward_score": 0.0424766772031473,
+          "forward_lag_samples": 1,
+          "forward_p": 0.41,
+          "forward_adjusted_p": 0.66,
+          "reverse_score": 0.08167363636005313,
+          "reverse_lag_samples": 5,
+          "reverse_adjusted_p": 0.025,
+          "seed": 22262011
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.05493778031026658,
+          "forward_lag_samples": 32,
+          "forward_p": 0.42,
+          "forward_adjusted_p": 0.605,
+          "reverse_score": 0.05085950543572526,
+          "reverse_lag_samples": 17,
+          "reverse_adjusted_p": 0.775,
+          "seed": 22262012
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.050658763648663244,
+          "forward_lag_samples": 15,
+          "forward_p": 0.635,
+          "forward_adjusted_p": 0.815,
+          "reverse_score": 0.06959404291883993,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.25,
+          "seed": 22262013
+        },
+        {
+          "max_lag_samples": 16,
+          "forward_score": 0.047521949856295584,
+          "forward_lag_samples": 1,
+          "forward_p": 0.535,
+          "forward_adjusted_p": 0.775,
+          "reverse_score": 0.04877265019026741,
+          "reverse_lag_samples": 10,
+          "reverse_adjusted_p": 0.745,
+          "seed": 22262014
+        },
+        {
+          "max_lag_samples": 27,
+          "forward_score": 0.05113580711159043,
+          "forward_lag_samples": 19,
+          "forward_p": 0.57,
+          "forward_adjusted_p": 0.81,
+          "reverse_score": 0.06561331563972068,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.34,
+          "seed": 22262015
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.07120056246913949,
+          "forward_lag_samples": 16,
+          "forward_p": 0.125,
+          "forward_adjusted_p": 0.25,
+          "reverse_score": 0.050311089158402884,
+          "reverse_lag_samples": 16,
+          "reverse_adjusted_p": 0.93,
+          "seed": 22262016
+        },
+        {
+          "max_lag_samples": 14,
+          "forward_score": 0.06130508824505014,
+          "forward_lag_samples": 3,
+          "forward_p": 0.155,
+          "forward_adjusted_p": 0.31,
+          "reverse_score": 0.034462467247670395,
+          "reverse_lag_samples": 7,
+          "reverse_adjusted_p": 0.965,
+          "seed": 22262017
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.054827488517727375,
+          "forward_lag_samples": 14,
+          "forward_p": 0.44,
+          "forward_adjusted_p": 0.67,
+          "reverse_score": 0.054338025362659824,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.67,
+          "seed": 22262018
+        },
+        {
+          "max_lag_samples": 20,
+          "forward_score": 0.03018937171260563,
+          "forward_lag_samples": 11,
+          "forward_p": 0.97,
+          "forward_adjusted_p": 1.0,
+          "reverse_score": 0.039798411364013554,
+          "reverse_lag_samples": 16,
+          "reverse_adjusted_p": 0.97,
+          "seed": 22262019
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.053371671973038146,
+          "forward_lag_samples": 1,
+          "forward_p": 0.535,
+          "forward_adjusted_p": 0.775,
+          "reverse_score": 0.04816823153020791,
+          "reverse_lag_samples": 24,
+          "reverse_adjusted_p": 0.895,
+          "seed": 22262020
+        },
+        {
+          "max_lag_samples": 16,
+          "forward_score": 0.05404592730702653,
+          "forward_lag_samples": 10,
+          "forward_p": 0.36,
+          "forward_adjusted_p": 0.55,
+          "reverse_score": 0.07264274941988097,
+          "reverse_lag_samples": 4,
+          "reverse_adjusted_p": 0.14,
+          "seed": 22262021
+        },
+        {
+          "max_lag_samples": 12,
+          "forward_score": 0.032700409508571886,
+          "forward_lag_samples": 11,
+          "forward_p": 0.85,
+          "forward_adjusted_p": 0.945,
+          "reverse_score": 0.0596472933047716,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.22,
+          "seed": 22262022
+        },
+        {
+          "max_lag_samples": 23,
+          "forward_score": 0.050488836772276016,
+          "forward_lag_samples": 22,
+          "forward_p": 0.605,
+          "forward_adjusted_p": 0.795,
+          "reverse_score": 0.07443453542876477,
+          "reverse_lag_samples": 9,
+          "reverse_adjusted_p": 0.175,
+          "seed": 22262023
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.05013317453435723,
+          "forward_lag_samples": 31,
+          "forward_p": 0.685,
+          "forward_adjusted_p": 0.92,
+          "reverse_score": 0.048368784497863526,
+          "reverse_lag_samples": 18,
+          "reverse_adjusted_p": 0.955,
+          "seed": 22262024
+        }
+      ],
+      "long_lag": [
+        {
+          "max_lag_samples": 17,
+          "forward_score": 0.13672520932015383,
+          "forward_lag_samples": 17,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.02911355642812668,
+          "reverse_lag_samples": 2,
+          "reverse_adjusted_p": 1.0,
+          "seed": 22263005
+        },
+        {
+          "max_lag_samples": 16,
+          "forward_score": 0.11169963344963887,
+          "forward_lag_samples": 16,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.01,
+          "reverse_score": 0.04529514825462209,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.865,
+          "seed": 22263006
+        },
+        {
+          "max_lag_samples": 13,
+          "forward_score": 0.02872197143019153,
+          "forward_lag_samples": 9,
+          "forward_p": 0.89,
+          "forward_adjusted_p": 0.99,
+          "reverse_score": 0.03332006476741484,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.965,
+          "seed": 22263007
+        },
+        {
+          "max_lag_samples": 16,
+          "forward_score": 0.02894199360702214,
+          "forward_lag_samples": 16,
+          "forward_p": 0.965,
+          "forward_adjusted_p": 1.0,
+          "reverse_score": 0.04981280105320363,
+          "reverse_lag_samples": 3,
+          "reverse_adjusted_p": 0.68,
+          "seed": 22263008
+        },
+        {
+          "max_lag_samples": 27,
+          "forward_score": 0.2887695106549569,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.025,
+          "reverse_score": 0.04042089121057864,
+          "reverse_lag_samples": 25,
+          "reverse_adjusted_p": 0.99,
+          "seed": 22263009
+        },
+        {
+          "max_lag_samples": 17,
+          "forward_score": 0.15546263363619867,
+          "forward_lag_samples": 17,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.015,
+          "reverse_score": 0.052137198538342235,
+          "reverse_lag_samples": 15,
+          "reverse_adjusted_p": 0.645,
+          "seed": 22263010
+        },
+        {
+          "max_lag_samples": 11,
+          "forward_score": 0.04728973641887168,
+          "forward_lag_samples": 4,
+          "forward_p": 0.445,
+          "forward_adjusted_p": 0.685,
+          "reverse_score": 0.07487446689487111,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.15,
+          "seed": 22263011
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.2384733770971129,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.04158528207829286,
+          "reverse_lag_samples": 15,
+          "reverse_adjusted_p": 1.0,
+          "seed": 22263012
+        },
+        {
+          "max_lag_samples": 23,
+          "forward_score": 0.3250017250556711,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.03209752877873764,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 1.0,
+          "seed": 22263013
+        },
+        {
+          "max_lag_samples": 20,
+          "forward_score": 0.3199397756994983,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.027277468858675522,
+          "reverse_lag_samples": 9,
+          "reverse_adjusted_p": 1.0,
+          "seed": 22263014
+        },
+        {
+          "max_lag_samples": 27,
+          "forward_score": 0.32950533880350097,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.06513360928524782,
+          "reverse_lag_samples": 13,
+          "reverse_adjusted_p": 0.35,
+          "seed": 22263015
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.3104937971660497,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05442052840140997,
+          "reverse_lag_samples": 23,
+          "reverse_adjusted_p": 0.815,
+          "seed": 22263016
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.30516217209083135,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.01,
+          "reverse_score": 0.04342143116963677,
+          "reverse_lag_samples": 1,
+          "reverse_adjusted_p": 0.95,
+          "seed": 22263017
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.30318071391334733,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.07027616996483926,
+          "reverse_lag_samples": 21,
+          "reverse_adjusted_p": 0.335,
+          "seed": 22263018
+        },
+        {
+          "max_lag_samples": 17,
+          "forward_score": 0.14185679613712704,
+          "forward_lag_samples": 17,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.01,
+          "reverse_score": 0.03981181878784915,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.895,
+          "seed": 22263019
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.23588577217115614,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.05773544590029295,
+          "reverse_lag_samples": 20,
+          "reverse_adjusted_p": 0.665,
+          "seed": 22263020
+        },
+        {
+          "max_lag_samples": 17,
+          "forward_score": 0.15136654424641735,
+          "forward_lag_samples": 17,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.040420973189278085,
+          "reverse_lag_samples": 10,
+          "reverse_adjusted_p": 0.945,
+          "seed": 22263021
+        },
+        {
+          "max_lag_samples": 17,
+          "forward_score": 0.1961376493103608,
+          "forward_lag_samples": 17,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.015,
+          "reverse_score": 0.050099452690462766,
+          "reverse_lag_samples": 12,
+          "reverse_adjusted_p": 0.715,
+          "seed": 22263022
+        },
+        {
+          "max_lag_samples": 11,
+          "forward_score": 0.03617385669656713,
+          "forward_lag_samples": 1,
+          "forward_p": 0.645,
+          "forward_adjusted_p": 0.875,
+          "reverse_score": 0.034313956022012995,
+          "reverse_lag_samples": 8,
+          "reverse_adjusted_p": 0.915,
+          "seed": 22263023
+        },
+        {
+          "max_lag_samples": 32,
+          "forward_score": 0.30454475610131126,
+          "forward_lag_samples": 18,
+          "forward_p": 0.005,
+          "forward_adjusted_p": 0.005,
+          "reverse_score": 0.058836086356242046,
+          "reverse_lag_samples": 16,
+          "reverse_adjusted_p": 0.665,
+          "seed": 22263024
+        }
+      ]
+    }
+  },
+  "measurements": {
+    "windows_analyzed": 20,
+    "slow_windows": 5,
+    "slow_subjects": 5,
+    "normal_windows": 15,
+    "normal_subjects": 15,
+    "window_detection_rate_short": 0.9,
+    "mismatched_detection_rate_short": 0.05,
+    "slow_detection_rate_short": 0.6,
+    "mismatched_slow_detection_rate_short": 0.0,
+    "slow_median_lag_s_short": 0.25,
+    "normal_detection_rate_short": 1.0,
+    "mismatched_normal_detection_rate_short": 0.06666666666666667,
+    "normal_median_lag_s_short": 0.5,
+    "synthetic_positive_detection_rate_short": 1.0,
+    "synthetic_null_false_positive_rate_short": 0.0,
+    "synthetic_long_lag_detection_rate_short": 0.0,
+    "window_detection_rate_long": 0.9,
+    "mismatched_detection_rate_long": 0.2,
+    "slow_detection_rate_long": 0.6,
+    "mismatched_slow_detection_rate_long": 0.2,
+    "slow_median_lag_s_long": 0.25,
+    "normal_detection_rate_long": 1.0,
+    "mismatched_normal_detection_rate_long": 0.2,
+    "normal_median_lag_s_long": 0.5,
+    "synthetic_positive_detection_rate_long": 1.0,
+    "synthetic_null_false_positive_rate_long": 0.0,
+    "synthetic_long_lag_detection_rate_long": 1.0,
+    "window_detection_rate_resonant": 0.9,
+    "mismatched_detection_rate_resonant": 0.05,
+    "slow_detection_rate_resonant": 0.6,
+    "mismatched_slow_detection_rate_resonant": 0.2,
+    "slow_median_lag_s_resonant": 0.25,
+    "normal_detection_rate_resonant": 1.0,
+    "mismatched_normal_detection_rate_resonant": 0.0,
+    "normal_median_lag_s_resonant": 0.5,
+    "synthetic_positive_detection_rate_resonant": 1.0,
+    "synthetic_null_false_positive_rate_resonant": 0.05,
+    "synthetic_long_lag_detection_rate_resonant": 0.8,
+    "slow_gain_long_vs_short": 0.0,
+    "normal_change_long_vs_short": 0.0,
+    "slow_resonant_vs_long": 0.0,
+    "normal_resonant_vs_short": 0.0
+  }
+}

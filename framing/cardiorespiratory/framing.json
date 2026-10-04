@@ -1,0 +1,32 @@
+{
+  "schema": "rain-pipeline-framing/v1",
+  "experiment_id": "V3D-EXP-0001",
+  "spec": "specs/cardiorespiratory.json",
+  "registered_at": "2026-10-04T14:59:41.703Z",
+  "definition_sha256": "8c4991a52141c959f52e30d2be615a85f89c47e386fbe61b9c89b78192346c28",
+  "binding": {},
+  "holdout_ranges": [],
+  "files": [
+    {
+      "name": "anna_record.json",
+      "sha256": "c37ad44ea9b157ff64d9f7e8704ac87c87feb09bf709dfd1d46729bd172fe1d2",
+      "bytes": 24324
+    },
+    {
+      "name": "anna_verification.json",
+      "sha256": "77e16b7dd07a11bb85f7559b225fa8743c87ceb132dfb904962297de68d34fd4",
+      "bytes": 1634
+    },
+    {
+      "name": "panel_meeting.md",
+      "sha256": "b83d04d00f7b0c19b96e2cd83927884709974c5acf53994bf8da40e60031f045",
+      "bytes": 4232
+    },
+    {
+      "name": "panel_summary.json",
+      "sha256": "607780802d86bd7c1ddf628bce0c48eebd600b239ca08216763be003c69cf4d8",
+      "bytes": 5093
+    }
+  ],
+  "note": "V3D-EXP-0001 was framed and run in one step, before the explore/register/run protocol existed. These files are byte-for-byte copies from runs/20261004T150406Z; its registration binds no framing hashes."
+}
