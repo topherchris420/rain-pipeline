@@ -51,6 +51,7 @@ Evidence levels follow mechanically from `python -m rain_pipeline verify` ([how]
 |---|---|---|---|---|
 | V3D-EXP-0001-RUN-0001 | [2026-10-04, Python 3.11.15, numpy 2.4.6, scipy 1.17.1](replays/V3D-EXP-0001/RUN-0001-20261004T200834Z.json) | `measurements-reproduced` | 11 of 11 identical, same verdict | 7.3e-15 |
 | V3D-EXP-0002-RUN-0001 | [2026-10-04, Python 3.11.15, numpy 2.4.6, scipy 1.17.1](replays/V3D-EXP-0002/RUN-0001-20261004T201606Z.json) | `measurements-reproduced` | 24 of 24 identical, same verdict | 7.9e-15 |
+| V3D-EXP-0003-RUN-0001 | [2026-10-04, Python 3.11.15, numpy 2.4.6, scipy 1.17.1](replays/V3D-EXP-0003/RUN-0001-20261004T202718Z.json) | `measurements-reproduced` | 24 of 24 identical, same verdict | 7.9e-15 |
 
 ![V3D-EXP-0003: detection by breathing stratum and frequency, for three lag windows](runs/20261004T181106Z/figure.png)
 
