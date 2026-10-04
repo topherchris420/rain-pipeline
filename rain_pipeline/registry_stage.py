@@ -261,6 +261,7 @@ def record_divergence(record: dict[str, Any], submission: dict[str, Any]) -> lis
     R.A.I.N. builds the record from the submission (redacting secret-like
     strings) but never compares them again; this does, field by field.
     """
+    vendor.ensure_importable()
     from james_library.experiments.provenance import redact
 
     expected = {

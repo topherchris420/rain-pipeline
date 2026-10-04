@@ -1,0 +1,457 @@
+{
+  "schema": "rain-pipeline-replay-receipt/v1",
+  "replayed_at": "2026-10-04T20:07:13.139Z",
+  "replayed": {
+    "experiment_id": "V3D-EXP-0001",
+    "run_id": "V3D-EXP-0001-RUN-0001",
+    "result_sha256": "8103083e4304201d4ba4f12401445a5459db8b87c1125ee85ea465e6a4e3f39c",
+    "definition_sha256": "8c4991a52141c959f52e30d2be615a85f89c47e386fbe61b9c89b78192346c28",
+    "submission_sha256": "0a47dfed45048f7bea0a5af254ba5d639e40e2d447b5c2ec795b9ab48b838a2e"
+  },
+  "environment": {
+    "python": "3.11.15",
+    "implementation": "CPython",
+    "platform": "Linux-6.18.44-fc-v64-x86_64-with-glibc2.39",
+    "packages": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "drr-framework": "4.3.0",
+      "matplotlib": "3.11.2",
+      "jsonschema": "4.26.0",
+      "pgserver": "0.1.4"
+    }
+  },
+  "code": {
+    "pipeline": {
+      "version": "0.3.0",
+      "source_sha256": "756d3c558db3d7c8278df83157d46302d6a7939e9010b74335a8cff54bc19df9",
+      "files": {
+        "__init__.py": "a29db826545981e227f88a5534ac814611f3c4b0dd476539cbbf78c91982c853",
+        "__main__.py": "245c3f752f34b6e25683d77eb7e57c107d1252ded4028eea5f7f2dd32ba738ec",
+        "anna_stage.py": "7f1ef961d51e190dbdae0a914086a0f646505617a6d60504930cbbad4ee396c7",
+        "drr_stage.py": "9196ebd8a3c233f5c63c4124e3d1664be4a65c36164ad641a0e83e56be2aa6ea",
+        "errors.py": "bad50caa911e21a3121be128b504a54202717e3cd4de965ca6c14ec7cff8ea6f",
+        "evidence.py": "00b4a2efd662b5a2330e3efc96846eef27b0d40e51bd641f7c403bc992324d14",
+        "figures.py": "31ecff0b03fdd785f69ac1b1415e69c3cd37e66fef08ccde3c2b35946b81e269",
+        "layout.py": "e63bed791e4adf33172abf157ea7779510a2d1c2be35807882217bf052d4c6ff",
+        "ledger.py": "7f84afa0ff291160a22d1eca7f45add4628e0b09d474ee6a9708d4acb4eaa5e7",
+        "panel_stage.py": "27832765b266f5269fbab6079113c2de030536ab5bfc36c6f7b94d8d16a4e98c",
+        "physio.py": "0c70c3544efcf823e168b4115b254a0ac6e989b018aabf6b11a6cf1c687ee0c3",
+        "pipeline.py": "896ee95bafd94df44a830489e255ea298ab78ede9ebf618cd031889dcaa9296c",
+        "provenance.py": "800346a6e80061dc4df8b41b18f3c93d8f3bd51867f813e1a4d23ad47b567126",
+        "registry_stage.py": "fcacbc24cc9f31fead6e0c8675c664c538e5715ae78486d2e0a04464c4f5f829",
+        "replay.py": "7772cb2ce26dbfa82a98ab14c37d2bf9254e135c0b5dbd83654d9a97ccc9803a",
+        "spec.py": "1c5402f195549bf82816d9e81a1d26619b52b42d11ea6fd18c9b9030abd0ba4a",
+        "vendor.py": "24011ede37182c770368f1dc53b91586c80cff068cfece7eff48eb76d07d0afe"
+      },
+      "git": {
+        "commit": "e13e3b655497e20ebfd198442673d9b4d9a2f5f2",
+        "branch": "claude/practical-gauss-3cjvr6",
+        "dirty": false
+      }
+    },
+    "vendored": {
+      "anna": {
+        "repository": "topherchris420/anna",
+        "commit": "064af912028be740900cc7dd090c4c5bc13cdf9a",
+        "branch": "HEAD",
+        "dirty": false,
+        "pinned": "064af912028be740900cc7dd090c4c5bc13cdf9a"
+      },
+      "rain": {
+        "repository": "topherchris420/james_library",
+        "commit": "9c8811e343d21b8c143055f9cf549abdefa862f1",
+        "branch": "HEAD",
+        "dirty": false,
+        "pinned": "9c8811e343d21b8c143055f9cf549abdefa862f1"
+      },
+      "drr": {
+        "repository": "topherchris420/dynamic-resonance-rooting",
+        "commit": "862c4f75e6092e3314eb786adcb9fa2a7ee3e779",
+        "branch": "HEAD",
+        "dirty": false,
+        "pinned": "862c4f75e6092e3314eb786adcb9fa2a7ee3e779"
+      }
+    }
+  },
+  "recorded_code": {
+    "pipeline": {
+      "source_sha256": "441b05c1c6da4aefd62df712108fd0bedb378710214280bd5bda1692639a9427",
+      "version": "0.1.0"
+    },
+    "vendored": {
+      "anna": {
+        "branch": "main",
+        "commit": "064af912028be740900cc7dd090c4c5bc13cdf9a",
+        "dirty": false,
+        "repository": "topherchris420/anna"
+      },
+      "drr": {
+        "branch": "main",
+        "commit": "862c4f75e6092e3314eb786adcb9fa2a7ee3e779",
+        "dirty": false,
+        "repository": "topherchris420/dynamic-resonance-rooting"
+      },
+      "rain": {
+        "branch": "main",
+        "commit": "9c8811e343d21b8c143055f9cf549abdefa862f1",
+        "dirty": false,
+        "repository": "topherchris420/james_library"
+      }
+    }
+  },
+  "data": [
+    {
+      "record": "f1y01",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y01.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "e8312f30c9881f899b46f469532a0721dc3e6cf55d95ab7401d35a88b923c3d3",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f1y02",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y02.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "0197fc4de9b68e476b11f240aae78e81e654b7581844467d05cf6080d35d9a99",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f1y03",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y03.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "56c5cb9e9ca709c613046ad8d47e421e264bff2deaff191df4650d0c58ed5bb3",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f1y04",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y04.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "815f72aa0a1bdd2756af793931cb9380f1705df4cc8000775706b5131e4dc85f",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f1y05",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y05.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "2baaf977ba1d9c6a4ff56ce6b8bc86a5d9fc95dfdfd1c7c20533d10490eac907",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f1y06",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y06.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "468625ed63c13be96c04c21b059f54d0a25e3c6911a1fa9f59ca3d3d8c69c30b",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f1y07",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y07.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "9c66f7b7e24e467b9cf476679aef9385afdf3ecba74509e51d6147e14b1b0d29",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f1y08",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y08.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "9cae3f5344ef9693aacb2cde682d5560cf42071b5656dc52cf4ef64123ba1624",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f1y09",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y09.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "1c1d38fe1e823117a5eb1d69206131727e1297923a9be7aa9bf0710ba282b429",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f1y10",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y10.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "9bc47293ecd45a2c49a99a89e5037f47a575fc66123c2c6d422b9d7c6f2825ff",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f2y01",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y01.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "77a77de3f351b268dd9f94e629c31970e576668207fb4acea318b4b769d78e03",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f2y02",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y02.dat",
+      "byte_range": [
+        89910,
+        989009
+      ],
+      "sha256": "88e895c3fce5fcfbf3a3c658e0f6ae7bd2b7696b20f3c452a34300b91e40d52c",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f2y03",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y03.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "95c8f5adb7f3eed892c424faada81828b5bf32fb0c94247eac360ff17fe1e7bd",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f2y04",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y04.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "c23919ad2931dbb66c37e69b840ca85891060e9deea60a27e9c11968704353fe",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f2y05",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y05.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "158c5fbbbce6827634fcc32f0ecc0f62a0ec73f821c2b82b760f1600a1017899",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f2y06",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y06.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "df40f57af0de9be5de4dfe11d4274de905119487f509c8c6d8d156f520bc716a",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f2y07",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y07.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "8d7d12a07d926fd4d76aa2b191e140f032bec9c6bd35bc6331cf27832e07cf60",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f2y08",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y08.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "0a8b44b844451f362095ad85f8597e023752162b742bd8f70d67f2351adcbae5",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f2y09",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y09.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "b75113c2c5235cb4bd7aa145788c21c0be18e0cb473ddebed45d54b9e3776212",
+      "matches_ledger": true,
+      "matches_run": true
+    },
+    {
+      "record": "f2y10",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y10.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "0297aeaf5ac215952317421fbc802085f25aab09b5e7b029eb03bb158a849ffd",
+      "matches_ledger": true,
+      "matches_run": true
+    }
+  ],
+  "comparison": {
+    "measurements": {
+      "records_analyzed": {
+        "recorded": 20,
+        "replayed": 20,
+        "identical": true,
+        "difference": 0
+      },
+      "coupling_detection_rate": {
+        "recorded": 0.9,
+        "replayed": 0.9,
+        "identical": true,
+        "difference": 0.0
+      },
+      "mismatched_detection_rate": {
+        "recorded": 0.05,
+        "replayed": 0.05,
+        "identical": true,
+        "difference": 0.0
+      },
+      "detection_rate_gap": {
+        "recorded": 0.85,
+        "replayed": 0.85,
+        "identical": true,
+        "difference": 0.0
+      },
+      "positive_control_detection_rate": {
+        "recorded": 1.0,
+        "replayed": 1.0,
+        "identical": true,
+        "difference": 0.0
+      },
+      "synthetic_null_false_positive_rate": {
+        "recorded": 0.05,
+        "replayed": 0.05,
+        "identical": true,
+        "difference": 0.0
+      },
+      "reverse_detection_rate": {
+        "recorded": 0.9,
+        "replayed": 0.9,
+        "identical": true,
+        "difference": 0.0
+      },
+      "median_coupling_lag_s": {
+        "recorded": 0.5,
+        "replayed": 0.5,
+        "identical": true,
+        "difference": 0.0
+      },
+      "spectral_peak_agreement_rate": {
+        "recorded": 0.2,
+        "replayed": 0.2,
+        "identical": true,
+        "difference": 0.0
+      },
+      "median_respiratory_frequency_hz": {
+        "recorded": 0.2734375,
+        "replayed": 0.2734375,
+        "identical": true,
+        "difference": 0.0
+      },
+      "median_heart_rate_bpm": {
+        "recorded": 62.83499506042062,
+        "replayed": 62.83499506042062,
+        "identical": true,
+        "difference": 0.0
+      }
+    },
+    "series": {
+      "coupling_adjusted_p": {
+        "recorded_n": 20,
+        "replayed_n": 20,
+        "identical": true,
+        "max_abs_difference": 0.0
+      },
+      "coupling_lag_s": {
+        "recorded_n": 20,
+        "replayed_n": 20,
+        "identical": true,
+        "max_abs_difference": 0.0
+      },
+      "coupling_score": {
+        "recorded_n": 20,
+        "replayed_n": 20,
+        "identical": false,
+        "max_abs_difference": 2.9976021664879227e-15
+      },
+      "mismatched_adjusted_p": {
+        "recorded_n": 20,
+        "replayed_n": 20,
+        "identical": true,
+        "max_abs_difference": 0.0
+      },
+      "mismatched_score": {
+        "recorded_n": 20,
+        "replayed_n": 20,
+        "identical": false,
+        "max_abs_difference": 3.469446951953614e-16
+      }
+    },
+    "report": {
+      "identical": false,
+      "differing_values": 151,
+      "first_differences": [
+        "/mismatched_pairs/0/forward_score",
+        "/mismatched_pairs/0/reverse_score",
+        "/mismatched_pairs/1/forward_score",
+        "/mismatched_pairs/1/reverse_score",
+        "/mismatched_pairs/2/reverse_score",
+        "/mismatched_pairs/3/forward_score",
+        "/mismatched_pairs/3/reverse_score",
+        "/mismatched_pairs/4/forward_score",
+        "/mismatched_pairs/4/reverse_score",
+        "/mismatched_pairs/5/forward_score"
+      ],
+      "max_abs_difference": 7.327471962526033e-15,
+      "recorded_sha256": "dd9c632498c7c510a59d5f09c2bb6cfc6fa5e076c484b2d9499b71fa4f8a584f",
+      "replayed_sha256": "f4e203195feb7d19760e2519385fbf368ad05e3da7c170286c7fd90850fabbf2"
+    },
+    "status": {
+      "recorded": "passed",
+      "replayed": "passed"
+    },
+    "verdict": {
+      "recorded": "supported",
+      "replayed": "supported"
+    },
+    "data_identical": true,
+    "error": null
+  },
+  "outcome": "measurements-reproduced"
+}

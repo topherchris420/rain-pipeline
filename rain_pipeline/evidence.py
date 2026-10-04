@@ -49,9 +49,10 @@ EXPLORATORY = ("EXPLORATORY. Computed on data the ledger had already seen, to ch
 
 # Evidence levels, strongest first. Each follows mechanically from the checks.
 LEVELS = {
-    "confirmatory": "registered, anchored in git before the run, on a holdout no byte of which was read before "
-                    "the anchor; every link verified",
-    "preregistered": "registered and anchored in git before the run; every link verified",
+    "confirmatory": "registered, anchored in git and pushed before the run, on a holdout no byte of which was read "
+                    "before the anchor; every link verified",
+    "preregistered": "registered and anchored in git before the run; every link verified (no holdout, or the anchor "
+                     "was not pushed before the run)",
     "registered": "criteria recorded by R.A.I.N. before the run, but not anchored in git before it",
     "unverified": "a link in its chain failed verification; treat the verdict as unsupported",
 }
@@ -385,6 +386,7 @@ def _run_checks(snap: Snapshot, eid: str, record: dict[str, Any]) -> list[Check]
     checks += _guarded("run.timing", run_id, lambda: _timing_check(definition, record))
     checks += _guarded("run.data", run_id, lambda: _data_check(snap, record))
     checks += _guarded("run.anchor", run_id, lambda: _anchor_check(snap, eid, record))
+    checks += _guarded("run.published", run_id, lambda: _published_check(record))
     checks += _guarded("run.code", run_id, lambda: _code_check(snap, record))
     return checks
 
@@ -488,6 +490,17 @@ def _anchor_check(snap: Snapshot, eid: str, record: dict[str, Any]) -> Check:
     return Check("run.anchor", record["run_id"], FAIL if problems else OK,
                  f"anchor {commit[:10]}: " + ("; ".join(problems) if problems else
                                              "holds the registration, is in history, and predates the run"))
+
+
+def _published_check(record: dict[str, Any]) -> list[Check]:
+    """Was the anchor on a remote when the run started? Only a push is witnessed by anyone but this machine."""
+    anchor = ((record.get("inputs") or {}).get("registration") or {}).get("git")
+    if not anchor:
+        return []  # run.anchor already says there was no anchor at all
+    pushed = anchor.get("pushed_to") or []
+    return [Check("run.published", record["run_id"], OK if pushed else WARN,
+                  f"the anchor was on {', '.join(pushed)} when the run started" if pushed else
+                  "the anchor had not been pushed when the run started, so its time rests on one machine's clock")]
 
 
 def _code_check(snap: Snapshot, record: dict[str, Any]) -> Check:
@@ -716,8 +729,9 @@ def claims(snap: Snapshot, checks: list[Check]) -> list[dict[str, Any]]:
             mine = [c for c in checks if c.subject in (eid, run_id)]
             failed = [f"{c.name}: {c.detail}" for c in mine if c.status == FAIL]
             anchored = any(c.name == "run.anchor" and c.status == OK and c.subject == run_id for c in mine)
+            published = any(c.name == "run.published" and c.status == OK and c.subject == run_id for c in mine)
             holdout_clean = holdout and all(c.status == OK for c in mine if c.name.startswith("holdout."))
-            level = ("unverified" if failed else "confirmatory" if anchored and holdout_clean
+            level = ("unverified" if failed else "confirmatory" if anchored and published and holdout_clean
                      else "preregistered" if anchored else "registered")
             out.append({
                 "experiment_id": eid, "run_id": run_id, "title": definition["title"],

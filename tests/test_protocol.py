@@ -165,6 +165,19 @@ def test_a_holdout_runs_only_committed_pinned_code(workspace, physionet, anna, m
     assert nothing_happened(workspace, physionet)
 
 
+def test_an_anchor_never_pushed_is_not_confirmatory(workspace, physionet, anna, clean_code):
+    spec = workspace.spec("coupling", **holdout_changes())
+    pipeline.register(spec, layout=workspace.layout, log=quiet)
+    workspace.commit("register", push=False)          # timestamped only by this machine's clock
+    pipeline.run(spec, layout=workspace.layout, log=quiet)
+    workspace.commit("run")
+    report = evidence.verify(workspace.layout)
+    assert report.ok
+    (claim,) = report.claims
+    assert claim["evidence_level"] == "preregistered"
+    assert any(link.startswith("run.published") for link in claim["weaker_links"])
+
+
 def test_an_unanchored_run_is_allowed_without_a_holdout_but_rated_lower(workspace, physionet, anna):
     spec = register(workspace, commit=False)
     assert pipeline.run(spec, layout=workspace.layout, allow_uncommitted=True, log=quiet)["status"] == "passed"

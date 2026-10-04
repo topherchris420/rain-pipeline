@@ -64,7 +64,8 @@ lose, burn or misstate evidence are closed.
   recorded code resolved to a commit; `RESULTS.md` identical to R.A.I.N.'s
   render; summaries and reports stating the recorded outcome; unrecorded
   attempts surfaced. `--strict` fails when a check cannot run (CI).
-- Each claim gets an evidence level derived from those checks: confirmatory,
+- Each claim gets an evidence level derived from those checks: confirmatory
+  (anchored and pushed before the run, holdout unread before the anchor),
   preregistered, registered or unverified.
 - `lineage` prints the chain behind every claim; `lineage --json` exports the
   evidence graph (nodes with hashes, typed edges, a digest identifying the

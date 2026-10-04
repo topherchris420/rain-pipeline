@@ -160,24 +160,31 @@ def git(root: Path, *args: str) -> str:
 
 
 class Workspace:
+    """A git repository with a bare 'origin' beside it, so anchors can be pushed as on GitHub."""
+
     def __init__(self, root: Path) -> None:
         self.root = root
         root.mkdir(parents=True)
         self.layout = Layout.at(root)
+        remote = root.parent / f"{root.name}-origin.git"
+        git(root.parent, "init", "-q", "--bare", "-b", "main", str(remote))
         git(root, "init", "-q", "-b", "main")
         git(root, "config", "user.email", "test@example.invalid")
         git(root, "config", "user.name", "test")
         git(root, "config", "commit.gpgsign", "false")
+        git(root, "remote", "add", "origin", str(remote))
         (root / "README.md").write_text("evidence workspace\n", encoding="utf-8")
         self.commit("start")
 
-    def commit(self, message: str = "record") -> str:
+    def commit(self, message: str = "record", push: bool = True) -> str:
         git(self.root, "add", "-A")
         git(self.root, "commit", "-q", "--allow-empty", "-m", message)
+        if push:
+            git(self.root, "push", "-q", "origin", "main")
         return git(self.root, "rev-parse", "HEAD")
 
     def spec(self, name: str, **changes: Any) -> Path:
-        """A small spec over the synthetic records; ``changes`` are deep-merged into it."""
+        """A small spec over the synthetic records; each of ``changes`` updates one section (top-level keys only)."""
         spec = base_spec()
         for key, value in changes.items():
             if isinstance(value, dict) and isinstance(spec.get(key), dict):
