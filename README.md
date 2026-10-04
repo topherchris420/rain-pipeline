@@ -1,16 +1,10 @@
 # rain-pipeline
 
-> "The conscious and intelligent manipulation of the organized habits and opinions of the masses is an important element in democratic society."
->
-> Edward L. Bernays, *Propaganda*, 1928
-
-*This is the public statement of an instrument, prepared as a counsel on public relations would prepare it. The counsel's devices are named in the last section. The facts are the repository's own, and every one of them can be re-derived by a stranger with `python -m rain_pipeline verify`.*
-
 ## I. The problem is not dishonesty
 
-The conscious and intelligent separation of what a researcher has *noticed* from what a researcher has *shown* is an important element in modern science. Those who maintain that separation constitute an invisible discipline, and that discipline, not the eminence of the researcher and not the confidence of the prose, is the true source of a result's authority.
+The conscious and intelligent separation of what a researcher has *noticed* from what a researcher has *shown* is an important element in modern science. Those who maintain that separation constitute an invisible discipline. That discipline, not the eminence of the researcher and not the confidence of the prose, is the true source of a result's authority.
 
-We are persuaded, our confidence won and our doubts settled, largely by mechanisms we have never examined. This is the natural consequence of the way the modern laboratory is organised. One mind looks at the data, forms a wish, writes the criteria, takes the measurement and announces the verdict; and the public, having no means of telling these five acts apart, hears them in one voice.
+We're persuaded, our confidence won and our doubts settled, largely by mechanisms we have never examined. This is the natural consequence of the way the modern laboratory is organised. One mind looks at the data, forms a wish, writes the criteria, takes the measurement and announces the verdict; and the public, having no means of telling these five acts apart, hears them in one voice.
 
 rain-pipeline is an instrument for giving them separate voices. It takes a question to a verdict on real data, and it keeps four things from being mistaken for one another:
 
@@ -52,7 +46,7 @@ Each stage calls the upstream code in-process at a pinned commit (Anna, R.A.I.N.
 
 Opinion is not moved by argument. It is moved by an event the public can witness. When a nation was to be reminded what it owed the electric lamp, the counsel did not publish an essay; he arranged for the lamps of a continent to be dimmed and relit at an appointed hour, with the inventor present.
 
-The event this instrument stages is smaller, and it is public. On 4 October 2026, at 17:41:53 UTC, commit `4b4a030` placed the criteria for V3D-EXP-0002 and V3D-EXP-0003 in the history of this repository, and that commit was pushed before the first byte of their held-out data was read. The commit, the push and the ledger are all open to inspection, and a reader who inspects them reaches the conclusion without taking anyone's word for it.
+The event this instrument stages is smaller, and it is public. On 4 October 2026, at 17:41:53 UTC, commit `4b4a030` placed the criteria for V3D-EXP-0002 and V3D-EXP-0003 in the history of this repository, and that commit was pushed before the first byte of their held-out data was read. The commit, the push and the ledger are all open to inspection, and a reader who inspects them concludes without taking anyone's word for it.
 
 The mechanism, in full:
 
@@ -240,10 +234,3 @@ One sentence from Section II applies to the counsel exactly as it applies to eve
 ```bash
 python -m rain_pipeline verify
 ```
-
-## Data citation
-
-PhysioNet Fantasia Database 1.0.0, ODC-By 1.0.
-
-- Iyengar N, Peng C-K, Morin R, Goldberger AL, Lipsitz LA. Age-related alterations in the fractal scaling of cardiac interbeat interval dynamics. *Am J Physiol* 1996;271:R1078–R1084.
-- Goldberger AL et al. PhysioBank, PhysioToolkit, and PhysioNet. *Circulation* 2000;101(23):e215–e220.
