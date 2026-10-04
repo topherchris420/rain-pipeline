@@ -3,40 +3,37 @@
 **Anna → R.A.I.N. → DRR**: one question becomes cited literature, a debated and pre-registered experiment, a real-data analysis with controls, and a verdict that no model and no pipeline code is allowed to assign.
 
 ```
-question
-  │
-  ├─[1] Anna         ingest arXiv → hybrid search → citation-first summary
-  │                  → anna-research-record/v1, SHA-256 sealed, every excerpt re-verified
-  ├─[2] R.A.I.N.     offline panel (James, Jasmine, Luca, Elena) argues over Anna's sources
-  ├─[3] R.A.I.N.     pre-register rain-experiment/v1 (write-once) ── before any data is read
-  ├─[4] data         PhysioNet byte-range fetch, every byte hashed
-  ├─[5] DRR          lead–lag tests + positive / null / mismatched-subject controls
-  └─[6] R.A.I.N.     admit rain-experiment-submission/v1 (no status field)
-                     → R.A.I.N. evaluates the criteria → re-verifies → RESULTS.md
+            explore ── seen data only, never evidence ──┐  (hash bound into the registration)
+                                                         ▼
+question ──► register ── Anna: arXiv → hybrid search → cited summary, sealed + re-verified
+                     ├── R.A.I.N. panel argues over Anna's sources
+                     └── write-once rain-experiment/v1, binding literature, panel,
+                         parent result, exploration and holdout proof by hash
+         ──► git commit + push          ◄── the public timestamp: criteria before data
+         ──► run ── refuses an uncommitted registration
+                 ├── PhysioNet byte ranges, each logged in data/ledger.json
+                 ├── DRR study: real pairs + mismatched-person + synthetic controls
+                 └── submission with no status field → R.A.I.N. alone assigns the verdict
+         ──► verify ── re-derives every result; re-checks every hash, binding and holdout
 ```
 
-Each stage calls the upstream code in-process at a recorded commit. Nothing is copied or forked. The vendored repos stay unmodified, and every run records whether they were dirty.
+Each stage calls the upstream code in-process at a pinned commit. Nothing is copied or forked, and every run records whether the vendored repos were dirty.
 
-## First result
+<!-- RESULTS -->
 
-[`V3D-EXP-0001`](experiments/V3D-EXP-0001/experiment.json): *Does DRR recover respiration-to-heart-rate coupling (RSA) in resting young adults?* The verdict is **PASSED (supported)**. See [RESULTS.md](RESULTS.md) and [the run report](runs/20261004T150406Z/REPORT.md).
+## The protocol, and what each step guarantees
 
-| | needs | observed |
+| step | command | guarantee |
 |---|---|---|
-| G1 records analyzed | ≥ 16 | 20 |
-| G2 positive-control detection | ≥ 0.9 | 1.00 |
-| G3 synthetic-null false positives | ≤ 0.15 | 0.05 |
-| G4 mismatched-subject detection | ≤ 0.25 | 0.05 |
-| **S1 coupling detection** | **≥ 0.8** | **0.90** (18/20) |
-| F1 coupling detection | < 0.5 | — |
+| explore | `explore SPEC` | Reads only bytes the ledger has already seen; refuses anything else. Trying ideas can never spend a holdout. Output is labelled *not evidence*. |
+| register | `register SPEC` | Refuses a declared holdout if any of its bytes were ever read. Writes a write-once registration that binds, by SHA-256, the Anna record, the panel corpus, the parent result and the exploration report. |
+| commit | `git commit && git push` | The commit is the timestamp. GitHub shows the criteria existed before the data was read. |
+| run | `run SPEC` | Refuses an uncommitted or edited registration. Logs every byte range it reads. Submits exactly the registered metrics, with no status. Reports the holdout bytes read before registration as a guard metric (must be 0). |
+| verify | `verify` | R.A.I.N. re-derives every stored result. Every Anna fingerprint, framing binding and holdout claim is re-checked. |
 
-What it does **not** show, and what to test next:
+Registrations never change. If a spec no longer matches its stored registration, `run` refuses; a changed idea needs a new title and a new registration. A crash after registration is recorded as an R.A.I.N. `error` run, distinct from a failed hypothesis.
 
-- **Direction.** Heart rate → respiration is also detected in 90% of records. The pre-registered limitation predicted this: the two signals share one rhythm.
-- **Slow breathers.** The two misses, f2y09 and f2y10, both breathe at about 0.11–0.13 Hz. f1y03 was detected only at the edge of the window (3 s). The pre-registered 3 s lag window may be too short for them. That idea needs its own registration with a new title; this registration can't change.
-- **Shared spectral peak.** Heart rate's dominant spectral peak matches the breathing frequency in only 20% of records, because low-frequency power dominates the heart-rate spectrum. The coupling is still detected.
-
-The first attempt (`runs/20261004T145937Z`) crashed in glue code after the analysis, before submitting, so R.A.I.N. has no record of it (see its `CRASHED.txt`). The re-run reused the unchanged registration and produced identical measurements.
+The data ledger is a log kept by this tool. It makes the holdout claim checkable and prevents accidents; it cannot rule out reads made outside the pipeline.
 
 ## Setup (Windows, no Docker)
 
@@ -48,55 +45,53 @@ uv pip install --python .venv/Scripts/python.exe -e ".[dev]"
 uv pip install --python .venv/Scripts/python.exe --no-deps -e vendor/dynamic-resonance-rooting
 ```
 
-Anna, R.A.I.N. and DRR are git submodules under `vendor/`. Each is pinned to the commit that produced the committed results (anna `064af91`, james_library `9c8811e`, DRR `862c4f7`). Each run also records the commits and whether they were dirty. Moving a submodule to a newer commit is a code change: re-run the experiment and commit the new run.
+Anna, R.A.I.N. and DRR are git submodules under `vendor/`, pinned to the commits that produced the committed results (anna `064af91`, james_library `9c8811e`, DRR `862c4f7`). Moving a submodule is a code change: re-run and commit the new runs.
 
-Anna needs PostgreSQL. `pgserver` bundles Postgres 16 + pgvector and runs it from `.pgdata/` only while a run is in progress.
+Anna needs PostgreSQL. `pgserver` bundles Postgres 16 + pgvector and runs it from `.pgdata/` only while a command needs it.
 
-## Run
+## Commands
 
 ```bash
-.venv/Scripts/python.exe -m rain_pipeline run specs/cardiorespiratory.json
-.venv/Scripts/python.exe -m rain_pipeline run specs/cardiorespiratory.json --offline
+.venv/Scripts/python.exe -m rain_pipeline explore specs/explore-lag-window.json
+.venv/Scripts/python.exe -m rain_pipeline register specs/<new-spec>.json
+.venv/Scripts/python.exe -m rain_pipeline run specs/<registered-spec>.json
 .venv/Scripts/python.exe -m rain_pipeline verify
 .venv/Scripts/python.exe -m pytest
 ```
 
-- **`run`:** the full pipeline. The first run ingests arXiv metadata and fetches about 14 MB from PhysioNet.
-- **`--offline`:** reuses the Anna index and the cached data.
-- **`verify`:** R.A.I.N. re-derives every stored result, and each Anna record's fingerprint is re-checked.
-- **`pytest`:** 15 offline tests.
-
-Exit codes for `run`: 0 for passed, failed or inconclusive (all recorded outcomes), 3 for an `error` run.
+- `run` exits 0 for any recorded outcome (passed, failed, inconclusive) and 3 for an `error` run.
+- DRR tests run in parallel across CPU cores; results are identical to a single process. `RAIN_PIPELINE_WORKERS=1` forces one process.
+- `pytest` runs 28 offline tests. One of them replays V3D-EXP-0001 from the cached data and requires identical measurements; it is skipped on a fresh clone until the cache exists.
 
 ## Writing a new experiment
 
-Copy `specs/cardiorespiratory.json` and edit it:
+Copy a spec from `specs/` and edit it:
 
-- **`literature`:** the arXiv queries and the Anna search.
-- **`data` / `analysis`:** what will run. These become the registration's `parameters`.
-- **`preregistration`:** the R.A.I.N. definition (hypothesis, metrics, guards, success and failure criteria).
+- **`literature`**: arXiv queries for Anna's index, and the search that becomes the cited record.
+- **`lineage`** (optional): the result it follows (`V3D-EXP-NNNN/RUN-NNNN`), what was observed, and the exploration report.
+- **`data`**: records, segments, QC. `"holdout": true` makes register and run enforce that the data is unseen.
+- **`analysis`**: the DRR study (`rsa_coupling` or `lag_window`) and its settings. These become the registration's parameters.
+- **`preregistration`**: the R.A.I.N. definition: hypothesis, metrics, guards, success and failure criteria, limitations.
 
-`drr_stage.py` must emit exactly the declared metrics, or the run is refused.
+Only metrics declared in the registration are submitted. Everything else a study computes stays in its report as description.
 
-Registrations are **write-once**. If a spec no longer matches its stored registration, the pipeline refuses to run. Give it a new title to register a new experiment.
+## Layout
 
-## Outputs per run (`runs/<UTC time>/`)
-
-| file | from |
+| path | what |
 |---|---|
-| `anna_record.json`, `anna_verification.json` | Anna research record packet + excerpt re-verification |
-| `corpus/`, `panel_meeting.md`, `panel_summary.json` | R.A.I.N. panel over Anna's sources |
-| `drr_report.json` | per-subject DRR statistics, controls, dataset byte ranges and hashes |
-| `submission.json` | what R.A.I.N. was given (no status) |
-| `REPORT.md`, `summary.json` | R.A.I.N.'s verdict, criteria table, literature, limitations |
-
-R.A.I.N.'s own records are in `experiments/V3D-EXP-*/runs/` and `RESULTS.md`, which is generated and not to be edited by hand.
+| `specs/` | experiment and exploration specs |
+| `explorations/` | exploratory reports and figures on seen data; never evidence |
+| `framing/<spec>/` | Anna record, panel transcript and corpus, and `framing.json`, fixed at registration |
+| `experiments/`, `RESULTS.md` | R.A.I.N.'s registry and its generated results page (do not edit by hand) |
+| `runs/<UTC time>/` | `REPORT.md`, `figure.png`, `drr_report.json`, `submission.json`, `summary.json` |
+| `data/ledger.json` | every byte range read, with the time and reader of its first read |
 
 ## Honest boundaries
 
-- **The panel is R.A.I.N.'s offline mode.** The quotes are verbatim and verified, but the reasoning text is scripted. It informs the pre-registration and never writes criteria.
-- **Anna uses its deterministic hashing embeddings.** That is lexical retrieval over arXiv metadata and abstracts, not semantic search. Install Anna's `requirements-engine.txt` for real embeddings; that path is untested here.
-- **Experiment IDs are local to this repo.** R.A.I.N. numbers experiments per registry, so this repo's `V3D-EXP-0001` is a different experiment from `V3D-EXP-0001` in james_library's own ledger. Cite them as `rain-pipeline/V3D-EXP-0001`. This experiment will not be moved into R.A.I.N.'s ledger: a new registration there would postdate the results, which defeats pre-registration. Future experiments can go to R.A.I.N.'s ledger with `--registry <james_library checkout>/experiments`; register them before running.
+- **The panel is R.A.I.N.'s offline mode.** Its quotes are verbatim and verified; its reasoning text is scripted. It informs the pre-registration and never writes criteria. When the retrieved abstracts do not address the question, it says so (grounding `none`), as it did for V3D-EXP-0002 and 0003.
+- **Anna uses its deterministic hashing embeddings**: lexical retrieval over arXiv metadata and abstracts, not semantic search.
+- **Experiment IDs are local to this repo.** R.A.I.N. numbers experiments per registry, so `rain-pipeline/V3D-EXP-0001` is not james_library's `V3D-EXP-0001`. Future experiments can go to R.A.I.N.'s own ledger with `--registry`; register them before running.
+- **V3D-EXP-0001 predates the protocol.** It was registered before its data was fetched, but the registration was not committed before the run, and the ledger shows two of its 20 records (f1y01, f2y01) were first read by an R-peak dry check that computed no coupling statistic. Its framing files were copied into `framing/cardiorespiratory/` byte for byte.
 
 ## Data citation
 
