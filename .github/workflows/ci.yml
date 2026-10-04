@@ -17,14 +17,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository with full history and pinned submodules
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: recursive
           fetch-depth: 0  # verify checks registrations, anchors and the ledger against every commit
           persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.11"
           cache: pip
@@ -52,12 +52,12 @@ jobs:
       matrix:
         python: ["3.10", "3.12"]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           submodules: recursive
           fetch-depth: 0
           persist-credentials: false
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python }}
           cache: pip
@@ -73,10 +73,10 @@ jobs:
     name: clean install from a built wheel
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.11"
       - name: Build the wheel
@@ -97,12 +97,12 @@ jobs:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           submodules: recursive
           fetch-depth: 0
           persist-credentials: false
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.11"
           cache: pip
@@ -112,7 +112,7 @@ jobs:
           pip install -c constraints.txt -e ".[dev]"
           pip install --no-deps -e vendor/dynamic-resonance-rooting
       - name: Cache the ledgered PhysioNet bytes (each is re-checked against its ledger hash)
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: data/cache
           key: physionet-${{ hashFiles('data/ledger.json') }}
