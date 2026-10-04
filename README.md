@@ -43,6 +43,12 @@ V3D-EXP-0001 missed two people, f2y09 and f2y10, who both breathe slowly. That s
 
 Earlier on V3D-EXP-0001: heart rate → respiration was also detected in 90% of records, as its pre-registered limitation predicted, so it shows coupling, not direction. Its first attempt (`runs/20261004T145937Z`) crashed before submitting and is kept with a `CRASHED.txt`.
 
+## Architecture and contribution protocol
+
+- [Architecture](docs/ARCHITECTURE.md) explains the evidence firewall, trust boundaries, and artifact graph.
+- [Experimental Protocol](docs/PROTOCOL.md) defines the rules for adding analyses and experiments without weakening reproducibility.
+- GitHub Actions runs the offline test suite on every push and pull request.
+
 ## The protocol, and what each step guarantees
 
 | step | command | guarantee |
