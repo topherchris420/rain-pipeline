@@ -1,0 +1,86 @@
+{
+  "run_dir": "C:\\Users\\chris\\code\\rain-pipeline\\runs\\20261004T150406Z",
+  "experiment_id": "V3D-EXP-0001",
+  "run_id": "V3D-EXP-0001-RUN-0001",
+  "status": "passed",
+  "verdict": "supported",
+  "evaluation": {
+    "rule": "rain-criteria/v1",
+    "guards": [
+      {
+        "id": "G1",
+        "metric": "records_analyzed",
+        "op": ">=",
+        "value": 16,
+        "observed": 20,
+        "holds": true
+      },
+      {
+        "id": "G2",
+        "metric": "positive_control_detection_rate",
+        "op": ">=",
+        "value": 0.9,
+        "observed": 1.0,
+        "holds": true
+      },
+      {
+        "id": "G3",
+        "metric": "synthetic_null_false_positive_rate",
+        "op": "<=",
+        "value": 0.15,
+        "observed": 0.05,
+        "holds": true
+      },
+      {
+        "id": "G4",
+        "metric": "mismatched_detection_rate",
+        "op": "<=",
+        "value": 0.25,
+        "observed": 0.05,
+        "holds": true
+      }
+    ],
+    "success": [
+      {
+        "id": "S1",
+        "metric": "coupling_detection_rate",
+        "op": ">=",
+        "value": 0.8,
+        "observed": 0.9,
+        "holds": true
+      }
+    ],
+    "failure": [
+      {
+        "id": "F1",
+        "metric": "coupling_detection_rate",
+        "op": "<",
+        "value": 0.5,
+        "observed": 0.9,
+        "holds": false
+      }
+    ],
+    "summary": "All 1 success criteria held and no failure criterion triggered."
+  },
+  "measurements": {
+    "records_analyzed": 20,
+    "coupling_detection_rate": 0.9,
+    "mismatched_detection_rate": 0.05,
+    "detection_rate_gap": 0.85,
+    "positive_control_detection_rate": 1.0,
+    "synthetic_null_false_positive_rate": 0.05,
+    "reverse_detection_rate": 0.9,
+    "median_coupling_lag_s": 0.5,
+    "spectral_peak_agreement_rate": 0.2,
+    "median_respiratory_frequency_hz": 0.2734375,
+    "median_heart_rate_bpm": 62.83499506042062
+  },
+  "rain_verify": {
+    "valid": true,
+    "problems": [],
+    "warnings": [],
+    "experiments": 1,
+    "runs": 1
+  },
+  "anna_record_sha256": "f8c6ae4e5d37d0928f437e7e8f30299c67a4bcc02e2060f130a68d293a07bdd3"
+}

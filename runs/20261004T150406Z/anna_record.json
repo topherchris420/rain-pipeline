@@ -1,0 +1,434 @@
+{
+  "captured_at": "2026-10-04T15:04:09.876Z",
+  "content_sha256": "f8c6ae4e5d37d0928f437e7e8f30299c67a4bcc02e2060f130a68d293a07bdd3",
+  "record": {
+    "schema": "anna-research-record/v1",
+    "provider": "live",
+    "request": {
+      "q": "respiratory sinus arrhythmia or cardiorespiratory coupling",
+      "mode": "hybrid",
+      "page": 1,
+      "per_page": 8,
+      "filters": {}
+    },
+    "retrieval": {
+      "backend": "postgres",
+      "requested_mode": "hybrid",
+      "executed": [
+        "fts",
+        "knn"
+      ],
+      "unavailable": [],
+      "degraded": false,
+      "embedding": "hashing",
+      "fusion": "rrf",
+      "candidate_count": 19,
+      "total_scope": "retrieved-candidates",
+      "score_ceiling": 0.03278688524590164,
+      "score_meaning": "ranking-score-not-probability"
+    },
+    "result_count": 19,
+    "scope": "current-page",
+    "hits": [
+      {
+        "score": 0.032522,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 2,
+            "knn": 1
+          },
+          "contributions": {
+            "fts": 0.016129032258064516,
+            "knn": 0.01639344262295082
+          }
+        },
+        "document": {
+          "id": "arxiv:d278669380f744b7",
+          "title": "Mathematical and Preclinical Investigation of Respiratory Sinus Arrhythmia Effects on Cardiac Output",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2004.11325v1",
+          "pdf_url": "https://arxiv.org/pdf/2004.11325v1",
+          "authors": [
+            "Sahar Rahbar"
+          ],
+          "published": "2020-04-23T17:19:44Z",
+          "version": "",
+          "abstract": "Respiratory sinus arrhythmia (RSA) is heart rate variability in synchrony with respiration although its functional significance not clear. The loss of sinus arrhythmia may indicate underlying heart failure or disease; therefore, there would be a great advantage of knowing how it works and affects the cardio-respiratory system, especially by providing a mathematical model. To this end, Windkessel model and cardiovascular partial differential equations are used to obtain cardiac output based on the elasticity of left ventricle, which is related to RSA. By solving the corresponding equations, it would be possible to propose a new model to predict the RSA effects on cardiac output."
+        },
+        "highlights": [
+          "<em>Respiratory</em> <em>sinus</em> <em>arrhythmia</em> (RSA) is heart rate variability in synchrony with respiration although its functional significance not clear. The loss of <em>sinus</em> <em>arrhythmia</em> may indicate",
+          "great advantage of knowing how it works and affects the cardio-<em>respiratory</em> system, especially by providing a mathematical model. To this end, Windkessel model"
+        ],
+        "relevance": 0.9919
+      },
+      {
+        "score": 0.032018,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 1,
+            "knn": 4
+          },
+          "contributions": {
+            "fts": 0.01639344262295082,
+            "knn": 0.015625
+          }
+        },
+        "document": {
+          "id": "arxiv:e2e5ed79dbae2ef1",
+          "title": "Cardiorespiratory coupling improves cardiac pumping efficiency in heart failure",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2507.00597v1",
+          "pdf_url": "https://arxiv.org/pdf/2507.00597v1",
+          "authors": [
+            "Josh Border",
+            "Andrew Lefevre",
+            "Vishal Jain",
+            "Alain Nogaret"
+          ],
+          "published": "2025-07-01T09:27:11Z",
+          "version": "",
+          "abstract": "Recent trials of a neuronal pacemaker have shown that cardiac pumping efficiency increases when respiratory sinus arrhythmia (RSA) is artificially restored in animal models of heart failure. This novel device sheds new light on the functional role of RSA, which has long been debated, by allowing the strength of cardiorespiratory coupling to be artificially varied. Here we show that RSA minimizes the cardiac power dissipated within the cardiovascular network. The cardiorespiratory system is found to exhibit mode-locked synchronized regions within which viscoelastic dissipation is reduced relative to the scenario where cardiorespiratory coupling is absent. We determine the gain in cardiac output as the magnitude of RSA increases. We find that cardiac pumping efficiency improves up and until the cardiac frequency, within each breadth intake, is approximately 1.5 times greater than the cardiac frequency in the expiratory phase, at which point it reaches a plateau. RSA was found to be most effective at low cardiac frequencies, in good agreement with clinical evidence. Simulation of the cardiac power saved under RSA is in good agreement with the 17-20% increase in cardiac output observed in RSA-paced animal models."
+        },
+        "highlights": [
+          "neuronal pacemaker have shown that cardiac pumping efficiency increases when <em>respiratory</em> <em>sinus</em> <em>arrhythmia</em> (RSA) is artificially restored in animal models of heart failure. This novel",
+          "which has long been debated, by allowing the strength of <em>cardiorespiratory</em> <em>coupling</em> to be artificially varied. Here we show that RSA minimizes the cardiac power"
+        ],
+        "relevance": 0.9765
+      },
+      {
+        "score": 0.031754,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 4,
+            "knn": 2
+          },
+          "contributions": {
+            "fts": 0.015625,
+            "knn": 0.016129032258064516
+          }
+        },
+        "document": {
+          "id": "arxiv:2cd076769301f26e",
+          "title": "Analysis of Respiratory Sinus Arrhythmia with Neural Networks",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2609.05698v1",
+          "pdf_url": "https://arxiv.org/pdf/2609.05698v1",
+          "authors": [
+            "Julian Szymanski",
+            "Patryk Orkisz",
+            "Higinio Mora"
+          ],
+          "published": "2026-09-04T20:09:30Z",
+          "version": "",
+          "abstract": "The paper introduces a neural network-based approach for analyzing ECG signals to estimate respiratory rate by leveraging the phe- nomenon of Respiratory Sinus Arrhythmia (RSA). Our method employs a deep learning model trained to predict respiratory waveforms directly from ECG input data. To achieve this, we developed and evaluated three different neural network architectures capable of automatically extract- ing relevant features from ECG signals without the need for manual preprocessing. The proposed approach offers a robust and scalable solu- tion for non-invasive respiratory monitoring, with potential applications in healthcare and wearable technology"
+        },
+        "highlights": [
+          "signals to estimate <em>respiratory</em> rate by leveraging the phe- nomenon of <em>Respiratory</em> <em>Sinus</em> <em>Arrhythmia</em> (RSA). Our method employs a deep learning model trained to predict"
+        ],
+        "relevance": 0.9685
+      },
+      {
+        "score": 0.031258,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 3,
+            "knn": 5
+          },
+          "contributions": {
+            "fts": 0.015873015873015872,
+            "knn": 0.015384615384615385
+          }
+        },
+        "document": {
+          "id": "arxiv:beb468b08796420f",
+          "title": "Disentangling Respiratory Sinus Arrhythmia in Heart Rate Variability Records",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/1802.00683v1",
+          "pdf_url": "https://arxiv.org/pdf/1802.00683v1",
+          "authors": [
+            "Çağdaş Topçu",
+            "Matthias Frühwirth",
+            "Maximilian Moser",
+            "Michael Rosenblum",
+            "Arkady Pikovsky"
+          ],
+          "published": "2018-02-02T13:54:50Z",
+          "version": "",
+          "abstract": "Different measures of heart rate variability and particularly of respiratory sinus arrhythmia are widely used in research and clinical applications. Inspired by the ideas from the theory of coupled oscillators, we use simultaneous measurements of respiratory and cardiac activity to perform a nonlinear decomposition of the heart rate variability into the respiratory-related component and the rest. We suggest to exploit the technique as a universal preprocessing tool, both for the analysis of respiratory influence on the heart rate as well as in cases when effects of other factors on the heart rate variability are in focus. The theoretical consideration is illustrated by the analysis of 25 data sets from healthy subjects."
+        },
+        "highlights": [
+          "Different measures of heart rate variability and particularly of <em>respiratory</em> <em>sinus</em> <em>arrhythmia</em> are widely used in research and clinical applications. Inspired by the ideas from",
+          "theory of <em>coupled</em> oscillators, we use simultaneous measurements of <em>respiratory</em> and cardiac activity to perform a nonlinear decomposition of the heart rate variability into"
+        ],
+        "relevance": 0.9534
+      },
+      {
+        "score": 0.030579,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 8,
+            "knn": 3
+          },
+          "contributions": {
+            "fts": 0.014705882352941176,
+            "knn": 0.015873015873015872
+          }
+        },
+        "document": {
+          "id": "arxiv:c828102dbd28c9d9",
+          "title": "Synchronization-dissipation dynamics in the cardiorespiratory system",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2603.23259v1",
+          "pdf_url": "https://arxiv.org/pdf/2603.23259v1",
+          "authors": [
+            "Joshua R. Border",
+            "Alain Nogaret",
+            "Andrew Lefevre",
+            "Vishal Jain"
+          ],
+          "published": "2026-03-24T14:22:41Z",
+          "version": "",
+          "abstract": "Dissipative coupling is known to induce synchronization. Conversely it may be hypothesized that oscillators driven to synchronize may reduce power dissipation in their coupling. The latter scenario is realized in the human cardiorespiratory system where cardiac and respiratory rhythms are controlled by the central nervous system while interacting viscoelastically through the pulmonary vasculature. Here we examine the functional significance of this coupling which is observed in respiratory sinus arrhythmia (RSA). By modelling electrical and viscoelastic interactions within the cardiorespiratory system, we identify the conditions leading to synchronization. We demonstrate that, when present, synchronization reduces cardiac power losses by 10% in humans and up to 55% in other species. The predicted gain in cardiac output is compared to the gain observed in-vivo by pacing the heart with a device restoring RSA. It is therefore surmised that RSA may improve cardiac pumping efficiency by reducing dynamic stress and power dissipation in the pulmonary vasculature."
+        },
+        "highlights": [
+          "<em>coupling</em>. The latter scenario is realized in the human <em>cardiorespiratory</em> system where cardiac and <em>respiratory</em> rhythms are controlled by the central nervous system while interacting",
+          "examine the functional significance of this <em>coupling</em> which is observed in <em>respiratory</em> <em>sinus</em> <em>arrhythmia</em> (RSA). By modelling electrical and viscoelastic interactions within the <em>cardiorespiratory</em> system"
+        ],
+        "relevance": 0.9327
+      },
+      {
+        "score": 0.030536,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 5,
+            "knn": 6
+          },
+          "contributions": {
+            "fts": 0.015384615384615385,
+            "knn": 0.015151515151515152
+          }
+        },
+        "document": {
+          "id": "arxiv:f6c0e229eeda150f",
+          "title": "Contact Sensors to Remote Cameras: Quantifying Cardiorespiratory Coupling in High-Altitude Exercise Recovery",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2508.00773v1",
+          "pdf_url": "https://arxiv.org/pdf/2508.00773v1",
+          "authors": [
+            "Jiankai Tang",
+            "Meng Kang",
+            "Yiru Zhang",
+            "Kegang Wang",
+            "Daniel Mcduff",
+            "Xin Liu",
+            "Yuanchun Shi",
+            "Yuntao Wang"
+          ],
+          "published": "2025-08-01T16:54:47Z",
+          "version": "",
+          "abstract": "Cardiorespiratory coupling (CRC) captures the dynamic interaction between the cardiac and respiratory systems--an interaction strengthened by physical exercise and linked to improved physiological function. We examined CRC at high altitude in two states, rest and post-exercise recovery, and found significant differences (p < 0.05). Quantitative analysis revealed that recovery involved more frequent yet less stable episodes of synchronization between respiration and pulse. Furthermore, we explored the feasibility of non-contact CRC measurement with remote photoplethysmography (rPPG), observing a strong correlation with oximeter-based metrics (Pearson r = 0.96). These findings highlight the potential of CRC as a sensitive marker for autonomic regulation and its future application in contactless monitoring. Source code is available at GitHub: https://github.com/McJackTang/CRC."
+        },
+        "highlights": [
+          "<em>Cardiorespiratory</em> <em>coupling</em> (CRC) captures the dynamic interaction between the cardiac and <em>respiratory</em> systems--an interaction strengthened by physical exercise and linked to improved physiological function"
+        ],
+        "relevance": 0.9313
+      },
+      {
+        "score": 0.029644,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 6,
+            "knn": 9
+          },
+          "contributions": {
+            "fts": 0.015151515151515152,
+            "knn": 0.014492753623188406
+          }
+        },
+        "document": {
+          "id": "arxiv:d8d7da7b460e44ec",
+          "title": "Buffering blood pressure fluctuations by respiratory sinus arrhythmia may in fact enhance them: a theoretical analysis",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/1007.2229v1",
+          "pdf_url": "https://arxiv.org/pdf/1007.2229v1",
+          "authors": [
+            "Teodor Buchner",
+            "Jan Żebrowski",
+            "Grzegorz Gielerak"
+          ],
+          "published": "2010-07-13T23:56:07Z",
+          "version": "",
+          "abstract": "Using a three-compartment model of blood pressure dynamics, we analyze theoretically the short term cardiovascular variability: how the respiratory-related blood pressure fluctuations are buffered by appropriate heart rate changes: i.e. the respiratory sinus arrhythmia. The buffering is shown to be crucially dependent on the time delay between the stimulus (such as e.g. the inspiration onset) and the application of the control (the moment in time when the efferent response is delivered to the heart). This theoretical analysis shows that the buffering mechanism is effective only in the upright position of the body. It explains a paradoxical effect of enhancement of the blood pressure fluctuations by an ineffective control. Such a phenomenon was observed experimentally. Using the basis of the model, we discuss the blood pressure variability and heart rate variability under such clinical conditions as the states of expressed adrenergic drive and the tilt-test during the parasympathetic blockade or fixed rate atrial pacing. From the results of the variability analysis we draw a conclusion that the control of blood pressure in the HF band does not directly obtain the arterial baroreceptor input. We also discuss methodological issues of baroreflex sensitivity and sympathovagal balance assessment."
+        },
+        "highlights": [
+          "pressure fluctuations are buffered by appropriate heart rate changes: i.e. the <em>respiratory</em> <em>sinus</em> <em>arrhythmia</em>. The buffering is shown to be crucially dependent on the time"
+        ],
+        "relevance": 0.9041
+      },
+      {
+        "score": 0.029418,
+        "explanation": {
+          "method": "rrf",
+          "ranks": {
+            "fts": 9,
+            "knn": 7
+          },
+          "contributions": {
+            "fts": 0.014492753623188406,
+            "knn": 0.014925373134328358
+          }
+        },
+        "document": {
+          "id": "arxiv:2025c70100c3c449",
+          "title": "RespEar: Earable-Based Robust Respiratory Rate Monitoring",
+          "source": "arxiv",
+          "url": "http://arxiv.org/abs/2407.06901v1",
+          "pdf_url": "https://arxiv.org/pdf/2407.06901v1",
+          "authors": [
+            "Yang Liu",
+            "Kayla-Jade Butkow",
+            "Jake Stuchbury-Wass",
+            "Adam Pullin",
+            "Dong Ma",
+            "Cecilia Mascolo"
+          ],
+          "published": "2024-07-09T14:32:28Z",
+          "version": "",
+          "abstract": "Respiratory rate (RR) monitoring is integral to understanding physical and mental health and tracking fitness. Existing studies have demonstrated the feasibility of RR monitoring under specific user conditions (e.g., while remaining still, or while breathing heavily). Yet, performing accurate, continuous and non-obtrusive RR monitoring across diverse daily routines and activities remains challenging. In this work, we present RespEar, an earable-based system for robust RR monitoring. By leveraging the unique properties of in-ear microphones in earbuds, RespEar enables the use of Respiratory Sinus Arrhythmia (RSA) and Locomotor Respiratory Coupling (LRC), physiological couplings between cardiovascular activity, gait and respiration, to indirectly determine RR. This effectively addresses the challenges posed by the almost imperceptible breathing signals under daily activities. We further propose a suite of meticulously crafted signal processing schemes to improve RR estimation accuracy and robustness. With data collected from 18 subjects over 8 activities, RespEar measures RR with a mean absolute error (MAE) of 1.48 breaths per minutes (BPM) and a mean absolute percent error (MAPE) of 9.12% in sedentary conditions, and a MAE of 2.28 BPM and a MAPE of 11.04% in active conditions, respectively, which is unprecedented for a method capable of generalizing across conditions with a single modality."
+        },
+        "highlights": [
+          "microphones in earbuds, RespEar enables the use of <em>Respiratory</em> <em>Sinus</em> <em>Arrhythmia</em> (RSA) and Locomotor <em>Respiratory</em> <em>Coupling</em> (LRC), physiological <em>couplings</em> between cardiovascular activity, gait and respiration"
+        ],
+        "relevance": 0.8972
+      }
+    ],
+    "summary": {
+      "query": "respiratory sinus arrhythmia or cardiorespiratory coupling",
+      "answer": "the respiratory sinus arrhythmia. [1] Here we examine the functional significance of this coupling which is observed in respiratory sinus arrhythmia (RSA). [2] Respiratory sinus arrhythmia (RSA) is heart rate variability in synchrony with respiration although its functional significance not clear. [3] Different measures of heart rate variability and particularly of respiratory sinus arrhythmia are widely used in research and clinical applications. [4] By leveraging the unique properties of in-ear microphones in earbuds, RespEar enables the use of Respiratory Sinus Arrhythmia (RSA) and Locomotor Respiratory Coupling (LRC), physiological couplings between cardiovascular activity, gait and respiration, to indirectly determine RR. [5]",
+      "generator": "extractive",
+      "citations": [
+        {
+          "n": 1,
+          "id": "arxiv:d8d7da7b460e44ec",
+          "title": "Buffering blood pressure fluctuations by respiratory sinus arrhythmia may in fact enhance them: a theoretical analysis",
+          "url": "http://arxiv.org/abs/1007.2229v1",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:d8d7da7b460e44ec",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 237,
+              "end": 270,
+              "quote": "the respiratory sinus arrhythmia.",
+              "matched_terms": [
+                "arrhythmia",
+                "respiratory",
+                "sinus"
+              ]
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "id": "arxiv:c828102dbd28c9d9",
+          "title": "Synchronization-dissipation dynamics in the cardiorespiratory system",
+          "url": "http://arxiv.org/abs/2603.23259v1",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:c828102dbd28c9d9",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 401,
+              "end": 518,
+              "quote": "Here we examine the functional significance of this coupling which is observed in respiratory sinus arrhythmia (RSA).",
+              "matched_terms": [
+                "arrhythmia",
+                "coupling",
+                "respiratory",
+                "sinus"
+              ]
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "id": "arxiv:d278669380f744b7",
+          "title": "Mathematical and Preclinical Investigation of Respiratory Sinus Arrhythmia Effects on Cardiac Output",
+          "url": "http://arxiv.org/abs/2004.11325v1",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:d278669380f744b7",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 0,
+              "end": 138,
+              "quote": "Respiratory sinus arrhythmia (RSA) is heart rate variability in synchrony with respiration although its functional significance not clear.",
+              "matched_terms": [
+                "arrhythmia",
+                "respiratory",
+                "sinus"
+              ]
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "id": "arxiv:beb468b08796420f",
+          "title": "Disentangling Respiratory Sinus Arrhythmia in Heart Rate Variability Records",
+          "url": "http://arxiv.org/abs/1802.00683v1",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:beb468b08796420f",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 0,
+              "end": 148,
+              "quote": "Different measures of heart rate variability and particularly of respiratory sinus arrhythmia are widely used in research and clinical applications.",
+              "matched_terms": [
+                "arrhythmia",
+                "respiratory",
+                "sinus"
+              ]
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "id": "arxiv:2025c70100c3c449",
+          "title": "RespEar: Earable-Based Robust Respiratory Rate Monitoring",
+          "url": "http://arxiv.org/abs/2407.06901v1",
+          "source": "arxiv",
+          "excerpts": [
+            {
+              "document_id": "arxiv:2025c70100c3c449",
+              "field": "abstract",
+              "offset_unit": "unicode-code-points",
+              "start": 488,
+              "end": 768,
+              "quote": "By leveraging the unique properties of in-ear microphones in earbuds, RespEar enables the use of Respiratory Sinus Arrhythmia (RSA) and Locomotor Respiratory Coupling (LRC), physiological couplings between cardiovascular activity, gait and respiration, to indirectly determine RR.",
+              "matched_terms": [
+                "arrhythmia",
+                "coupling",
+                "respiratory",
+                "sinus"
+              ]
+            }
+          ]
+        }
+      ],
+      "grounding": "source-extract",
+      "fallback_reason": null
+    }
+  }
+}

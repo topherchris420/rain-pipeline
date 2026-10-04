@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rain-pipeline"
+version = "0.1.0"
+description = "Anna (literature) -> R.A.I.N. (deliberate, pre-register, evaluate) -> DRR (analysis)"
+requires-python = ">=3.10"
+dependencies = [
+  # Anna engine (in-process) on an embedded PostgreSQL + pgvector
+  "pgserver>=0.1.4",
+  "psycopg2-binary>=2.9",
+  "httpx>=0.23",
+  # R.A.I.N. experiment contracts
+  "jsonschema>=4.26,<5",
+  # DRR runtime subset (DRR itself is installed editable from vendor/, without its notebook extras)
+  "numpy",
+  "scipy",
+  "pandas",
+  "scikit-learn",
+  "networkx",
+  "pyinform",
+  "PyYAML",
+  "matplotlib",
+  "seaborn",
+  # PhysioNet byte-range fetches
+  "requests",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.setuptools]
+packages = ["rain_pipeline"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

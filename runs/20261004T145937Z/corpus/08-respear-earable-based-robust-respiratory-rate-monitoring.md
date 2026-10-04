@@ -1,0 +1,8 @@
+# RespEar: Earable-Based Robust Respiratory Rate Monitoring
+
+Yang Liu, Kayla-Jade Butkow, Jake Stuchbury-Wass, Adam Pullin; 2024-07-09; http://arxiv.org/abs/2407.06901v1
+Anna document arxiv:2025c70100c3c449
+
+Abstract
+
+Respiratory rate (RR) monitoring is integral to understanding physical and mental health and tracking fitness. Existing studies have demonstrated the feasibility of RR monitoring under specific user conditions (e.g., while remaining still, or while breathing heavily). Yet, performing accurate, continuous and non-obtrusive RR monitoring across diverse daily routines and activities remains challenging. In this work, we present RespEar, an earable-based system for robust RR monitoring. By leveraging the unique properties of in-ear microphones in earbuds, RespEar enables the use of Respiratory Sinus Arrhythmia (RSA) and Locomotor Respiratory Coupling (LRC), physiological couplings between cardiovascular activity, gait and respiration, to indirectly determine RR. This effectively addresses the challenges posed by the almost imperceptible breathing signals under daily activities. We further propose a suite of meticulously crafted signal processing schemes to improve RR estimation accuracy and robustness. With data collected from 18 subjects over 8 activities, RespEar measures RR with a mean absolute error (MAE) of 1.48 breaths per minutes (BPM) and a mean absolute percent error (MAPE) of 9.12% in sedentary conditions, and a MAE of 2.28 BPM and a MAPE of 11.04% in active conditions, respectively, which is unprecedented for a method capable of generalizing across conditions with a single modality.

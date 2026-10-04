@@ -1,0 +1,108 @@
+{
+  "engine": "R.A.I.N. offline meeting (deterministic, no model)",
+  "question": "Does breathing drive heart rate at rest, and can Dynamic Resonance Rooting recover that respiratory sinus arrhythmia coupling from real recordings?",
+  "grounding": "strong",
+  "matched_terms": [
+    "drive",
+    "heart",
+    "rate",
+    "rest",
+    "dynamic",
+    "respiratory",
+    "sinus",
+    "arrhythmia",
+    "coupling"
+  ],
+  "missing_terms": [
+    "breathing",
+    "resonance",
+    "rooting",
+    "recover",
+    "real",
+    "recordings"
+  ],
+  "corpus_files": 8,
+  "quotable_passages": 41,
+  "citation_audit": {
+    "checked": 3,
+    "verified": 3,
+    "passed": true,
+    "corpus_sha256": "41aea8b0cc027fc4f86a90f54439eda05006ad21eb7ab56acc3a240a72234639"
+  },
+  "verdict": {
+    "agreed": "The library speaks to this directly: 7 papers cover 'drive', 'heart', 'rate' and 'rest', led by 04-disentangling-respiratory-sinus-arrhythmia-in-heart-rate-var.",
+    "contested": "Luca reads the shared 'clinical' in 04-disentangling-respiratory-sinus-arrhythmia-in-heart-rate-var and 07-buffering-blood-pressure-fluctuations-by-respiratory-sinus-a as real structure; Elena reads it as unreplicated until an outside source reproduces it.",
+    "next_move": "Write one falsifiable prediction for this question and the measurement that would refute it."
+  },
+  "quotes": [
+    {
+      "speaker": "James",
+      "move": "frame",
+      "text": "Inspired by the ideas from the theory of coupled oscillators, we use simultaneous measurements of respiratory and cardiac activity to perform a nonlinear decomposition of the heart rate variability into the respiratory-related component and the rest.",
+      "corpus_file": "04-disentangling-respiratory-sinus-arrhythmia-in-heart-rate-var.md",
+      "line": 8,
+      "anna_id": "arxiv:beb468b08796420f",
+      "url": "http://arxiv.org/abs/1802.00683v1"
+    },
+    {
+      "speaker": "Luca",
+      "move": "connection",
+      "text": "Different measures of heart rate variability and particularly of respiratory sinus arrhythmia are widely used in research and clinical applications.",
+      "corpus_file": "04-disentangling-respiratory-sinus-arrhythmia-in-heart-rate-var.md",
+      "line": 8,
+      "anna_id": "arxiv:beb468b08796420f",
+      "url": "http://arxiv.org/abs/1802.00683v1"
+    },
+    {
+      "speaker": "Luca",
+      "move": "connection",
+      "text": "Using the basis of the model, we discuss the blood pressure variability and heart rate variability under such clinical conditions as the states of expressed adrenergic drive and the tilt-test during the parasympathetic blockade or fixed rate atrial pacing.",
+      "corpus_file": "07-buffering-blood-pressure-fluctuations-by-respiratory-sinus-a.md",
+      "line": 8,
+      "anna_id": "arxiv:d8d7da7b460e44ec",
+      "url": "http://arxiv.org/abs/1007.2229v1"
+    }
+  ],
+  "sources": {
+    "01-mathematical-and-preclinical-investigation-of-respiratory-si.md": {
+      "anna_id": "arxiv:d278669380f744b7",
+      "title": "Mathematical and Preclinical Investigation of Respiratory Sinus Arrhythmia Effects on Cardiac Output",
+      "url": "http://arxiv.org/abs/2004.11325v1"
+    },
+    "02-cardiorespiratory-coupling-improves-cardiac-pumping-efficien.md": {
+      "anna_id": "arxiv:e2e5ed79dbae2ef1",
+      "title": "Cardiorespiratory coupling improves cardiac pumping efficiency in heart failure",
+      "url": "http://arxiv.org/abs/2507.00597v1"
+    },
+    "03-analysis-of-respiratory-sinus-arrhythmia-with-neural-network.md": {
+      "anna_id": "arxiv:2cd076769301f26e",
+      "title": "Analysis of Respiratory Sinus Arrhythmia with Neural Networks",
+      "url": "http://arxiv.org/abs/2609.05698v1"
+    },
+    "04-disentangling-respiratory-sinus-arrhythmia-in-heart-rate-var.md": {
+      "anna_id": "arxiv:beb468b08796420f",
+      "title": "Disentangling Respiratory Sinus Arrhythmia in Heart Rate Variability Records",
+      "url": "http://arxiv.org/abs/1802.00683v1"
+    },
+    "05-synchronization-dissipation-dynamics-in-the-cardiorespirator.md": {
+      "anna_id": "arxiv:c828102dbd28c9d9",
+      "title": "Synchronization-dissipation dynamics in the cardiorespiratory system",
+      "url": "http://arxiv.org/abs/2603.23259v1"
+    },
+    "06-contact-sensors-to-remote-cameras-quantifying-cardiorespirat.md": {
+      "anna_id": "arxiv:f6c0e229eeda150f",
+      "title": "Contact Sensors to Remote Cameras: Quantifying Cardiorespiratory Coupling in High-Altitude Exercise Recovery",
+      "url": "http://arxiv.org/abs/2508.00773v1"
+    },
+    "07-buffering-blood-pressure-fluctuations-by-respiratory-sinus-a.md": {
+      "anna_id": "arxiv:d8d7da7b460e44ec",
+      "title": "Buffering blood pressure fluctuations by respiratory sinus arrhythmia may in fact enhance them: a theoretical analysis",
+      "url": "http://arxiv.org/abs/1007.2229v1"
+    },
+    "08-respear-earable-based-robust-respiratory-rate-monitoring.md": {
+      "anna_id": "arxiv:2025c70100c3c449",
+      "title": "RespEar: Earable-Based Robust Respiratory Rate Monitoring",
+      "url": "http://arxiv.org/abs/2407.06901v1"
+    }
+  }
+}

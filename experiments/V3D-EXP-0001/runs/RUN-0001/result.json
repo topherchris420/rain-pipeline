@@ -1,0 +1,1039 @@
+{
+  "artifacts": [
+    {
+      "bytes": 24324,
+      "kind": "anna-research-record/v1",
+      "name": "anna_record.json",
+      "note": "external artifact; referenced by hash, never fetched",
+      "sha256": "c37ad44ea9b157ff64d9f7e8704ac87c87feb09bf709dfd1d46729bd172fe1d2",
+      "stored": false,
+      "uri": "runs/20261004T150406Z/anna_record.json"
+    },
+    {
+      "bytes": 1634,
+      "kind": "anna-verification",
+      "name": "anna_verification.json",
+      "note": "external artifact; referenced by hash, never fetched",
+      "sha256": "77e16b7dd07a11bb85f7559b225fa8743c87ceb132dfb904962297de68d34fd4",
+      "stored": false,
+      "uri": "runs/20261004T150406Z/anna_verification.json"
+    },
+    {
+      "bytes": 4232,
+      "kind": "rain-offline-meeting",
+      "name": "panel_meeting.md",
+      "note": "external artifact; referenced by hash, never fetched",
+      "sha256": "b83d04d00f7b0c19b96e2cd83927884709974c5acf53994bf8da40e60031f045",
+      "stored": false,
+      "uri": "runs/20261004T150406Z/panel_meeting.md"
+    },
+    {
+      "bytes": 5093,
+      "kind": "rain-panel-summary",
+      "name": "panel_summary.json",
+      "note": "external artifact; referenced by hash, never fetched",
+      "sha256": "607780802d86bd7c1ddf628bce0c48eebd600b239ca08216763be003c69cf4d8",
+      "stored": false,
+      "uri": "runs/20261004T150406Z/panel_summary.json"
+    },
+    {
+      "bytes": 40100,
+      "kind": "drr-report",
+      "name": "drr_report.json",
+      "note": "external artifact; referenced by hash, never fetched",
+      "sha256": "638b36fad2fcc3f69bba0bbeecdf8ec5f3ac67d5aa97df38cb20f9bcb1e824c1",
+      "stored": false,
+      "uri": "runs/20261004T150406Z/drr_report.json"
+    }
+  ],
+  "definition": {
+    "created_at": "2026-10-04T14:59:41.703Z",
+    "created_by": "rain-pipeline",
+    "criteria": {
+      "failure": [
+        {
+          "id": "F1",
+          "metric": "coupling_detection_rate",
+          "op": "<",
+          "value": 0.5
+        }
+      ],
+      "guards": [
+        {
+          "id": "G1",
+          "metric": "records_analyzed",
+          "note": "At most 4 of 20 records may fail QC.",
+          "op": ">=",
+          "value": 16
+        },
+        {
+          "id": "G2",
+          "metric": "positive_control_detection_rate",
+          "note": "The test must have power on a known coupling.",
+          "op": ">=",
+          "value": 0.9
+        },
+        {
+          "id": "G3",
+          "metric": "synthetic_null_false_positive_rate",
+          "note": "The test must stay near its nominal 5% false-alarm rate.",
+          "op": "<=",
+          "value": 0.15
+        },
+        {
+          "id": "G4",
+          "metric": "mismatched_detection_rate",
+          "note": "Shared rhythm alone must not produce detections; otherwise no conclusion.",
+          "op": "<=",
+          "value": 0.25
+        }
+      ],
+      "success": [
+        {
+          "id": "S1",
+          "metric": "coupling_detection_rate",
+          "op": ">=",
+          "value": 0.8
+        }
+      ]
+    },
+    "data_policy": {
+      "classification": "public",
+      "store_artifacts": false
+    },
+    "dependencies": [
+      "drr-framework",
+      "numpy",
+      "scipy"
+    ],
+    "evidence_class": "measured",
+    "experiment_id": "V3D-EXP-0001",
+    "experiment_version": 1,
+    "hypothesis": "In at least 80% of 10-minute resting recordings from healthy young adults (PhysioNet Fantasia), DRR detects respiration -> heart-rate coupling (max-statistic adjusted p <= 0.05, lags 0.25-3 s), given that mismatched-subject pairs are detected in at most 25% and the synthetic controls behave as calibrated.",
+    "limitations": [
+      "Lagged correlation ignores sign and lag 0, and respiration and heart rate share one rhythm, so the reverse direction may score as high: this tests coupling, not direction.",
+      "Fantasia subjects are healthy young adults in supine rest watching the film Fantasia; nothing here generalizes to other ages, conditions or postures.",
+      "R peaks come from a simple band-pass detector; records below the QC threshold are excluded, not repaired.",
+      "Respiratory sinus arrhythmia is established physiology; this experiment tests whether DRR recovers it, not whether it exists.",
+      "Literature retrieval uses Anna's deterministic hashing embeddings (lexical, not semantic) over arXiv metadata and abstracts only."
+    ],
+    "metrics": [
+      {
+        "description": "Records that passed R-peak QC and were analyzed.",
+        "deterministic": true,
+        "name": "records_analyzed",
+        "unit": "count"
+      },
+      {
+        "description": "Share of analyzed records with respiration -> heart-rate adjusted p <= alpha.",
+        "deterministic": true,
+        "name": "coupling_detection_rate",
+        "unit": "ratio"
+      },
+      {
+        "description": "Share of mismatched-subject pairs with adjusted p <= alpha.",
+        "deterministic": true,
+        "name": "mismatched_detection_rate",
+        "unit": "ratio"
+      },
+      {
+        "description": "coupling_detection_rate minus mismatched_detection_rate.",
+        "deterministic": true,
+        "name": "detection_rate_gap",
+        "unit": "ratio"
+      },
+      {
+        "description": "Share of synthetic directed pairs detected.",
+        "deterministic": true,
+        "name": "positive_control_detection_rate",
+        "unit": "ratio"
+      },
+      {
+        "description": "Share of independent synthetic pairs falsely detected.",
+        "deterministic": true,
+        "name": "synthetic_null_false_positive_rate",
+        "unit": "ratio"
+      },
+      {
+        "description": "Share of records with heart rate -> respiration adjusted p <= alpha (descriptive; direction is not claimed).",
+        "deterministic": true,
+        "name": "reverse_detection_rate",
+        "unit": "ratio"
+      },
+      {
+        "description": "Median lag of detected respiration -> heart-rate couplings (descriptive).",
+        "deterministic": true,
+        "name": "median_coupling_lag_s",
+        "unit": "s"
+      },
+      {
+        "description": "Share of records whose dominant Welch peaks of respiration and heart rate agree within 0.03 Hz (descriptive).",
+        "deterministic": true,
+        "name": "spectral_peak_agreement_rate",
+        "unit": "ratio"
+      },
+      {
+        "description": "Median dominant respiratory frequency (descriptive).",
+        "deterministic": true,
+        "name": "median_respiratory_frequency_hz",
+        "unit": "Hz"
+      },
+      {
+        "description": "Median of per-record mean heart rate (descriptive).",
+        "deterministic": true,
+        "name": "median_heart_rate_bpm",
+        "unit": "bpm"
+      }
+    ],
+    "parameters": {
+      "analysis": {
+        "alpha": 0.05,
+        "controls": {
+          "ar_coefficient": 0.5,
+          "positive_coupling": 0.3,
+          "positive_lag_samples": 4,
+          "synthetic_trials": 20
+        },
+        "correction": "max_statistic",
+        "max_lag_s": 3.0,
+        "method": "lagged_correlation",
+        "n_surrogates": 199,
+        "peak_agreement_hz": 0.03,
+        "seed": 20261004,
+        "surrogate_method": "circular_shift"
+      },
+      "data": {
+        "duration_s": 600,
+        "grid_hz": 4,
+        "highpass_hz": 0.05,
+        "qc": {
+          "min_valid_rr_fraction": 0.95
+        },
+        "records": [
+          "f1y01",
+          "f1y02",
+          "f1y03",
+          "f1y04",
+          "f1y05",
+          "f1y06",
+          "f1y07",
+          "f1y08",
+          "f1y09",
+          "f1y10",
+          "f2y01",
+          "f2y02",
+          "f2y03",
+          "f2y04",
+          "f2y05",
+          "f2y06",
+          "f2y07",
+          "f2y08",
+          "f2y09",
+          "f2y10"
+        ],
+        "source": "physionet-fantasia",
+        "start_s": 60
+      }
+    },
+    "procedure": [
+      "Retrieve and cite literature with Anna; seal the anna-research-record/v1 and re-verify every excerpt against the index.",
+      "Convene the R.A.I.N. offline panel over Anna's sources and archive the transcript.",
+      "Pre-register this definition in the R.A.I.N. registry before any data is fetched.",
+      "Fetch seconds 60-660 of each listed Fantasia record by HTTP byte range; hash every byte.",
+      "Detect R peaks (5-20 Hz band-pass, 330 ms refractory); exclude records whose valid-RR fraction is below 0.95.",
+      "Resample respiration (1 Hz low-pass) and instantaneous heart rate onto a 4 Hz grid; high-pass both at 0.05 Hz; z-score.",
+      "Run DRR RootingAnalyzer (lagged correlation, lags 1-12 samples, 199 circular-shift surrogates, max-statistic correction) on each subject's [respiration, heart rate].",
+      "Run the identical test on mismatched pairs (respiration of subject i, heart rate of subject i+1) and on 20 synthetic directed and 20 synthetic independent AR(1) pairs.",
+      "Submit measurements as rain-experiment-submission/v1; R.A.I.N. evaluates the criteria."
+    ],
+    "question": "Can DRR's surrogate-tested lead-lag analysis detect the well-established coupling from respiration to heart rate in real resting recordings, while not detecting it between different people?",
+    "rationale": "External real-data validation for DRR, whose only prior external test (QBO) was not supported. Respiratory sinus arrhythmia is established physiology, so this is a positive control on real recordings: a sound lead-lag method must find it in matched pairs and must not find it between mismatched subjects, whose breathing and heart rate share a ~0.25 Hz rhythm but no causal link. Literature context comes from Anna (arXiv) and the R.A.I.N. panel; criteria were fixed before any coupling statistic was computed on real data.",
+    "runner": {
+      "adapter": "rain-pipeline: Anna -> R.A.I.N. -> DRR (rain-experiment-submission/v1)",
+      "kind": "external",
+      "repository": "topherchris420/dynamic-resonance-rooting"
+    },
+    "schema_version": "rain-experiment/v1",
+    "seed": 20261004,
+    "subsystem": {
+      "component": "RootingAnalyzer",
+      "paths": [],
+      "repository": "topherchris420/dynamic-resonance-rooting"
+    },
+    "title": "Does DRR recover respiration-to-heart-rate coupling (RSA) in resting young adults?",
+    "variables": {
+      "controls": [
+        "synthetic directed AR(1) pairs (positive control)",
+        "independent AR(1) pairs (negative control)",
+        "mismatched-subject pairs (real-data negative control)",
+        "identical preprocessing, lag window, surrogates and correction for every pair"
+      ],
+      "dependent": [
+        "max-statistic adjusted p-value, respiration -> heart rate",
+        "lag of the strongest lagged correlation"
+      ],
+      "independent": [
+        "pairing: same subject vs mismatched subject"
+      ]
+    }
+  },
+  "definition_sha256": "8c4991a52141c959f52e30d2be615a85f89c47e386fbe61b9c89b78192346c28",
+  "duration_ms": 100202.0,
+  "error": null,
+  "evaluation": {
+    "failure": [
+      {
+        "holds": false,
+        "id": "F1",
+        "metric": "coupling_detection_rate",
+        "observed": 0.9,
+        "op": "<",
+        "value": 0.5
+      }
+    ],
+    "guards": [
+      {
+        "holds": true,
+        "id": "G1",
+        "metric": "records_analyzed",
+        "observed": 20,
+        "op": ">=",
+        "value": 16
+      },
+      {
+        "holds": true,
+        "id": "G2",
+        "metric": "positive_control_detection_rate",
+        "observed": 1.0,
+        "op": ">=",
+        "value": 0.9
+      },
+      {
+        "holds": true,
+        "id": "G3",
+        "metric": "synthetic_null_false_positive_rate",
+        "observed": 0.05,
+        "op": "<=",
+        "value": 0.15
+      },
+      {
+        "holds": true,
+        "id": "G4",
+        "metric": "mismatched_detection_rate",
+        "observed": 0.05,
+        "op": "<=",
+        "value": 0.25
+      }
+    ],
+    "rule": "rain-criteria/v1",
+    "success": [
+      {
+        "holds": true,
+        "id": "S1",
+        "metric": "coupling_detection_rate",
+        "observed": 0.9,
+        "op": ">=",
+        "value": 0.8
+      }
+    ],
+    "summary": "All 1 success criteria held and no failure criterion triggered."
+  },
+  "evidence_class": "measured",
+  "experiment_id": "V3D-EXP-0001",
+  "finished_at": "2026-10-04T15:05:50.788Z",
+  "hypothesis_verdict": "supported",
+  "inputs": {
+    "code": {
+      "pipeline": {
+        "source_sha256": "441b05c1c6da4aefd62df712108fd0bedb378710214280bd5bda1692639a9427",
+        "version": "0.1.0"
+      },
+      "vendored": {
+        "anna": {
+          "branch": "main",
+          "commit": "064af912028be740900cc7dd090c4c5bc13cdf9a",
+          "dirty": false,
+          "repository": "topherchris420/anna"
+        },
+        "drr": {
+          "branch": "main",
+          "commit": "862c4f75e6092e3314eb786adcb9fa2a7ee3e779",
+          "dirty": false,
+          "repository": "topherchris420/dynamic-resonance-rooting"
+        },
+        "rain": {
+          "branch": "main",
+          "commit": "9c8811e343d21b8c143055f9cf549abdefa862f1",
+          "dirty": false,
+          "repository": "topherchris420/james_library"
+        }
+      }
+    },
+    "dataset": {
+      "excluded_records": [],
+      "files": [
+        {
+          "byte_range": [
+            60000,
+            659999
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "519eff62d1ad082ea1f3ed68e4e90dc474dc35f7c99757b1d00cdaf1738bc9c2",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y01.hea",
+          "record": "f1y01",
+          "sha256": "e8312f30c9881f899b46f469532a0721dc3e6cf55d95ab7401d35a88b923c3d3",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f1y01.dat"
+        },
+        {
+          "byte_range": [
+            60000,
+            659999
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "9f9539b217b186e55eb10bd02c33d8fd716f8bc644d4ae5e5c815c063a8da77e",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y02.hea",
+          "record": "f1y02",
+          "sha256": "0197fc4de9b68e476b11f240aae78e81e654b7581844467d05cf6080d35d9a99",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f1y02.dat"
+        },
+        {
+          "byte_range": [
+            60000,
+            659999
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "51f76b2873ac92e84fd05a842d7580926c875ff12e895c3f4287679b5057d764",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y03.hea",
+          "record": "f1y03",
+          "sha256": "56c5cb9e9ca709c613046ad8d47e421e264bff2deaff191df4650d0c58ed5bb3",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f1y03.dat"
+        },
+        {
+          "byte_range": [
+            60000,
+            659999
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "2dfebac593c932bc4c73e49c834da796f55195c2758dba80c459af5fe7f368b5",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y04.hea",
+          "record": "f1y04",
+          "sha256": "815f72aa0a1bdd2756af793931cb9380f1705df4cc8000775706b5131e4dc85f",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f1y04.dat"
+        },
+        {
+          "byte_range": [
+            60000,
+            659999
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "e4b2cb36a48626d893fb9a6c74e13b3681c7d7ce8b2396eaafbff6d47ffa4180",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y05.hea",
+          "record": "f1y05",
+          "sha256": "2baaf977ba1d9c6a4ff56ce6b8bc86a5d9fc95dfdfd1c7c20533d10490eac907",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f1y05.dat"
+        },
+        {
+          "byte_range": [
+            60000,
+            659999
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "f2b5aeb9954288cd5de0e5eed274705321610a18d9fa6923801263c32b9ddbf1",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y06.hea",
+          "record": "f1y06",
+          "sha256": "468625ed63c13be96c04c21b059f54d0a25e3c6911a1fa9f59ca3d3d8c69c30b",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f1y06.dat"
+        },
+        {
+          "byte_range": [
+            60000,
+            659999
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "38128068262c493c60cfe37e3730ad4dc24467b0f97eb3d44092c5f8034aa55a",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y07.hea",
+          "record": "f1y07",
+          "sha256": "9c66f7b7e24e467b9cf476679aef9385afdf3ecba74509e51d6147e14b1b0d29",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f1y07.dat"
+        },
+        {
+          "byte_range": [
+            60000,
+            659999
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "74cded67d8460176178abd3552f6bfa7de87e5249fe5bd1ad2458de44b10e80e",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y08.hea",
+          "record": "f1y08",
+          "sha256": "9cae3f5344ef9693aacb2cde682d5560cf42071b5656dc52cf4ef64123ba1624",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f1y08.dat"
+        },
+        {
+          "byte_range": [
+            60000,
+            659999
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "3d72f47c294b3d54f8a3fc2805b7c6a02b5ffa19c69e814cf783d3884c8639c0",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y09.hea",
+          "record": "f1y09",
+          "sha256": "1c1d38fe1e823117a5eb1d69206131727e1297923a9be7aa9bf0710ba282b429",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f1y09.dat"
+        },
+        {
+          "byte_range": [
+            60000,
+            659999
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "df4a8a086037415a18cc23c367b5d009c6e0904d512b087d54ac85acfed46d9c",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y10.hea",
+          "record": "f1y10",
+          "sha256": "9bc47293ecd45a2c49a99a89e5037f47a575fc66123c2c6d422b9d7c6f2825ff",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f1y10.dat"
+        },
+        {
+          "byte_range": [
+            67500,
+            742499
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "4074b8fe12804229305d6e84c92453205dab5cce704856dadfc16e94ad6435a0",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y01.hea",
+          "record": "f2y01",
+          "sha256": "77a77de3f351b268dd9f94e629c31970e576668207fb4acea318b4b769d78e03",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f2y01.dat"
+        },
+        {
+          "byte_range": [
+            89910,
+            989009
+          ],
+          "duration_s": 600,
+          "fs_hz": 333.0,
+          "header_sha256": "9de8b532de4913dcd10e5355518bee34e8ea2b416069ec563c11c110afa9986d",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y02.hea",
+          "record": "f2y02",
+          "sha256": "88e895c3fce5fcfbf3a3c658e0f6ae7bd2b7696b20f3c452a34300b91e40d52c",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f2y02.dat"
+        },
+        {
+          "byte_range": [
+            67500,
+            742499
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "5af18ef02528d0a62d7bc3d237d259c5dabded7c60c70eedc503a33d5e84c565",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y03.hea",
+          "record": "f2y03",
+          "sha256": "95c8f5adb7f3eed892c424faada81828b5bf32fb0c94247eac360ff17fe1e7bd",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f2y03.dat"
+        },
+        {
+          "byte_range": [
+            67500,
+            742499
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "1b1cae21d75482e3c50c7d31f98e9506f5b0424814d1e5fa36373ba56f19a05d",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y04.hea",
+          "record": "f2y04",
+          "sha256": "c23919ad2931dbb66c37e69b840ca85891060e9deea60a27e9c11968704353fe",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f2y04.dat"
+        },
+        {
+          "byte_range": [
+            67500,
+            742499
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "de538fe68c7bc7b6a4ceccad35117a8bfc4a66c1d4a89dde8c0036dcb37d9c99",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y05.hea",
+          "record": "f2y05",
+          "sha256": "158c5fbbbce6827634fcc32f0ecc0f62a0ec73f821c2b82b760f1600a1017899",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f2y05.dat"
+        },
+        {
+          "byte_range": [
+            67500,
+            742499
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "6c7eb0d512356688ce7332e52e58cf9b8312ec7cd0e08df9221d626d31fa8463",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y06.hea",
+          "record": "f2y06",
+          "sha256": "df40f57af0de9be5de4dfe11d4274de905119487f509c8c6d8d156f520bc716a",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f2y06.dat"
+        },
+        {
+          "byte_range": [
+            67500,
+            742499
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "8eb44ce7d8cb71ed8b424326618ebfa78d68e813a37175a6ae1a1e9ac406ab8c",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y07.hea",
+          "record": "f2y07",
+          "sha256": "8d7d12a07d926fd4d76aa2b191e140f032bec9c6bd35bc6331cf27832e07cf60",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f2y07.dat"
+        },
+        {
+          "byte_range": [
+            67500,
+            742499
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "a3a8aea8b080612cf66b7d97802bff3d845efe94eb292d3263eab85b2441b432",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y08.hea",
+          "record": "f2y08",
+          "sha256": "0a8b44b844451f362095ad85f8597e023752162b742bd8f70d67f2351adcbae5",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f2y08.dat"
+        },
+        {
+          "byte_range": [
+            67500,
+            742499
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "0d9c147b527ce68ba3bfe5c069a21b85765b210dda22bd3840f3b8289b09746f",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y09.hea",
+          "record": "f2y09",
+          "sha256": "b75113c2c5235cb4bd7aa145788c21c0be18e0cb473ddebed45d54b9e3776212",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f2y09.dat"
+        },
+        {
+          "byte_range": [
+            67500,
+            742499
+          ],
+          "duration_s": 600,
+          "fs_hz": 250.0,
+          "header_sha256": "6a9a78d677c7f4f5ec47da3cfd5b978c86196e5b2f38fa349e53af0ed417c174",
+          "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y10.hea",
+          "record": "f2y10",
+          "sha256": "0297aeaf5ac215952317421fbc802085f25aab09b5e7b029eb03bb158a849ffd",
+          "start_s": 60,
+          "url": "https://physionet.org/files/fantasia/1.0.0/f2y10.dat"
+        }
+      ],
+      "license": "ODC-By-1.0",
+      "name": "PhysioNet Fantasia Database 1.0.0"
+    },
+    "literature": {
+      "engine": "Anna (in-process, embedded PostgreSQL)",
+      "excerpt_verification": {
+        "drifted": 0,
+        "invalid-excerpt": 0,
+        "missing-document": 0,
+        "missing-field": 0,
+        "relocated": 0,
+        "verified": 5
+      },
+      "record_sha256": "f8c6ae4e5d37d0928f437e7e8f30299c67a4bcc02e2060f130a68d293a07bdd3",
+      "retrieval": {
+        "backend": "postgres",
+        "candidate_count": 19,
+        "degraded": false,
+        "embedding": "hashing",
+        "executed": [
+          "fts",
+          "knn"
+        ],
+        "fusion": "rrf",
+        "requested_mode": "hybrid",
+        "score_ceiling": 0.03278688524590164,
+        "score_meaning": "ranking-score-not-probability",
+        "total_scope": "retrieved-candidates",
+        "unavailable": []
+      },
+      "search": "respiratory sinus arrhythmia or cardiorespiratory coupling",
+      "sources": [
+        {
+          "id": "arxiv:d278669380f744b7",
+          "title": "Mathematical and Preclinical Investigation of Respiratory Sinus Arrhythmia Effects on Cardiac Output",
+          "url": "http://arxiv.org/abs/2004.11325v1"
+        },
+        {
+          "id": "arxiv:e2e5ed79dbae2ef1",
+          "title": "Cardiorespiratory coupling improves cardiac pumping efficiency in heart failure",
+          "url": "http://arxiv.org/abs/2507.00597v1"
+        },
+        {
+          "id": "arxiv:2cd076769301f26e",
+          "title": "Analysis of Respiratory Sinus Arrhythmia with Neural Networks",
+          "url": "http://arxiv.org/abs/2609.05698v1"
+        },
+        {
+          "id": "arxiv:beb468b08796420f",
+          "title": "Disentangling Respiratory Sinus Arrhythmia in Heart Rate Variability Records",
+          "url": "http://arxiv.org/abs/1802.00683v1"
+        },
+        {
+          "id": "arxiv:c828102dbd28c9d9",
+          "title": "Synchronization-dissipation dynamics in the cardiorespiratory system",
+          "url": "http://arxiv.org/abs/2603.23259v1"
+        },
+        {
+          "id": "arxiv:f6c0e229eeda150f",
+          "title": "Contact Sensors to Remote Cameras: Quantifying Cardiorespiratory Coupling in High-Altitude Exercise Recovery",
+          "url": "http://arxiv.org/abs/2508.00773v1"
+        },
+        {
+          "id": "arxiv:d8d7da7b460e44ec",
+          "title": "Buffering blood pressure fluctuations by respiratory sinus arrhythmia may in fact enhance them: a theoretical analysis",
+          "url": "http://arxiv.org/abs/1007.2229v1"
+        },
+        {
+          "id": "arxiv:2025c70100c3c449",
+          "title": "RespEar: Earable-Based Robust Respiratory Rate Monitoring",
+          "url": "http://arxiv.org/abs/2407.06901v1"
+        }
+      ]
+    },
+    "panel": {
+      "citation_audit": {
+        "checked": 3,
+        "corpus_sha256": "41aea8b0cc027fc4f86a90f54439eda05006ad21eb7ab56acc3a240a72234639",
+        "passed": true,
+        "verified": 3
+      },
+      "engine": "R.A.I.N. offline meeting (deterministic, no model)",
+      "grounding": "strong",
+      "verdict": {
+        "agreed": "The library speaks to this directly: 7 papers cover 'drive', 'heart', 'rate' and 'rest', led by 04-disentangling-respiratory-sinus-arrhythmia-in-heart-rate-var.",
+        "contested": "Luca reads the shared 'clinical' in 04-disentangling-respiratory-sinus-arrhythmia-in-heart-rate-var and 07-buffering-blood-pressure-fluctuations-by-respiratory-sinus-a as real structure; Elena reads it as unreplicated until an outside source reproduces it.",
+        "next_move": "Write one falsifiable prediction for this question and the measurement that would refute it."
+      }
+    },
+    "preregistration": {
+      "created_at": "2026-10-04T14:59:41.703Z",
+      "definition_sha256": "8c4991a52141c959f52e30d2be615a85f89c47e386fbe61b9c89b78192346c28"
+    }
+  },
+  "interpretation": {
+    "deterministic": "All 1 success criteria held and no failure criterion triggered. Measured on this code and data; the result is bounded by the listed limitations.",
+    "model": null
+  },
+  "kind": "external",
+  "limitations": [
+    "Lagged correlation ignores sign and lag 0, and respiration and heart rate share one rhythm, so the reverse direction may score as high: this tests coupling, not direction.",
+    "Fantasia subjects are healthy young adults in supine rest watching the film Fantasia; nothing here generalizes to other ages, conditions or postures.",
+    "R peaks come from a simple band-pass detector; records below the QC threshold are excluded, not repaired.",
+    "Respiratory sinus arrhythmia is established physiology; this experiment tests whether DRR recovers it, not whether it exists.",
+    "Literature retrieval uses Anna's deterministic hashing embeddings (lexical, not semantic) over arXiv metadata and abstracts only."
+  ],
+  "measurements": {
+    "coupling_detection_rate": 0.9,
+    "detection_rate_gap": 0.85,
+    "median_coupling_lag_s": 0.5,
+    "median_heart_rate_bpm": 62.83499506042062,
+    "median_respiratory_frequency_hz": 0.2734375,
+    "mismatched_detection_rate": 0.05,
+    "positive_control_detection_rate": 1.0,
+    "records_analyzed": 20,
+    "reverse_detection_rate": 0.9,
+    "spectral_peak_agreement_rate": 0.2,
+    "synthetic_null_false_positive_rate": 0.05
+  },
+  "models": [],
+  "observations": [
+    "Literature: Anna record f8c6ae4e5d37d0928f437e7e8f30299c67a4bcc02e2060f130a68d293a07bdd3 (8 arXiv sources, embedding=hashing, fusion=rrf); excerpt verification ok=True.",
+    "Panel: grounding=strong; quotes verified 3/3. Agreed: The library speaks to this directly: 7 papers cover 'drive', 'heart', 'rate' and 'rest', led by 04-disentangling-respiratory-sinus-arrhythmia-in-heart-rate-var.",
+    "Panel contested: Luca reads the shared 'clinical' in 04-disentangling-respiratory-sinus-arrhythmia-in-heart-rate-var and 07-buffering-blood-pressure-fluctuations-by-respiratory-sinus-a as real structure; Elena reads it as unreplicated until an outside source reproduces it."
+  ],
+  "parameters": {
+    "analysis": {
+      "alpha": 0.05,
+      "controls": {
+        "ar_coefficient": 0.5,
+        "positive_coupling": 0.3,
+        "positive_lag_samples": 4,
+        "synthetic_trials": 20
+      },
+      "correction": "max_statistic",
+      "max_lag_s": 3.0,
+      "method": "lagged_correlation",
+      "n_surrogates": 199,
+      "peak_agreement_hz": 0.03,
+      "seed": 20261004,
+      "surrogate_method": "circular_shift"
+    },
+    "data": {
+      "duration_s": 600,
+      "grid_hz": 4,
+      "highpass_hz": 0.05,
+      "qc": {
+        "min_valid_rr_fraction": 0.95
+      },
+      "records": [
+        "f1y01",
+        "f1y02",
+        "f1y03",
+        "f1y04",
+        "f1y05",
+        "f1y06",
+        "f1y07",
+        "f1y08",
+        "f1y09",
+        "f1y10",
+        "f2y01",
+        "f2y02",
+        "f2y03",
+        "f2y04",
+        "f2y05",
+        "f2y06",
+        "f2y07",
+        "f2y08",
+        "f2y09",
+        "f2y10"
+      ],
+      "source": "physionet-fantasia",
+      "start_s": 60
+    }
+  },
+  "provenance": {
+    "producer": {
+      "branch": "main",
+      "commit": "862c4f75e6092e3314eb786adcb9fa2a7ee3e779",
+      "dirty": false,
+      "environment": {
+        "drr-framework": "4.3.0",
+        "numpy": "2.4.6",
+        "pgserver": "0.1.4",
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.11.9",
+        "scipy": "1.17.1"
+      },
+      "producer": "rain-pipeline 0.1.0",
+      "repository": "topherchris420/dynamic-resonance-rooting"
+    },
+    "recorded_at": "2026-10-04T15:05:51.855Z",
+    "recorded_by": {
+      "environment": {
+        "cpu_count": 8,
+        "machine": "AMD64",
+        "os": "Windows",
+        "os_release": "10",
+        "python": "3.11.9",
+        "python_implementation": "CPython"
+      },
+      "git": {
+        "branch": "main",
+        "changed_paths": 0,
+        "commit": "9c8811e343d21b8c143055f9cf549abdefa862f1",
+        "dirty": false,
+        "note": null
+      }
+    },
+    "source": "external_submission",
+    "submission_sha256": "0a47dfed45048f7bea0a5af254ba5d639e40e2d447b5c2ec795b9ab48b838a2e"
+  },
+  "reproduces": null,
+  "reproduction": null,
+  "run_id": "V3D-EXP-0001-RUN-0001",
+  "schema_version": "rain-experiment-run/v1",
+  "seed": 20261004,
+  "series": {
+    "coupling_adjusted_p": [
+      0.005,
+      0.005,
+      0.02,
+      0.01,
+      0.005,
+      0.005,
+      0.005,
+      0.005,
+      0.005,
+      0.005,
+      0.005,
+      0.01,
+      0.005,
+      0.005,
+      0.005,
+      0.005,
+      0.005,
+      0.005,
+      0.835,
+      0.21
+    ],
+    "coupling_lag_s": [
+      0.5,
+      0.75,
+      3.0,
+      0.75,
+      0.5,
+      0.5,
+      0.5,
+      0.25,
+      0.5,
+      0.25,
+      0.5,
+      0.75,
+      0.5,
+      0.25,
+      0.25,
+      0.5,
+      0.75,
+      0.5,
+      2.25,
+      3.0
+    ],
+    "coupling_score": [
+      0.8126390803498424,
+      0.6103072025683208,
+      0.6471941563218754,
+      0.5140461338276469,
+      0.4439613337048581,
+      0.47234391537352005,
+      0.6096312156738695,
+      0.4327797667796283,
+      0.453344560274035,
+      0.4976614606202412,
+      0.5010635256355014,
+      0.6361756254660283,
+      0.8052906962330011,
+      0.4913374054129278,
+      0.4756792232519798,
+      0.3703128784602117,
+      0.6445100954288404,
+      0.5466980346922955,
+      0.030361364494341472,
+      0.11539749159569451
+    ],
+    "mismatched_adjusted_p": [
+      0.31,
+      1.0,
+      0.145,
+      0.745,
+      0.485,
+      0.865,
+      0.78,
+      0.165,
+      0.635,
+      0.525,
+      0.98,
+      0.245,
+      0.68,
+      0.02,
+      0.24,
+      0.245,
+      0.53,
+      0.995,
+      0.23,
+      0.83
+    ],
+    "mismatched_score": [
+      0.0978324537411307,
+      0.015073478336366266,
+      0.1251830297744108,
+      0.051538807622084244,
+      0.05893825853959594,
+      0.04345129247513811,
+      0.05422033317001316,
+      0.10980769890698451,
+      0.06242517470565588,
+      0.06952731370965276,
+      0.017291466774578053,
+      0.07775704716743406,
+      0.07614805228590436,
+      0.13820899134471049,
+      0.07367371643441091,
+      0.057341848863042014,
+      0.06746892012030627,
+      0.03226054318199331,
+      0.10228954354854733,
+      0.05208431128307039
+    ]
+  },
+  "started_at": "2026-10-04T15:04:10.586Z",
+  "statistics": {
+    "coupling_adjusted_p": {
+      "max": 0.835,
+      "mean": 0.058,
+      "median": 0.005,
+      "min": 0.005,
+      "n": 20,
+      "note": null,
+      "stdev": 0.188487051,
+      "variance": 0.035527368
+    },
+    "coupling_lag_s": {
+      "max": 3.0,
+      "mean": 0.8375,
+      "median": 0.5,
+      "min": 0.25,
+      "n": 20,
+      "note": null,
+      "stdev": 0.851759016,
+      "variance": 0.725493421
+    },
+    "coupling_score": {
+      "max": 0.81263908,
+      "mean": 0.505536758,
+      "median": 0.499362493,
+      "min": 0.030361364,
+      "n": 20,
+      "note": null,
+      "stdev": 0.18842312,
+      "variance": 0.035503272
+    },
+    "mismatched_adjusted_p": {
+      "max": 1.0,
+      "mean": 0.5325,
+      "median": 0.5275,
+      "min": 0.02,
+      "n": 20,
+      "note": null,
+      "stdev": 0.317268357,
+      "variance": 0.100659211
+    },
+    "mismatched_score": {
+      "max": 0.138208991,
+      "mean": 0.069126114,
+      "median": 0.064947047,
+      "min": 0.015073478,
+      "n": 20,
+      "note": null,
+      "stdev": 0.032748914,
+      "variance": 0.001072491
+    }
+  },
+  "status": "passed"
+}

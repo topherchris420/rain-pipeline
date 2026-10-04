@@ -1,0 +1,6 @@
+This run crashed in pipeline glue code after the DRR stage, while building the
+R.A.I.N. submission (AttributeError: sha256_json was looked up in
+james_library.experiments.provenance; it lives in .schema). No submission was
+made, so R.A.I.N. holds no run record for it. Pre-registration V3D-EXP-0001 was
+created by this run at 2026-10-04T14:59:41.703Z, before any data was fetched;
+the criteria were not changed afterwards. The next run reused that registration.

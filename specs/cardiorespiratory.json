@@ -1,0 +1,109 @@
+{
+  "question": "Does breathing drive heart rate at rest, and can Dynamic Resonance Rooting recover that respiratory sinus arrhythmia coupling from real recordings?",
+  "literature": {
+    "arxiv_queries": [
+      "abs:\"respiratory sinus arrhythmia\"",
+      "abs:cardiorespiratory AND abs:coupling",
+      "abs:\"heart rate variability\" AND abs:respiration"
+    ],
+    "limit_per_query": 25,
+    "search": "respiratory sinus arrhythmia or cardiorespiratory coupling",
+    "max_sources": 8
+  },
+  "data": {
+    "source": "physionet-fantasia",
+    "records": [
+      "f1y01", "f1y02", "f1y03", "f1y04", "f1y05", "f1y06", "f1y07", "f1y08", "f1y09", "f1y10",
+      "f2y01", "f2y02", "f2y03", "f2y04", "f2y05", "f2y06", "f2y07", "f2y08", "f2y09", "f2y10"
+    ],
+    "start_s": 60,
+    "duration_s": 600,
+    "grid_hz": 4,
+    "highpass_hz": 0.05,
+    "qc": {"min_valid_rr_fraction": 0.95}
+  },
+  "analysis": {
+    "method": "lagged_correlation",
+    "surrogate_method": "circular_shift",
+    "correction": "max_statistic",
+    "max_lag_s": 3.0,
+    "n_surrogates": 199,
+    "alpha": 0.05,
+    "peak_agreement_hz": 0.03,
+    "seed": 20261004,
+    "controls": {
+      "synthetic_trials": 20,
+      "positive_coupling": 0.3,
+      "positive_lag_samples": 4,
+      "ar_coefficient": 0.5
+    }
+  },
+  "preregistration": {
+    "title": "Does DRR recover respiration-to-heart-rate coupling (RSA) in resting young adults?",
+    "question": "Can DRR's surrogate-tested lead-lag analysis detect the well-established coupling from respiration to heart rate in real resting recordings, while not detecting it between different people?",
+    "hypothesis": "In at least 80% of 10-minute resting recordings from healthy young adults (PhysioNet Fantasia), DRR detects respiration -> heart-rate coupling (max-statistic adjusted p <= 0.05, lags 0.25-3 s), given that mismatched-subject pairs are detected in at most 25% and the synthetic controls behave as calibrated.",
+    "rationale": "External real-data validation for DRR, whose only prior external test (QBO) was not supported. Respiratory sinus arrhythmia is established physiology, so this is a positive control on real recordings: a sound lead-lag method must find it in matched pairs and must not find it between mismatched subjects, whose breathing and heart rate share a ~0.25 Hz rhythm but no causal link. Literature context comes from Anna (arXiv) and the R.A.I.N. panel; criteria were fixed before any coupling statistic was computed on real data.",
+    "evidence_class": "measured",
+    "procedure": [
+      "Retrieve and cite literature with Anna; seal the anna-research-record/v1 and re-verify every excerpt against the index.",
+      "Convene the R.A.I.N. offline panel over Anna's sources and archive the transcript.",
+      "Pre-register this definition in the R.A.I.N. registry before any data is fetched.",
+      "Fetch seconds 60-660 of each listed Fantasia record by HTTP byte range; hash every byte.",
+      "Detect R peaks (5-20 Hz band-pass, 330 ms refractory); exclude records whose valid-RR fraction is below 0.95.",
+      "Resample respiration (1 Hz low-pass) and instantaneous heart rate onto a 4 Hz grid; high-pass both at 0.05 Hz; z-score.",
+      "Run DRR RootingAnalyzer (lagged correlation, lags 1-12 samples, 199 circular-shift surrogates, max-statistic correction) on each subject's [respiration, heart rate].",
+      "Run the identical test on mismatched pairs (respiration of subject i, heart rate of subject i+1) and on 20 synthetic directed and 20 synthetic independent AR(1) pairs.",
+      "Submit measurements as rain-experiment-submission/v1; R.A.I.N. evaluates the criteria."
+    ],
+    "variables": {
+      "independent": ["pairing: same subject vs mismatched subject"],
+      "dependent": [
+        "max-statistic adjusted p-value, respiration -> heart rate",
+        "lag of the strongest lagged correlation"
+      ],
+      "controls": [
+        "synthetic directed AR(1) pairs (positive control)",
+        "independent AR(1) pairs (negative control)",
+        "mismatched-subject pairs (real-data negative control)",
+        "identical preprocessing, lag window, surrogates and correction for every pair"
+      ]
+    },
+    "metrics": [
+      {"name": "records_analyzed", "unit": "count", "description": "Records that passed R-peak QC and were analyzed.", "deterministic": true},
+      {"name": "coupling_detection_rate", "unit": "ratio", "description": "Share of analyzed records with respiration -> heart-rate adjusted p <= alpha.", "deterministic": true},
+      {"name": "mismatched_detection_rate", "unit": "ratio", "description": "Share of mismatched-subject pairs with adjusted p <= alpha.", "deterministic": true},
+      {"name": "detection_rate_gap", "unit": "ratio", "description": "coupling_detection_rate minus mismatched_detection_rate.", "deterministic": true},
+      {"name": "positive_control_detection_rate", "unit": "ratio", "description": "Share of synthetic directed pairs detected.", "deterministic": true},
+      {"name": "synthetic_null_false_positive_rate", "unit": "ratio", "description": "Share of independent synthetic pairs falsely detected.", "deterministic": true},
+      {"name": "reverse_detection_rate", "unit": "ratio", "description": "Share of records with heart rate -> respiration adjusted p <= alpha (descriptive; direction is not claimed).", "deterministic": true},
+      {"name": "median_coupling_lag_s", "unit": "s", "description": "Median lag of detected respiration -> heart-rate couplings (descriptive).", "deterministic": true},
+      {"name": "spectral_peak_agreement_rate", "unit": "ratio", "description": "Share of records whose dominant Welch peaks of respiration and heart rate agree within 0.03 Hz (descriptive).", "deterministic": true},
+      {"name": "median_respiratory_frequency_hz", "unit": "Hz", "description": "Median dominant respiratory frequency (descriptive).", "deterministic": true},
+      {"name": "median_heart_rate_bpm", "unit": "bpm", "description": "Median of per-record mean heart rate (descriptive).", "deterministic": true}
+    ],
+    "criteria": {
+      "guards": [
+        {"id": "G1", "metric": "records_analyzed", "op": ">=", "value": 16, "note": "At most 4 of 20 records may fail QC."},
+        {"id": "G2", "metric": "positive_control_detection_rate", "op": ">=", "value": 0.9, "note": "The test must have power on a known coupling."},
+        {"id": "G3", "metric": "synthetic_null_false_positive_rate", "op": "<=", "value": 0.15, "note": "The test must stay near its nominal 5% false-alarm rate."},
+        {"id": "G4", "metric": "mismatched_detection_rate", "op": "<=", "value": 0.25, "note": "Shared rhythm alone must not produce detections; otherwise no conclusion."}
+      ],
+      "success": [
+        {"id": "S1", "metric": "coupling_detection_rate", "op": ">=", "value": 0.8}
+      ],
+      "failure": [
+        {"id": "F1", "metric": "coupling_detection_rate", "op": "<", "value": 0.5}
+      ]
+    },
+    "dependencies": ["drr-framework", "numpy", "scipy"],
+    "data_policy": {"classification": "public", "store_artifacts": false},
+    "limitations": [
+      "Lagged correlation ignores sign and lag 0, and respiration and heart rate share one rhythm, so the reverse direction may score as high: this tests coupling, not direction.",
+      "Fantasia subjects are healthy young adults in supine rest watching the film Fantasia; nothing here generalizes to other ages, conditions or postures.",
+      "R peaks come from a simple band-pass detector; records below the QC threshold are excluded, not repaired.",
+      "Respiratory sinus arrhythmia is established physiology; this experiment tests whether DRR recovers it, not whether it exists.",
+      "Literature retrieval uses Anna's deterministic hashing embeddings (lexical, not semantic) over arXiv metadata and abstracts only."
+    ],
+    "created_by": "rain-pipeline"
+  }
+}

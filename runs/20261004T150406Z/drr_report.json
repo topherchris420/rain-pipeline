@@ -1,0 +1,1346 @@
+{
+  "dataset_files": [
+    {
+      "record": "f1y01",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y01.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "e8312f30c9881f899b46f469532a0721dc3e6cf55d95ab7401d35a88b923c3d3",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y01.hea",
+      "header_sha256": "519eff62d1ad082ea1f3ed68e4e90dc474dc35f7c99757b1d00cdaf1738bc9c2",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f1y02",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y02.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "0197fc4de9b68e476b11f240aae78e81e654b7581844467d05cf6080d35d9a99",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y02.hea",
+      "header_sha256": "9f9539b217b186e55eb10bd02c33d8fd716f8bc644d4ae5e5c815c063a8da77e",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f1y03",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y03.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "56c5cb9e9ca709c613046ad8d47e421e264bff2deaff191df4650d0c58ed5bb3",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y03.hea",
+      "header_sha256": "51f76b2873ac92e84fd05a842d7580926c875ff12e895c3f4287679b5057d764",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f1y04",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y04.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "815f72aa0a1bdd2756af793931cb9380f1705df4cc8000775706b5131e4dc85f",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y04.hea",
+      "header_sha256": "2dfebac593c932bc4c73e49c834da796f55195c2758dba80c459af5fe7f368b5",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f1y05",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y05.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "2baaf977ba1d9c6a4ff56ce6b8bc86a5d9fc95dfdfd1c7c20533d10490eac907",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y05.hea",
+      "header_sha256": "e4b2cb36a48626d893fb9a6c74e13b3681c7d7ce8b2396eaafbff6d47ffa4180",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f1y06",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y06.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "468625ed63c13be96c04c21b059f54d0a25e3c6911a1fa9f59ca3d3d8c69c30b",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y06.hea",
+      "header_sha256": "f2b5aeb9954288cd5de0e5eed274705321610a18d9fa6923801263c32b9ddbf1",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f1y07",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y07.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "9c66f7b7e24e467b9cf476679aef9385afdf3ecba74509e51d6147e14b1b0d29",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y07.hea",
+      "header_sha256": "38128068262c493c60cfe37e3730ad4dc24467b0f97eb3d44092c5f8034aa55a",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f1y08",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y08.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "9cae3f5344ef9693aacb2cde682d5560cf42071b5656dc52cf4ef64123ba1624",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y08.hea",
+      "header_sha256": "74cded67d8460176178abd3552f6bfa7de87e5249fe5bd1ad2458de44b10e80e",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f1y09",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y09.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "1c1d38fe1e823117a5eb1d69206131727e1297923a9be7aa9bf0710ba282b429",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y09.hea",
+      "header_sha256": "3d72f47c294b3d54f8a3fc2805b7c6a02b5ffa19c69e814cf783d3884c8639c0",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f1y10",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y10.dat",
+      "byte_range": [
+        60000,
+        659999
+      ],
+      "sha256": "9bc47293ecd45a2c49a99a89e5037f47a575fc66123c2c6d422b9d7c6f2825ff",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f1y10.hea",
+      "header_sha256": "df4a8a086037415a18cc23c367b5d009c6e0904d512b087d54ac85acfed46d9c",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f2y01",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y01.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "77a77de3f351b268dd9f94e629c31970e576668207fb4acea318b4b769d78e03",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y01.hea",
+      "header_sha256": "4074b8fe12804229305d6e84c92453205dab5cce704856dadfc16e94ad6435a0",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f2y02",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y02.dat",
+      "byte_range": [
+        89910,
+        989009
+      ],
+      "sha256": "88e895c3fce5fcfbf3a3c658e0f6ae7bd2b7696b20f3c452a34300b91e40d52c",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y02.hea",
+      "header_sha256": "9de8b532de4913dcd10e5355518bee34e8ea2b416069ec563c11c110afa9986d",
+      "fs_hz": 333.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f2y03",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y03.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "95c8f5adb7f3eed892c424faada81828b5bf32fb0c94247eac360ff17fe1e7bd",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y03.hea",
+      "header_sha256": "5af18ef02528d0a62d7bc3d237d259c5dabded7c60c70eedc503a33d5e84c565",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f2y04",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y04.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "c23919ad2931dbb66c37e69b840ca85891060e9deea60a27e9c11968704353fe",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y04.hea",
+      "header_sha256": "1b1cae21d75482e3c50c7d31f98e9506f5b0424814d1e5fa36373ba56f19a05d",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f2y05",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y05.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "158c5fbbbce6827634fcc32f0ecc0f62a0ec73f821c2b82b760f1600a1017899",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y05.hea",
+      "header_sha256": "de538fe68c7bc7b6a4ceccad35117a8bfc4a66c1d4a89dde8c0036dcb37d9c99",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f2y06",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y06.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "df40f57af0de9be5de4dfe11d4274de905119487f509c8c6d8d156f520bc716a",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y06.hea",
+      "header_sha256": "6c7eb0d512356688ce7332e52e58cf9b8312ec7cd0e08df9221d626d31fa8463",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f2y07",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y07.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "8d7d12a07d926fd4d76aa2b191e140f032bec9c6bd35bc6331cf27832e07cf60",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y07.hea",
+      "header_sha256": "8eb44ce7d8cb71ed8b424326618ebfa78d68e813a37175a6ae1a1e9ac406ab8c",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f2y08",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y08.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "0a8b44b844451f362095ad85f8597e023752162b742bd8f70d67f2351adcbae5",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y08.hea",
+      "header_sha256": "a3a8aea8b080612cf66b7d97802bff3d845efe94eb292d3263eab85b2441b432",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f2y09",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y09.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "b75113c2c5235cb4bd7aa145788c21c0be18e0cb473ddebed45d54b9e3776212",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y09.hea",
+      "header_sha256": "0d9c147b527ce68ba3bfe5c069a21b85765b210dda22bd3840f3b8289b09746f",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    },
+    {
+      "record": "f2y10",
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y10.dat",
+      "byte_range": [
+        67500,
+        742499
+      ],
+      "sha256": "0297aeaf5ac215952317421fbc802085f25aab09b5e7b029eb03bb158a849ffd",
+      "header_url": "https://physionet.org/files/fantasia/1.0.0/f2y10.hea",
+      "header_sha256": "6a9a78d677c7f4f5ec47da3cfd5b978c86196e5b2f38fa349e53af0ed417c174",
+      "fs_hz": 250.0,
+      "start_s": 60,
+      "duration_s": 600
+    }
+  ],
+  "engine": "drr_framework.RootingAnalyzer",
+  "settings": {
+    "method": "lagged_correlation",
+    "surrogate_method": "circular_shift",
+    "correction": "max_statistic",
+    "max_lag_s": 3.0,
+    "n_surrogates": 199,
+    "alpha": 0.05,
+    "peak_agreement_hz": 0.03,
+    "seed": 20261004,
+    "controls": {
+      "synthetic_trials": 20,
+      "positive_coupling": 0.3,
+      "positive_lag_samples": 4,
+      "ar_coefficient": 0.5
+    },
+    "max_lag_samples": 12,
+    "grid_hz": 4,
+    "minimum_attainable_p": 0.005
+  },
+  "real_pairs": [
+    {
+      "record": "f1y01",
+      "forward_score": 0.8126390803498424,
+      "forward_lag_samples": 2,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.4956792404368077,
+      "reverse_lag_samples": 6,
+      "reverse_adjusted_p": 0.005,
+      "seed": 20261004,
+      "respiration_peak_hz": 0.28125,
+      "heart_rate_peak_hz": 0.234375,
+      "qc": {
+        "beats": 779,
+        "valid_rr_fraction": 0.9858611825192802,
+        "mean_heart_rate_bpm": 78.73594382617573,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f1y02",
+      "forward_score": 0.6103072025683208,
+      "forward_lag_samples": 3,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.21757238856780098,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.005,
+      "seed": 20261005,
+      "respiration_peak_hz": 0.28125,
+      "heart_rate_peak_hz": 0.078125,
+      "qc": {
+        "beats": 605,
+        "valid_rr_fraction": 0.9983443708609272,
+        "mean_heart_rate_bpm": 60.88622165122467,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f1y03",
+      "forward_score": 0.6471941563218754,
+      "forward_lag_samples": 12,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.02,
+      "reverse_score": 0.5454228606642733,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.025,
+      "seed": 20261006,
+      "respiration_peak_hz": 0.109375,
+      "heart_rate_peak_hz": 0.109375,
+      "qc": {
+        "beats": 659,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 66.08613810852343,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f1y04",
+      "forward_score": 0.5140461338276469,
+      "forward_lag_samples": 3,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.01,
+      "reverse_score": 0.4000127451120657,
+      "reverse_lag_samples": 5,
+      "reverse_adjusted_p": 0.01,
+      "seed": 20261007,
+      "respiration_peak_hz": 0.328125,
+      "heart_rate_peak_hz": 0.09375,
+      "qc": {
+        "beats": 453,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 45.51705978176279,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f1y05",
+      "forward_score": 0.4439613337048581,
+      "forward_lag_samples": 2,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.2326306670706821,
+      "reverse_lag_samples": 5,
+      "reverse_adjusted_p": 0.035,
+      "seed": 20261008,
+      "respiration_peak_hz": 0.328125,
+      "heart_rate_peak_hz": 0.078125,
+      "qc": {
+        "beats": 622,
+        "valid_rr_fraction": 0.9951690821256038,
+        "mean_heart_rate_bpm": 62.32450533391242,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f1y06",
+      "forward_score": 0.47234391537352005,
+      "forward_lag_samples": 2,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.27255029755711546,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.02,
+      "seed": 20261009,
+      "respiration_peak_hz": 0.25,
+      "heart_rate_peak_hz": 0.078125,
+      "qc": {
+        "beats": 592,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 59.5971123311565,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f1y07",
+      "forward_score": 0.6096312156738695,
+      "forward_lag_samples": 2,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.3649411696475697,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.015,
+      "seed": 20261010,
+      "respiration_peak_hz": 0.21875,
+      "heart_rate_peak_hz": 0.21875,
+      "qc": {
+        "beats": 529,
+        "valid_rr_fraction": 0.9981060606060606,
+        "mean_heart_rate_bpm": 53.78022191681513,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f1y08",
+      "forward_score": 0.4327797667796283,
+      "forward_lag_samples": 1,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.3057492073530907,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.005,
+      "seed": 20261011,
+      "respiration_peak_hz": 0.15625,
+      "heart_rate_peak_hz": 0.09375,
+      "qc": {
+        "beats": 620,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 62.30165164967464,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f1y09",
+      "forward_score": 0.453344560274035,
+      "forward_lag_samples": 2,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.18584621481463603,
+      "reverse_lag_samples": 4,
+      "reverse_adjusted_p": 0.005,
+      "seed": 20261012,
+      "respiration_peak_hz": 0.3125,
+      "heart_rate_peak_hz": 0.109375,
+      "qc": {
+        "beats": 703,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 70.55552540833672,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f1y10",
+      "forward_score": 0.4976614606202412,
+      "forward_lag_samples": 1,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.29997994548753915,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.005,
+      "seed": 20261013,
+      "respiration_peak_hz": 0.125,
+      "heart_rate_peak_hz": 0.125,
+      "qc": {
+        "beats": 754,
+        "valid_rr_fraction": 0.9960159362549801,
+        "mean_heart_rate_bpm": 76.02207036477647,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f2y01",
+      "forward_score": 0.5010635256355014,
+      "forward_lag_samples": 2,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.4451093451416018,
+      "reverse_lag_samples": 4,
+      "reverse_adjusted_p": 0.005,
+      "seed": 20261014,
+      "respiration_peak_hz": 0.359375,
+      "heart_rate_peak_hz": 0.109375,
+      "qc": {
+        "beats": 689,
+        "valid_rr_fraction": 0.998546511627907,
+        "mean_heart_rate_bpm": 69.15985565494866,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f2y02",
+      "forward_score": 0.6361756254660283,
+      "forward_lag_samples": 3,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.01,
+      "reverse_score": 0.36327053149217753,
+      "reverse_lag_samples": 5,
+      "reverse_adjusted_p": 0.015,
+      "seed": 20261015,
+      "respiration_peak_hz": 0.265625,
+      "heart_rate_peak_hz": 0.078125,
+      "qc": {
+        "beats": 550,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 55.51526333442061,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f2y03",
+      "forward_score": 0.8052906962330011,
+      "forward_lag_samples": 2,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.42441488641639735,
+      "reverse_lag_samples": 6,
+      "reverse_adjusted_p": 0.03,
+      "seed": 20261016,
+      "respiration_peak_hz": 0.3125,
+      "heart_rate_peak_hz": 0.3125,
+      "qc": {
+        "beats": 583,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 58.35350450155729,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f2y04",
+      "forward_score": 0.4913374054129278,
+      "forward_lag_samples": 1,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.3326482282814581,
+      "reverse_lag_samples": 5,
+      "reverse_adjusted_p": 0.005,
+      "seed": 20261017,
+      "respiration_peak_hz": 0.3125,
+      "heart_rate_peak_hz": 0.078125,
+      "qc": {
+        "beats": 761,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 76.40941498635186,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f2y05",
+      "forward_score": 0.4756792232519798,
+      "forward_lag_samples": 1,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.24449454740860246,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.01,
+      "seed": 20261018,
+      "respiration_peak_hz": 0.28125,
+      "heart_rate_peak_hz": 0.109375,
+      "qc": {
+        "beats": 787,
+        "valid_rr_fraction": 0.9860050890585241,
+        "mean_heart_rate_bpm": 78.68504292164418,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f2y06",
+      "forward_score": 0.3703128784602117,
+      "forward_lag_samples": 2,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.28713483543943286,
+      "reverse_lag_samples": 3,
+      "reverse_adjusted_p": 0.005,
+      "seed": 20261019,
+      "respiration_peak_hz": 0.375,
+      "heart_rate_peak_hz": 0.09375,
+      "qc": {
+        "beats": 606,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 60.67791018636099,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f2y07",
+      "forward_score": 0.6445100954288404,
+      "forward_lag_samples": 3,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.5269977920444202,
+      "reverse_lag_samples": 5,
+      "reverse_adjusted_p": 0.015,
+      "seed": 20261020,
+      "respiration_peak_hz": 0.25,
+      "heart_rate_peak_hz": 0.109375,
+      "qc": {
+        "beats": 574,
+        "valid_rr_fraction": 1.0,
+        "mean_heart_rate_bpm": 57.61439199449046,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f2y08",
+      "forward_score": 0.5466980346922955,
+      "forward_lag_samples": 2,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.25520904289684393,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.02,
+      "seed": 20261021,
+      "respiration_peak_hz": 0.203125,
+      "heart_rate_peak_hz": 0.125,
+      "qc": {
+        "beats": 626,
+        "valid_rr_fraction": 0.992,
+        "mean_heart_rate_bpm": 63.345484786928814,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f2y09",
+      "forward_score": 0.030361364494341472,
+      "forward_lag_samples": 9,
+      "forward_p": 0.68,
+      "forward_adjusted_p": 0.835,
+      "reverse_score": 0.08960624112333247,
+      "reverse_lag_samples": 4,
+      "reverse_adjusted_p": 0.235,
+      "seed": 20261022,
+      "respiration_peak_hz": 0.125,
+      "heart_rate_peak_hz": 0.25,
+      "qc": {
+        "beats": 770,
+        "valid_rr_fraction": 0.953185955786736,
+        "mean_heart_rate_bpm": 77.66096605030314,
+        "grid_samples": 2384
+      }
+    },
+    {
+      "record": "f2y10",
+      "forward_score": 0.11539749159569451,
+      "forward_lag_samples": 12,
+      "forward_p": 0.155,
+      "forward_adjusted_p": 0.21,
+      "reverse_score": 0.1347620628689287,
+      "reverse_lag_samples": 12,
+      "reverse_adjusted_p": 0.185,
+      "seed": 20261023,
+      "respiration_peak_hz": 0.109375,
+      "heart_rate_peak_hz": 0.0625,
+      "qc": {
+        "beats": 602,
+        "valid_rr_fraction": 0.9833610648918469,
+        "mean_heart_rate_bpm": 64.20388771361772,
+        "grid_samples": 2384
+      }
+    }
+  ],
+  "mismatched_pairs": [
+    {
+      "respiration_of": "f1y01",
+      "heart_rate_of": "f1y02",
+      "forward_score": 0.0978324537411307,
+      "forward_lag_samples": 1,
+      "forward_p": 0.185,
+      "forward_adjusted_p": 0.31,
+      "reverse_score": 0.09847739485804105,
+      "reverse_lag_samples": 9,
+      "reverse_adjusted_p": 0.31,
+      "seed": 20262004
+    },
+    {
+      "respiration_of": "f1y02",
+      "heart_rate_of": "f1y03",
+      "forward_score": 0.015073478336366266,
+      "forward_lag_samples": 9,
+      "forward_p": 0.995,
+      "forward_adjusted_p": 1.0,
+      "reverse_score": 0.0684944669478766,
+      "reverse_lag_samples": 8,
+      "reverse_adjusted_p": 0.445,
+      "seed": 20262005
+    },
+    {
+      "respiration_of": "f1y03",
+      "heart_rate_of": "f1y04",
+      "forward_score": 0.1251830297744108,
+      "forward_lag_samples": 4,
+      "forward_p": 0.085,
+      "forward_adjusted_p": 0.145,
+      "reverse_score": 0.07480454499743243,
+      "reverse_lag_samples": 10,
+      "reverse_adjusted_p": 0.645,
+      "seed": 20262006
+    },
+    {
+      "respiration_of": "f1y04",
+      "heart_rate_of": "f1y05",
+      "forward_score": 0.051538807622084244,
+      "forward_lag_samples": 12,
+      "forward_p": 0.525,
+      "forward_adjusted_p": 0.745,
+      "reverse_score": 0.05810483254248182,
+      "reverse_lag_samples": 11,
+      "reverse_adjusted_p": 0.62,
+      "seed": 20262007
+    },
+    {
+      "respiration_of": "f1y05",
+      "heart_rate_of": "f1y06",
+      "forward_score": 0.05893825853959594,
+      "forward_lag_samples": 6,
+      "forward_p": 0.365,
+      "forward_adjusted_p": 0.485,
+      "reverse_score": 0.04047956699073681,
+      "reverse_lag_samples": 4,
+      "reverse_adjusted_p": 0.845,
+      "seed": 20262008
+    },
+    {
+      "respiration_of": "f1y06",
+      "heart_rate_of": "f1y07",
+      "forward_score": 0.04345129247513811,
+      "forward_lag_samples": 11,
+      "forward_p": 0.695,
+      "forward_adjusted_p": 0.865,
+      "reverse_score": 0.08132877470144768,
+      "reverse_lag_samples": 3,
+      "reverse_adjusted_p": 0.36,
+      "seed": 20262009
+    },
+    {
+      "respiration_of": "f1y07",
+      "heart_rate_of": "f1y08",
+      "forward_score": 0.05422033317001316,
+      "forward_lag_samples": 12,
+      "forward_p": 0.645,
+      "forward_adjusted_p": 0.78,
+      "reverse_score": 0.11319365878127813,
+      "reverse_lag_samples": 4,
+      "reverse_adjusted_p": 0.175,
+      "seed": 20262010
+    },
+    {
+      "respiration_of": "f1y08",
+      "heart_rate_of": "f1y09",
+      "forward_score": 0.10980769890698451,
+      "forward_lag_samples": 4,
+      "forward_p": 0.075,
+      "forward_adjusted_p": 0.165,
+      "reverse_score": 0.10735552121427609,
+      "reverse_lag_samples": 5,
+      "reverse_adjusted_p": 0.17,
+      "seed": 20262011
+    },
+    {
+      "respiration_of": "f1y09",
+      "heart_rate_of": "f1y10",
+      "forward_score": 0.06242517470565588,
+      "forward_lag_samples": 1,
+      "forward_p": 0.435,
+      "forward_adjusted_p": 0.635,
+      "reverse_score": 0.06549725563373089,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.595,
+      "seed": 20262012
+    },
+    {
+      "respiration_of": "f1y10",
+      "heart_rate_of": "f2y01",
+      "forward_score": 0.06952731370965276,
+      "forward_lag_samples": 11,
+      "forward_p": 0.34,
+      "forward_adjusted_p": 0.525,
+      "reverse_score": 0.08100053733879181,
+      "reverse_lag_samples": 7,
+      "reverse_adjusted_p": 0.36,
+      "seed": 20262013
+    },
+    {
+      "respiration_of": "f2y01",
+      "heart_rate_of": "f2y02",
+      "forward_score": 0.017291466774578053,
+      "forward_lag_samples": 10,
+      "forward_p": 0.89,
+      "forward_adjusted_p": 0.98,
+      "reverse_score": 0.03506046499856277,
+      "reverse_lag_samples": 8,
+      "reverse_adjusted_p": 0.455,
+      "seed": 20262014
+    },
+    {
+      "respiration_of": "f2y02",
+      "heart_rate_of": "f2y03",
+      "forward_score": 0.07775704716743406,
+      "forward_lag_samples": 6,
+      "forward_p": 0.155,
+      "forward_adjusted_p": 0.245,
+      "reverse_score": 0.07047177372393823,
+      "reverse_lag_samples": 2,
+      "reverse_adjusted_p": 0.31,
+      "seed": 20262015
+    },
+    {
+      "respiration_of": "f2y03",
+      "heart_rate_of": "f2y04",
+      "forward_score": 0.07614805228590436,
+      "forward_lag_samples": 12,
+      "forward_p": 0.53,
+      "forward_adjusted_p": 0.68,
+      "reverse_score": 0.09101377321323902,
+      "reverse_lag_samples": 8,
+      "reverse_adjusted_p": 0.49,
+      "seed": 20262016
+    },
+    {
+      "respiration_of": "f2y04",
+      "heart_rate_of": "f2y05",
+      "forward_score": 0.13820899134471049,
+      "forward_lag_samples": 10,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.02,
+      "reverse_score": 0.10935011126164744,
+      "reverse_lag_samples": 9,
+      "reverse_adjusted_p": 0.06,
+      "seed": 20262017
+    },
+    {
+      "respiration_of": "f2y05",
+      "heart_rate_of": "f2y06",
+      "forward_score": 0.07367371643441091,
+      "forward_lag_samples": 1,
+      "forward_p": 0.165,
+      "forward_adjusted_p": 0.24,
+      "reverse_score": 0.09988062372532713,
+      "reverse_lag_samples": 2,
+      "reverse_adjusted_p": 0.075,
+      "seed": 20262018
+    },
+    {
+      "respiration_of": "f2y06",
+      "heart_rate_of": "f2y07",
+      "forward_score": 0.057341848863042014,
+      "forward_lag_samples": 1,
+      "forward_p": 0.16,
+      "forward_adjusted_p": 0.245,
+      "reverse_score": 0.055424335797577017,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.29,
+      "seed": 20262019
+    },
+    {
+      "respiration_of": "f2y07",
+      "heart_rate_of": "f2y08",
+      "forward_score": 0.06746892012030627,
+      "forward_lag_samples": 5,
+      "forward_p": 0.39,
+      "forward_adjusted_p": 0.53,
+      "reverse_score": 0.08970713315097463,
+      "reverse_lag_samples": 5,
+      "reverse_adjusted_p": 0.335,
+      "seed": 20262020
+    },
+    {
+      "respiration_of": "f2y08",
+      "heart_rate_of": "f2y09",
+      "forward_score": 0.03226054318199331,
+      "forward_lag_samples": 2,
+      "forward_p": 0.91,
+      "forward_adjusted_p": 0.995,
+      "reverse_score": 0.03869905684344517,
+      "reverse_lag_samples": 12,
+      "reverse_adjusted_p": 0.98,
+      "seed": 20262021
+    },
+    {
+      "respiration_of": "f2y09",
+      "heart_rate_of": "f2y10",
+      "forward_score": 0.10228954354854733,
+      "forward_lag_samples": 1,
+      "forward_p": 0.165,
+      "forward_adjusted_p": 0.23,
+      "reverse_score": 0.12159776050711543,
+      "reverse_lag_samples": 2,
+      "reverse_adjusted_p": 0.075,
+      "seed": 20262022
+    },
+    {
+      "respiration_of": "f2y10",
+      "heart_rate_of": "f1y01",
+      "forward_score": 0.05208431128307039,
+      "forward_lag_samples": 1,
+      "forward_p": 0.665,
+      "forward_adjusted_p": 0.83,
+      "reverse_score": 0.056547041202444505,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.795,
+      "seed": 20262023
+    }
+  ],
+  "excluded_records": [],
+  "positive_controls": [
+    {
+      "forward_score": 0.2920893212275586,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.04511360186154411,
+      "reverse_lag_samples": 6,
+      "reverse_adjusted_p": 0.695,
+      "seed": 20263004
+    },
+    {
+      "forward_score": 0.2991430561622297,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.04986854130412278,
+      "reverse_lag_samples": 4,
+      "reverse_adjusted_p": 0.575,
+      "seed": 20263005
+    },
+    {
+      "forward_score": 0.2966566546321267,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.0515360964760834,
+      "reverse_lag_samples": 9,
+      "reverse_adjusted_p": 0.43,
+      "seed": 20263006
+    },
+    {
+      "forward_score": 0.30290329330263677,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.025355560072035075,
+      "reverse_lag_samples": 11,
+      "reverse_adjusted_p": 0.99,
+      "seed": 20263007
+    },
+    {
+      "forward_score": 0.2972022406977566,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.0657770709462814,
+      "reverse_lag_samples": 10,
+      "reverse_adjusted_p": 0.125,
+      "seed": 20263008
+    },
+    {
+      "forward_score": 0.3168515850719483,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.01,
+      "reverse_score": 0.050591117461678575,
+      "reverse_lag_samples": 12,
+      "reverse_adjusted_p": 0.585,
+      "seed": 20263009
+    },
+    {
+      "forward_score": 0.32574594773398624,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.043386265190349806,
+      "reverse_lag_samples": 8,
+      "reverse_adjusted_p": 0.74,
+      "seed": 20263010
+    },
+    {
+      "forward_score": 0.3126358964076581,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.04744692417647499,
+      "reverse_lag_samples": 4,
+      "reverse_adjusted_p": 0.615,
+      "seed": 20263011
+    },
+    {
+      "forward_score": 0.3348600520641842,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.01,
+      "reverse_score": 0.06578689178594822,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.18,
+      "seed": 20263012
+    },
+    {
+      "forward_score": 0.31923184573552865,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.05609805768293884,
+      "reverse_lag_samples": 5,
+      "reverse_adjusted_p": 0.415,
+      "seed": 20263013
+    },
+    {
+      "forward_score": 0.36845367613330104,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.07055908660500204,
+      "reverse_lag_samples": 10,
+      "reverse_adjusted_p": 0.15,
+      "seed": 20263014
+    },
+    {
+      "forward_score": 0.3181356535292228,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.04054842102757613,
+      "reverse_lag_samples": 7,
+      "reverse_adjusted_p": 0.895,
+      "seed": 20263015
+    },
+    {
+      "forward_score": 0.28541504025510134,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.0354228752867483,
+      "reverse_lag_samples": 9,
+      "reverse_adjusted_p": 0.92,
+      "seed": 20263016
+    },
+    {
+      "forward_score": 0.31116942374656403,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.038976304941446306,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.845,
+      "seed": 20263017
+    },
+    {
+      "forward_score": 0.29172679855864553,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.04641158903808809,
+      "reverse_lag_samples": 3,
+      "reverse_adjusted_p": 0.62,
+      "seed": 20263018
+    },
+    {
+      "forward_score": 0.3382483981214645,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.07596445430068202,
+      "reverse_lag_samples": 8,
+      "reverse_adjusted_p": 0.01,
+      "seed": 20263019
+    },
+    {
+      "forward_score": 0.31219984231908726,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.04397606311518346,
+      "reverse_lag_samples": 12,
+      "reverse_adjusted_p": 0.83,
+      "seed": 20263020
+    },
+    {
+      "forward_score": 0.29366392238659234,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.042499946047265945,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.815,
+      "seed": 20263021
+    },
+    {
+      "forward_score": 0.2738903372740407,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.0604547228531964,
+      "reverse_lag_samples": 9,
+      "reverse_adjusted_p": 0.225,
+      "seed": 20263022
+    },
+    {
+      "forward_score": 0.29123920473599707,
+      "forward_lag_samples": 4,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.005,
+      "reverse_score": 0.038504010600739914,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.92,
+      "seed": 20263023
+    }
+  ],
+  "null_controls": [
+    {
+      "forward_score": 0.03412859975051572,
+      "forward_lag_samples": 7,
+      "forward_p": 0.73,
+      "forward_adjusted_p": 0.955,
+      "reverse_score": 0.032360338499723806,
+      "reverse_lag_samples": 3,
+      "reverse_adjusted_p": 0.975,
+      "seed": 20264004
+    },
+    {
+      "forward_score": 0.02844408352221366,
+      "forward_lag_samples": 11,
+      "forward_p": 0.94,
+      "forward_adjusted_p": 0.995,
+      "reverse_score": 0.03285738777012796,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.995,
+      "seed": 20264005
+    },
+    {
+      "forward_score": 0.06908983376587427,
+      "forward_lag_samples": 12,
+      "forward_p": 0.055,
+      "forward_adjusted_p": 0.08,
+      "reverse_score": 0.05007390513931131,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.485,
+      "seed": 20264006
+    },
+    {
+      "forward_score": 0.033188738487381735,
+      "forward_lag_samples": 1,
+      "forward_p": 0.81,
+      "forward_adjusted_p": 0.955,
+      "reverse_score": 0.04113652954541557,
+      "reverse_lag_samples": 9,
+      "reverse_adjusted_p": 0.875,
+      "seed": 20264007
+    },
+    {
+      "forward_score": 0.046926782247887114,
+      "forward_lag_samples": 2,
+      "forward_p": 0.435,
+      "forward_adjusted_p": 0.65,
+      "reverse_score": 0.05280245712451985,
+      "reverse_lag_samples": 8,
+      "reverse_adjusted_p": 0.545,
+      "seed": 20264008
+    },
+    {
+      "forward_score": 0.044575677013202364,
+      "forward_lag_samples": 3,
+      "forward_p": 0.595,
+      "forward_adjusted_p": 0.83,
+      "reverse_score": 0.04257286841870279,
+      "reverse_lag_samples": 8,
+      "reverse_adjusted_p": 0.88,
+      "seed": 20264009
+    },
+    {
+      "forward_score": 0.030817394357011627,
+      "forward_lag_samples": 4,
+      "forward_p": 0.805,
+      "forward_adjusted_p": 0.965,
+      "reverse_score": 0.043739477887492585,
+      "reverse_lag_samples": 12,
+      "reverse_adjusted_p": 0.77,
+      "seed": 20264010
+    },
+    {
+      "forward_score": 0.05090311108498835,
+      "forward_lag_samples": 12,
+      "forward_p": 0.405,
+      "forward_adjusted_p": 0.575,
+      "reverse_score": 0.035746496356744165,
+      "reverse_lag_samples": 4,
+      "reverse_adjusted_p": 0.9,
+      "seed": 20264011
+    },
+    {
+      "forward_score": 0.05487759742578389,
+      "forward_lag_samples": 2,
+      "forward_p": 0.305,
+      "forward_adjusted_p": 0.51,
+      "reverse_score": 0.052667365140661095,
+      "reverse_lag_samples": 1,
+      "reverse_adjusted_p": 0.57,
+      "seed": 20264012
+    },
+    {
+      "forward_score": 0.05512839270916903,
+      "forward_lag_samples": 4,
+      "forward_p": 0.27,
+      "forward_adjusted_p": 0.39,
+      "reverse_score": 0.036831493960957085,
+      "reverse_lag_samples": 7,
+      "reverse_adjusted_p": 0.9,
+      "seed": 20264013
+    },
+    {
+      "forward_score": 0.044067963714631675,
+      "forward_lag_samples": 6,
+      "forward_p": 0.59,
+      "forward_adjusted_p": 0.84,
+      "reverse_score": 0.03188558254746603,
+      "reverse_lag_samples": 2,
+      "reverse_adjusted_p": 0.985,
+      "seed": 20264014
+    },
+    {
+      "forward_score": 0.04080002631789493,
+      "forward_lag_samples": 6,
+      "forward_p": 0.555,
+      "forward_adjusted_p": 0.84,
+      "reverse_score": 0.04506967115947916,
+      "reverse_lag_samples": 12,
+      "reverse_adjusted_p": 0.795,
+      "seed": 20264015
+    },
+    {
+      "forward_score": 0.08727576171340666,
+      "forward_lag_samples": 10,
+      "forward_p": 0.005,
+      "forward_adjusted_p": 0.025,
+      "reverse_score": 0.062007795329893235,
+      "reverse_lag_samples": 3,
+      "reverse_adjusted_p": 0.215,
+      "seed": 20264016
+    },
+    {
+      "forward_score": 0.04494127124207426,
+      "forward_lag_samples": 5,
+      "forward_p": 0.445,
+      "forward_adjusted_p": 0.665,
+      "reverse_score": 0.046724462730127245,
+      "reverse_lag_samples": 10,
+      "reverse_adjusted_p": 0.61,
+      "seed": 20264017
+    },
+    {
+      "forward_score": 0.054580136922738776,
+      "forward_lag_samples": 3,
+      "forward_p": 0.32,
+      "forward_adjusted_p": 0.55,
+      "reverse_score": 0.059007552798651476,
+      "reverse_lag_samples": 6,
+      "reverse_adjusted_p": 0.425,
+      "seed": 20264018
+    },
+    {
+      "forward_score": 0.035302852725899565,
+      "forward_lag_samples": 12,
+      "forward_p": 0.85,
+      "forward_adjusted_p": 0.965,
+      "reverse_score": 0.025137238223816936,
+      "reverse_lag_samples": 5,
+      "reverse_adjusted_p": 0.995,
+      "seed": 20264019
+    },
+    {
+      "forward_score": 0.02799816145201835,
+      "forward_lag_samples": 4,
+      "forward_p": 0.9,
+      "forward_adjusted_p": 0.985,
+      "reverse_score": 0.0708005358360193,
+      "reverse_lag_samples": 2,
+      "reverse_adjusted_p": 0.14,
+      "seed": 20264020
+    },
+    {
+      "forward_score": 0.03484117327534393,
+      "forward_lag_samples": 3,
+      "forward_p": 0.805,
+      "forward_adjusted_p": 0.96,
+      "reverse_score": 0.0577385681995239,
+      "reverse_lag_samples": 2,
+      "reverse_adjusted_p": 0.4,
+      "seed": 20264021
+    },
+    {
+      "forward_score": 0.04367867942370142,
+      "forward_lag_samples": 8,
+      "forward_p": 0.545,
+      "forward_adjusted_p": 0.8,
+      "reverse_score": 0.031628610249527636,
+      "reverse_lag_samples": 5,
+      "reverse_adjusted_p": 0.975,
+      "seed": 20264022
+    },
+    {
+      "forward_score": 0.04110566166002963,
+      "forward_lag_samples": 1,
+      "forward_p": 0.61,
+      "forward_adjusted_p": 0.805,
+      "reverse_score": 0.059865434501131805,
+      "reverse_lag_samples": 8,
+      "reverse_adjusted_p": 0.255,
+      "seed": 20264023
+    }
+  ],
+  "measurements": {
+    "records_analyzed": 20,
+    "coupling_detection_rate": 0.9,
+    "mismatched_detection_rate": 0.05,
+    "detection_rate_gap": 0.85,
+    "positive_control_detection_rate": 1.0,
+    "synthetic_null_false_positive_rate": 0.05,
+    "reverse_detection_rate": 0.9,
+    "median_coupling_lag_s": 0.5,
+    "spectral_peak_agreement_rate": 0.2,
+    "median_respiratory_frequency_hz": 0.2734375,
+    "median_heart_rate_bpm": 62.83499506042062
+  }
+}
