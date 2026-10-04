@@ -41,13 +41,14 @@ The first attempt (`runs/20261004T145937Z`) crashed in glue code after the analy
 ## Setup (Windows, no Docker)
 
 ```bash
-git clone https://github.com/topherchris420/anna.git vendor/anna
-git clone https://github.com/topherchris420/james_library.git vendor/james_library
-git -c core.longpaths=true clone https://github.com/topherchris420/dynamic-resonance-rooting.git vendor/dynamic-resonance-rooting
+git clone --recurse-submodules https://github.com/topherchris420/rain-pipeline.git
+cd rain-pipeline
 uv venv --python 3.11 .venv
 uv pip install --python .venv/Scripts/python.exe -e ".[dev]"
 uv pip install --python .venv/Scripts/python.exe --no-deps -e vendor/dynamic-resonance-rooting
 ```
+
+Anna, R.A.I.N. and DRR are git submodules under `vendor/`. Each is pinned to the commit that produced the committed results (anna `064af91`, james_library `9c8811e`, DRR `862c4f7`). Each run also records the commits and whether they were dirty. Moving a submodule to a newer commit is a code change: re-run the experiment and commit the new run.
 
 Anna needs PostgreSQL. `pgserver` bundles Postgres 16 + pgvector and runs it from `.pgdata/` only while a run is in progress.
 
@@ -95,7 +96,7 @@ R.A.I.N.'s own records are in `experiments/V3D-EXP-*/runs/` and `RESULTS.md`, wh
 
 - **The panel is R.A.I.N.'s offline mode.** The quotes are verbatim and verified, but the reasoning text is scripted. It informs the pre-registration and never writes criteria.
 - **Anna uses its deterministic hashing embeddings.** That is lexical retrieval over arXiv metadata and abstracts, not semantic search. Install Anna's `requirements-engine.txt` for real embeddings; that path is untested here.
-- **This registry is separate from R.A.I.N.'s own,** so its `V3D-EXP-0001` is not the same experiment as `vendor/james_library`'s `V3D-EXP-0001`. Pass `--registry vendor/james_library/experiments` to file into R.A.I.N.'s ledger instead. That modifies that checkout.
+- **Experiment IDs are local to this repo.** R.A.I.N. numbers experiments per registry, so this repo's `V3D-EXP-0001` is a different experiment from `V3D-EXP-0001` in james_library's own ledger. Cite them as `rain-pipeline/V3D-EXP-0001`. This experiment will not be moved into R.A.I.N.'s ledger: a new registration there would postdate the results, which defeats pre-registration. Future experiments can go to R.A.I.N.'s ledger with `--registry <james_library checkout>/experiments`; register them before running.
 
 ## Data citation
 

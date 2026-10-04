@@ -1,0 +1,9 @@
+[submodule "vendor/anna"]
+	path = vendor/anna
+	url = https://github.com/topherchris420/anna.git
+[submodule "vendor/james_library"]
+	path = vendor/james_library
+	url = https://github.com/topherchris420/james_library.git
+[submodule "vendor/dynamic-resonance-rooting"]
+	path = vendor/dynamic-resonance-rooting
+	url = https://github.com/topherchris420/dynamic-resonance-rooting.git
