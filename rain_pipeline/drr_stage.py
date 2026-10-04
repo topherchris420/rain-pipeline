@@ -18,12 +18,20 @@ measurements. The spec picks one with ``analysis.study``:
 Controls always run with exactly the settings of the real pairs. Studies only
 measure; the registration chooses which measurements are evidence, and
 R.A.I.N. evaluates them.
+
+Each study is published as a ``Study`` contract: the settings it accepts, the
+measurements it will emit for given settings, and a dry run on synthetic
+windows. Registration checks a spec against that contract, so a misspelt
+metric or setting is refused before any data is read instead of ending a
+holdout run as an error.
 """
 
 from __future__ import annotations
 
 import math
+import multiprocessing
 import os
+import re
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
 from typing import Any, Callable
@@ -78,6 +86,10 @@ def _map_rooting(tasks: list[tuple]) -> list[dict[str, Any]]:
 
     Each test is seeded on its own, so the results are identical however they
     are scheduled. ``RAIN_PIPELINE_WORKERS=1`` forces a single process.
+    Workers are spawned, never forked: a fork of a process that already runs
+    BLAS threads can deadlock, and only a fresh interpreter honours the
+    one-thread-per-worker setting below. Spawn is also what Windows uses, where
+    the committed runs were made.
     """
     workers = int(os.environ.get("RAIN_PIPELINE_WORKERS", max(1, (os.cpu_count() or 2) - 1)))
     if workers <= 1 or len(tasks) < PARALLEL_MIN_TASKS:
@@ -85,7 +97,7 @@ def _map_rooting(tasks: list[tuple]) -> list[dict[str, Any]]:
     inherited = {name: os.environ.get(name) for name in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS")}
     os.environ.update({name: "1" for name in inherited})  # workers inherit this: one thread each, no oversubscription
     try:
-        with ProcessPoolExecutor(max_workers=workers) as pool:
+        with ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context("spawn")) as pool:
             return list(pool.map(_rooting_task, tasks, chunksize=4))
     finally:
         for name, value in inherited.items():
@@ -291,7 +303,7 @@ def lag_window(windows: list[PairedSeries], excluded: list[dict[str, Any]], anal
                 synthetic[name][kind].append(queue(data, arm_lag_samples(arm, frequency, fs),
                                                    seed + 2_000_000 + 1000 * kind_index + k))
 
-    for (slot, _), outcome in zip(jobs, _map_rooting([task for _, task in jobs])):
+    for (slot, _), outcome in zip(jobs, _map_rooting([task for _, task in jobs]), strict=True):
         slot.update(outcome)
 
     def detected(entry: dict[str, Any]) -> bool:
@@ -347,9 +359,148 @@ def lag_window(windows: list[PairedSeries], excluded: list[dict[str, Any]], anal
     return DrrResult(measurements=measurements, series=series, report=report)
 
 
-STUDIES: dict[str, Callable[[list[PairedSeries], list[dict[str, Any]], dict[str, Any]], DrrResult]] = {
-    "rsa_coupling": rsa_coupling,
-    "lag_window": lag_window,
+# --------------------------------------------------------------------------- #
+# Study contracts
+# --------------------------------------------------------------------------- #
+NAME = re.compile(r"^[a-z][a-z0-9_]{0,63}$")  # R.A.I.N.'s pattern for measurement and series names
+COMMON_KEYS = ("study", "method", "surrogate_method", "correction", "n_surrogates", "alpha", "seed", "controls")
+CONTROL_KEYS = ("synthetic_trials", "positive_coupling", "positive_lag_samples", "ar_coefficient")
+
+
+def _number(value: Any) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def _integer(value: Any) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool)
+
+
+def _common_problems(analysis: dict[str, Any], keys: tuple[str, ...], control_keys: tuple[str, ...]) -> list[str]:
+    problems = [f"analysis.{key}: not a setting of this study" for key in analysis if key not in keys]
+    for key in ("method", "surrogate_method", "correction"):
+        if not isinstance(analysis.get(key), str) or not analysis.get(key):
+            problems.append(f"analysis.{key}: required (a DRR option name)")
+    if not _integer(analysis.get("n_surrogates")) or analysis["n_surrogates"] < 1:
+        problems.append("analysis.n_surrogates: required, an integer >= 1")
+    if not _number(analysis.get("alpha")) or not 0 < analysis["alpha"] < 1:
+        problems.append("analysis.alpha: required, between 0 and 1")
+    if not _integer(analysis.get("seed")) or not 0 <= analysis["seed"] <= 2**32 - 1 - 3_000_000:
+        problems.append("analysis.seed: required, an integer from 0 to 2**32 - 3000001 (per-test seeds are offsets)")
+    controls = analysis.get("controls")
+    if not isinstance(controls, dict):
+        return problems + ["analysis.controls: required (synthetic control settings)"]
+    problems += [f"analysis.controls.{key}: not a control setting of this study" for key in controls
+                 if key not in control_keys]
+    if not _integer(controls.get("synthetic_trials")) or controls["synthetic_trials"] < 0:
+        problems.append("analysis.controls.synthetic_trials: required, an integer >= 0")
+    if not _number(controls.get("positive_coupling")):
+        problems.append("analysis.controls.positive_coupling: required, a number")
+    for key in [k for k in control_keys if k.endswith("_lag_samples")]:
+        if not _integer(controls.get(key)) or controls[key] < 1:
+            problems.append(f"analysis.controls.{key}: required, an integer >= 1")
+    if not _number(controls.get("ar_coefficient")) or not -1 < controls["ar_coefficient"] < 1:
+        problems.append("analysis.controls.ar_coefficient: required, strictly between -1 and 1")
+    return problems
+
+
+def rsa_coupling_problems(analysis: dict[str, Any]) -> list[str]:
+    problems = _common_problems(analysis, COMMON_KEYS + ("max_lag_s", "peak_agreement_hz"), CONTROL_KEYS)
+    for key in ("max_lag_s", "peak_agreement_hz"):
+        if not _number(analysis.get(key)) or analysis[key] <= 0:
+            problems.append(f"analysis.{key}: required, a number > 0")
+    return problems
+
+
+def rsa_coupling_outputs(analysis: dict[str, Any]) -> list[str]:
+    return ["records_analyzed", "coupling_detection_rate", "mismatched_detection_rate", "detection_rate_gap",
+            "positive_control_detection_rate", "synthetic_null_false_positive_rate", "reverse_detection_rate",
+            "median_coupling_lag_s", "spectral_peak_agreement_rate", "median_respiratory_frequency_hz",
+            "median_heart_rate_bpm"]
+
+
+def lag_window_problems(analysis: dict[str, Any]) -> list[str]:
+    problems = _common_problems(analysis, COMMON_KEYS + ("arms", "strata", "contrasts"),
+                                CONTROL_KEYS + ("long_lag_samples",))
+    arms, strata = analysis.get("arms"), analysis.get("strata")
+    if not isinstance(arms, dict) or not arms:
+        problems.append("analysis.arms: required, at least one lag-window arm")
+        arms = {}
+    for name, arm in arms.items():
+        where = f"analysis.arms.{name}"
+        if not NAME.match(name):
+            problems.append(f"{where}: arm names must be lowercase identifiers (they become metric names)")
+        if not isinstance(arm, dict):
+            problems.append(f"{where}: must be an object")
+        elif arm.get("rule") == "half_period":
+            if set(arm) != {"rule", "min_lag_s", "max_lag_s"}:
+                problems.append(f"{where}: a half_period arm has exactly rule, min_lag_s and max_lag_s")
+            elif not (_number(arm["min_lag_s"]) and _number(arm["max_lag_s"]) and 0 < arm["min_lag_s"] <= arm["max_lag_s"]):
+                problems.append(f"{where}: needs 0 < min_lag_s <= max_lag_s")
+        elif set(arm) != {"max_lag_s"} or not _number(arm["max_lag_s"]) or arm["max_lag_s"] <= 0:
+            problems.append(f"{where}: a fixed arm is {{\"max_lag_s\": seconds > 0}}; "
+                            "a derived arm is {\"rule\": \"half_period\", \"min_lag_s\", \"max_lag_s\"}")
+    if not isinstance(strata, dict) or not strata:
+        problems.append("analysis.strata: required, at least one breathing stratum")
+        strata = {}
+    for name, bounds in strata.items():
+        where = f"analysis.strata.{name}"
+        if not NAME.match(name):
+            problems.append(f"{where}: stratum names must be lowercase identifiers (they become metric names)")
+        if not isinstance(bounds, dict) or set(bounds) - {"min_hz", "below_hz"} \
+                or not all(_number(v) and v >= 0 for v in bounds.values()):
+            problems.append(f"{where}: bounds are min_hz and/or below_hz, in Hz")
+        elif bounds.get("min_hz", 0.0) >= bounds.get("below_hz", math.inf):
+            problems.append(f"{where}: min_hz must be below below_hz")
+    contrasts = analysis.get("contrasts", {})
+    if not isinstance(contrasts, dict):
+        return problems + ["analysis.contrasts: must be an object"]
+    plain = set(_lag_window_base_outputs(arms, strata))
+    for name, contrast in contrasts.items():
+        where = f"analysis.contrasts.{name}"
+        if not NAME.match(name) or name in plain:
+            problems.append(f"{where}: needs a lowercase name that no other measurement uses")
+        if not isinstance(contrast, dict) or set(contrast) != {"metric", "arm", "minus"}:
+            problems.append(f"{where}: a contrast is {{metric, arm, minus}}")
+            continue
+        for side in ("arm", "minus"):
+            if contrast[side] not in arms:
+                problems.append(f"{where}.{side}: {contrast[side]!r} is not an arm")
+            elif f"{contrast['metric']}_{contrast[side]}" not in plain:
+                problems.append(f"{where}: {contrast['metric']}_{contrast[side]} is not a measurement of this study")
+    return problems
+
+
+def _lag_window_base_outputs(arms: dict[str, Any], strata: dict[str, Any]) -> list[str]:
+    names = ["windows_analyzed"]
+    for stratum in strata:
+        names += [f"{stratum}_windows", f"{stratum}_subjects"]
+    for arm in arms:
+        names += [f"window_detection_rate_{arm}", f"mismatched_detection_rate_{arm}"]
+        for stratum in strata:
+            names += [f"{stratum}_detection_rate_{arm}", f"mismatched_{stratum}_detection_rate_{arm}",
+                      f"{stratum}_median_lag_s_{arm}"]
+        names += [f"synthetic_positive_detection_rate_{arm}", f"synthetic_null_false_positive_rate_{arm}",
+                  f"synthetic_long_lag_detection_rate_{arm}"]
+    return names
+
+
+def lag_window_outputs(analysis: dict[str, Any]) -> list[str]:
+    return _lag_window_base_outputs(analysis["arms"], analysis["strata"]) + list(analysis.get("contrasts", {}))
+
+
+@dataclass(frozen=True)
+class Study:
+    """A named analysis: what it accepts, what it emits, and how it runs."""
+
+    name: str
+    run: Callable[[list[PairedSeries], list[dict[str, Any]], dict[str, Any]], DrrResult]
+    problems: Callable[[dict[str, Any]], list[str]]
+    outputs: Callable[[dict[str, Any]], list[str]]
+
+
+STUDIES: dict[str, Study] = {
+    "rsa_coupling": Study("rsa_coupling", rsa_coupling, rsa_coupling_problems, rsa_coupling_outputs),
+    "lag_window": Study("lag_window", lag_window, lag_window_problems, lag_window_outputs),
 }
 
 
@@ -357,5 +508,60 @@ def study_name(analysis: dict[str, Any]) -> str:
     return analysis.get("study", "rsa_coupling")  # V3D-EXP-0001 was registered before studies had names
 
 
+def study_of(analysis: dict[str, Any]) -> Study:
+    name = study_name(analysis)
+    if name not in STUDIES:
+        raise ValueError(f"unknown study {name!r}; known: {', '.join(STUDIES)}")
+    return STUDIES[name]
+
+
+def problems(analysis: dict[str, Any]) -> list[str]:
+    """Everything wrong with an ``analysis`` section (empty when it can run)."""
+    if not isinstance(analysis, dict):
+        return ["analysis: must be an object"]
+    if study_name(analysis) not in STUDIES:
+        return [f"analysis.study: {study_name(analysis)!r} is not a study; known: {', '.join(STUDIES)}"]
+    found = study_of(analysis).problems(analysis)
+    if not found:
+        found = [f"measurement {name!r} is not a valid R.A.I.N. measurement name"
+                 for name in study_of(analysis).outputs(analysis) if not NAME.match(name)]
+    return found
+
+
+def outputs(analysis: dict[str, Any]) -> list[str]:
+    """The measurements this study will emit, in emission order."""
+    return study_of(analysis).outputs(analysis)
+
+
 def run(windows: list[PairedSeries], excluded: list[dict[str, Any]], analysis: dict[str, Any]) -> DrrResult:
-    return STUDIES[study_name(analysis)](windows, excluded, analysis)
+    return study_of(analysis).run(windows, excluded, analysis)
+
+
+def dry_run(analysis: dict[str, Any]) -> DrrResult:
+    """Run the study end to end on two small synthetic people, with few surrogates and trials.
+
+    It proves the configured DRR options exist and that the study emits exactly
+    its declared outputs, before a single byte of real data is read.
+    """
+    rng = np.random.default_rng(0)
+    fs, n = 4.0, 480
+    windows = []
+    for k, record in enumerate(("dry_a", "dry_b")):
+        breath = np.sin(2 * np.pi * (0.2 + 0.05 * k) * np.arange(n) / fs) + 0.3 * rng.standard_normal(n)
+        heart = np.roll(breath, 3) + 0.5 * rng.standard_normal(n)
+        windows.append(PairedSeries(record, (breath - breath.mean()) / breath.std(),
+                                    (heart - heart.mean()) / heart.std(), fs,
+                                    {"mean_heart_rate_bpm": 60.0, "valid_rr_fraction": 1.0}, segment=0, start_s=0.0))
+    light = {**analysis, "n_surrogates": min(analysis["n_surrogates"], 9),
+             "controls": {**analysis["controls"], "synthetic_trials": min(analysis["controls"]["synthetic_trials"], 1)}}
+    previous = os.environ.get("RAIN_PIPELINE_WORKERS")
+    os.environ["RAIN_PIPELINE_WORKERS"] = "1"
+    try:
+        result = run(windows, [], light)
+    finally:
+        os.environ.pop("RAIN_PIPELINE_WORKERS") if previous is None else os.environ.__setitem__(
+            "RAIN_PIPELINE_WORKERS", previous)
+    if list(result.measurements) != outputs(analysis):
+        raise RuntimeError(f"study {study_name(analysis)!r} emitted {sorted(result.measurements)}, "
+                           f"but declares {sorted(outputs(analysis))}")
+    return result

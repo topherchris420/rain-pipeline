@@ -23,8 +23,10 @@ import requests
 from scipy.ndimage import median_filter
 from scipy.signal import butter, filtfilt, find_peaks, sosfiltfilt
 
+from . import __version__
+
 FANTASIA = "https://physionet.org/files/fantasia/1.0.0/"
-USER_AGENT = "rain-pipeline/0.1 (research; byte-range fetch of Fantasia segments)"
+USER_AGENT = f"rain-pipeline/{__version__} (research; byte-range fetch of Fantasia segments)"
 
 
 @dataclass(frozen=True)

@@ -1,11 +1,12 @@
 # Evidence is hashed byte-for-byte (Anna fingerprints, artifact SHA-256s in
 # submission.json, R.A.I.N. run records, framing hashes bound into registrations,
-# the data ledger). Git must never rewrite its line endings.
+# the data ledger, replay receipts). Git must never rewrite its line endings.
 * text=auto eol=lf
 runs/** -text
 experiments/** -text
 framing/** -text
 explorations/** -text
+replays/** -text
 data/ledger.json -text
 RESULTS.md -text
 *.png binary

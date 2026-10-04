@@ -1,6 +1,7 @@
 import json
 
 import numpy as np
+import pytest
 
 from rain_pipeline import drr_stage, vendor
 from rain_pipeline.physio import PairedSeries
@@ -129,3 +130,29 @@ def test_subject_balanced_rate_weights_people_not_windows():
     # Person a: 3 of 3 detected. Person b: 0 of 1. Window-level would say 0.75.
     assert m["slow_detection_rate_long"] == 0.5
     assert m["window_detection_rate_long"] == 0.75
+
+
+@pytest.mark.parametrize("analysis", [ANALYSIS, LAG_WINDOW, {**LAG_WINDOW, "contrasts": {}},
+                                      {**LAG_WINDOW, "arms": {"only": {"max_lag_s": 2.0}},
+                                       "contrasts": {}}],
+                         ids=["rsa_coupling", "lag_window", "no_contrasts", "one_arm"])
+def test_a_study_emits_exactly_its_declared_outputs(analysis):
+    assert drr_stage.problems(analysis) == []
+    result = drr_stage.dry_run(analysis)
+    assert list(result.measurements) == drr_stage.outputs(analysis)
+
+
+def test_the_committed_specs_declare_what_their_studies_emit():
+    for path in sorted((vendor.PROJECT_ROOT / "specs").glob("*.json")):
+        analysis = json.loads(path.read_text(encoding="utf-8"))["analysis"]
+        assert drr_stage.problems(analysis) == [], path.name
+        assert list(drr_stage.dry_run(analysis).measurements) == drr_stage.outputs(analysis), path.name
+
+
+def test_a_misconfigured_study_is_named_before_it_runs():
+    assert any("not a study" in p for p in drr_stage.problems({**ANALYSIS, "study": "nope"}))
+    assert any("max_lag_s" in p for p in drr_stage.problems({k: v for k, v in ANALYSIS.items() if k != "max_lag_s"}))
+    with pytest.raises(ValueError, match="unknown study"):
+        drr_stage.outputs({**ANALYSIS, "study": "nope"})
+    with pytest.raises(Exception):  # a DRR option DRR does not have fails in the dry run, not on real data
+        drr_stage.dry_run({**ANALYSIS, "method": "telepathy"})

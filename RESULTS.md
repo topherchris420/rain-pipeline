@@ -1,11 +1,11 @@
 # Experimental Results
 
-<!-- Generated from experiments/ by `python rain_lab.py experiment results`. Do not edit by hand. -->
+<!-- Generated from experiments/ by `python -m rain_pipeline publish` (R.A.I.N.'s results renderer). Do not edit by hand. -->
 
 What R.A.I.N. actually ran, and what happened. Each status is computed by host code
 from recorded measurements against criteria registered *before* the run; no model
 decides it. Failed and inconclusive results stay on the record.
-How to add one: [EXPERIMENTS.md](EXPERIMENTS.md). Raw records: [`experiments/`](experiments/).
+How to add one: [docs/PROTOCOL.md](docs/PROTOCOL.md). Raw records: [`experiments/`](experiments/).
 
 **3 experiments · 3 runs** — 2 passed · 1 failed
 
@@ -65,7 +65,7 @@ Measurements from V3D-EXP-0001-RUN-0001:
 - Respiratory sinus arrhythmia is established physiology; this experiment tests whether DRR recovers it, not whether it exists.
 - Literature retrieval uses Anna's deterministic hashing embeddings (lexical, not semantic) over arXiv metadata and abstracts only.
 
-**Reproduce:** `python rain_lab.py experiment reproduce V3D-EXP-0001`
+**Reproduce:** `python -m rain_pipeline replay V3D-EXP-0001`
 
 ## V3D-EXP-0002
 
@@ -128,7 +128,7 @@ Measurements from V3D-EXP-0002-RUN-0001:
 - A sibling experiment (specs/resonance-derived-window.json) was registered alongside this one and is judged on the same held-out windows. Each is evaluated on its own criteria; there is no correction across the two.
 - Literature retrieval uses Anna's deterministic hashing embeddings (lexical, not semantic) over arXiv metadata and abstracts only.
 
-**Reproduce:** `python rain_lab.py experiment reproduce V3D-EXP-0002`
+**Reproduce:** `python -m rain_pipeline replay V3D-EXP-0002`
 
 ## V3D-EXP-0003
 
@@ -191,4 +191,4 @@ Measurements from V3D-EXP-0003-RUN-0001:
 - A sibling experiment (specs/slow-breathers-6s-window.json) was registered alongside this one and is judged on the same held-out windows. Each is evaluated on its own criteria; there is no correction across the two.
 - Literature retrieval uses Anna's deterministic hashing embeddings (lexical, not semantic) over arXiv metadata and abstracts only.
 
-**Reproduce:** `python rain_lab.py experiment reproduce V3D-EXP-0003`
+**Reproduce:** `python -m rain_pipeline replay V3D-EXP-0003`

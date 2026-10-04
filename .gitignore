@@ -2,6 +2,13 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
 .scratch/
 .pgdata/
 data/cache/
+# transient write locks (left behind only if a process was killed mid-write)
+data/.ledger.json.lock
+experiments/.registry.lock

@@ -12,11 +12,14 @@ pre-registration — it never writes criteria and never decides an outcome.
 
 from __future__ import annotations
 
+import hashlib
+import os
 import re
+from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterator
 
 from . import vendor
 
@@ -47,14 +50,45 @@ def write_corpus(documents: list[Any], corpus_dir: Path) -> dict[str, dict[str, 
     return sources
 
 
-def run(question: str, documents: list[Any], corpus_dir: Path) -> PanelResult:
+def corpus_fingerprint(corpus_dir: Path) -> str:
+    """The digest R.A.I.N.'s citation audit records as ``corpus_sha256``, recomputed from the files on disk.
+
+    It mirrors the offline meeting's fingerprint (path, NUL, SHA-256 per
+    discovered corpus file, in path order) using R.A.I.N.'s own discovery and
+    hashing helpers, so a registration's ``panel_corpus_sha256`` can be checked
+    without convening the panel again.
+    """
+    vendor.ensure_importable()
+    from james_library.utilities.citation_corpus import discover_corpus_files, hash_corpus_files
+
+    files = discover_corpus_files(corpus_dir) if corpus_dir.is_dir() else []
+    digest = hashlib.sha256()
+    for row in hash_corpus_files(files, corpus_dir) if files else []:
+        digest.update(f"{row['path']}\0{row['sha256']}\n".encode())
+    return digest.hexdigest()
+
+
+@contextmanager
+def _cwd(path: Path | None) -> Iterator[None]:
+    previous = os.getcwd()
+    if path is not None:
+        os.chdir(path)
+    try:
+        yield
+    finally:
+        os.chdir(previous)
+
+
+def run(question: str, documents: list[Any], corpus_dir: Path, relative_to: Path | None = None) -> PanelResult:
+    """Convene the offline panel over ``documents``; its transcript names paths relative to ``relative_to``."""
     vendor.ensure_importable()
     from james_library.launcher.offline_meeting import build_offline_meeting
     from james_library.launcher.offline_meeting_view import render_markdown
 
     sources = write_corpus(documents, corpus_dir)
-    meeting = build_offline_meeting(question, corpus_dir)
-    markdown = render_markdown(meeting, timestamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    with _cwd(relative_to):  # the transcript prints the corpus path relative to the working directory
+        meeting = build_offline_meeting(question, corpus_dir)
+        markdown = render_markdown(meeting, timestamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
     summary = {
         "engine": "R.A.I.N. offline meeting (deterministic, no model)",

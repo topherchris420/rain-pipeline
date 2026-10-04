@@ -44,7 +44,10 @@ def render(report: dict[str, Any], path: Path, note: str = "") -> dict[str, Any]
     from matplotlib.path import Path as MplPath
     from matplotlib.ticker import PercentFormatter
 
-    plt.rcParams["font.family"] = ["Segoe UI", "DejaVu Sans"]
+    from matplotlib import font_manager
+
+    installed = {font.name for font in font_manager.fontManager.ttflist}  # naming a missing font logs a warning per text
+    plt.rcParams["font.family"] = [name for name in ("Segoe UI", "DejaVu Sans") if name in installed] or ["sans-serif"]
     measurements, rows, alpha = report["measurements"], report["windows"], settings["alpha"]
     strata: dict[str, dict[str, float]] = settings["strata"]
     colors = dict(zip(arms, SERIES))

@@ -4,18 +4,24 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 6 * * 1"  # weekly: replay V3D-EXP-0001 against the public data
 
 permissions:
   contents: read
 
 jobs:
-  tests:
+  integrity:
+    name: evidence integrity (Python 3.11, pinned environment)
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: Check out repository with full history and pinned submodules
         uses: actions/checkout@v4
         with:
           submodules: recursive
+          fetch-depth: 0  # verify checks registrations, anchors and the ledger against every commit
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -23,11 +29,92 @@ jobs:
           python-version: "3.11"
           cache: pip
 
-      - name: Install pipeline
+      - name: Install the pinned environment
         run: |
           python -m pip install --upgrade pip
-          pip install ".[dev]"
+          pip install -c constraints.txt -e ".[dev]"
           pip install --no-deps -e vendor/dynamic-resonance-rooting
 
-      - name: Run offline test suite
+      - name: Lint (syntax errors, undefined names, dead imports)
+        run: ruff check .
+
+      - name: Verify the evidence chain (every hash, binding, anchor, holdout and record)
+        run: python -m rain_pipeline verify --strict
+
+      - name: Run the offline test suite
         run: python -m pytest -q
+
+  compatibility:
+    name: tests (Python ${{ matrix.python }}, newest dependencies)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+          pip install --no-deps -e vendor/dynamic-resonance-rooting
+      - name: Run the offline test suite
+        run: python -m pytest -q
+
+  package:
+    name: clean install from a built wheel
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build the wheel
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build --wheel
+      - name: Install it into an empty environment and smoke-test it outside the checkout
+        run: |
+          python -m venv "$RUNNER_TEMP/clean"
+          "$RUNNER_TEMP/clean/bin/pip" install dist/*.whl
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/clean/bin/rain-pipeline" --version
+          "$RUNNER_TEMP/clean/bin/python" -m rain_pipeline --help > /dev/null
+          "$RUNNER_TEMP/clean/bin/python" -c "import json, sys; from rain_pipeline import spec; problems = spec.problems(json.load(open(sys.argv[1])), 'register'); assert not problems, problems" "$GITHUB_WORKSPACE/specs/resonance-derived-window.json"
+
+  replay:
+    name: replay V3D-EXP-0001 from PhysioNet
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install the pinned environment
+        run: |
+          python -m pip install --upgrade pip
+          pip install -c constraints.txt -e ".[dev]"
+          pip install --no-deps -e vendor/dynamic-resonance-rooting
+      - name: Cache the ledgered PhysioNet bytes (each is re-checked against its ledger hash)
+        uses: actions/cache@v4
+        with:
+          path: data/cache
+          key: physionet-${{ hashFiles('data/ledger.json') }}
+      - name: Replay the registered run and compare every measurement
+        run: python -m rain_pipeline replay V3D-EXP-0001 --no-write
