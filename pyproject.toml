@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rain-pipeline"
-version = "0.1.0"
-description = "Anna (literature) -> R.A.I.N. (deliberate, pre-register, evaluate) -> DRR (analysis)"
+version = "0.2.0"
+description = "Evidence-first research pipeline: literature -> R.A.I.N. registration -> DRR analysis -> reproducible verdict"
 requires-python = ">=3.10"
 dependencies = [
   # Anna engine (in-process) on an embedded PostgreSQL + pgvector
