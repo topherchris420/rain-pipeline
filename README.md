@@ -1,6 +1,6 @@
 # rain-pipeline
 
-## A note from me
+## A note 
 
 I built **rain-pipeline** because I kept running into the same problem from different directions: a scientific result can look rigorous long before anyone has a reliable way to separate what was *noticed*, what was *measured*, and what was actually allowed to count as evidence.
 
