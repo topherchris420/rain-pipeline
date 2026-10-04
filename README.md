@@ -19,7 +19,29 @@ question ──► register ── Anna: arXiv → hybrid search → cited summa
 
 Each stage calls the upstream code in-process at a pinned commit. Nothing is copied or forked, and every run records whether the vendored repos were dirty.
 
-<!-- RESULTS -->
+## Results
+
+| experiment | question | data | verdict (assigned by R.A.I.N.) |
+|---|---|---|---|
+| [V3D-EXP-0001](runs/20261004T150406Z/REPORT.md) | Does DRR recover respiration → heart-rate coupling at rest? | 20 people × 10 min | **PASSED**: 18 of 20 detected; 1 of 20 mismatched pairs |
+| [V3D-EXP-0002](runs/20261004T174209Z/REPORT.md) | Do slow breathers escape a 3 s lag window, and does 6 s recover them? | held out: 190 windows | **FAILED** (F1): nothing to recover; 3 s already detected 33 of 33 slow windows |
+| [V3D-EXP-0003](runs/20261004T181106Z/REPORT.md) | Can the lag window come from the breathing rhythm (half its period)? | held out: 190 windows | **PASSED**, at ceiling: matches both fixed windows (100%); mismatched 3 of 190 |
+
+![V3D-EXP-0003: detection by breathing stratum and frequency, for three lag windows](runs/20261004T181106Z/figure.png)
+
+### What the held-out data says
+
+V3D-EXP-0001 missed two people, f2y09 and f2y10, who both breathe slowly. That suggested the 3 s lag window was too short for slow breathing. Two experiments tested this on 6,000 s per person that had never been read, with their criteria pushed to GitHub (`4b4a030`) before the first byte was fetched. The idea did not survive:
+
+- **The coupling is too strong to miss in 10 minutes.** Within a person, breathing and heart rate correlate at a median |r| of 0.53, against 0.055 for mismatched people. Under the 3 s window, 171 of 190 windows reach the smallest p-value 199 surrogates allow (0.005), and none exceeds 0.020. Every lag window detects every window, including 43 windows breathing slower than the slow stratum (0.063–0.078 Hz).
+- **So V3D-EXP-0002 fails, and V3D-EXP-0003's pass is weak.** The 6 s window had no gain to show. The breathing-derived window matching both fixed windows at 100% shows that it costs nothing. It does not show that it helps, because these windows could not tell the arms apart. Both outcomes stand as registered.
+- **Truncation is real but rare.** *Description, not evidence.* In 6 of 76 slow or very slow windows, the 3 s window's best lag sat at its 3 s edge. The 6 s window found the true peak further out in 5 of them, with a lower p-value. None changed a detection.
+- **f2y09's miss looks like signal quality, not lag.** All 10 of its held-out windows fail the pre-registered beat QC (86–94% valid RR intervals). Its V3D-EXP-0001 window passed at 95.3%, just over the 95% bar, and showed almost no coupling (|r| 0.03). Noisy ECG or frequent ectopic beats would both do this; the band-pass detector cannot tell which. f2y10 is detected in all 10 held-out windows; its V3D-EXP-0001 window was the exception.
+- **The exploration's warning did not replicate.** On seen data the 6 s window fired on 4 of 20 mismatched pairs. On held-out data each lag window fired on 3 of 190.
+
+**Next experiment** (not yet registered): escape the ceiling, so the arms can disagree. Use shorter windows (about 2 min) and the older Fantasia cohort (f1o/f2o). Nobody has read any of its bytes, and its weaker age-related coupling lowers the ceiling. Choose the window length by exploring on the seen young-cohort data first. Separately, a beat detector that flags ectopic beats would show whether f2y09 can be analysed at all.
+
+Earlier on V3D-EXP-0001: heart rate → respiration was also detected in 90% of records, as its pre-registered limitation predicted, so it shows coupling, not direction. Its first attempt (`runs/20261004T145937Z`) crashed before submitting and is kept with a `CRASHED.txt`.
 
 ## The protocol, and what each step guarantees
 
