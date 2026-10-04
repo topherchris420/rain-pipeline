@@ -1,0 +1,147 @@
+{
+  "run_dir": "runs/20261004T181106Z",
+  "experiment_id": "V3D-EXP-0003",
+  "run_id": "V3D-EXP-0003-RUN-0001",
+  "status": "passed",
+  "verdict": "supported",
+  "evaluation": {
+    "rule": "rain-criteria/v1",
+    "guards": [
+      {
+        "id": "G1",
+        "metric": "holdout_bytes_read_before_registration",
+        "op": "<=",
+        "value": 0,
+        "observed": 0,
+        "holds": true
+      },
+      {
+        "id": "G2",
+        "metric": "windows_analyzed",
+        "op": ">=",
+        "value": 160,
+        "observed": 190,
+        "holds": true
+      },
+      {
+        "id": "G3",
+        "metric": "slow_subjects",
+        "op": ">=",
+        "value": 4,
+        "observed": 13,
+        "holds": true
+      },
+      {
+        "id": "G4",
+        "metric": "slow_windows",
+        "op": ">=",
+        "value": 20,
+        "observed": 33,
+        "holds": true
+      },
+      {
+        "id": "G5",
+        "metric": "synthetic_positive_detection_rate_resonant",
+        "op": ">=",
+        "value": 0.9,
+        "observed": 1.0,
+        "holds": true
+      },
+      {
+        "id": "G6",
+        "metric": "synthetic_null_false_positive_rate_resonant",
+        "op": "<=",
+        "value": 0.15,
+        "observed": 0.05,
+        "holds": true
+      }
+    ],
+    "success": [
+      {
+        "id": "S1",
+        "metric": "slow_resonant_vs_long",
+        "op": ">=",
+        "value": -0.05,
+        "observed": 0.0,
+        "holds": true
+      },
+      {
+        "id": "S2",
+        "metric": "normal_resonant_vs_short",
+        "op": ">=",
+        "value": -0.05,
+        "observed": 0.0,
+        "holds": true
+      },
+      {
+        "id": "S3",
+        "metric": "mismatched_detection_rate_resonant",
+        "op": "<=",
+        "value": 0.1,
+        "observed": 0.015789473684210527,
+        "holds": true
+      }
+    ],
+    "failure": [
+      {
+        "id": "F1",
+        "metric": "slow_resonant_vs_long",
+        "op": "<",
+        "value": -0.15,
+        "observed": 0.0,
+        "holds": false
+      },
+      {
+        "id": "F2",
+        "metric": "normal_resonant_vs_short",
+        "op": "<",
+        "value": -0.15,
+        "observed": 0.0,
+        "holds": false
+      },
+      {
+        "id": "F3",
+        "metric": "mismatched_detection_rate_resonant",
+        "op": ">",
+        "value": 0.15,
+        "observed": 0.015789473684210527,
+        "holds": false
+      }
+    ],
+    "summary": "All 3 success criteria held and no failure criterion triggered."
+  },
+  "measurements": {
+    "holdout_bytes_read_before_registration": 0,
+    "windows_analyzed": 190,
+    "slow_windows": 33,
+    "slow_subjects": 13,
+    "normal_windows": 114,
+    "normal_subjects": 19,
+    "slow_detection_rate_resonant": 1.0,
+    "slow_detection_rate_long": 1.0,
+    "slow_detection_rate_short": 1.0,
+    "slow_resonant_vs_long": 0.0,
+    "normal_detection_rate_resonant": 1.0,
+    "normal_detection_rate_short": 1.0,
+    "normal_detection_rate_long": 1.0,
+    "normal_resonant_vs_short": 0.0,
+    "mismatched_detection_rate_resonant": 0.015789473684210527,
+    "mismatched_detection_rate_short": 0.015789473684210527,
+    "mismatched_detection_rate_long": 0.015789473684210527,
+    "mismatched_long_vs_resonant": 0.0,
+    "mismatched_slow_detection_rate_resonant": 0.0,
+    "window_detection_rate_resonant": 1.0,
+    "slow_median_lag_s_resonant": 0.25,
+    "normal_median_lag_s_resonant": 0.5,
+    "synthetic_positive_detection_rate_resonant": 1.0,
+    "synthetic_null_false_positive_rate_resonant": 0.05
+  },
+  "rain_verify": {
+    "valid": true,
+    "problems": [],
+    "warnings": [],
+    "experiments": 1,
+    "runs": 1
+  },
+  "anna_record_sha256": "04b3db7e0e8728fcfaefe3ba37274d9e3c38dc3efa56bd9dba13eec365dc8607"
+}

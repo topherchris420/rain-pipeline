@@ -220,6 +220,206 @@
       "first_read_at": "2026-10-04T15:01:34.742Z",
       "first_read_by": "V3D-EXP-0001",
       "note": "Backfilled: time is the cache file's creation time."
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y01.dat",
+      "byte_range": [
+        660000,
+        6659999
+      ],
+      "sha256": "0a69604493a34594d8aade2d5bfbaac035a41de5d1f580db55c8c60d4ad78c5d",
+      "first_read_at": "2026-10-04T17:42:53.843Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y02.dat",
+      "byte_range": [
+        660000,
+        6659999
+      ],
+      "sha256": "2ff42ccc04a4687863db9995d2e10f030fe50b3bcb9634db70e57f284a3d7b68",
+      "first_read_at": "2026-10-04T17:43:39.362Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y03.dat",
+      "byte_range": [
+        660000,
+        6659999
+      ],
+      "sha256": "56e1f64ba4fc62226e18abbc47b889060678a7b6d73381b0c90920d123e8d2f3",
+      "first_read_at": "2026-10-04T17:44:22.418Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y04.dat",
+      "byte_range": [
+        660000,
+        6659999
+      ],
+      "sha256": "21b23a2413199c209171060c508947c97358cfb3912a243d9cf4b0949614a592",
+      "first_read_at": "2026-10-04T17:45:06.419Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y05.dat",
+      "byte_range": [
+        660000,
+        6659999
+      ],
+      "sha256": "42c1b2e94ac4e5388fb0636d2b3549cd0f12c3438769d08fdbd3f189b31baaf6",
+      "first_read_at": "2026-10-04T17:45:51.894Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y06.dat",
+      "byte_range": [
+        660000,
+        6659999
+      ],
+      "sha256": "50d2bb71cf125d4e25fcd1ef6ab8b00171fbeffb3ce6420547573d53f3f46c07",
+      "first_read_at": "2026-10-04T17:46:37.938Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y07.dat",
+      "byte_range": [
+        660000,
+        6659999
+      ],
+      "sha256": "295cc83ee3c03a1ad0bf27be2b70ca35ebd175fdd30b8b20740c770b8e8e36e8",
+      "first_read_at": "2026-10-04T17:47:20.412Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y08.dat",
+      "byte_range": [
+        660000,
+        6659999
+      ],
+      "sha256": "9bf95c0dc35be3d9ba47a05e2dd7d266afe0ef5c4449afa9b1fe4af7f244ba6c",
+      "first_read_at": "2026-10-04T17:48:00.339Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y09.dat",
+      "byte_range": [
+        660000,
+        6659999
+      ],
+      "sha256": "f33e0456c92a557f5c14578bc0a1f9cd5214a3b4c4d8f90421fd660a40b4e059",
+      "first_read_at": "2026-10-04T17:48:46.550Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f1y10.dat",
+      "byte_range": [
+        660000,
+        6659999
+      ],
+      "sha256": "1ad857714abd3f86c6112452c29a049093969611fe328a8318b3a8ec149aab35",
+      "first_read_at": "2026-10-04T17:49:31.784Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y01.dat",
+      "byte_range": [
+        742500,
+        7492499
+      ],
+      "sha256": "3d41cbf9dffe208c7d8e2e10e4709d38216f25be8aac702cec758feb82a0a74d",
+      "first_read_at": "2026-10-04T17:50:22.556Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y02.dat",
+      "byte_range": [
+        989010,
+        9980009
+      ],
+      "sha256": "670df650534300b7614b7dd780347f8c1f3bbbe54f22b45c9fa831e7ce637087",
+      "first_read_at": "2026-10-04T17:51:28.998Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y03.dat",
+      "byte_range": [
+        742500,
+        7492499
+      ],
+      "sha256": "891c0be646781db33ff50d18bc5ceb2ad44e595db0ba06176272e296f662ef9d",
+      "first_read_at": "2026-10-04T17:52:14.612Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y04.dat",
+      "byte_range": [
+        742500,
+        7492499
+      ],
+      "sha256": "37729ac853c2083784aeb0985c0c6b46ea2e92a6c7fd1c22cf7436eca32d7011",
+      "first_read_at": "2026-10-04T17:53:04.510Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y05.dat",
+      "byte_range": [
+        742500,
+        7492499
+      ],
+      "sha256": "34ac1eae984834eb7ab0d59f3c73217c0c832a806c5234cf7cefc35bb623c27f",
+      "first_read_at": "2026-10-04T17:53:54.028Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y06.dat",
+      "byte_range": [
+        742500,
+        7492499
+      ],
+      "sha256": "9a07cd0fde88f355ea0ffc8d8583e3d34d09e70ee9ee00b049813e2c737c65a1",
+      "first_read_at": "2026-10-04T17:54:50.824Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y07.dat",
+      "byte_range": [
+        742500,
+        7492499
+      ],
+      "sha256": "47add5fb1ff3b8ae7e772ffe22aab1318d7c66216f92b73644d7cf6b39e4c538",
+      "first_read_at": "2026-10-04T17:55:43.250Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y08.dat",
+      "byte_range": [
+        742500,
+        7492499
+      ],
+      "sha256": "5d63e76a7242a358f8ea1ac5ca2bfc92bd9b2dd28f6a9a0e3efefcae68bf807e",
+      "first_read_at": "2026-10-04T17:56:31.699Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y09.dat",
+      "byte_range": [
+        742500,
+        7492499
+      ],
+      "sha256": "03029d43d25a9c889425e0e63d26942edf31e8211ca22448fbb8e6a5de0c8e2b",
+      "first_read_at": "2026-10-04T17:57:21.209Z",
+      "first_read_by": "V3D-EXP-0002"
+    },
+    {
+      "url": "https://physionet.org/files/fantasia/1.0.0/f2y10.dat",
+      "byte_range": [
+        742500,
+        7492499
+      ],
+      "sha256": "ee3578273abaa41ae18f66fafb5e250fcccbccf7bb78d168d598dc767d1c1857",
+      "first_read_at": "2026-10-04T17:58:14.120Z",
+      "first_read_by": "V3D-EXP-0002"
     }
   ]
 }
