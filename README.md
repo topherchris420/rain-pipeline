@@ -16,6 +16,10 @@ This is the reproducibility instrument behind a simple challenge: could someone 
 
 The pipeline uses a **pinned historical R.A.I.N. version** from the former `james_library` as a submodule. The [current integrated R.A.I.N. Lab](https://github.com/topherchris420/lop-nur-twin) lives in Lop Nur Twin; these experiments remain tied to the versions that originally produced them.
 
+### A mathematical question worth testing
+
+**Can a preregistered effect survive a subject-level holdout and a falsifying negative control?** The [proposed study](docs/MATH_RESEARCH.md) names assumptions, an existing baseline and a negative control. Candidate mathematics can be explored through [R.A.I.N.'s shared reference scout](https://github.com/topherchris420/lop-nur-twin/blob/main/docs/MATH_PORTFOLIO.md). **No additional mathematical capability has been demonstrated here yet.**
+
 ## A note 
 
 I built **rain-pipeline** because I kept running into the same problem from different directions: a scientific result can look rigorous long before anyone has a reliable way to separate what was *noticed*, what was *measured*, and what was actually allowed to count as evidence.
