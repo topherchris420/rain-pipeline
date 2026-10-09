@@ -1,5 +1,21 @@
 # rain-pipeline
 
+**A hypothesis can fail. Its evidence should remain standing.**
+
+This is the reproducibility instrument behind a simple challenge: could someone inspect not only a scientific result, but the rules that were in force *before* the result appeared?
+
+[**Inspect the failed experiment →**](runs/20261004T174209Z/REPORT.md) · [**Read a passed run →**](runs/20261004T181106Z/REPORT.md) · [**Set up and replay →**](#ix-setup) · [**Verify the evidence chain →**](docs/EVIDENCE.md) · [**Current R.A.I.N. Lab →**](https://github.com/topherchris420/lop-nur-twin)
+
+**Three things to inspect first:**
+
+| Question | Where the answer lives | Boundary |
+| --- | --- | --- |
+| What was decided before the data? | [Registered experiment specs](experiments/) and their Git history | A registration can be verified; it cannot prove no out-of-band data access occurred |
+| What did the held-out records show? | [The recorded results](#vi-the-record), including a **failed** test | A run can test its registered hypothesis, not every interpretation of its graphs |
+| Could another machine regenerate the numerical result? | [Replay receipts](replays/) and [verification contracts](docs/EVIDENCE.md) | Matching computations do not constitute independent replication with new subjects |
+
+The pipeline uses a **pinned historical R.A.I.N. version** from the former `james_library` as a submodule. The [current integrated R.A.I.N. Lab](https://github.com/topherchris420/lop-nur-twin) lives in Lop Nur Twin; these experiments remain tied to the versions that originally produced them.
+
 ## A note 
 
 I built **rain-pipeline** because I kept running into the same problem from different directions: a scientific result can look rigorous long before anyone has a reliable way to separate what was *noticed*, what was *measured*, and what was actually allowed to count as evidence.
@@ -45,18 +61,20 @@ The group mind does not carry arguments. It carries phrases, and a principle the
 
 A relation of mine in Vienna spent his life demonstrating that the wish precedes the perception, and that the mind which holds the wish is the last to be told of it. Researchers who look at the data and then write the criteria are not frauds. They are human beings, and the ordinary laws of the human mind apply to them with full force.
 
-Every earlier remedy asked researchers to be better than that. This instrument asks nothing of the kind. It assumes the wish, and it arranges matters so that the wish does not matter. The criteria are written down, sealed by hash, committed to a public history and pushed to a server the researcher does not control, before one byte of the data that could gratify them is read; and the ledger records that first read, by the machine's own clock, to the millisecond. Researchers remain free to hope. They are no longer free to adjust.
+Every earlier remedy asked researchers to be better than that. This instrument asks nothing of the kind. It assumes the wish, and it arranges matters so that the wish does not matter. The criteria are written down, sealed by hash, committed to a public history and pushed before the pipeline first reads the designated holdout data; its ledger timestamps that first read. This makes the recorded process auditable. It cannot detect earlier or outside-the-tool access, and the author can still modify a public repository. The point is to expose the sequence, not declare the researcher's judgment infallible.
 
-## IV. Who vouches, and why it is not the author
+## IV. Four separate roles, no borrowed authority
 
-The public does not believe a maker. It believes an authority the maker did not hire. When a nation was to be persuaded to a heavier breakfast, the counsel did not praise bacon; the counsel wrote to five thousand physicians and reported what forty-five hundred of them replied.
+The strongest experiment is not the one with the most impressive referee. It is the one in which you can name **who did which step**, and check that no step quietly performed another's job.
 
-No claim in this repository is certified by the people who wrote the software. Four parties certify it, and none of them answers to the author:
+The pipeline separates four roles. **They are not four independent certifiers:** the researcher maintains this software, writes the criteria and chooses what to investigate. The separation is implemented by contracts and recorded provenance, not by an external review board.
 
-- **R.A.I.N., the judge.** It alone assigns a verdict, from the registered criteria and the submitted measurements and from nothing else. A submission carries no status. The author cannot pass their own experiment.
-- **Anna, the librarian.** It searches arXiv, produces the cited record and seals it; the record is re-verified by hash at every later step. The R.A.I.N. panel that argues over Anna's sources may inform a registration. It may never write a criterion.
-- **PhysioNet, the data.** Every byte range read from the public Fantasia database is logged once in an append-only ledger with its SHA-256 and the time and reader of its first read: 40 ranges, 142.7 MB, 20 people. A replay fetches the same bytes from the public server and refuses unless every hash agrees.
-- **The git history, the witness.** The first commit that holds a registration is its timestamp, and a push to GitHub is the only moment anyone outside the machine can attest to. `verify` reads that history. It does not read the author's word.
+- **R.A.I.N., the rules engine.** The pinned historical version evaluates submitted measurements against registered criteria. A run cannot declare its own verdict; the author's software still defines how the criteria are evaluated.
+- **Anna, the librarian.** Its cited literature record is sealed and re-verified by hash. Literature can inform a question but cannot overwrite criteria after registration.
+- **PhysioNet, the external data source.** The Fantasia byte ranges read through the pipeline are logged with hashes, first-access times and reader identity. Replay refuses changed bytes. The ledger **cannot detect data read outside this pipeline**.
+- **Git history, the public timeline.** A registration in a pushed commit is independently inspectable. It establishes the visible order of recorded commits and results, not a guarantee about everything the researcher did privately.
+
+The aim is to make mistakes and interventions easier to detect and explain, **not** to claim external certification or perfect prevention of hindsight bias.
 
 Each stage calls the upstream code in-process at a pinned commit (Anna, R.A.I.N. and DRR are submodules under `vendor/`). Nothing is copied or forked. Every run records which code ran, and `verify` maps that record back to the exact commit.
 
