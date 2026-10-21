@@ -5,6 +5,71 @@ Each run records the version and source digest of the code that produced it
 commit. Historical runs keep the version they were produced with; a new
 version never rewrites them.
 
+## 0.4.0 — 2026-10-21
+
+Preregistration proves when the criteria were written. 0.4.0 adds the second
+question a reader should ask of every confirmatory verdict: could the data have
+answered otherwise?
+
+**Rehearsal (new)**
+
+- `python -m rain_pipeline rehearse SPEC [--on EXPLORATION]` applies a spec's
+  criteria, through R.A.I.N.'s evaluator, to an exploration of seen data. It
+  reports the verdict data like that gives, how often the verdict recurs over
+  1,000 resamples of the exploration's people (settled at 95%), which
+  contrasts are blind (their arms decide every test alike, so they are 0 by
+  construction), and which rival arms the criteria cannot tell apart from a
+  registered one. It reads no data, runs no test and writes nothing.
+  Guards on the design's size and criteria on the holdout metrics are set
+  aside and listed; everything else is applied as registered.
+- `register` rehearses on `lineage.exploration` as its third step, writes
+  `framing/<spec>/rehearsal.json` and binds it by hash (`rehearsal_sha256`), so
+  what the data could decide is anchored in the same commit as the criteria.
+  An exploration of other tests is recorded as not rehearsable, with the reason.
+- `verify` checks the bound rehearsal and derives it again (`framing.rehearsal`);
+  `lineage` and each claim summarise it; each run's `REPORT.md` repeats its
+  findings; the evidence graph gives it the role `design (not evidence)` and a
+  `rehearses_on` edge. The graph digest of records without a rehearsal is
+  unchanged.
+- Resampling uses numpy's frozen `RandomState` stream, so a rehearsal derives
+  identically under any numpy version.
+
+**Studies and figures**
+
+- Measurements are a function of the tests a study ran:
+  `drr_stage.measure(report, analysis)` recomputes them from a report under any
+  settings, and `run` uses the same code. It gives back every committed
+  report's measurements exactly (tested).
+- The categorical palette gains its validated fourth slot, so four-arm studies
+  get figures; `figures.window_lengths` draws detection by window length.
+
+**Records**
+
+- V3D-EXP-0001 to 0003 bound no rehearsal and are unchanged. Rehearsed
+  afterwards on the exploration their registrations bound, V3D-EXP-0002 fails
+  in 1,000 of 1,000 resamples and V3D-EXP-0003 passes in 911: on those 20
+  windows the 3 s, 6 s and breathing-derived windows never disagree, so every
+  same-person contrast in both experiments is blind. Their verdicts and
+  evidence levels stand; the README says what they are worth.
+- New explorations of seen data (never evidence), run from a clean checkout at
+  their specs' commit: a one-sample (0.25 s) rival window on the 190 windows
+  V3D-EXP-0002 and 0003 judged (all 1,320 recorded tests reproduce with
+  identical p-values; the rival detects 189 of 190 windows and meets every
+  criterion 0003 applies to real recordings), and the young cohort cut into
+  300, 120 and 60 s windows. The ceiling breaks between 5 and 2 minutes; the
+  3 s, 6 s and derived windows stay within two points of each other at every
+  length; the one-sample window gains on slow breathers and loses on normal
+  ones. `docs/window-lengths.png` (`figures.window_lengths`) draws it.
+- `specs/narrow-window-elderly.json`: the next experiment, drafted and
+  rehearsed, not registered. It predicts that two-way effect in the unread
+  elderly cohort, in 2-minute windows; its rehearsal is neither settled nor
+  blind, and tells the one-sample window from the wide ones.
+
+**Tests**
+
+- Copies of the finished test repository get a private `origin`, so tests that
+  push no longer collide.
+
 ## 0.3.0 — 2026-10-04
 
 The evidence chain becomes checkable end to end, and failure modes that could

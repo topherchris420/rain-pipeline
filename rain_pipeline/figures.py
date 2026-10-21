@@ -2,10 +2,11 @@
 
 One figure per ``lag_window`` report: detection by breathing stratum (grouped
 columns, one per lag-window arm) and by breathing frequency (one line per
-arm). Colours are a validated three-slot categorical palette in fixed arm
-order; text stays in ink colours and every column carries its value, so
-identity never rests on colour alone. The numbers behind it are in the run's
-REPORT.md and drr_report.json.
+arm). ``window_lengths`` draws one more, across explorations: detection by
+window length. Colours are a validated four-slot categorical palette in fixed
+arm order; text stays in ink colours and every column or line carries a label,
+so identity never rests on colour alone. The numbers behind every figure are
+in the reports it is drawn from.
 """
 
 from __future__ import annotations
@@ -17,7 +18,9 @@ from typing import Any
 
 SURFACE, INK, SECONDARY, MUTED = "#fcfcfb", "#0b0b0b", "#52514e", "#898781"
 GRID, BASELINE = "#e1e0d9", "#c3c2b7"
-SERIES = ("#2a78d6", "#eb6834", "#1baf7a")  # blue, orange, aqua: passes all-pairs CVD checks on this surface
+# Blue, orange, aqua, yellow: the first three pass all-pairs CVD checks on this surface, all four the adjacent
+# pairs that lines and grouped columns put side by side. Aqua and yellow sit under 3:1 contrast, so marks are labelled.
+SERIES = ("#2a78d6", "#eb6834", "#1baf7a", "#eda100")
 DPI = 200
 PX = DPI / 100  # device pixels per CSS-like pixel
 
@@ -139,6 +142,93 @@ def render(report: dict[str, Any], path: Path, note: str = "") -> dict[str, Any]
     for text in legend.get_texts():
         text.set_color(SECONDARY)
 
+    fig.savefig(path, dpi=DPI, facecolor=SURFACE)
+    plt.close(fig)
+    data = path.read_bytes()
+    return {"name": path.name, "sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data)}
+
+
+def _window_seconds(report: dict[str, Any]) -> float:
+    starts = sorted({row["start_s"] for row in report["windows"] if row["record"] == report["windows"][0]["record"]})
+    return min(b - a for a, b in zip(starts, starts[1:])) if len(starts) > 1 else float("nan")
+
+
+def window_lengths(reports: list[dict[str, Any]], path: Path, note: str = "") -> dict[str, Any]:
+    """Detection by window length, one line per arm, from explorations that differ only in window length."""
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib import font_manager
+    from matplotlib.lines import Line2D
+    from matplotlib.ticker import PercentFormatter
+
+    installed = {font.name for font in font_manager.fontManager.ttflist}
+    plt.rcParams["font.family"] = [name for name in ("Segoe UI", "DejaVu Sans") if name in installed] or ["sans-serif"]
+    reports = sorted(reports, key=_window_seconds)
+    arms: dict[str, dict[str, Any]] = reports[0]["settings"]["arms"]
+    colors = dict(zip(arms, SERIES))
+    seconds = [_window_seconds(r) for r in reports]
+    x = [math.log(s) for s in seconds]
+
+    def values(metric: str, arm: str) -> list[float]:
+        return [r["measurements"][f"{metric}_{arm}"] for r in reports]
+
+    detected = [v for metric in ("normal_detection_rate", "slow_detection_rate") for arm in arms
+                for v in values(metric, arm)]
+    mismatched = [v for arm in arms for v in values("mismatched_detection_rate", arm)]
+    floor = math.floor(min(detected) * 10 - 0.5) / 10  # one scale for both detection panels
+    ceiling = max(0.1, math.ceil(max(mismatched) * 20) / 20)
+    panels = [("normal_detection_rate", "Own heart rate, normal breathing", (floor, 1.0)),
+              ("slow_detection_rate", "Own heart rate, slow breathing", (floor, 1.0)),
+              ("mismatched_detection_rate", "Another person's heart rate (should stay low)", (0.0, ceiling))]
+
+    fig = plt.figure(figsize=(11, 4.6), dpi=DPI, facecolor=SURFACE)
+    span = x[-1] - x[0]
+    for p, (metric, title, (low, high)) in enumerate(panels):
+        ax = fig.add_axes([0.05 + p * 0.325, 0.13, 0.27, 0.56])
+        ax.set_facecolor(SURFACE)
+        for side in ("top", "right", "left"):
+            ax.spines[side].set_visible(False)
+        ax.spines["bottom"].set_color(BASELINE)
+        ax.yaxis.grid(True, color=GRID, linewidth=0.6)
+        ax.set_axisbelow(True)
+        ax.tick_params(axis="both", colors=MUTED, labelcolor=SECONDARY, labelsize=8.5, length=0)
+        ax.set_ylim(low, high)
+        ax.yaxis.set_major_formatter(PercentFormatter(1.0, decimals=0))
+        ax.set_xlim(x[0] - 0.75 * span, x[-1] + 0.06 * span)  # room on the left for the line labels
+        ax.set_xticks(x)
+        ax.set_xticklabels([f"{s / 60:g} min" for s in seconds])
+        ax.set_title(title, loc="left", fontsize=9.5, color=SECONDARY, pad=8)
+        ends = []
+        for arm in arms:
+            series = values(metric, arm)
+            ax.plot(x, series, color=colors[arm], linewidth=2, marker="o", markersize=7, markeredgecolor=SURFACE,
+                    markeredgewidth=1.5, solid_capstyle="round", clip_on=False, zorder=3)
+            ends.append((series[0], arm))
+        # Direct labels beside the shortest window, where the lines spread most. Lines that start too close to
+        # label apart share one label, so a label never sits beside another line's point.
+        clusters: list[list[tuple[float, str]]] = []
+        for value, arm in sorted(ends):
+            if clusters and value - clusters[-1][-1][0] < (high - low) * 0.07:
+                clusters[-1].append((value, arm))
+            else:
+                clusters.append([(value, arm)])
+        for members in clusters:
+            names = {arm for _, arm in members}
+            ax.text(x[0] - 0.05 * span, sum(v for v, _ in members) / len(members),
+                    ", ".join(arm for arm in arms if arm in names), ha="right", va="center", fontsize=8,
+                    color=SECONDARY)
+    fig.text(0.05, 0.945, "Coupling detected, by window length and lag window", fontsize=13, fontweight="bold",
+             color=INK, va="center")
+    if note:
+        fig.text(0.05, 0.885, note, fontsize=9, color=SECONDARY, va="center")
+    handles = [Line2D([], [], color=colors[arm], linewidth=2, marker="o", markersize=6) for arm in arms]
+    legend = fig.legend(handles, [f"{arm}: {arm_label(arms[arm]).replace(' window', '')}" for arm in arms],
+                        loc="upper left", bbox_to_anchor=(0.045, 0.855), ncol=len(arms), frameon=False,
+                        fontsize=8.5, handletextpad=0.4, columnspacing=1.6)
+    for text in legend.get_texts():
+        text.set_color(SECONDARY)
     fig.savefig(path, dpi=DPI, facecolor=SURFACE)
     plt.close(fig)
     data = path.read_bytes()

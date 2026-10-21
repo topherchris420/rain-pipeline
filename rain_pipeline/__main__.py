@@ -1,7 +1,8 @@
 """Command line: ``python -m rain_pipeline <command>``.
 
   explore SPEC      try an analysis on data the ledger has already seen (never evidence)
-  register SPEC     Anna -> R.A.I.N. panel -> write-once registration; then commit and push
+  rehearse SPEC     apply a spec's criteria to an exploration: what could this data decide?
+  register SPEC     Anna -> R.A.I.N. panel -> rehearsal -> write-once registration; then commit and push
   run SPEC          data -> DRR -> R.A.I.N. verdict; refuses an unanchored registration
   verify            re-derive every result; re-check every link of the evidence chain
   replay EXP-ID     re-execute a recorded run from its registration; write a receipt
@@ -23,7 +24,7 @@ import json
 import sys
 from pathlib import Path
 
-from . import __version__, evidence, pipeline, registry_stage
+from . import __version__, evidence, pipeline, registry_stage, rehearsal
 from . import replay as replays
 from .errors import ProtocolRefusal
 from .layout import Layout
@@ -41,6 +42,13 @@ def _parser() -> argparse.ArgumentParser:
 
     explore = sub.add_parser("explore", help="exploratory analysis on already-seen data")
     explore.add_argument("spec", type=Path)
+
+    rehearse = sub.add_parser("rehearse", help="apply a spec's criteria to an exploration of seen data")
+    rehearse.add_argument("spec", type=Path)
+    rehearse.add_argument("--on", help="exploration directory or report (default: the spec's lineage.exploration)")
+    rehearse.add_argument("--resamples", type=int, default=rehearsal.RESAMPLES,
+                          help=f"subject resamples (default {rehearsal.RESAMPLES})")
+    rehearse.add_argument("--json", action="store_true", help="print the rehearsal document as JSON")
 
     register = sub.add_parser("register", help="frame and pre-register an experiment")
     register.add_argument("spec", type=Path)
@@ -90,6 +98,10 @@ def main(argv: list[str] | None = None) -> int:
 def _dispatch(args: argparse.Namespace, layout: Layout) -> int:
     if args.command == "explore":
         pipeline.explore(args.spec, layout=layout)
+        return EXIT_OK
+    if args.command == "rehearse":
+        doc = rehearsal.rehearse_spec(args.spec, on=args.on, layout=layout, resamples=args.resamples)
+        print(json.dumps(doc, indent=2, ensure_ascii=False) if args.json else rehearsal.render(doc, str(args.spec)))
         return EXIT_OK
     if args.command == "register":
         pipeline.register(args.spec, offline=args.offline, layout=layout)
