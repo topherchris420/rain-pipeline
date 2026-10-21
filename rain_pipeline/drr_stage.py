@@ -125,7 +125,6 @@ def _median(values: list[float | None]) -> float | None:
 # Study: rsa_coupling (V3D-EXP-0001)
 # --------------------------------------------------------------------------- #
 def rsa_coupling(pairs: list[PairedSeries], excluded: list[dict[str, Any]], analysis: dict[str, Any]) -> DrrResult:
-    alpha = analysis["alpha"]
     seed = analysis["seed"]
     fs = pairs[0].fs if pairs else 4.0
     max_lag = max(1, int(round(analysis["max_lag_s"] * fs)))
@@ -160,29 +159,7 @@ def rsa_coupling(pairs: list[PairedSeries], excluded: list[dict[str, Any]], anal
         data = simulate_ar1(n_samples, 2, controls["ar_coefficient"], rng)
         null.append(_rooting(data, analysis, max_lag, seed + 3000 + k))
 
-    detected = [r["forward_adjusted_p"] <= alpha for r in real]
-    mismatched_detected = [m["forward_adjusted_p"] <= alpha for m in mismatched]
-    coupling_rate, mismatched_rate = _rate(detected), _rate(mismatched_detected)
-    agreement = [
-        r["respiration_peak_hz"] is not None and r["heart_rate_peak_hz"] is not None
-        and abs(r["respiration_peak_hz"] - r["heart_rate_peak_hz"]) <= analysis["peak_agreement_hz"]
-        for r in real
-    ]
-    detected_lags = [r["forward_lag_samples"] / fs for r in real if r["forward_adjusted_p"] <= alpha]
-
-    measurements = {
-        "records_analyzed": len(real),
-        "coupling_detection_rate": coupling_rate,
-        "mismatched_detection_rate": mismatched_rate,
-        "detection_rate_gap": None if coupling_rate is None or mismatched_rate is None else coupling_rate - mismatched_rate,
-        "positive_control_detection_rate": _rate([p["forward_adjusted_p"] <= alpha for p in positive]),
-        "synthetic_null_false_positive_rate": _rate([n["forward_adjusted_p"] <= alpha for n in null]),
-        "reverse_detection_rate": _rate([r["reverse_adjusted_p"] <= alpha for r in real]),
-        "median_coupling_lag_s": float(np.median(detected_lags)) if detected_lags else None,
-        "spectral_peak_agreement_rate": _rate(agreement),
-        "median_respiratory_frequency_hz": _median([r["respiration_peak_hz"] for r in real]),
-        "median_heart_rate_bpm": _median([r["qc"]["mean_heart_rate_bpm"] for r in real]),
-    }
+    measurements = _rsa_coupling_measurements(real, mismatched, positive, null, analysis, fs)
     series = {
         "coupling_adjusted_p": [r["forward_adjusted_p"] for r in real],
         "mismatched_adjusted_p": [m["forward_adjusted_p"] for m in mismatched],
@@ -202,6 +179,34 @@ def rsa_coupling(pairs: list[PairedSeries], excluded: list[dict[str, Any]], anal
         "measurements": measurements,
     }
     return DrrResult(measurements=measurements, series=series, report=report)
+
+
+def _rsa_coupling_measurements(real: list[dict[str, Any]], mismatched: list[dict[str, Any]],
+                               positive: list[dict[str, Any]], null: list[dict[str, Any]],
+                               analysis: dict[str, Any], fs: float) -> dict[str, float | None]:
+    alpha = analysis["alpha"]
+    detected = [r["forward_adjusted_p"] <= alpha for r in real]
+    mismatched_detected = [m["forward_adjusted_p"] <= alpha for m in mismatched]
+    coupling_rate, mismatched_rate = _rate(detected), _rate(mismatched_detected)
+    agreement = [
+        r["respiration_peak_hz"] is not None and r["heart_rate_peak_hz"] is not None
+        and abs(r["respiration_peak_hz"] - r["heart_rate_peak_hz"]) <= analysis["peak_agreement_hz"]
+        for r in real
+    ]
+    detected_lags = [r["forward_lag_samples"] / fs for r in real if r["forward_adjusted_p"] <= alpha]
+    return {
+        "records_analyzed": len(real),
+        "coupling_detection_rate": coupling_rate,
+        "mismatched_detection_rate": mismatched_rate,
+        "detection_rate_gap": None if coupling_rate is None or mismatched_rate is None else coupling_rate - mismatched_rate,
+        "positive_control_detection_rate": _rate([p["forward_adjusted_p"] <= alpha for p in positive]),
+        "synthetic_null_false_positive_rate": _rate([n["forward_adjusted_p"] <= alpha for n in null]),
+        "reverse_detection_rate": _rate([r["reverse_adjusted_p"] <= alpha for r in real]),
+        "median_coupling_lag_s": float(np.median(detected_lags)) if detected_lags else None,
+        "spectral_peak_agreement_rate": _rate(agreement),
+        "median_respiratory_frequency_hz": _median([r["respiration_peak_hz"] for r in real]),
+        "median_heart_rate_bpm": _median([r["qc"]["mean_heart_rate_bpm"] for r in real]),
+    }
 
 
 # --------------------------------------------------------------------------- #
@@ -235,7 +240,7 @@ def stratum_of(frequency_hz: float | None, strata: dict[str, dict[str, float]]) 
 
 
 def lag_window(windows: list[PairedSeries], excluded: list[dict[str, Any]], analysis: dict[str, Any]) -> DrrResult:
-    alpha, seed = analysis["alpha"], analysis["seed"]
+    seed = analysis["seed"]
     arms: dict[str, dict[str, Any]] = analysis["arms"]
     strata: dict[str, dict[str, float]] = analysis["strata"]
     fs = windows[0].fs if windows else 4.0
@@ -306,41 +311,8 @@ def lag_window(windows: list[PairedSeries], excluded: list[dict[str, Any]], anal
     for (slot, _), outcome in zip(jobs, _map_rooting([task for _, task in jobs]), strict=True):
         slot.update(outcome)
 
-    def detected(entry: dict[str, Any]) -> bool:
-        return entry["forward_adjusted_p"] <= alpha
-
-    def subject_balanced(members: list[dict[str, Any]], arm: str) -> float | None:
-        """Each subject's share of detected windows, averaged with equal weight per subject."""
-        per_subject: dict[str, list[bool]] = {}
-        for row in members:
-            per_subject.setdefault(row["record"], []).append(detected(row["arms"][arm]))
-        return float(np.mean([np.mean(flags) for flags in per_subject.values()])) if per_subject else None
-
-    in_stratum = {name: [row for row in rows if row["stratum"] == name] for name in strata}
+    measurements = _lag_window_measurements(rows, synthetic, analysis, fs)
     with_mismatch = [row for row in rows if row["mismatched"]]
-
-    measurements: dict[str, float | None] = {"windows_analyzed": len(rows)}
-    for stratum, members in in_stratum.items():
-        measurements[f"{stratum}_windows"] = len(members)
-        measurements[f"{stratum}_subjects"] = len({row["record"] for row in members})
-    for name in arms:
-        measurements[f"window_detection_rate_{name}"] = _rate([detected(row["arms"][name]) for row in rows])
-        measurements[f"mismatched_detection_rate_{name}"] = _rate(
-            [detected(row["mismatched"]["arms"][name]) for row in with_mismatch])
-        for stratum, members in in_stratum.items():
-            measurements[f"{stratum}_detection_rate_{name}"] = subject_balanced(members, name)
-            measurements[f"mismatched_{stratum}_detection_rate_{name}"] = _rate(
-                [detected(row["mismatched"]["arms"][name]) for row in with_mismatch if row["stratum"] == stratum])
-            measurements[f"{stratum}_median_lag_s_{name}"] = _median(
-                [row["arms"][name]["forward_lag_samples"] / fs for row in members if detected(row["arms"][name])])
-        measurements[f"synthetic_positive_detection_rate_{name}"] = _rate([detected(s) for s in synthetic[name]["positive"]])
-        measurements[f"synthetic_null_false_positive_rate_{name}"] = _rate([detected(s) for s in synthetic[name]["null"]])
-        measurements[f"synthetic_long_lag_detection_rate_{name}"] = _rate([detected(s) for s in synthetic[name]["long_lag"]])
-    for name, contrast in analysis.get("contrasts", {}).items():
-        left = measurements.get(f"{contrast['metric']}_{contrast['arm']}")
-        right = measurements.get(f"{contrast['metric']}_{contrast['minus']}")
-        measurements[name] = None if left is None or right is None else left - right
-
     series: dict[str, list[float]] = {
         "respiratory_frequency_hz": [row["respiratory_frequency_hz"] or 0.0 for row in rows]}
     for name in arms:
@@ -357,6 +329,65 @@ def lag_window(windows: list[PairedSeries], excluded: list[dict[str, Any]], anal
         "measurements": measurements,
     }
     return DrrResult(measurements=measurements, series=series, report=report)
+
+
+def _lag_window_measurements(rows: list[dict[str, Any]], synthetic: dict[str, dict[str, list[dict[str, Any]]]],
+                             analysis: dict[str, Any], fs: float) -> dict[str, float | None]:
+    alpha, arms, strata = analysis["alpha"], analysis["arms"], analysis["strata"]
+
+    def detected(entry: dict[str, Any]) -> bool:
+        return entry["forward_adjusted_p"] <= alpha
+
+    def subject_balanced(members: list[dict[str, Any]], arm: str) -> float | None:
+        """Each subject's share of detected windows, averaged with equal weight per subject."""
+        per_subject: dict[str, list[bool]] = {}
+        for row in members:
+            per_subject.setdefault(row["record"], []).append(detected(row["arms"][arm]))
+        return float(np.mean([np.mean(flags) for flags in per_subject.values()])) if per_subject else None
+
+    # The stratum is re-derived from the breathing frequency, so a report can be measured under other strata.
+    stratum = [stratum_of(row["respiratory_frequency_hz"], strata) for row in rows]
+    in_stratum = {name: [row for row, s in zip(rows, stratum) if s == name] for name in strata}
+    with_mismatch = [(row, s) for row, s in zip(rows, stratum) if row["mismatched"]]
+
+    measurements: dict[str, float | None] = {"windows_analyzed": len(rows)}
+    for name, members in in_stratum.items():
+        measurements[f"{name}_windows"] = len(members)
+        measurements[f"{name}_subjects"] = len({row["record"] for row in members})
+    for name in arms:
+        measurements[f"window_detection_rate_{name}"] = _rate([detected(row["arms"][name]) for row in rows])
+        measurements[f"mismatched_detection_rate_{name}"] = _rate(
+            [detected(row["mismatched"]["arms"][name]) for row, _ in with_mismatch])
+        for band, members in in_stratum.items():
+            measurements[f"{band}_detection_rate_{name}"] = subject_balanced(members, name)
+            measurements[f"mismatched_{band}_detection_rate_{name}"] = _rate(
+                [detected(row["mismatched"]["arms"][name]) for row, s in with_mismatch if s == band])
+            measurements[f"{band}_median_lag_s_{name}"] = _median(
+                [row["arms"][name]["forward_lag_samples"] / fs for row in members if detected(row["arms"][name])])
+        measurements[f"synthetic_positive_detection_rate_{name}"] = _rate([detected(s) for s in synthetic[name]["positive"]])
+        measurements[f"synthetic_null_false_positive_rate_{name}"] = _rate([detected(s) for s in synthetic[name]["null"]])
+        measurements[f"synthetic_long_lag_detection_rate_{name}"] = _rate([detected(s) for s in synthetic[name]["long_lag"]])
+    for name, contrast in analysis.get("contrasts", {}).items():
+        left = measurements.get(f"{contrast['metric']}_{contrast['arm']}")
+        right = measurements.get(f"{contrast['metric']}_{contrast['minus']}")
+        measurements[name] = None if left is None or right is None else left - right
+    return measurements
+
+
+def measure(report: dict[str, Any], analysis: dict[str, Any] | None = None) -> dict[str, float | None]:
+    """A study's measurements, recomputed from its report: every test it ran, judged under ``analysis``.
+
+    With the settings the report was produced with (the default), this gives
+    back exactly the measurements the study emitted. A rehearsal passes other
+    settings (alpha, strata, contrasts, a subset of the arms) to ask what the
+    same tests would measure under another registration. No test is re-run.
+    """
+    analysis = analysis or report["settings"]
+    fs = report["settings"]["grid_hz"]
+    if study_name(analysis) == "lag_window":
+        return _lag_window_measurements(report["windows"], report["synthetic"], analysis, fs)
+    return _rsa_coupling_measurements(report["real_pairs"], report["mismatched_pairs"], report["positive_controls"],
+                                      report["null_controls"], analysis, fs)
 
 
 # --------------------------------------------------------------------------- #

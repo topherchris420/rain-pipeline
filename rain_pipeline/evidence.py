@@ -4,7 +4,7 @@ A claim in this repository is the verdict of one run, and it stands on a chain:
 
     spec ── registration ── anchor commit       criteria written, then timestamped by git
                  │ binds by hash: literature record, panel corpus, parent result,
-                 │ exploration report, holdout ranges and the ledger as it was
+                 │ exploration report, its rehearsal, holdout ranges and the ledger as it was
                  ▼
     data ranges (ledger) ──► run ──► artifacts   measured; every byte and file hash-bound
                               │
@@ -37,7 +37,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Callable
 
-from . import ledger, panel_stage, provenance, registry_stage, vendor
+from . import ledger, panel_stage, provenance, registry_stage, rehearsal, vendor
 from .errors import DossierMismatch
 from .layout import Layout
 
@@ -224,7 +224,31 @@ def dossier_checks(layout: Layout, registry: Any, dossier: Path, definition: dic
         checks.append(Check("lineage.exploration", eid, OK if exploratory else FAIL,
                             f"motivated by {lineage['exploration']} (exploratory, bound by hash)" if exploratory else
                             f"{lineage['exploration']} is missing, changed, or not an exploration report"))
+    if "rehearsal_sha256" in bound:
+        checks.append(_rehearsal_check(layout, dossier, definition, bound["rehearsal_sha256"]))
     return checks
+
+
+def _rehearsal_check(layout: Layout, dossier: Path, definition: dict[str, Any], bound: str) -> Check:
+    """The rehearsal is the one the registration bound, and still what its exploration and criteria give."""
+    eid, path = definition["experiment_id"], dossier / "rehearsal.json"
+    if not path.is_file() or provenance.sha256_file(path) != bound:
+        return Check("framing.rehearsal", eid, FAIL, "rehearsal.json is missing or is not the rehearsal the "
+                     "registration bound")
+    stored = _json(path)
+    report = layout.resolve(definition["parameters"]["lineage"]["exploration"])
+    if not report.is_file() or provenance.sha256_file(report) != stored["exploration"]["sha256"]:
+        return Check("framing.rehearsal", eid, WARN, "bound by hash, but it cannot be derived again: the exploration "
+                     "it rehearsed is missing or changed (see lineage.exploration)")
+    derived = rehearsal.rehearse(rehearsal.of_definition(definition), _json(report),
+                                 exploration=layout.relative(report), exploration_sha256=provenance.sha256_file(report),
+                                 resamples=(stored.get("resampled") or {}).get("resamples", rehearsal.RESAMPLES))
+    if json.loads(provenance.dumps(derived)) != stored:
+        return Check("framing.rehearsal", eid, WARN, "bound by hash, but this code derives another rehearsal from the "
+                     "same exploration and criteria (the rehearsal changed since registration?)")
+    return Check("framing.rehearsal", eid, OK, "bound by hash, and derived again from the exploration and the "
+                 "registered criteria: " + (f"{stored['observed']['status']} as observed" if stored["rehearsed"]
+                                            else "not rehearsable"))
 
 
 def load_dossier(layout: Layout, registry: Any, dossier: Path, definition: dict[str, Any]
@@ -743,8 +767,20 @@ def claims(snap: Snapshot, checks: list[Check]) -> list[dict[str, Any]]:
                 "code": _code_of(snap, record),
                 "shares_holdout_with": sorted({e for family in shared if eid in family for e in family} - {eid}),
                 "replays": replays.get(run_id, []),
+                "rehearsal": _rehearsal_of(snap, eid),
             })
     return out
+
+
+def _rehearsal_of(snap: Snapshot, eid: str) -> dict[str, Any] | None:
+    """What the rehearsal bound at registration said the data could decide (None if none was bound)."""
+    if "rehearsal_sha256" not in (snap.definitions[eid]["parameters"].get("framing") or {}):
+        return None
+    for dossier in snap.dossiers.get(eid, []):
+        doc = _json(dossier / "rehearsal.json")
+        if isinstance(doc, dict) and doc.get("schema") == rehearsal.SCHEMA:
+            return rehearsal.summary(doc)
+    return None
 
 
 def _code_of(snap: Snapshot, record: dict[str, Any]) -> dict[str, Any]:
@@ -840,7 +876,14 @@ def graph(layout: Layout) -> dict[str, Any]:
                 if spec:
                     edges.add((registration, "specified_by", spec))
             for ref in manifest.get("files", []):
-                target = file_node(dossier / ref["name"], "framing", "context (not evidence)")
+                if ref["name"] == "rehearsal.json":
+                    target = file_node(dossier / ref["name"], "rehearsal", "design (not evidence)")
+                    explored = ((_json(dossier / ref["name"]) or {}).get("exploration") or {}).get("report")
+                    if target and explored:
+                        edges.add((target, "rehearses_on",
+                                   f"exploration:{layout.relative(layout.resolve(explored).parent)}"))
+                else:
+                    target = file_node(dossier / ref["name"], "framing", "context (not evidence)")
                 if target:
                     edges.add((registration, "binds", target))
             corpus = node(f"corpus:{layout.relative(dossier / 'corpus')}", "panel-corpus", "context (not evidence)",
@@ -909,6 +952,21 @@ def render_checks(report: Report) -> str:
     return "\n".join(lines)
 
 
+def _describe_rehearsal(summary: dict[str, Any] | None) -> list[str]:
+    if summary is None:
+        return ["  rehearsed    no rehearsal was bound at registration"]
+    if not summary["rehearsed"]:
+        return [f"  rehearsed    not possible on {summary['exploration']}: {summary['reason']}"]
+    lines = [f"  rehearsed    on {summary['exploration']}: {summary['observed'].upper()} as observed, in "
+             f"{summary['share_observed']:.0%} of subject resamples"
+             + ("; settled before the data was read" if summary["settled"] else "")]
+    if summary["blind_contrasts"]:
+        lines.append(f"               blind: {', '.join(summary['blind_contrasts'])} (its arms never disagreed)")
+    if summary["indistinguishable_rivals"]:
+        lines.append(f"               cannot tell apart: {', '.join(summary['indistinguishable_rivals'])}")
+    return lines
+
+
 def describe(report: Report, graph_doc: dict[str, Any]) -> str:
     """The lineage of every claim, as a reader would want to audit it."""
     nodes = {n["id"]: n for n in graph_doc["nodes"]}
@@ -936,6 +994,7 @@ def describe(report: Report, graph_doc: dict[str, Any]) -> str:
             lines.append(f"  follows      {parent.split(':', 1)[1]}")
         for exploration in targets(f"registration:{eid}", "motivated_by"):
             lines.append(f"  motivated by {exploration.split(':', 1)[1]} (exploratory, not evidence)")
+        lines += _describe_rehearsal(claim["rehearsal"])
         data = claim["data"]
         earlier = data["records_analysed_by_earlier_experiments"]
         lines.append(f"  data         {data['records']} records, {'held out' if data['held_out'] else 'not held out'}"

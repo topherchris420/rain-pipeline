@@ -197,7 +197,11 @@ class Workspace:
         return path
 
     def copy(self, destination: Path) -> "Workspace":
+        """A copy with a private 'origin', so that pushes from one copy never collide with another's."""
         shutil.copytree(self.root, destination)
+        remote = destination.parent / f"{destination.name}-origin.git"
+        shutil.copytree(self.root.parent / f"{self.root.name}-origin.git", remote)
+        git(destination, "remote", "set-url", "origin", str(remote))
         clone = Workspace.__new__(Workspace)
         clone.root, clone.layout = destination, Layout.at(destination)
         return clone

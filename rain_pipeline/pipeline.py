@@ -2,9 +2,11 @@
 
 explore    Try an analysis on data the ledger has already seen. Never evidence.
 register   Anna retrieves and cites the literature, the R.A.I.N. panel argues
-           over it, and the experiment is registered write-once. The
-           registration binds the literature record, the panel corpus, the
-           parent result, the exploration and the holdout proof by hash.
+           over it, the criteria are rehearsed on the exploration (what could
+           data like this decide?), and the experiment is registered
+           write-once. The registration binds the literature record, the panel
+           corpus, the parent result, the exploration, the rehearsal and the
+           holdout proof by hash.
            -> commit and push: that commit is the registration's timestamp.
 run        Refuses an uncommitted registration, a framing dossier that no
            longer matches it, and (for a holdout) uncommitted or unpinned code.
@@ -34,7 +36,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from . import (__version__, anna_stage, drr_stage, evidence, figures, ledger, panel_stage, physio, provenance,
-               registry_stage, vendor)
+               registry_stage, rehearsal, vendor)
 from . import spec as specs
 from .errors import HoldoutViolation, NotRegistered, ProtocolRefusal, SpecError, UnpinnedCode
 from .evidence import EXPLORATORY
@@ -236,7 +238,7 @@ def register(spec_path: Path, *, offline: bool = False, layout: Layout | None = 
     framing_dir.mkdir(parents=True)
     files = []
 
-    log("\n[1/3] Anna: literature retrieval")
+    log("\n[1/4] Anna: literature retrieval")
     anna = anna_stage.run(spec, pgdata=layout.root / ".pgdata", offline=offline)
     for item in anna.ingestion:
         if "query" in item:
@@ -250,7 +252,7 @@ def register(spec_path: Path, *, offline: bool = False, layout: Layout | None = 
     if not anna.verification["ok"]:
         raise RuntimeError("Anna could not re-verify its own citations; refusing to build on them")
 
-    log("\n[2/3] R.A.I.N. research panel (offline, over Anna's sources)")
+    log("\n[2/4] R.A.I.N. research panel (offline, over Anna's sources)")
     panel = panel_stage.run(spec["question"], anna.documents, framing_dir / "corpus", relative_to=layout.root)
     files.append(provenance.write_text(framing_dir / "panel_meeting.md", panel.markdown))
     files.append(provenance.write_json(framing_dir / "panel_summary.json", panel.summary))
@@ -259,7 +261,18 @@ def register(spec_path: Path, *, offline: bool = False, layout: Layout | None = 
     log(f"    agreed:    {panel.summary['verdict']['agreed']}")
     log(f"    contested: {panel.summary['verdict']['contested']}")
 
-    log("\n[3/3] R.A.I.N. registration (write-once)")
+    log("\n[3/4] Rehearsal: the criteria on the exploration (seen data; description, not evidence)")
+    if "exploration" in lineage:
+        report = layout.resolve(lineage["exploration"])
+        rehearsed = rehearsal.for_spec(spec, report, provenance.read_json(report), layout)
+        files.append(provenance.write_json(framing_dir / "rehearsal.json", rehearsed))
+        binding["rehearsal_sha256"] = files[-1]["sha256"]
+        for finding in rehearsed["findings"]:
+            log(f"    {finding}")
+    else:
+        log("    no lineage.exploration, so nothing on the record says what data like this could decide")
+
+    log("\n[4/4] R.A.I.N. registration (write-once)")
     binding = {"anna_record_sha256": anna.fingerprint, "panel_corpus_sha256": audit["corpus_sha256"], **binding}
     definition = registry_stage.register(registry, spec, binding)
     experiment_id = definition["experiment_id"]
@@ -389,7 +402,8 @@ def run(spec_path: Path, *, layout: Layout | None = None, allow_uncommitted: boo
     if measured.report is None and measured.error is None:
         raise AssertionError("a run must end with a report or an error")
     kinds = {"anna_record.json": "anna-research-record/v1", "anna_verification.json": "anna-verification",
-             "panel_meeting.md": "rain-offline-meeting", "panel_summary.json": "rain-panel-summary"}
+             "panel_meeting.md": "rain-offline-meeting", "panel_summary.json": "rain-panel-summary",
+             "rehearsal.json": rehearsal.SCHEMA}
     for ref in manifest["files"]:
         measured.artifacts.append({**{k: ref[k] for k in ("name", "sha256", "bytes")},
                                    "kind": kinds.get(ref["name"], "framing"),
@@ -416,9 +430,12 @@ def run(spec_path: Path, *, layout: Layout | None = None, allow_uncommitted: boo
         "anna_record_sha256": packet["content_sha256"],
     }
     provenance.write_json(run_dir / "summary.json", summary)
+    rehearsed = provenance.read_json(dossier / "rehearsal.json") if any(
+        ref["name"] == "rehearsal.json" for ref in manifest["files"]) else None
     provenance.write_text(run_dir / "REPORT.md", _report(spec, definition, record, packet, panel, measured,
                                                          verification, anchor, layout.relative(dossier),
-                                                         has_figure=(run_dir / "figure.png").exists()))
+                                                         has_figure=(run_dir / "figure.png").exists(),
+                                                         rehearsed=rehearsed))
     log(f"    {record['run_id']}: {record['status'].upper()} ({record['hypothesis_verdict'].replace('_', ' ')})")
     if record["evaluation"]:
         log(f"    {record['evaluation']['summary']}")
@@ -669,7 +686,7 @@ def _verify_line(verification: dict[str, Any]) -> str:
 
 
 def _report(spec, definition, record, packet, panel, measured: _Measured, verification, anchor, dossier: str,
-            *, has_figure: bool) -> str:
+            *, has_figure: bool, rehearsed: dict[str, Any] | None = None) -> str:
     ev = record["evaluation"]
     lines = [
         f"# {record['run_id']}: {record['status'].upper()}",
@@ -727,6 +744,12 @@ def _report(spec, definition, record, packet, panel, measured: _Measured, verifi
         if "exploration" in lineage:
             lines.append(f"- Exploration on seen data (not evidence): `{lineage['exploration']}`")
     lines.append(f"- Framing dossier: `{dossier}/`")
+
+    if rehearsed is not None:
+        lines += ["", "## Rehearsal at registration (description, not evidence)", "",
+                  f"Before the data was read, the registered criteria were applied to "
+                  f"`{rehearsed['exploration']['report']}`, data already seen:", ""]
+        lines += [f"- {finding}" for finding in rehearsed["findings"]]
 
     lines += ["", "## Literature (Anna)", "", f"Record `{packet['content_sha256']}`", ""]
     for i, hit in enumerate(packet["record"]["hits"], start=1):

@@ -70,3 +70,29 @@ def test_docs_use_rains_outcome_vocabulary():
     for name in ("README.md", "docs/ARCHITECTURE.md", "docs/PROTOCOL.md", "docs/EVIDENCE.md"):
         text = (CODE_ROOT / name).read_text(encoding="utf-8")
         assert "contradicted" not in text and "unresolved" not in text, name  # not R.A.I.N. statuses
+
+
+def test_the_readme_rehearsal_table_states_what_rehearse_derives():
+    from rain_pipeline import rehearsal
+
+    rows = re.findall(r"^\| (V3D-EXP-\d{4}) \| `([^`]+)` \| (passed|failed|inconclusive) \| ([\d,]+) of ([\d,]+) \|",
+                      README, flags=re.M)
+    assert rows, "README has no rehearsal table"
+    layout = Layout.default()
+    for experiment_id, exploration, status, recurs, resamples in rows:
+        framing = next(p for p in layout.framing.glob("*/framing.json")
+                       if provenance.read_json(p)["experiment_id"] == experiment_id)
+        spec = layout.resolve(provenance.read_json(framing)["spec"])
+        doc = rehearsal.rehearse_spec(spec, on=exploration, layout=layout, resamples=int(resamples.replace(",", "")))
+        assert doc["observed"]["status"] == status, experiment_id
+        assert doc["resampled"]["statuses"][status] == int(recurs.replace(",", "")), experiment_id
+
+
+def test_the_window_length_figure_draws_from_the_committed_explorations(tmp_path):
+    from rain_pipeline import figures
+
+    reports = [provenance.read_json(p) for p in sorted(CODE_ROOT.glob("explorations/20261021T*/report.json"))]
+    assert sorted(figures._window_seconds(r) for r in reports) == [60, 120, 300, 600]
+    ref = figures.window_lengths(reports, tmp_path / "window-lengths.png")
+    assert ref["bytes"] > 10_000 and (tmp_path / "window-lengths.png").read_bytes().startswith(b"\x89PNG")
+    assert (CODE_ROOT / "docs" / "window-lengths.png").is_file() and "docs/window-lengths.png" in README

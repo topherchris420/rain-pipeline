@@ -12,7 +12,15 @@ The operating contract for extending `rain-pipeline` without weakening its evide
 - Enforced: the report is labelled `EXPLORATORY … It is not evidence for any claim`. `verify` checks the label and that every byte was seen before the exploration ran.
 - Convention: describe exploratory results as description in prose, never as confirmation.
 
-### 2. Register (criteria, before data)
+### 2. Rehearse (could this data decide?)
+
+`python -m rain_pipeline rehearse specs/<name>.json [--on explorations/<dir>]` applies a draft's criteria to an exploration, with R.A.I.N.'s evaluator, before anything is registered. It reads no data and writes nothing. It reports the verdict data like the exploration's gives, how often that verdict recurs over resamples of its people, which contrasts are blind (their arms never disagree) and which rival arms the criteria cannot tell apart ([EVIDENCE.md](EVIDENCE.md#rehearsal)).
+
+- Enforced: `register` repeats the rehearsal on `lineage.exploration` and binds it by hash; `verify` derives it again (`framing.rehearsal`).
+- Convention: a settled verdict or a blind contrast is a design problem, not a wording problem. Change what the experiment can see (window length, data, arms) and rehearse again; do not loosen a margin until it passes. To test a comparison, explore a *rival* too: an arm the hypothesis says should do worse. If the rival earns the same verdict, the experiment cannot show the hypothesis.
+- Convention: when you register anyway, say in the limitations what the rehearsal found. It is on the record either way.
+
+### 3. Register (criteria, before data)
 
 Write a spec (see the README) under a **new file name** and run `python -m rain_pipeline register specs/<name>.json`. A registration states, before the confirmation data is read: the question, hypothesis, dataset and exact segments, analysis settings, seed, guards, success and failure criteria, limitations, and optionally its lineage (a prior run, the exploration that motivated it).
 
@@ -28,16 +36,16 @@ Write a spec (see the README) under a **new file name** and run `python -m rain_
 - `framing/<spec>/` already holds another experiment's dossier;
 - the lineage names a run that is not recorded, or an exploration report that is not one.
 
-The registration binds by SHA-256 the Anna record, the panel corpus, the parent result, the exploration report and the ledger as it was. It is write-once.
+The registration binds by SHA-256 the Anna record, the panel corpus, the parent result, the exploration report, its rehearsal and the ledger as it was. It is write-once.
 
-### 3. Anchor (the timestamp)
+### 4. Anchor (the timestamp)
 
 Commit and push `experiments/`, `framing/`, `data/ledger.json` and `RESULTS.md`. The **first commit that holds the registration** is its anchor. Every later commit must hold the identical file, or the registration is anchored to nothing (`run` refuses; `verify` fails `registration.history`).
 
 - Never amend, rebase or squash a registration commit. Rewriting it moves the anchor and erases the timestamp it carried.
 - Do not use `--allow-uncommitted` for evidence intended to support a public claim. It exists for development; it is refused for a holdout.
 
-### 4. Run (measurement)
+### 5. Run (measurement)
 
 `python -m rain_pipeline run specs/<name>.json`. The runner:
 
@@ -51,7 +59,7 @@ Commit and push `experiments/`, `framing/`, `data/ledger.json` and `RESULTS.md`.
 
 Every failure after the run starts is filed by R.A.I.N. as an `error` run, never lost. That covers data, analysis, artifacts, a rejected submission (kept as `submission.rejected.json`), a failure assembling the submission, and Ctrl-C (recorded, then re-raised). A non-finite measurement is submitted as not measured. A figure that fails to render is noted and does not void the run.
 
-### 5. Evaluate (R.A.I.N. alone)
+### 6. Evaluate (R.A.I.N. alone)
 
 R.A.I.N. applies `rain-criteria/v1` to the submitted measurements:
 
@@ -65,13 +73,13 @@ R.A.I.N. applies `rain-criteria/v1` to the submitted measurements:
 
 These outcomes are not collapsed into success and failure. A failed or inconclusive result is a result.
 
-### 6. Verify (audit)
+### 7. Verify (audit)
 
 `python -m rain_pipeline verify` re-derives every link of the chain. The checks are listed in [EVIDENCE.md](EVIDENCE.md#what-verify-checks). CI runs it with `--strict` on full history for every push and pull request.
 
 When verify fails, do not edit the record to make it pass. Find what changed, restore it from git, or record the change honestly; a broken chain is itself information. Warnings are for honest weaknesses (an unanchored historical registration, an unrecorded attempt); they stay visible.
 
-### 7. Replay (reproduction)
+### 8. Replay (reproduction)
 
 `python -m rain_pipeline replay V3D-EXP-NNNN` re-executes a recorded run from its registration and writes a receipt to `replays/`. Commit receipts: each is a dated, environment-stamped reproducibility claim that `verify` keeps honest. Replay after moving a submodule pin or a numeric dependency, and before relying on results produced under the new environment.
 
@@ -85,6 +93,7 @@ When verify fails, do not edit the record to make it pass. Find what changed, re
 - Make new experiments additive: a new idea gets a new title, a new spec file and a new registration.
 - Name the multiplicity: experiments judged on the same holdout acknowledge each other in `data.holdout_shared_with` and in their limitations.
 - Distinguish new data from new subjects in the hypothesis and limitations; `lineage` reports which records earlier experiments analysed.
+- Rehearse before registering, and explore a rival arm alongside the arms you compare.
 
 ### Do not
 
@@ -93,6 +102,7 @@ When verify fails, do not edit the record to make it pass. Find what changed, re
 - Edit a registration, its spec, its framing dossier or the ledger after the fact (refused by `run`, failed by `verify`).
 - Delete failed, inconclusive or crashed runs (`verify` lists unrecorded attempts).
 - Treat a higher correlation, a lower p-value or a prettier figure as a reason to change criteria.
+- Read a rehearsal as evidence. It describes what data like the exploration's can decide; only a registered run measures.
 - Hand-edit `RESULTS.md` (`verify` compares it with the registry; regenerate with `publish`).
 
 ## Adding a study
@@ -102,8 +112,9 @@ A study lives in `drr_stage.py` and is published as a `Study` contract:
 1. `run(windows, excluded, analysis) -> DrrResult`: measurements, series and a report. It must be deterministic given the seed. Seed each test on its own so results do not depend on scheduling.
 2. `problems(analysis) -> list[str]`: every reason the settings cannot run, including unknown keys.
 3. `outputs(analysis) -> list[str]`: exactly the measurements `run` emits, in order.
+4. Measurements computed from the report alone: `measure(report, analysis)` must give back exactly what `run` emitted, from the per-test records the report holds. That is what lets a rehearsal judge an exploration under other settings (alpha, strata, contrasts, a subset of arms) without re-running a test.
 
-Registration then refuses metrics the study cannot produce, and the dry run proves `run` emits exactly `outputs`. Provide controls where scientifically appropriate: at least one positive and one null, run with the real pairs' exact settings. Add tests for edge cases and a `test_a_study_emits_exactly_its_declared_outputs` case.
+Registration then refuses metrics the study cannot produce, and the dry run proves `run` emits exactly `outputs`. `test_rehearsal` recomputes every committed report and requires identical measurements. Provide controls where scientifically appropriate: at least one positive and one null, run with the real pairs' exact settings. Add tests for edge cases and a `test_a_study_emits_exactly_its_declared_outputs` case.
 
 Changing an existing study's numerics changes what registered experiments measure. Replay every experiment that uses it; if a registered result no longer reproduces, that is a finding to report, not a reason to edit the record.
 

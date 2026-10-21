@@ -1,6 +1,6 @@
-# Evidence: how claims are checked, graded and re-executed
+# Evidence: how claims are checked, graded, rehearsed and re-executed
 
-A claim in this repository is the verdict R.A.I.N. assigned to one run. This document says how `verify` checks the chain beneath each claim, how a claim's evidence level follows from those checks, what a replay proves, and the formats of the machine-readable records.
+A claim in this repository is the verdict R.A.I.N. assigned to one run. This document says how `verify` checks the chain beneath each claim, how a claim's evidence level follows from those checks, what a rehearsal shows about the criteria before the data, what a replay proves, and the formats of the machine-readable records.
 
 ## What verify checks
 
@@ -21,6 +21,7 @@ A claim in this repository is the verdict R.A.I.N. assigned to one run. This doc
 | `framing.anna` | experiment | Anna's fingerprint of the literature record; the bound record hash | the record no longer seals, or is not the one bound |
 | `framing.corpus` | experiment | the panel-corpus fingerprint from the files on disk (R.A.I.N.'s algorithm) | it differs from the citation audit or the binding |
 | `lineage.parent`, `lineage.exploration` | experiment | the bound parent result and exploration report | missing, changed, or not an exploration |
+| `framing.rehearsal` | experiment | the rehearsal the registration bound, derived again from the bound exploration and the registered criteria | the file is missing or not the one bound (*warn*: this code derives a different rehearsal, or its exploration is gone and it cannot be derived again) |
 | `holdout.before_registration` | experiment | bytes of the holdout first read before the registration | any |
 | `holdout.ledger_snapshot` | experiment | the ledger version bound at registration, found in git history | the current ledger does not extend it, or it shows holdout reads (*warn*: never committed) |
 | `holdout.before_anchor` | experiment | bytes first read before the first commit holding the registration (rounded up to the next whole second) | any |
@@ -60,6 +61,26 @@ The level grades the *chain*, not the hypothesis. A confirmatory FAILED is stron
 - **Shared holdouts.** Experiments judged on overlapping held-out bytes form a family, each evaluated on its own criteria with no correction across it. Since 0.3.0, registering into such a family requires `data.holdout_shared_with`.
 - **Code identity.** It names the commit whose source matches the recorded digest.
 - **Replays.** It lists each receipt's outcome.
+- **Rehearsal.** What the rehearsal bound at registration found: the verdict as observed, how often it recurred, blind contrasts and rivals the criteria cannot tell apart (none, for a registration that bound no rehearsal).
+
+## Rehearsal
+
+Preregistration proves *when* the criteria were written. It cannot show that the data could have answered them. A rehearsal asks that question before a holdout is spent, on an exploration of data the ledger has already seen. `python -m rain_pipeline rehearse SPEC [--on EXPLORATION]` prints one; `register` writes one into the framing dossier whenever the spec names `lineage.exploration`, and binds it by hash (`rehearsal_sha256`) into the registration, so it is anchored in the same commit as the criteria.
+
+The rehearsal runs no test and reads no byte. It recomputes the registered measurements from the tests the exploration already ran (`drr_stage.measure`, which gives back every committed report's measurements exactly), and has R.A.I.N.'s own evaluator judge them. It refuses an exploration whose tests differ from the registered ones (another study, method, surrogate count, correction, sampling grid, lag window or arm definition), or that has no test at all because nothing passed QC, and records why instead.
+
+| question | how it is answered | what it shows |
+|---|---|---|
+| **observed** | the registered criteria on the exploration's tests, under the registered settings | the verdict data like this gives |
+| **resampled** | the same, over 1,000 resamples of the exploration's people (each drawn copy a person of its own; numpy's frozen `RandomState`, seeded with the registered seed) | how often that verdict recurs; at 95% or more it is *settled* before the registered data is read |
+| **contrasts** | per registered contrast, the tests it compares and how many its two arms decide differently | a contrast whose arms never disagree is 0 by construction, in every resample: it is *blind* |
+| **rivals** | each registered arm replaced by an arm the exploration ran and the registration did not, then judged again | a rival that earns the same verdict cannot be told apart by these criteria; one that does not names the criteria that changed |
+
+Guards on the design's size (`count` metrics) and every criterion on the pipeline's holdout metrics are set aside, and listed: an exploration is smaller than the experiment it rehearses and is by definition not held out. Every other guard, and every success and failure criterion, is applied as registered. Settings the rehearsal cannot undo (another seed, other synthetic controls) are listed as kept as explored.
+
+A rehearsal is description, never evidence. It changes no registration, run or verdict, does not alter an evidence level, and speaks only for data like its exploration's: a holdout can still disagree, which is why it is read. Its document (`rain-pipeline-rehearsal/v1`) holds the exploration and its hash, the set-aside criteria, the observed evaluation and measurements, the resampled tally, every contrast and rival, and one plain sentence per finding. Each run's `REPORT.md` repeats those sentences, and `lineage` summarises them per claim.
+
+V3D-EXP-0001 to 0003 were registered before rehearsals existed and bound none. Rehearsed afterwards on the exploration their registrations bound (`python -m rain_pipeline rehearse specs/slow-breathers-6s-window.json`), both lag-window experiments were settled before their holdout was read; see the README.
 
 ## Replay
 
@@ -113,10 +134,12 @@ Receipts are written to `replays/<EXP-ID>/RUN-NNNN-<UTC time>.json`:
   "edges": [{"from": "run:…", "relation": "tests", "to": "registration:…"}, …],
   "claims": [{"run_id", "status", "verdict", "assigned_by", "evidence_level", "broken_links", "weaker_links",
               "data": {"records", "records_analysed_by_earlier_experiments", "held_out"},
-              "shares_holdout_with", "code": {"version", "source_sha256", "commit"}, "replays": […]}, …]
+              "shares_holdout_with", "code": {"version", "source_sha256", "commit"}, "replays": […],
+              "rehearsal": {"exploration", "observed", "share_observed", "settled", "blind_contrasts",
+                            "indistinguishable_rivals"} | null}, …]
 }
 ```
 
-Node roles make the epistemic status of every record explicit: `intent` (spec), `criteria` (registration), `temporal anchor` (commit), `context (not evidence)` (literature, panel), `observation (not evidence)` (exploration), `input` (data range), `measurement` (run), `evaluation` (verdict), `artifact`, `implementation` (code), `reproduction` (receipt).
+Node roles make the epistemic status of every record explicit: `intent` (spec), `criteria` (registration), `temporal anchor` (commit), `context (not evidence)` (literature, panel), `observation (not evidence)` (exploration), `design (not evidence)` (rehearsal, which `rehearses_on` its exploration), `input` (data range), `measurement` (run), `evaluation` (verdict), `artifact`, `implementation` (code), `reproduction` (receipt).
 
 The graph is derived from committed files only. Its digest is stable for a given set of records and changes when any of them, or any bound file, changes. `claims` comes from the live checks and is not part of the digest. A consumer can recompute everything from a clone; nothing in the graph has to be taken on trust.
