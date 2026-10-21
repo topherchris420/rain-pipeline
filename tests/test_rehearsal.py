@@ -154,6 +154,17 @@ def test_only_an_exploration_of_the_same_tests_can_rehearse():
     other_study["analysis"] = {**base_spec()["analysis"], "study": "rsa_coupling"}
     assert "rsa_coupling" in rehearse(other_study, report(AGREEING))["reason"]
 
+    finer_grid = {**registration(**criteria), "grid_hz": 8}  # a 3 s window is 24 samples here, 12 where explored
+    doc = rehearse(finer_grid, report(AGREEING))
+    assert not doc["rehearsed"] and "data.grid_hz: registered 8, explored 4.0" in doc["reason"]
+    assert rehearse({**registration(**criteria), "grid_hz": 4}, report(AGREEING))["rehearsed"]
+
+
+def test_an_exploration_in_which_nothing_passed_qc_cannot_rehearse():
+    doc = rehearse(registration(success=[criterion("S1", "normal_detection_rate_short", ">=", 0.5)]), report([]))
+    assert not doc["rehearsed"] and "no window of the exploration passed QC" in doc["reason"]
+    assert doc["findings"] == [f"Not rehearsed: {doc['reason']}."]  # never "settled" on zero tests
+
 
 # --------------------------------------------------------------------------- #
 # This repository's records

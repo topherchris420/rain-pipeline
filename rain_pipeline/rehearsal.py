@@ -66,7 +66,7 @@ SYNTHETIC = {"synthetic_positive_detection_rate": "positive", "synthetic_null_fa
 def of_spec(spec: dict[str, Any]) -> dict[str, Any]:
     """The criteria a spec would register, in the form ``rehearse`` reads."""
     preregistration = spec["preregistration"]
-    return {"analysis": spec["analysis"], "holdout": bool(spec["data"].get("holdout")),
+    return {"analysis": spec["analysis"], "holdout": bool(spec["data"].get("holdout")), "grid_hz": spec["data"]["grid_hz"],
             "metrics": preregistration.get("metrics", []), "criteria": preregistration.get("criteria", {})}
 
 
@@ -74,16 +74,19 @@ def of_definition(definition: dict[str, Any]) -> dict[str, Any]:
     """The criteria a registration holds, in the form ``rehearse`` reads."""
     parameters = definition["parameters"]
     return {"analysis": parameters["analysis"], "holdout": bool(parameters["data"].get("holdout")),
-            "metrics": definition["metrics"], "criteria": definition["criteria"]}
+            "grid_hz": parameters["data"]["grid_hz"], "metrics": definition["metrics"], "criteria": definition["criteria"]}
 
 
-def incompatibilities(analysis: dict[str, Any], explored: dict[str, Any]) -> list[str]:
+def incompatibilities(analysis: dict[str, Any], explored: dict[str, Any], grid_hz: float | None = None) -> list[str]:
     """Why an exploration's tests are not the tests this analysis would run (empty when they are)."""
     study, ran = drr_stage.study_name(analysis), drr_stage.study_name(explored)
     if study != ran:
         return [f"the exploration ran the {ran} study, the registration the {study} study"]
     found = [f"analysis.{key}: registered {analysis.get(key)!r}, explored {explored.get(key)!r}"
              for key in TEST_SETTINGS if analysis.get(key) != explored.get(key)]
+    if grid_hz is not None and grid_hz != explored.get("grid_hz"):  # the grid turns lag windows in seconds into tests
+        found.append(f"data.grid_hz: registered {grid_hz!r}, explored {explored.get('grid_hz')!r}, so the same "
+                     "lag windows in seconds are other tests")
     if study == "rsa_coupling":
         if analysis.get("max_lag_s") != explored.get("max_lag_s"):
             found.append(f"analysis.max_lag_s: registered {analysis.get('max_lag_s')!r}, "
@@ -203,7 +206,9 @@ def rehearse(registration: dict[str, Any], report: dict[str, Any], *, exploratio
     analysis = registration["analysis"]
     head = {"schema": SCHEMA, "status": LABEL, "epistemic_role": "design (not evidence)",
             "exploration": {"report": exploration, "sha256": exploration_sha256}}
-    problems = incompatibilities(analysis, report["settings"])
+    problems = incompatibilities(analysis, report["settings"], registration.get("grid_hz"))
+    if not _subjects(report):
+        problems.append("no window of the exploration passed QC, so there are no tests to rehearse on")
     if problems:
         doc = {**head, "rehearsed": False, "reason": "; ".join(problems)}
         return {**doc, "findings": findings(doc)}

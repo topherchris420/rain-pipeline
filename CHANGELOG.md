@@ -25,7 +25,8 @@ answered otherwise?
 - `register` rehearses on `lineage.exploration` as its third step, writes
   `framing/<spec>/rehearsal.json` and binds it by hash (`rehearsal_sha256`), so
   what the data could decide is anchored in the same commit as the criteria.
-  An exploration of other tests is recorded as not rehearsable, with the reason.
+  An exploration of other tests (including another sampling grid) or of no
+  tests at all is recorded as not rehearsable, with the reason.
 - `verify` checks the bound rehearsal and derives it again (`framing.rehearsal`);
   `lineage` and each claim summarise it; each run's `REPORT.md` repeats its
   findings; the evidence graph gives it the role `design (not evidence)` and a

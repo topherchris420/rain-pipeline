@@ -67,7 +67,7 @@ The level grades the *chain*, not the hypothesis. A confirmatory FAILED is stron
 
 Preregistration proves *when* the criteria were written. It cannot show that the data could have answered them. A rehearsal asks that question before a holdout is spent, on an exploration of data the ledger has already seen. `python -m rain_pipeline rehearse SPEC [--on EXPLORATION]` prints one; `register` writes one into the framing dossier whenever the spec names `lineage.exploration`, and binds it by hash (`rehearsal_sha256`) into the registration, so it is anchored in the same commit as the criteria.
 
-The rehearsal runs no test and reads no byte. It recomputes the registered measurements from the tests the exploration already ran (`drr_stage.measure`, which gives back every committed report's measurements exactly), and has R.A.I.N.'s own evaluator judge them. It refuses an exploration whose tests differ from the registered ones (another study, method, surrogate count, correction, lag window or arm definition), and records why instead.
+The rehearsal runs no test and reads no byte. It recomputes the registered measurements from the tests the exploration already ran (`drr_stage.measure`, which gives back every committed report's measurements exactly), and has R.A.I.N.'s own evaluator judge them. It refuses an exploration whose tests differ from the registered ones (another study, method, surrogate count, correction, sampling grid, lag window or arm definition), or that has no test at all because nothing passed QC, and records why instead.
 
 | question | how it is answered | what it shows |
 |---|---|---|
