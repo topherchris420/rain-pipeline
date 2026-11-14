@@ -15,7 +15,7 @@ This is the reproducibility instrument behind a simple challenge: could someone 
 | Could another machine regenerate the numerical result? | [Replay receipts](replays/) and [verification contracts](docs/EVIDENCE.md) | Matching computations do not constitute independent replication with new subjects |
 | Could the data have answered otherwise? | [The rehearsal](#vii-the-dress-rehearsal-nobody-held) of each registration's criteria on its own exploration | A rehearsal speaks for data like the exploration's; a holdout can still differ, which is why it is read |
 
-The pipeline uses a **pinned historical R.A.I.N. version** from the former `james_library` as a submodule. The [current integrated R.A.I.N. Lab](https://github.com/topherchris420/lop-nur-twin) lives in Lop Nur Twin; these experiments remain tied to the versions that originally produced them.
+The pipeline uses a pinned historical version of **R.A.I.N. (Recursive Architecture of Intelligent Nexus)** from the former `james_library` as a submodule. The [current integrated R.A.I.N. Lab](https://github.com/topherchris420/lop-nur-twin) lives in Lop Nur Twin; these experiments remain tied to the versions that originally produced them.
 
 ### A mathematical question worth testing
 
