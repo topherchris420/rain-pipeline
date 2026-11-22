@@ -2,7 +2,7 @@
 
 **A hypothesis can fail. Its evidence should remain standing.**
 
-This is the reproducibility instrument behind a simple challenge: could someone inspect not only a scientific result, but the rules that were in force *before* the result appeared?
+Start with a recorded experiment that failed. Then follow its report back to the registered rules and replay the run. This workbench preserves the criteria that were in force before each result appeared.
 
 [**Inspect the failed experiment →**](runs/20261004T174209Z/REPORT.md) · [**Read a passed run →**](runs/20261004T181106Z/REPORT.md) · [**See what the data could decide →**](#vii-the-dress-rehearsal-nobody-held) · [**Set up and replay →**](#x-setup) · [**Verify the evidence chain →**](docs/EVIDENCE.md) · [**Current R.A.I.N. Lab →**](https://github.com/topherchris420/lop-nur-twin)
 
